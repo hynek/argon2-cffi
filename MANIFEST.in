@@ -1,0 +1,6 @@
+include *.rst *.txt
+include .coveragerc
+include LICENSE
+include tox.ini
+recursive-include tests *.py
+exclude src/argon2/_ffi.py

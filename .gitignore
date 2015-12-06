@@ -1,0 +1,13 @@
+dist
+.tox
+.eggs
+.coverage
+.coverage.*
+.cache
+src/argon2/_ffi.py
+__pycache__
+*.pyc
+*.egg-info
+*.dylib
+*.so
+.hypothesis

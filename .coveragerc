@@ -1,0 +1,12 @@
+[run]
+branch = True
+source = argon2
+
+[paths]
+source =
+   src/argon2
+   .tox/*/lib/python*/site-packages/argon2
+   .tox/pypy/site-packages/argon2
+
+[report]
+show_missing = True
