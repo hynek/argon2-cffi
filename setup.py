@@ -34,10 +34,10 @@ CLASSIFIERS = [
 
 SETUP_REQUIRES = ["cffi"]
 INSTALL_REQUIRES = ["six", "cffi>=1.0.0"]
-EXTRAS_REQUIRES = {
-    ':python_version<"3.4"': ["enum34"],  # for wheels
+EXTRAS_REQUIRE = {
+    ':python_version<"3.4"': ["enum34"],  # modern + wheels
 }
-if sys.version_info[0:2] < (3, 4):  # for sdist
+if sys.version_info[0:2] < (3, 4):  # old school
     INSTALL_REQUIRES += ["enum34"]
 
 ###############################################################################
@@ -87,6 +87,6 @@ if __name__ == "__main__":
         classifiers=CLASSIFIERS,
         setup_requires=SETUP_REQUIRES,
         install_requires=INSTALL_REQUIRES,
-        extras_requires=EXTRAS_REQUIRES,
+        extras_require=EXTRAS_REQUIRE,
         zip_safe=False,
     )
