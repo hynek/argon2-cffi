@@ -83,11 +83,9 @@ def get_encoded_len(hash_len, salt_len):
     # + NULL byte
     # 9 + 12 + 14 + 23 + 44 + 1 = 103
     # Rounded to 4 byte boundary: 104
-
-    l = 36 + int(encoded_str_len(hash_len) + encoded_str_len(salt_len))
-    while l % 4:  # round up to 4 byte boundary.
-        l += 1
-    return l
+    return (
+        39 + int(encoded_str_len(hash_len) + encoded_str_len(salt_len))
+    ) & ~3
 
 
 def guess_type(s):
