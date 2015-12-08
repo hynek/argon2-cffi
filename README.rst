@@ -38,7 +38,7 @@ But of course, you can set them yourself if you wish:
   ...     b"secret", b"somesalt",
   ...     time_cost=1,         # number of iterations
   ...     memory_cost=8,       # used memory in KiB
-  ...     parallelism=8,       # number of threads used
+  ...     parallelism=8,       # number of threads used; changes hash!
   ...     hash_len=64,         # length of resulting raw hash
   ...     type=argon2.Type.D,  # choose Argon2i or Argon2d
   ... )
@@ -79,7 +79,8 @@ The authors of Argon2 specified a method in their `paper <https://github.com/P-H
 CLI
 ^^^
 
-To aid you with finding the parameters, ``argon2_cffi`` can be run using ``python -m argon2`` which will benchmark Argon2 in the current environment..
+To aid you with finding the parameters, ``argon2_cffi`` offers a CLI interface that can be accessed using ``python -m argon2``.
+It will benchmark Argon2’s *password verification* in the current environment.
 You can use command line arguments to set hashing parameters:
 
 .. code-block:: text
