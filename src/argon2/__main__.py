@@ -73,7 +73,8 @@ def main(argv):
         setup="from argon2 import verify_password; gc.enable()",
         number=args.n,
     )
-    print("\n{0:.3}ms per password".format(duration / args.n * 1000))
+    print("\n{0:.3}ms per password verification"
+          .format(duration / args.n * 1000))
 
 
 if __name__ == "__main__":
