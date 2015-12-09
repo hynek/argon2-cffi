@@ -1,0 +1,53 @@
+sudo: false
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/argon2_cffi/.eggs
+
+language: python
+
+
+matrix:
+  include:
+    - python: "2.6"  # these are just to make travis's UI a bit prettier
+      env: TOXENV=py26
+    - python: "2.7"
+      env: TOXENV=py27
+    - python: "3.3"
+      env: TOXENV=py33
+    - python: "3.4"
+      env: TOXENV=py34
+    - python: "3.5"
+      env: TOXENV=py35
+    - python: "pypy"
+      env: TOXENV=pypy
+
+    # Meta
+    - python: "3.5"
+      env: TOXENV=flake8
+    - python: "3.5"
+      env: TOXENV=manifest
+    - python: "3.5"
+      env: TOXENV=docs
+
+
+  allow_failures:
+    - env: TOXENV=manifest  # doesn't handle properly submodules
+    - python: "pypy"        # PyPy & bundled CFFI are too old on Travis
+
+
+install:
+  - pip install tox
+
+script:
+  - tox --hashseed 0
+
+before_install:
+  - pip install codecov
+
+after_success:
+  - tox -e coverage-report
+  - codecov
+
+notifications:
+  email: false

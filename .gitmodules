@@ -1,0 +1,3 @@
+[submodule "libargon2"]
+	path = libargon2
+	url = https://github.com/p-h-c/phc-winner-argon2

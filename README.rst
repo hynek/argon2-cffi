@@ -2,6 +2,18 @@
 CFFI-based Argon2 Bindings for Python
 =====================================
 
+.. image:: https://travis-ci.org/hynek/argon2_cffi.svg?branch=master
+  :target: https://travis-ci.org/hynek/argon2_cffi
+
+.. image:: https://codecov.io/github/hynek/argon2_cffi/coverage.svg?branch=master
+  :target: https://codecov.io/github/hynek/argon2_cffi
+
+.. image:: https://www.irccloud.com/invite-svg?channel=%23cryptography-dev&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1
+    :target: https://www.irccloud.com/invite?channel=%23cryptography-dev&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1
+
+.. begin
+
+
 `Argon2 <https://github.com/p-h-c/phc-winner-argon2>`_ won the `Password Hashing Competition <https://password-hashing.net/>`_ in 2015.
 ``argon2_cffi`` is the simplest way to use it in Python and PyPy:
 
@@ -38,11 +50,11 @@ But of course, you can set them yourself if you wish:
   ...     b"secret", b"somesalt",
   ...     time_cost=1,         # number of iterations
   ...     memory_cost=8,       # used memory in KiB
-  ...     parallelism=8,       # number of threads used; changes hash!
+  ...     parallelism=1,       # number of threads used; changes hash!
   ...     hash_len=64,         # length of resulting raw hash
   ...     type=argon2.Type.D,  # choose Argon2i or Argon2d
   ... )
-  b'$argon2d$m=8,t=1,p=8$c29tZXNhbHQ$RGhaBn2bZoWmKwBrWsLZT4Y950n1efoRde77Af3OKWUomJoFz7nEYVQbM6bAk/rqAi0hDP0y6XO5qJ0y8cqwUA'
+  b'$argon2d$m=8,t=1,p=1$c29tZXNhbHQ$H0oN1/L3H8t8hcg47pAyJZ8toBh2UbgcMt0zRFrqt4mEJCeKSEWGxt+KpZrMwxvr7M5qktNcc/bk/hvbinueJA'
 
 The raw hash can also be computed.
 The function takes the same parameters as ``hash_password()``:

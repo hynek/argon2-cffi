@@ -13,6 +13,25 @@ HERE = os.path.abspath(os.path.dirname(__file__))
 NAME = "argon2_cffi"
 PACKAGES = find_packages(where="src")
 CFFI_MODULES = [os.path.join(HERE, "src", "argon2", "_ffi_build.py:ffi")]
+LIBRARIES = [
+    ("libargon2", {
+        "include_dirs": [
+            "libargon2/src",
+            "libargon2/src/blake2"
+        ],
+        "sources": [
+            "libargon2/src/argon2.c",
+            "libargon2/src/bench.c",
+            "libargon2/src/blake2/blake2b.c",
+            "libargon2/src/core.c",
+            "libargon2/src/encoding.c",
+            "libargon2/src/genkat.c",
+            "libargon2/src/opt.c",
+            "libargon2/src/ref.c",
+            "libargon2/src/thread.c",
+        ],
+    }),
+]
 META_PATH = ("src", "argon2", "__init__.py")
 KEYWORDS = ["password", "hash", "hashing", "security"]
 CLASSIFIERS = [
@@ -36,9 +55,7 @@ CLASSIFIERS = [
 
 SETUP_REQUIRES = ["cffi"]
 INSTALL_REQUIRES = ["six", "cffi>=1.0.0"]
-EXTRAS_REQUIRE = {
-    ':python_version<"3.4"': ["enum34"],  # modern + wheels
-}
+EXTRAS_REQUIRE = {}
 if sys.version_info[0:2] < (3, 4):  # old school
     INSTALL_REQUIRES += ["enum34"]
 
@@ -86,6 +103,8 @@ if __name__ == "__main__":
         packages=PACKAGES,
         package_dir={"": "src"},
         cffi_modules=CFFI_MODULES,
+        ext_package="argon2",
+        libraries=LIBRARIES,
         classifiers=CLASSIFIERS,
         setup_requires=SETUP_REQUIRES,
         install_requires=INSTALL_REQUIRES,

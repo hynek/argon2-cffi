@@ -7,8 +7,9 @@ from cffi import FFI
 
 ffi = FFI()
 ffi.set_source(
-    "argon2._ffi", None,
-    libraries=["argon2"],
+    "_ffi", "#import <argon2.h>",
+    include_dirs=["libargon2/src"],
+    libraries=["libargon2"],
 )
 
 ffi.cdef("""\
@@ -84,3 +85,6 @@ typedef enum Argon2_ErrorCodes {
                                  error code */
 } argon2_error_codes;
 """)
+
+if __name__ == '__main__':
+    ffi.compile()
