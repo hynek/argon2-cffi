@@ -12,7 +12,7 @@ HERE = os.path.abspath(os.path.dirname(__file__))
 
 NAME = "argon2_cffi"
 PACKAGES = find_packages(where="src")
-CFFI_MODULES = [os.path.join(HERE, "src", "argon2", "_ffi_build.py:ffi")]
+CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 LIBRARIES = [
     ("libargon2", {
         "include_dirs": [
