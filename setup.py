@@ -33,7 +33,7 @@ LIBRARIES = [
 META_PATH = ("src", "argon2", "__init__.py")
 KEYWORDS = ["password", "hash", "hashing", "security"]
 CLASSIFIERS = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
