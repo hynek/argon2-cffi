@@ -7,7 +7,7 @@ from cffi import FFI
 
 ffi = FFI()
 ffi.set_source(
-    "_ffi", "#import <argon2.h>",
+    "_ffi", "#include <argon2.h>",
     include_dirs=["libargon2/src"],
     libraries=["libargon2"],
 )
