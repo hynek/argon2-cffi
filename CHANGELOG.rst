@@ -14,6 +14,17 @@ Changes:
 ^^^^^^^^
 
 
+15.0.0.b3 (2015-12-09)
+----------------------
+
+Vendoring ``argon2`` @ `7f0dbc3efa0d07b338c3a40260aef92f3b619a00 <https://github.com/P-H-C/phc-winner-argon2/tree/7f0dbc3efa0d07b338c3a40260aef92f3b619a00>`_.
+
+Changes:
+^^^^^^^^
+
+- More Windows fixes.
+
+
 15.0.0.b2 (2015-12-09)
 ----------------------
 
