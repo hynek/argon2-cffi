@@ -2,17 +2,12 @@
 
 from __future__ import absolute_import, division, print_function
 
-import ctypes.util
-
 from enum import Enum
 from six import iteritems, PY3
 
 
-from ._ffi import ffi
+from ._ffi import ffi, lib
 from .exceptions import InvalidHash
-
-
-lib = ffi.dlopen(ctypes.util.find_library("argon2"))
 
 
 class Type(Enum):
