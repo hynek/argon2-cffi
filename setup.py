@@ -21,11 +21,9 @@ LIBRARIES = [
         ],
         "sources": [
             "libargon2/src/argon2.c",
-            "libargon2/src/bench.c",
             "libargon2/src/blake2/blake2b.c",
             "libargon2/src/core.c",
             "libargon2/src/encoding.c",
-            "libargon2/src/genkat.c",
             "libargon2/src/opt.c",
             "libargon2/src/ref.c",
             "libargon2/src/thread.c",
