@@ -31,6 +31,9 @@ def hash_password(password, salt=None,
                   parallelism=DEFAULT_PARALLELISM,
                   hash_len=DEFAULT_HASH_LENGTH,
                   type=Type.I):
+    """
+    Hash *password* and return an *encoded* hash.
+    """
     return _hash(password, salt, time_cost, memory_cost, parallelism, hash_len,
                  type, True)
 
@@ -41,6 +44,9 @@ def hash_password_raw(password, salt=None,
                       parallelism=DEFAULT_PARALLELISM,
                       hash_len=DEFAULT_HASH_LENGTH,
                       type=Type.I):
+    """
+    Hash *password* and return a *raw* hash.
+    """
     return _hash(password, salt, time_cost, memory_cost, parallelism, hash_len,
                  type, False)
 

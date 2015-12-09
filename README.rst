@@ -38,6 +38,13 @@ You can omit the ``salt`` argument for a secure random salt of length ``argon2.D
   b'$argon2i$m=4096,t=3,p=2$GIESi4asMZaP051OPlH/zw$s5bQHIupLB1Fep/U5NXIVQ'
 
 
+Installation
+============
+
+A working C compiler is required because the official Argon2 C implementation is shipped along with the Python CFFI bindings.
+Otherwise a plain ``pip install argon2_cffi`` should just work.
+
+
 Hands-on
 ========
 
