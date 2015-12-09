@@ -16,7 +16,7 @@ from ._api import (
 )
 
 
-__version__ = "15.0.0.beta0"
+__version__ = "15.0.0.beta1"
 
 __title__ = "argon2_cffi"
 __description__ = "argon2 password hashing algorithm."
