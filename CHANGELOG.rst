@@ -8,7 +8,7 @@ The third digit is only for regressions.
 15.0.0 (UNRELEASED)
 -------------------
 
-Vendoring ``argon2`` @ `7f0dbc3efa0d07b338c3a40260aef92f3b619a00 <https://github.com/P-H-C/phc-winner-argon2/tree/7f0dbc3efa0d07b338c3a40260aef92f3b619a00>`_.
+Vendoring ``argon2`` @ `567c22d97bf137cf4aeca99decb12d946d1799c7 <https://github.com/P-H-C/phc-winner-argon2/tree/567c22d97bf137cf4aeca99decb12d946d1799c7>`_.
 
 Changes:
 ^^^^^^^^
