@@ -32,7 +32,6 @@ matrix:
 
 
   allow_failures:
-    - env: TOXENV=manifest  # doesn't handle properly submodules
     - python: "pypy"        # PyPy & bundled CFFI are too old on Travis
 
 
