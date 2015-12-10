@@ -14,6 +14,20 @@ Changes:
 ^^^^^^^^
 
 
+15.0.0b5 (2015-12-10)
+---------------------
+
+Vendoring ``argon2`` @ `4fe0d8cda37691228dd5a96a310be57369403a4b <https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b>`_.
+
+Changes:
+^^^^^^^^
+
+- Vendor msinttypes to build on Visual Studio 2008 for Python 2.7.
+  See AUTHORS.rst for licensing details.
+- Update ``argon2``.
+  The authors were kind enough to `help me <https://github.com/P-H-C/phc-winner-argon2/issues/44>`_ to get it building under that ancient compiler we’re forced to use.
+
+
 15.0.0b4 (2015-12-10)
 ---------------------
 
