@@ -14,6 +14,17 @@ Changes:
 ^^^^^^^^
 
 
+15.0.0.b4 (2015-12-10)
+----------------------
+
+Vendoring ``argon2`` @ `567c22d97bf137cf4aeca99decb12d946d1799c7 <https://github.com/P-H-C/phc-winner-argon2/tree/567c22d97bf137cf4aeca99decb12d946d1799c7>`_.
+
+Changes:
+^^^^^^^^
+
+- Update ``argon2``.
+
+
 15.0.0.b3 (2015-12-09)
 ----------------------
 
