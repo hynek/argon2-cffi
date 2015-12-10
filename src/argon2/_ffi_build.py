@@ -2,13 +2,21 @@
 
 from __future__ import absolute_import, division, print_function
 
+import sys
+
 from cffi import FFI
+
+
+include_dirs = ["libargon2/src"]
+
+if sys.version_info[0] == 2 and "win32" in str(sys.platform).lower():
+    include_dirs.append("extras/msinttypes")
 
 
 ffi = FFI()
 ffi.set_source(
     "_ffi", "#include <argon2.h>",
-    include_dirs=["libargon2/src"],
+    include_dirs=include_dirs,
     libraries=["libargon2"],
 )
 
