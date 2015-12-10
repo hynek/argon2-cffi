@@ -13,12 +13,17 @@ HERE = os.path.abspath(os.path.dirname(__file__))
 NAME = "argon2_cffi"
 PACKAGES = find_packages(where="src")
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
+includes = [
+    "libargon2/src",
+    "libargon2/src/blake2",
+]
+
+if sys.version_info[0] == 2 and "win32" in str(sys.platform).lower():
+    includes.append("extras/msinttypes")
+
 LIBRARIES = [
     ("libargon2", {
-        "include_dirs": [
-            "libargon2/src",
-            "libargon2/src/blake2"
-        ],
+        "include_dirs": includes,
         "sources": [
             "libargon2/src/argon2.c",
             "libargon2/src/blake2/blake2b.c",
