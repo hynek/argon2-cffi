@@ -7,7 +7,7 @@ import sys
 from cffi import FFI
 
 
-include_dirs = ["libargon2/src"]
+include_dirs = ["extras/libargon2/src"]
 
 if sys.version_info[0] == 2 and "win32" in str(sys.platform).lower():
     include_dirs.append("extras/msinttypes")

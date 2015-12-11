@@ -14,8 +14,8 @@ NAME = "argon2_cffi"
 PACKAGES = find_packages(where="src")
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 include_dirs = [
-    "libargon2/src",
-    "libargon2/src/blake2",
+    "extras/libargon2/src",
+    "extras/libargon2/src/blake2",
 ]
 
 if sys.version_info[0] == 2 and "win32" in str(sys.platform).lower():
@@ -25,13 +25,13 @@ LIBRARIES = [
     ("libargon2", {
         "include_dirs": include_dirs,
         "sources": [
-            "libargon2/src/argon2.c",
-            "libargon2/src/blake2/blake2b.c",
-            "libargon2/src/core.c",
-            "libargon2/src/encoding.c",
-            "libargon2/src/opt.c",
-            "libargon2/src/ref.c",
-            "libargon2/src/thread.c",
+            "extras/libargon2/src/argon2.c",
+            "extras/libargon2/src/blake2/blake2b.c",
+            "extras/libargon2/src/core.c",
+            "extras/libargon2/src/encoding.c",
+            "extras/libargon2/src/opt.c",
+            "extras/libargon2/src/ref.c",
+            "extras/libargon2/src/thread.c",
         ],
     }),
 ]
