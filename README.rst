@@ -22,7 +22,7 @@ CFFI-based Argon2 Bindings for Python
   >>> import argon2
   >>> encoded_hash = argon2.hash_password(b"secret", b"somesalt")
   >>> encoded_hash
-  b'$argon2i$m=4096,t=3,p=2$c29tZXNhbHQ$FNqxwHC2l1liWu3JTgGn6w'
+  b'$argon2i$m=512,t=2,p=2$c29tZXNhbHQ$2IdoNVglVTxb9w4YVJqW8w'
   >>> argon2.verify_password(encoded_hash, b"secret")
   True
   >>> argon2.verify_password(encoded_hash, b"wrong")
@@ -35,7 +35,7 @@ You can omit the ``salt`` argument for a secure random salt of length ``argon2.D
 .. code-block:: pycon
 
   >>> argon2.hash_password(b"secret")  # doctest: +SKIP
-  b'$argon2i$m=4096,t=3,p=2$GIESi4asMZaP051OPlH/zw$s5bQHIupLB1Fep/U5NXIVQ'
+  b'$argon2i$m=512,t=2,p=2$c29tZXNhbHQ$2IdoNVglVTxb9w4YVJqW8w'
 
 
 Installation
@@ -70,7 +70,7 @@ The function takes the same parameters as ``hash_password()``:
 .. code-block:: pycon
 
   >>> argon2.hash_password_raw(b"secret", b"somesalt")
-  b'\x14\xda\xb1\xc0p\xb6\x97YbZ\xed\xc9N\x01\xa7\xeb'
+  b'\xd8\x87h5X%U<[\xf7\x0e\x18T\x9a\x96\xf3'
 
 
 Choosing Parameters
