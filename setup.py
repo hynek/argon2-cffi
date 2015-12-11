@@ -1,8 +1,11 @@
+from __future__ import absolute_import, division, print_function
+
 from setuptools import setup, find_packages
 
 import sys
 import codecs
 import os
+import platform
 import re
 
 
@@ -12,26 +15,61 @@ HERE = os.path.abspath(os.path.dirname(__file__))
 
 NAME = "argon2_cffi"
 PACKAGES = find_packages(where="src")
+
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
+lib_base = os.path.join("extras", "libargon2", "src")
 include_dirs = [
-    "extras/libargon2/src",
-    "extras/libargon2/src/blake2",
+    os.path.join(lib_base, path)
+    for path in [
+        "",
+        "blake2",
+    ]
 ]
 
-if sys.version_info[0] == 2 and "win32" in str(sys.platform).lower():
-    include_dirs.append("extras/msinttypes")
+
+# Add vendored integer types headers.
+if "win32" in str(sys.platform).lower():
+    int_base = "extras/msinttypes/"
+    inttypes = int_base + "inttypes"
+    stdint = int_base + "stdint"
+    vi = sys.version_info[0:2]
+    if vi in [(2, 6), (2, 7)]:
+        # VS 2008 needs both.
+        include_dirs += [inttypes, stdint]
+    elif vi in [(3, 3), (3, 4)]:
+        # VS 2010 needs only inttypes.h
+        include_dirs += [inttypes]
+
+# Optimized version requires SSE2 extensions.  They have been around since
+# 2001 so we try to compile it on every recent-ish x86.
+optimized = platform.machine() in (
+    "i686",
+    "x86",
+    "x86_64",
+    "AMD64",
+)
+if optimized:
+    print("Building SSE2-optimized version.")
+else:
+    print(
+        "Building unoptimized reference implementation because",
+        platform.machine(),
+        "is not known to support SSE2."
+    )
 
 LIBRARIES = [
     ("libargon2", {
         "include_dirs": include_dirs,
         "sources": [
-            "extras/libargon2/src/argon2.c",
-            "extras/libargon2/src/blake2/blake2b.c",
-            "extras/libargon2/src/core.c",
-            "extras/libargon2/src/encoding.c",
-            "extras/libargon2/src/opt.c",
-            "extras/libargon2/src/ref.c",
-            "extras/libargon2/src/thread.c",
+            os.path.join(lib_base, path)
+            for path in [
+                "argon2.c",
+                os.path.join("blake2", "blake2b.c"),
+                "core.c",
+                "encoding.c",
+                "opt.c" if optimized else "ref.c",
+                "thread.c",
+            ]
         ],
     }),
 ]

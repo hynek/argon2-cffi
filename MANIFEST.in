@@ -1,5 +1,5 @@
 include *.rst *.txt tox.ini .coveragerc LICENSE
-exclude src/argon2/_ffi.py .gitmodules extras/libargon2/.git
+exclude src/argon2/_ffi.py .gitmodules extras/libargon2/.git appveyor.yml
 graft tests
 recursive-exclude tests *.pyc
 graft extras

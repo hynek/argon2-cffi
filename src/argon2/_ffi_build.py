@@ -2,15 +2,26 @@
 
 from __future__ import absolute_import, division, print_function
 
+import os
 import sys
 
 from cffi import FFI
 
 
-include_dirs = ["extras/libargon2/src"]
+include_dirs = [os.path.join("extras", "libargon2", "src")]
 
-if sys.version_info[0] == 2 and "win32" in str(sys.platform).lower():
-    include_dirs.append("extras/msinttypes")
+# Add vendored integer types headers.
+if "win32" in str(sys.platform).lower():
+    int_base = os.path.join("extras", "msinttypes")
+    inttypes = os.path.join(int_base, "inttypes")
+    stdint = os.path.join(int_base, "stdint")
+    vi = sys.version_info[0:2]
+    if vi in [(2, 6), (2, 7)]:
+        # VS 2008 needs both.
+        include_dirs += [inttypes, stdint]
+    elif vi in [(3, 3), (3, 4)]:
+        # VS 2010 needs only inttypes.h
+        include_dirs += [inttypes]
 
 
 ffi = FFI()
