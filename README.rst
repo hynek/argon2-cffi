@@ -49,7 +49,7 @@ Binary `wheels <http://pythonwheels.com>`_ are offered for OS X and Windows.
 Hands-on
 ========
 
-``argon2_cffi`` comes with hopefully reasonable defaults for Argon2 parameters.
+``argon2_cffi`` comes with hopefully reasonable defaults for Argon2 parameters that result in a verification time of between 0.5ms and 1ms on reasonably recent hardware.
 But of course, you can set them yourself if you wish:
 
 .. code-block:: pycon
