@@ -22,11 +22,13 @@ The string encoding routines in src/encoding.c are copyright (c) 2015 Thomas Por
 
 The BLAKE2 code in src/blake2/ is copyright (c) Samuel Neves, 2013-2015, and under CC0 license.
 
+The authors of Argon2 also were very helpful to get the library to compile on ancient versions of Visual Studio for ancient versions of Python.
+
 
 msinttypes
 ^^^^^^^^^^
 
-In order to be able to compile on Visual Studio 2008 which is required for Python 2.7, we also ship two headers with integer types.
+In order to be able to compile on Visual Studio 2008 and Visual Studio 2010 which are required for Python 2.6/2.7 and 3.3/3.4 respectively, we also ship two C headers with integer types.
 They are from the `msinttypes project <https://code.google.com/p/msinttypes/>`_ (`auto-import on GitHub <https://github.com/chemeris/msinttypes>`_) and licensed under New BSD:
 
 Copyright (c) 2006-2013 Alexander Chemeris
