@@ -9,8 +9,6 @@ import platform
 import re
 
 
-HERE = os.path.abspath(os.path.dirname(__file__))
-
 ###############################################################################
 
 NAME = "argon2_cffi"
@@ -26,8 +24,7 @@ include_dirs = [
     ]
 ]
 
-
-# Add vendored integer types headers.
+# Add vendored integer types headers if necessary.
 is_windows = "win32" in str(sys.platform).lower()
 if is_windows:
     int_base = "extras/msinttypes/"
@@ -38,7 +35,7 @@ if is_windows:
         # VS 2008 needs both.
         include_dirs += [inttypes, stdint]
     elif vi in [(3, 3), (3, 4)]:
-        # VS 2010 needs only inttypes.h
+        # VS 2010 needs only inttypes.h and fails with both.
         include_dirs += [inttypes]
 
 # Optimized version requires SSE2 extensions.  They have been around since
@@ -100,12 +97,17 @@ if is_windows and sys.version_info[0] == 2:
     # required for "Microsoft Visual C++ Compiler for Python 2.7"
     # https://www.microsoft.com/en-us/download/details.aspx?id=44266
     SETUP_REQUIRES.append("setuptools>=6.0")
+
 INSTALL_REQUIRES = ["six", "cffi>=1.0.0"]
-EXTRAS_REQUIRE = {}
-if sys.version_info[0:2] < (3, 4):  # old school
+# we're not building universal wheel so this works.
+if sys.version_info[0:2] < (3, 4):
     INSTALL_REQUIRES += ["enum34"]
 
+EXTRAS_REQUIRE = {}
+
 ###############################################################################
+
+HERE = os.path.abspath(os.path.dirname(__file__))
 
 
 def read(*parts):
