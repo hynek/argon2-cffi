@@ -28,7 +28,8 @@ include_dirs = [
 
 
 # Add vendored integer types headers.
-if "win32" in str(sys.platform).lower():
+is_windows = "win32" in str(sys.platform).lower()
+if is_windows:
     int_base = "extras/msinttypes/"
     inttypes = int_base + "inttypes"
     stdint = int_base + "stdint"
@@ -95,6 +96,10 @@ CLASSIFIERS = [
 ]
 
 SETUP_REQUIRES = ["cffi"]
+if is_windows and sys.version_info[0] == 2:
+    # required for "Microsoft Visual C++ Compiler for Python 2.7"
+    # https://www.microsoft.com/en-us/download/details.aspx?id=44266
+    SETUP_REQUIRES.append("setuptools>=6.0")
 INSTALL_REQUIRES = ["six", "cffi>=1.0.0"]
 EXTRAS_REQUIRE = {}
 if sys.version_info[0:2] < (3, 4):  # old school
