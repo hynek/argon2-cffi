@@ -35,7 +35,7 @@ CFFI-based Argon2 Bindings for Python
     ...
   argon2.exceptions.VerificationError: Decoding failed
 
-You can omit the ``salt`` argument for a secure random salt of length ``argon2.DEFAULT_RANDOM_SALT_LENGTH``:
+You can omit the ``salt`` argument for a secure random `salt <https://en.wikipedia.org/wiki/Salt_(cryptography)>`_ of length ``argon2.DEFAULT_RANDOM_SALT_LENGTH``:
 
 .. code-block:: pycon
 

@@ -24,7 +24,10 @@ The `BLAKE2 <https://blake2.net>_` code in ``src/blake2/`` is copyright (c) Samu
 
 The authors of Argon2 also were very helpful to get the library to compile on ancient versions of Visual Studio for ancient versions of Python.
 
+The documentation also quotes frequently from the Argon2 paper_ to avoid mistakes by rephrasing.
+
 .. _CC0: https://creativecommons.org/publicdomain/zero/1.0/
+.. _paper: https://password-hashing.net/argon2-specs.pdf
 
 msinttypes
 ^^^^^^^^^^

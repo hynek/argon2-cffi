@@ -11,8 +11,21 @@ from .exceptions import InvalidHash
 
 
 class Type(Enum):
+    """
+    Enum of Argon2 variants.
+    """
     D = lib.Argon2_d
+    """
+    Argon2\ **d** is faster and uses data-depending memory access, which makes
+    it suitable for cryptocurrencies and applications with no threats from
+    side-channel timing attacks.
+    """
     I = lib.Argon2_i
+    """
+    Argon2\ **i** uses data-independent memory access, which is preferred for
+    password hashing and password-based key derivation.  Argon2i is slower as
+    it makes more passes over the memory to protect from tradeoff attacks.
+    """
 
 
 NoneType = type(None)

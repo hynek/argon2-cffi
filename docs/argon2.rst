@@ -11,8 +11,13 @@ It is designed to have both a configurable runtime as well as memory consumption
 This means that you can decide how long it takes to hash a password and how much memory is required.
 
 Argon2 comes in two variants:
-Argon2\ **d** is faster and uses data-depending memory access, which makes it suitable for cryptocurrencies and applications with no threats from side-channel timing attacks.
-Argon2\ **i** uses data-independent memory access, which is preferred for password hashing and password-based key derivation. Argon2i is slower as it makes more passes over the memory to protect from tradeoff attacks.
+
+Argon2d
+  is faster and uses data-depending memory access, which makes it suitable for cryptocurrencies and applications with no threats from side-channel timing attacks.
+
+Argon2i
+  uses data-independent memory access, which is preferred for password hashing and password-based key derivation.
+  Argon2i is slower as it makes more passes over the memory to protect from tradeoff attacks.
 
 
 Why “just use bcrypt” Is Not the Answer

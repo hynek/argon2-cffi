@@ -32,7 +32,25 @@ def hash_password(password, salt=None,
                   hash_len=DEFAULT_HASH_LENGTH,
                   type=Type.I):
     """
-    Hash *password* and return an *encoded* hash.
+    Hash *password* and return an **encoded** hash.
+
+    :param bytes password: Password to hash.
+    :param bytes salt: A salt_.  Should be random and different for each
+        password.  Will generate a random salt for you if left ``None``
+        (recommended).
+    :param int time_cost: Defines the amount of computation realized and
+        therefore the execution time, given in number of iterations.
+    :param int memory_cost: Defines the memory usage, given in kibibytes_.
+    :param int parallelism: Defines the number of parallel threads (*changes*
+        the resulting hash value).
+    :param int hash_len: Length of the hash in bytes.
+    :param Type type: Which Argon2 variant to use.  In doubt use the default
+        :attr:`Type.I` which is better suited for passwords.
+
+    :rtype: bytes
+
+    .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
+    .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
     return _hash(password, salt, time_cost, memory_cost, parallelism, hash_len,
                  type, True)
@@ -45,7 +63,7 @@ def hash_password_raw(password, salt=None,
                       hash_len=DEFAULT_HASH_LENGTH,
                       type=Type.I):
     """
-    Hash *password* and return a *raw* hash.
+    Hash *password* and return a **raw** hash.
 
     The function takes the same parameters as :func:`hash_password`.
     """
