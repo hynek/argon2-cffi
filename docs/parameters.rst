@@ -19,4 +19,4 @@ The authors of Argon2 specified a method in their `paper <https://github.com/P-H
    Find a ``time_cost`` that is within your accounted time.
    If ``time_cost=1`` takes too long, lower ``memory_cost``.
 
-`argon2_cffi`'s :doc:`cli` will help you with this process.
+``argon2_cffi``'s :doc:`cli` will help you with this process.
