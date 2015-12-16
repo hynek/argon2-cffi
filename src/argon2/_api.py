@@ -12,7 +12,11 @@ from .exceptions import VerificationError, HashingError
 
 
 __all__ = [
+    "DEFAULT_HASH_LENGTH",
+    "DEFAULT_MEMORY_COST",
+    "DEFAULT_PARALLELISM",
     "DEFAULT_RANDOM_SALT_LENGTH",
+    "DEFAULT_TIME_COST",
     "hash_password",
     "hash_password_raw",
     "verify_password",
