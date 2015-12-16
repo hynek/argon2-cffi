@@ -46,6 +46,8 @@ def hash_password_raw(password, salt=None,
                       type=Type.I):
     """
     Hash *password* and return a *raw* hash.
+
+    The function takes the same parameters as :func:`hash_password`.
     """
     return _hash(password, salt, time_cost, memory_cost, parallelism, hash_len,
                  type, False)

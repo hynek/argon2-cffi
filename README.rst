@@ -2,6 +2,10 @@
 CFFI-based Argon2 Bindings for Python
 =====================================
 
+.. image:: https://readthedocs.org/projects/argon2-cffi/badge/?version=latest
+  :target: http://argon2-cffi.readthedocs.org/en/latest/?badge=latest
+  :alt: Documentation Status
+
 .. image:: https://travis-ci.org/hynek/argon2_cffi.svg?branch=master
   :target: https://travis-ci.org/hynek/argon2_cffi
 
@@ -14,11 +18,9 @@ CFFI-based Argon2 Bindings for Python
 .. image:: https://www.irccloud.com/invite-svg?channel=%23cryptography-dev&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1
     :target: https://www.irccloud.com/invite?channel=%23cryptography-dev&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1
 
-.. begin
+.. teaser-begin
 
-
-`Argon2 <https://github.com/p-h-c/phc-winner-argon2>`_ won the `Password Hashing Competition <https://password-hashing.net/>`_ in 2015.
-``argon2_cffi`` is the simplest way to use it in Python and PyPy:
+`Argon2 <https://github.com/p-h-c/phc-winner-argon2>`_ won the `Password Hashing Competition <https://password-hashing.net/>`_ and ``argon2_cffi`` is the simplest way to use it in Python and PyPy:
 
 .. code-block:: pycon
 
@@ -37,86 +39,10 @@ You can omit the ``salt`` argument for a secure random salt of length ``argon2.D
 
 .. code-block:: pycon
 
+  >>> argon2.DEFAULT_RANDOM_SALT_LENGTH
+  16
   >>> argon2.hash_password(b"secret")  # doctest: +SKIP
   b'$argon2i$m=512,t=2,p=2$c29tZXNhbHQ$2IdoNVglVTxb9w4YVJqW8w'
 
-
-Installation
-============
-
-A working C compiler is required because the official Argon2 C implementation is shipped along with the Python CFFI bindings.
-Otherwise a plain ``pip install argon2_cffi`` should just work.
-Binary `wheels <http://pythonwheels.com>`_ are offered for OS X and Windows.
-
-
-Hands-on
-========
-
-``argon2_cffi`` comes with hopefully reasonable defaults for Argon2 parameters that result in a verification time of between 0.5ms and 1ms on reasonably recent hardware.
-But of course, you can set them yourself if you wish:
-
-.. code-block:: pycon
-
-  >>> argon2.hash_password(
-  ...     b"secret", b"somesalt",
-  ...     time_cost=1,         # number of iterations
-  ...     memory_cost=8,       # used memory in KiB
-  ...     parallelism=1,       # number of threads used; changes hash!
-  ...     hash_len=64,         # length of resulting raw hash
-  ...     type=argon2.Type.D,  # choose Argon2i or Argon2d
-  ... )
-  b'$argon2d$m=8,t=1,p=1$c29tZXNhbHQ$H0oN1/L3H8t8hcg47pAyJZ8toBh2UbgcMt0zRFrqt4mEJCeKSEWGxt+KpZrMwxvr7M5qktNcc/bk/hvbinueJA'
-
-The raw hash can also be computed.
-The function takes the same parameters as ``hash_password()``:
-
-.. code-block:: pycon
-
-  >>> argon2.hash_password_raw(b"secret", b"somesalt")
-  b'\xd8\x87h5X%U<[\xf7\x0e\x18T\x9a\x96\xf3'
-
-
-Choosing Parameters
--------------------
-
-Finding the right parameters for a password hashing algorithm is a daunting task.
-The authors of Argon2 specified a method in their `paper <https://github.com/P-H-C/phc-winner-argon2/blob/master/argon2-specs.pdf>`_ but it should be noted that they also  mention that no value for ``time_cost`` or ``memory_cost`` is actually insecure (cf. section 6.4).
-
-
-#. Choose whether you want Argon2i or Argon2d (``type``).
-   If you don't know what that means, choose Argon2i (``Type.I``).
-#. Figure out how many threads can be used on each call to Argon2 (``parallelism``).
-   They recommend twice as many as the number of cores dedicated to hashing passwords.
-#. Figure out how much memory each call can afford (``memory_cost``).
-#. Choose a salt length.
-   16 Bytes are fine.
-#. Choose a hash length (``hash_len``).
-   16 Bytes are fine.
-#. Figure out how long each call can take.
-   One `recommendation <https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2015/march/enough-with-the-salts-updates-on-secure-password-schemes/>`_ for concurent user logins is to keep it under 0.5ms.
-#. Measure the time for hashing using your chosen parameters.
-   Find a ``time_cost`` that is within your accounted time.
-   If ``time_cost=1`` takes too long, lower ``memory_cost``.
-
-
-CLI
-^^^
-
-To aid you with finding the parameters, ``argon2_cffi`` offers a CLI interface that can be accessed using ``python -m argon2``.
-It will benchmark Argon2’s *password verification* in the current environment.
-You can use command line arguments to set hashing parameters:
-
-.. code-block:: text
-
-  $ python -m argon2 -t 1 -m 512 -p 2
-  Running Argon2i 100 times with:
-  hash_len: 16
-  memory_cost: 512
-  parallelism: 2
-  time_cost: 1
-
-  Measuring...
-
-  0.418ms per password verification
-
-This should make it much easier to determine the right parameters for your use case and your environment.
+``argon2_cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.org/>`_, the code on `GitHub <https://github.com/hynek/argon2_cffi>`_.
+It’s rigorously tested on Python 2.6, 2.7, 3.3+, and PyPy.

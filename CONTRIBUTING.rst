@@ -11,6 +11,8 @@ Here are a few guidelines to get you started:
   If you lack some Python version, you can can always limit the environments like ``tox -e py27,py35`` (in that case you may want to look into pyenv_ that makes it very easy to install many different Python versions in parallel).
 - Make sure your changes pass our CI.
   You won't get any feedback until it's green unless you ask for it.
+- If you address review feedback, make sure to bump the pull request.
+  Maintainers don’t receive notifications if you push new commits.
 - If your change is noteworthy, add an entry to the changelog_.
   Use present tense, semantic newlines, and add link to your pull request.
 - No contribution is too small; please submit as many fixes for typos and grammar bloopers as you can!
@@ -19,8 +21,6 @@ Here are a few guidelines to get you started:
   This is a hard rule; patches with missing tests or documentation won’t be merged.
 - Write `good test docstrings`_.
 - Obey `PEP 8`_ and `PEP 257`_.
-- If you address review feedback, make sure to bump the pull request.
-  Maintainers don’t receive notifications if you push new commits.
 
 Please note that this project is released with a Contributor `Code of Conduct`_.
 By participating in this project you agree to abide by its terms.
