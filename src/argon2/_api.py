@@ -38,6 +38,9 @@ def hash_password(password, salt=None,
     """
     Hash *password* and return an **encoded** hash.
 
+    An encoded hash can be directly passed into :func:`verify_password` as it
+    contains all parameters and the salt.
+
     :param bytes password: Password to hash.
     :param bytes salt: A salt_.  Should be random and different for each
         password.  Will generate a random salt for you if left ``None``
@@ -121,6 +124,13 @@ def _hash(password, salt, time_cost, memory_cost, parallelism, hash_len, type,
 def verify_password(hash, password, type=None):
     """
     Verify whether *password* is correct for *hash* of *type*.
+
+    :param bytes hash: An encoded Argon2 password hash as returned by
+        :func:`hash_password`.
+    :param bytes password: The password to verify whether it matches the one
+        *hash*.
+    :param Type type: Explicit type for *hash*.  Is deduced from the *hash*
+        if left ``None``.
 
     :return: ``True`` on success, throw exception otherwise.
     :rtype: bool
