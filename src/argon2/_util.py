@@ -17,8 +17,8 @@ class Type(Enum):
     D = lib.Argon2_d
     """
     Argon2\ **d** is faster and uses data-depending memory access, which makes
-    it suitable for cryptocurrencies and applications with no threats from
-    side-channel timing attacks.
+    it less suitable for hashing secrets and more suitable for cryptocurrencies
+    and applications with no threats from side-channel timing attacks.
     """
     I = lib.Argon2_i
     """
