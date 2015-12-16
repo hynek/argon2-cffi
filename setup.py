@@ -16,13 +16,7 @@ PACKAGES = find_packages(where="src")
 
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 lib_base = os.path.join("extras", "libargon2", "src")
-include_dirs = [
-    os.path.join(lib_base, path)
-    for path in [
-        "",
-        "blake2",
-    ]
-]
+include_dirs = [lib_base, os.path.join(lib_base, "blake2")]
 
 # Add vendored integer types headers if necessary.
 is_windows = "win32" in str(sys.platform).lower()
@@ -35,17 +29,12 @@ if is_windows:
         # VS 2008 needs both.
         include_dirs += [inttypes, stdint]
     elif vi in [(3, 3), (3, 4)]:
-        # VS 2010 needs only inttypes.h and fails with both.
+        # VS 2010 needs inttypes.h and fails with both.
         include_dirs += [inttypes]
 
 # Optimized version requires SSE2 extensions.  They have been around since
 # 2001 so we try to compile it on every recent-ish x86.
-optimized = platform.machine() in (
-    "i686",
-    "x86",
-    "x86_64",
-    "AMD64",
-)
+optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
 if optimized:
     print("Building SSE2-optimized version.")
 else:
@@ -157,9 +146,9 @@ if __name__ == "__main__":
         cffi_modules=CFFI_MODULES,
         ext_package="argon2",
         libraries=LIBRARIES,
+        zip_safe=False,
         classifiers=CLASSIFIERS,
         setup_requires=SETUP_REQUIRES,
         install_requires=INSTALL_REQUIRES,
         extras_require=EXTRAS_REQUIRE,
-        zip_safe=False,
     )
