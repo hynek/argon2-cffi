@@ -5,6 +5,8 @@ Argon2
 
   **TL;DR**: Use Argon2\ **i** to securely hash your passwords.
 
+  You do **not** need to read or understand anything below this box.
+
 Argon2 is a secure password hashing algorithm.
 It is designed to have both a configurable runtime as well as memory consumption.
 
@@ -13,7 +15,7 @@ This means that you can decide how long it takes to hash a password and how much
 Argon2 comes in two variants:
 
 Argon2d
-  is faster and uses data-depending memory access, which makes it suitable for cryptocurrencies and applications with no threats from side-channel timing attacks.
+  is faster and uses data-depending memory access, which makes it less suitable for hashing secrets and more suitable for cryptocurrencies and applications with no threats from side-channel timing attacks.
 
 Argon2i
   uses data-independent memory access, which is preferred for password hashing and password-based key derivation.
