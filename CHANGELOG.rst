@@ -13,6 +13,16 @@ Vendoring ``argon2`` @ `4fe0d8cda37691228dd5a96a310be57369403a4b <https://github
 Changes:
 ^^^^^^^^
 
+- ``verify_password()`` doesn't guess the hash type if passed ``None`` anymore.
+  Supporting this resulted in measurable overhead (~ 0.6ms vs 0.8ms on my notebook) since it had to happen in Python.
+  That means that naïve usage of the API would give attackers an edge.
+  The new behavior is that it has the same default value as ``hash_password()`` such that ``verify_password(hash_password(b"password"), b"password")`` still works.
+- Conditionally use the `SSE2 <https://en.wikipedia.org/wiki/SSE2>`_-optimized version of ``argon2`` on x86 architectures.
+- More packaging fixes.
+  Most notably compilation on Visual Studio 2010 for Python 3.3 and 3.4.
+- Tweaked default parameters to more reasonable values.
+  Verification should take between 0.5ms and 1ms on recent-ish hardware.
+
 
 15.0.0b5 (2015-12-10)
 ---------------------
