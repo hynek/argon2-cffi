@@ -16,7 +16,7 @@ CFFI-based Argon2 Bindings for Python
   :target: https://ci.appveyor.com/project/hynek/argon2-cffi
 
 .. image:: https://www.irccloud.com/invite-svg?channel=%23cryptography-dev&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1
-    :target: https://www.irccloud.com/invite?channel=%23cryptography-dev&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1
+  :target: https://www.irccloud.com/invite?channel=%23cryptography-dev&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1
 
 .. teaser-begin
 
@@ -25,8 +25,8 @@ CFFI-based Argon2 Bindings for Python
 .. code-block:: pycon
 
   >>> import argon2
-  >>> encoded_hash = argon2.hash_password(b"secret", b"somesalt")
-  >>> encoded_hash
+  >>> encoded_hash = argon2.hash_password(b"secret")
+  >>> encoded_hash   # doctest: +SKIP
   b'$argon2i$m=512,t=2,p=2$c29tZXNhbHQ$2IdoNVglVTxb9w4YVJqW8w'
   >>> argon2.verify_password(encoded_hash, b"secret")
   True
@@ -35,14 +35,6 @@ CFFI-based Argon2 Bindings for Python
     ...
   argon2.exceptions.VerificationError: Decoding failed
 
-You can omit the ``salt`` argument for a secure random `salt <https://en.wikipedia.org/wiki/Salt_(cryptography)>`_ of length ``argon2.DEFAULT_RANDOM_SALT_LENGTH``:
-
-.. code-block:: pycon
-
-  >>> argon2.DEFAULT_RANDOM_SALT_LENGTH
-  16
-  >>> argon2.hash_password(b"secret")  # doctest: +SKIP
-  b'$argon2i$m=512,t=2,p=2$c29tZXNhbHQ$2IdoNVglVTxb9w4YVJqW8w'
 
 ``argon2_cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.org/>`_, the code on `GitHub <https://github.com/hynek/argon2_cffi>`_.
 It’s rigorously tested on Python 2.6, 2.7, 3.3+, and PyPy.

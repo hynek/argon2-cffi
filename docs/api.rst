@@ -37,5 +37,6 @@ The raw hash can also be computed:
   >>> argon2.hash_password_raw(b"secret", b"somesalt")
   b'\xd8\x87h5X%U<[\xf7\x0e\x18T\x9a\x96\xf3'
 
+
 .. autoclass:: Type
   :members: D, I
