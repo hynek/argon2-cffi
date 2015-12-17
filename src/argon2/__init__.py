@@ -16,11 +16,11 @@ from ._api import (
 )
 
 
-__version__ = "15.0.0b6"
+__version__ = "15.0.0.dev0"
 
 __title__ = "argon2_cffi"
-__description__ = "argon2 password hashing algorithm."
-__uri__ = ""
+__description__ = "The secure Argon2 password hashing algorithm."
+__uri__ = "https://argon2-cffi.readthedocs.org"
 
 __author__ = "Hynek Schlawack"
 __email__ = "hs@ox.cx"
