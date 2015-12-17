@@ -5,8 +5,7 @@ from __future__ import absolute_import, division, print_function
 import os
 
 from ._util import (
-    check_types, error_to_str, guess_type, ffi, lib, get_encoded_len, Type,
-    NoneType,
+    check_types, error_to_str, ffi, lib, get_encoded_len, Type, NoneType,
 )
 from .exceptions import VerificationError, HashingError
 
@@ -121,7 +120,7 @@ def _hash(password, salt, time_cost, memory_cost, parallelism, hash_len, type,
     )
 
 
-def verify_password(hash, password, type=None):
+def verify_password(hash, password, type=Type.I):
     """
     Verify whether *password* is correct for *hash* of *type*.
 
@@ -129,8 +128,7 @@ def verify_password(hash, password, type=None):
         :func:`hash_password`.
     :param bytes password: The password to verify whether it matches the one
         *hash*.
-    :param Type type: Explicit type for *hash*.  Is deduced from the *hash*
-        if left ``None``.
+    :param Type type: Type for *hash*.
 
     :return: ``True`` on success, throw exception otherwise.
     :rtype: bool
@@ -138,13 +136,10 @@ def verify_password(hash, password, type=None):
     e = check_types(
         password=(password, bytes),
         hash=(hash, bytes),
-        type=(type, (Type, NoneType)),
+        type=(type, Type),
     )
     if e:
         raise TypeError(e)
-
-    if type is None:
-        type = guess_type(hash)
 
     rv = lib.argon2_verify(
         ffi.new("char[]", hash),

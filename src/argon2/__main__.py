@@ -3,7 +3,6 @@
 from __future__ import absolute_import, division, print_function
 
 import argparse
-import os
 import sys
 import timeit
 
@@ -11,7 +10,6 @@ import six
 
 from . import (
     hash_password,
-    DEFAULT_RANDOM_SALT_LENGTH,
     DEFAULT_TIME_COST,
     DEFAULT_MEMORY_COST,
     DEFAULT_PARALLELISM,
@@ -39,10 +37,8 @@ def main(argv):
     args = parser.parse_args(argv[1:])
 
     password = b"secret"
-    salt = os.urandom(DEFAULT_RANDOM_SALT_LENGTH)
-
     hash = hash_password(
-        password, salt,
+        password,
         time_cost=args.t,
         memory_cost=args.m,
         parallelism=args.p,
@@ -67,10 +63,10 @@ def main(argv):
 
     print("\nMeasuring...")
     duration = timeit.timeit(
-        "verify_password({hash!r}, {password!r})".format(
-            hash=hash, password=password
+        "verify_password({hash!r}, {password!r}, {type})".format(
+            hash=hash, password=password, type=args.d,
         ),
-        setup="from argon2 import verify_password; gc.enable()",
+        setup="from argon2 import verify_password, Type; gc.enable()",
         number=args.n,
     )
     print("\n{0:.3}ms per password verification"

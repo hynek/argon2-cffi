@@ -7,7 +7,6 @@ from six import iteritems, PY3
 
 
 from ._ffi import ffi, lib
-from .exceptions import InvalidHash
 
 
 class Type(Enum):
@@ -92,16 +91,3 @@ def get_encoded_len(hash_len, salt_len):
     # 9 + 12 + 14 + 23 + 44 + 1 = 103
     # Rounded to 4 byte boundary: 104
     return (42 + int(((hash_len + salt_len) << 2) / 3)) & ~3
-
-
-def guess_type(s):
-    """
-    Guesses what type of encoded Argon2 hash *s* is or raises InvalidHash.
-    """
-    prefix = s[:8]
-    if prefix == b"$argon2i":
-        return Type.I
-    elif prefix == b"$argon2d":
-        return Type.D
-    else:
-        raise InvalidHash(s)

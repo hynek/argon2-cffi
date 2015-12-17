@@ -17,13 +17,6 @@ class VerificationError(Argon2Error):
     """
 
 
-class InvalidHash(VerificationError):
-    """
-    Raised if :func:`argon2.verify_password` should guess the type of a hash
-    but the hash is invalid.
-    """
-
-
 class HashingError(Argon2Error):
     """
     Raised if hasing failed.

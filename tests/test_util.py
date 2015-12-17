@@ -4,15 +4,7 @@ from __future__ import absolute_import, division, print_function
 
 from six import PY3
 
-import pytest
-
-from hypothesis import given
-from hypothesis import strategies as st
-
-from argon2.exceptions import InvalidHash
-from argon2._util import get_encoded_len, check_types, NoneType, guess_type
-
-from .test_api import i_and_d_encoded
+from argon2._util import get_encoded_len, check_types, NoneType
 
 
 def test_get_encoded_len():
@@ -49,20 +41,3 @@ class TestCheckTypes(object):
             assert "'bytes' must be a bytes (got str)" in rv
         else:
             assert "'bytes' must be a str (got unicode)" in rv
-
-
-class TestGuessType(object):
-    @i_and_d_encoded
-    def test_success(self, type, hash):
-        """
-        Returns Type.I on likely Argon2i hashes.
-        """
-        assert type is guess_type(hash)
-
-    @given(st.binary(max_size=128))
-    def test_fail(self, wrong_hash):
-        """
-        If the hash can't be neither i nor d, raise InvalidHash.
-        """
-        with pytest.raises(InvalidHash):
-            guess_type(wrong_hash)

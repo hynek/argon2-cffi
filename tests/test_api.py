@@ -167,21 +167,13 @@ class TestHash(object):
 
 class TestVerify(object):
     @i_and_d_encoded
-    def test_auto_success(self, type, hash):
-        """
-        Given a valid hash and password, we figure out the type ourself and
-        succeed.
-        """
-        assert True is verify_password(hash, TEST_PASSWORD)
-
-    @i_and_d_encoded
-    def test_explicit_success(self, type, hash):
+    def test_success(self, type, hash):
         """
         Given a valid hash and password and correct type, we succeed.
         """
         assert True is verify_password(hash, TEST_PASSWORD, type)
 
-    def test_explicit_fail(self):
+    def test_fail(self):
         """
         Given a valid hash and password and wrong type, we fail.
         """
@@ -194,18 +186,3 @@ class TestVerify(object):
         """
         with pytest.raises(TypeError):
             verify_password(TEST_HASH_I, TEST_PASSWORD.decode("ascii"))
-
-    def test_auto_fast(self):
-        """
-        Just a test ensure that test_auto_fail works on correct data.
-        """
-        assert verify_password(TEST_HASH_FAST, b"password")
-
-    @given(st.binary(max_size=128))
-    def test_auto_fail(self, wrong_password):
-        """
-        Given a valid but wrong hash and password, we figure out the type
-        ourself and fail.
-        """
-        with pytest.raises(VerificationError):
-            verify_password(TEST_HASH_FAST, wrong_password)
