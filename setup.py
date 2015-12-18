@@ -67,7 +67,10 @@ CLASSIFIERS = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
-    "Operating System :: OS Independent",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
     "Programming Language :: Python :: 2",
     "Programming Language :: Python :: 2.6",
     "Programming Language :: Python :: 2.7",
@@ -78,6 +81,8 @@ CLASSIFIERS = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
