@@ -5,7 +5,7 @@ Credits & License
 
 The development is kindly supported by `Variomedia AG <https://www.variomedia.de/>`_.
 
-A full list of contributors can be found on `GitHub <https://github.com/hynek/argon2_cffi/graphs/contributors>`_.
+A full list of contributors can be found in GitHub's `overview <https://github.com/hynek/argon2_cffi/graphs/contributors>`_.
 
 
 Vendored Code
