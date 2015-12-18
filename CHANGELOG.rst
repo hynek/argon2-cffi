@@ -5,7 +5,7 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-15.0.0 (UNRELEASED)
+15.0.0 (2015-12-18)
 -------------------
 
 Vendoring ``argon2`` @ `4fe0d8cda37691228dd5a96a310be57369403a4b <https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b>`_.

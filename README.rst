@@ -2,8 +2,8 @@
 CFFI-based Argon2 Bindings for Python
 =====================================
 
-.. image:: https://readthedocs.org/projects/argon2-cffi/badge/?version=latest
-  :target: http://argon2-cffi.readthedocs.org/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/argon2-cffi/badge/?version=stable
+  :target: http://argon2-cffi.readthedocs.org/en/latest/?badge=stable
   :alt: Documentation Status
 
 .. image:: https://travis-ci.org/hynek/argon2_cffi.svg?branch=master
