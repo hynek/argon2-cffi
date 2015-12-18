@@ -25,12 +25,12 @@ CFFI-based Argon2 Bindings for Python
 .. code-block:: pycon
 
   >>> import argon2
-  >>> encoded_hash = argon2.hash_password(b"secret")
-  >>> encoded_hash   # doctest: +SKIP
+  >>> hash = argon2.hash_password(b"secret")
+  >>> hash   # doctest: +SKIP
   b'$argon2i$m=512,t=2,p=2$c29tZXNhbHQ$2IdoNVglVTxb9w4YVJqW8w'
-  >>> argon2.verify_password(encoded_hash, b"secret")
+  >>> argon2.verify_password(hash, b"secret")
   True
-  >>> argon2.verify_password(encoded_hash, b"wrong")
+  >>> argon2.verify_password(hash, b"wrong")
   Traceback (most recent call last):
     ...
   argon2.exceptions.VerificationError: Decoding failed

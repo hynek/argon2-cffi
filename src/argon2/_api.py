@@ -71,7 +71,7 @@ def hash_password_raw(password, salt=None,
     """
     Hash *password* and return a **raw** hash.
 
-    The function takes the same parameters as :func:`hash_password`.
+    This function takes the same parameters as :func:`hash_password`.
     """
     return _hash(password, salt, time_cost, memory_cost, parallelism, hash_len,
                  type, False)
@@ -127,7 +127,7 @@ def verify_password(hash, password, type=Type.I):
     :param bytes hash: An encoded Argon2 password hash as returned by
         :func:`hash_password`.
     :param bytes password: The password to verify whether it matches the one
-        *hash*.
+        in *hash*.
     :param Type type: Type for *hash*.
 
     :return: ``True`` on success, throw exception otherwise.
