@@ -29,6 +29,8 @@ matrix:
       env: TOXENV=manifest
     - python: "3.5"
       env: TOXENV=docs
+    - python: "3.5"
+      env: TOXENV=readme
 
 
   allow_failures:
