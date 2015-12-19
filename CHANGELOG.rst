@@ -13,7 +13,7 @@ Vendoring ``argon2`` @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
 Changes:
 ^^^^^^^^
 
-- Fix ``long_description`` on PyPI.
+None
 
 
 15.0.1 (2015-12-18)
