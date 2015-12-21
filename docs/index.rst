@@ -19,6 +19,7 @@ User's Guide
    api
    parameters
    cli
+   faq
 
 
 Project Information
