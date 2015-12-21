@@ -142,6 +142,7 @@ if __name__ == "__main__":
         maintainer_email=find_meta("email"),
         long_description=(
             read("README.rst") + "\n\n" +
+            read("FAQ.rst") + "\n\n" +
             read("AUTHORS.rst") + "\n\n" +
             read("CHANGELOG.rst")
         ),
