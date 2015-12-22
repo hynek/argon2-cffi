@@ -28,6 +28,7 @@ DEFAULT_TIME_COST = 2
 DEFAULT_MEMORY_COST = 512
 DEFAULT_PARALLELISM = 2
 
+
 def hash_password(password, salt=None,
                   time_cost=DEFAULT_TIME_COST,
                   memory_cost=DEFAULT_MEMORY_COST,
@@ -133,6 +134,7 @@ def verify_password(hash, password, type=Type.I):
     else:
         raise VerificationError(_error_to_str(rv))
 
+
 def core(password,
          salt=None,
          secret=None,
@@ -177,7 +179,7 @@ def core(password,
     context.threads = threads
     context.allocate_cbk = ffi.NULL
     context.free_cbk = ffi.NULL
-    context.flags = 4 # XXX
+    context.flags = 4  # XXX
 
     if secret is None:
         context.secret = ffi.NULL

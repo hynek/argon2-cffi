@@ -217,4 +217,3 @@ class TestCore(object):
         rv = core(b"abc\x00", TEST_SALT)
 
         assert rv != core(b"abc", TEST_SALT)
-
