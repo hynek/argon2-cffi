@@ -30,7 +30,7 @@ class Type(Enum):
 NoneType = type(None)
 
 
-def check_types(**kw):
+def _check_types(**kw):
     """
     Check each ``name: (value, types)`` in *kw*.
 
@@ -53,7 +53,7 @@ def check_types(**kw):
         return ", ".join(errors) + "."
 
 
-def error_to_str(error):
+def _error_to_str(error):
     """
     Convert an Argon2 error code into a native string.
     """
@@ -63,14 +63,14 @@ def error_to_str(error):
     return msg
 
 
-def encoded_str_len(l):
+def _encoded_str_len(l):
     """
     Compute how long a byte string of length *l* becomes if encoded to hex.
     """
     return (l << 2) / 3 + 2
 
 
-def get_encoded_len(hash_len, salt_len):
+def _get_encoded_len(hash_len, salt_len):
     """
     Compute the size of the required buffer for an encoded hash with *hash_len*
     and *salt_len*.

@@ -13,7 +13,8 @@ Vendoring ``argon2`` @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
 Changes:
 ^^^^^^^^
 
-None
+- Add ``argon2.PasswordHasher``.
+  A higher-level class specifically for hashing passwords that also works on unicode.
 
 
 15.0.1 (2015-12-18)

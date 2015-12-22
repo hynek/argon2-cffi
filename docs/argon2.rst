@@ -3,7 +3,7 @@ Argon2
 
 .. note::
 
-  **TL;DR**: Use Argon2\ **i** to securely hash your passwords.
+  **TL;DR**: Use :class:`argon2.PasswordHasher` with its default parameters to securely hash your passwords.
 
   You do **not** need to read or understand anything below this box.
 
@@ -22,12 +22,11 @@ Argon2i
   Argon2i is slower as it makes more passes over the memory to protect from tradeoff attacks.
 
 
-Why “just use bcrypt” Is Not the Answer
----------------------------------------
+Why “just use bcrypt” Is Not the Best Answer (Anymore)
+------------------------------------------------------
 
-There's an unfortunate meme to respond to questions of storage of secrets like passwords to “just use bcrypt_”.
-The problem is, neither bcrypt nor its closest NIST-approved competitor PBKDF2_ are fit for hashing passwords in the days of ASIC_ password breakers.
-In a nutshell, password crackers are able to create highly parallelized hardware specifically tailored to crack computationally expensive password hashes.
+The current workhorses of password hashing are unquestionably bcrypt_ and PBKDF2_.
+And while they're still fine to use, the password cracking community embraced new technologies like GPU_\ s and ASIC_\ s to crack password in a highly parallel fashion.
 
 An effective measure against extreme parallelism proved making computation of password hashes also *memory* hard.
 The best known implementation of that approach is to date scrypt_.
@@ -35,11 +34,12 @@ However according to the `Argon2 paper`_, page 2:
 
   […] the existence of a trivial time-memory tradeoff allows compact implementations with the same energy cost.
 
-
 Therefore a new algorithm was needed.
+This time future-proof and with committee-vetting instead of single implementors.
 
 .. _bcrypt: https://en.wikipedia.org/wiki/Bcrypt
 .. _PBKDF2: https://en.wikipedia.org/wiki/PBKDF2
+.. _GPU: http://hashcat.net/oclhashcat/
 .. _ASIC: https://en.wikipedia.org/wiki/Application-specific_integrated_circuit
 .. _scrypt: https://en.wikipedia.org/wiki/Scrypt
 .. _Argon2 paper: https://password-hashing.net/argon2-specs.pdf

@@ -3,30 +3,43 @@ API Reference
 
 .. module:: argon2
 
-``argon2_cffi`` comes with hopefully reasonable defaults for Argon2 parameters that result in a verification time of between 0.5ms and 1ms on recent-ish hardware.
+``argon2_cffi`` comes with an high-level API and hopefully reasonable defaults for Argon2 parameters that result in a verification time of between 0.5ms and 1ms on recent-ish hardware.
 
-So unless you have any special needs, all you need to know is:
+Unless you have any special needs, all you need to know is:
 
 .. doctest::
 
-  >>> import argon2
-  >>> hash = argon2.hash_password(b"s3kr3tp4ssw0rd")
+  >>> from argon2 import PasswordHasher
+  >>> ph = PasswordHasher()
+  >>> hash = ph.hash("s3kr3tp4ssw0rd")
   >>> hash  # doctest: +SKIP
   b'$argon2i$m=512,t=2,p=2$0FFfEeL6JmUnpxwgwcSC8g$98BmZUa5A/3t5wb3ZxFLBg'
-  >>> argon2.verify_password(hash, b"s3kr3tp4ssw0rd")
+  >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
-  >>> argon2.verify_password(hash, b"t0t411ywr0ng")
+  >>> ph.verify(hash, b"t0t411ywr0ng")
   Traceback (most recent call last):
     ...
   argon2.exceptions.VerificationError: Decoding failed
 
-But of course, ``argon2_cffi`` gives you more control should you need it:
+But of course the :class:`PasswordHasher` class has all the parametrization you'll need:
 
+.. autoclass:: PasswordHasher
+  :members: hash, verify
+
+
+.. autoexception:: argon2.exceptions.VerificationError
+
+
+Low Level
+---------
+
+Use these functions if you want to build your own high-level abstraction.
 
 .. autofunction:: hash_password
 
 .. doctest::
 
+  >>> import argon2
   >>> argon2.hash_password(
   ...     b"secret", b"somesalt",
   ...     time_cost=1,         # number of iterations

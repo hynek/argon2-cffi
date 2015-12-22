@@ -9,7 +9,7 @@ import timeit
 import six
 
 from . import (
-    hash_password,
+    PasswordHasher,
     DEFAULT_TIME_COST,
     DEFAULT_MEMORY_COST,
     DEFAULT_PARALLELISM,
@@ -22,9 +22,6 @@ def main(argv):
     parser = argparse.ArgumentParser(description="Benchmark Argon2.")
     parser.add_argument("-n", type=int, default=100,
                         help="Number of iterations to measure.")
-    parser.add_argument("-d", action="store_const",
-                        const=Type.D, default=Type.I,
-                        help="Use Argon2d instead of the default Argon2i.")
     parser.add_argument("-t", type=int, help="`time_cost`",
                         default=DEFAULT_TIME_COST)
     parser.add_argument("-m", type=int, help="`memory_cost`",
@@ -37,14 +34,13 @@ def main(argv):
     args = parser.parse_args(argv[1:])
 
     password = b"secret"
-    hash = hash_password(
-        password,
+    ph = PasswordHasher(
         time_cost=args.t,
         memory_cost=args.m,
         parallelism=args.p,
-        type=args.d,
         hash_len=args.l,
     )
+    hash = ph.hash(password)
 
     params = {
         "time_cost": args.t,
@@ -53,20 +49,27 @@ def main(argv):
         "hash_len": args.l,
     }
 
-    print("Running Argon2{0} {1} times with:".format(
-        Type(args.d).name.lower(),
-        args.n,
-    ))
+    print("Running Argon2i {0} times with:".format(args.n))
 
     for k, v in sorted(six.iteritems(params)):
         print("{0}: {1}".format(k, v))
 
     print("\nMeasuring...")
     duration = timeit.timeit(
-        "verify_password({hash!r}, {password!r}, {type})".format(
-            hash=hash, password=password, type=args.d,
+        "ph.verify({hash!r}, {password!r})".format(
+            hash=hash, password=password,
         ),
-        setup="from argon2 import verify_password, Type; gc.enable()",
+        setup="""\
+from argon2 import PasswordHasher, Type
+
+ph = PasswordHasher(
+    time_cost={time_cost!r},
+    memory_cost={memory_cost!r},
+    parallelism={parallelism!r},
+    hash_len={hash_len!r},
+)
+gc.enable()""".format(time_cost=args.t, memory_cost=args.m, parallelism=args.p,
+                      hash_len=args.l),
         number=args.n,
     )
     print("\n{0:.3}ms per password verification"

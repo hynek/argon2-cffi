@@ -4,14 +4,14 @@ from __future__ import absolute_import, division, print_function
 
 from six import PY3
 
-from argon2._util import get_encoded_len, check_types, NoneType
+from argon2._util import _get_encoded_len, _check_types, NoneType
 
 
 def test_get_encoded_len():
     """
     Verify we get the same result as the official example.
     """
-    assert 104 == get_encoded_len(32, 16)
+    assert 104 == _get_encoded_len(32, 16)
 
 
 class TestCheckTypes(object):
@@ -19,7 +19,7 @@ class TestCheckTypes(object):
         """
         Returns None if all types are okay.
         """
-        assert None is check_types(
+        assert None is _check_types(
             bytes=(b"bytes", bytes),
             tuple=((1, 2), tuple),
             str_or_None=(None, (str, NoneType)),
@@ -29,7 +29,7 @@ class TestCheckTypes(object):
         """
         Returns summary of failures.
         """
-        rv = check_types(
+        rv = _check_types(
             bytes=(u"not bytes", bytes),
             str_or_None=(42, (str, NoneType))
         )

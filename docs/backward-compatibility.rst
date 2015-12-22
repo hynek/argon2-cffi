@@ -10,6 +10,6 @@ If breaking changes are needed do be done, they are:
 #. …the old behavior raises a :exc:`DeprecationWarning` for a year.
 #. …are done with another announcement in the changelog_.
 
-What explicitly *may* change over time are the default hashing parameters.
+What explicitly *may* change over time are the default hashing parameters and the behavior of the :doc:`cli`.
 
 .. _changelog: https://argon2-cffi.readthedocs.org/en/stable/changelog.html

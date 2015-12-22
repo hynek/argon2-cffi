@@ -1,6 +1,11 @@
 Choosing Parameters
 ===================
 
+.. note::
+
+  You can probably just use :class:`argon2.PasswordHasher` with its default values and be fine.
+  Only tweak these if you've determined using :doc:`cli` that these defaults are too slow or too fast for your use case.
+
 Finding the right parameters for a password hashing algorithm is a daunting task.
 The authors of Argon2 specified a method in their `paper <https://github.com/P-H-C/phc-winner-argon2/blob/master/argon2-specs.pdf>`_ but it should be noted that they also  mention that no value for ``time_cost`` or ``memory_cost`` is actually insecure (cf. section 6.4).
 

@@ -14,6 +14,7 @@ from ._api import (
     hash_password_raw,
     verify_password,
 )
+from ._password_hasher import PasswordHasher
 
 
 __version__ = "16.0.0.dev0"
@@ -35,6 +36,7 @@ __all__ = [
     "DEFAULT_PARALLELISM",
     "DEFAULT_RANDOM_SALT_LENGTH",
     "DEFAULT_TIME_COST",
+    "PasswordHasher",
     "Type",
     "exceptions",
     "hash_password",

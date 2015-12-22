@@ -14,7 +14,7 @@ from argon2 import (
     DEFAULT_RANDOM_SALT_LENGTH,
 )
 from argon2.exceptions import VerificationError, HashingError
-from argon2._util import encoded_str_len
+from argon2._util import _encoded_str_len
 
 # Example data obtained using the official Argon2 CLI client:
 #
@@ -133,7 +133,7 @@ class TestHash(object):
         salt = rv.split(b",")[-1].split(b"$")[1]
         assert (
             # -1 for not NUL byte
-            int(encoded_str_len(DEFAULT_RANDOM_SALT_LENGTH)) - 1 == len(salt)
+            int(_encoded_str_len(DEFAULT_RANDOM_SALT_LENGTH)) - 1 == len(salt)
         )
 
     def test_hash_wrong_arg_type(self):
