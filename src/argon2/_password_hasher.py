@@ -71,10 +71,12 @@ class PasswordHasher(object):
 
     def hash(self, password):
         """
-        Hash *password* and return an encoded hash..
+        Hash *password* and return an encoded hash.
 
         :param password: Password to hash.
         :type password: ``bytes`` or ``unicode``
+
+        :raises argon2.exceptions.HashingError: If hashing fails.
 
         :rtype: unicode
         """
@@ -95,6 +97,8 @@ class PasswordHasher(object):
             :meth:`PasswordHasher.hash`.
         :param password: The password to verify.
         :type password: ``bytes`` or ``unicode``
+
+        :raises argon2.exceptions.VerificationError: If verification fails.
 
         :return: ``True`` on success, raise
             :exc:`~argon2.exceptions.VerificationError` otherwise.

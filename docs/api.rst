@@ -29,6 +29,8 @@ But of course the :class:`PasswordHasher` class has all the parametrization you'
 
 .. autoexception:: argon2.exceptions.VerificationError
 
+.. autoexception:: argon2.exceptions.HashingError
+
 
 Low Level
 ---------

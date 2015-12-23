@@ -14,10 +14,14 @@ class Argon2Error(Exception):
 class VerificationError(Argon2Error):
     """
     Raised if verification failed.
+
+    You can find the original error message from Argon2 in ``args[0]``.
     """
 
 
 class HashingError(Argon2Error):
     """
-    Raised if hasing failed.
+    Raised if hashing failed.
+
+    You can find the original error message from Argon2 in ``args[0]``.
     """

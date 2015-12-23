@@ -55,6 +55,8 @@ def hash_password(password, salt=None,
 
     :rtype: bytes
 
+    :raises argon2.exceptions.HashingError: If hashing fails.
+
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
@@ -117,6 +119,8 @@ def verify_password(hash, password, type=Type.I):
     :param bytes password: The password to verify whether it matches the one
         in *hash*.
     :param Type type: Type for *hash*.
+
+    :raises argon2.exceptions.VerificationError: If verification fails.
 
     :return: ``True`` on success, raise
             :exc:`~argon2.exceptions.VerificationError` otherwise.
