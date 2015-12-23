@@ -14,7 +14,6 @@ from . import (
     DEFAULT_MEMORY_COST,
     DEFAULT_PARALLELISM,
     DEFAULT_HASH_LENGTH,
-    Type,
 )
 
 

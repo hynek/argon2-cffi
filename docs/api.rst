@@ -13,10 +13,10 @@ Unless you have any special needs, all you need to know is:
   >>> ph = PasswordHasher()
   >>> hash = ph.hash("s3kr3tp4ssw0rd")
   >>> hash  # doctest: +SKIP
-  b'$argon2i$m=512,t=2,p=2$0FFfEeL6JmUnpxwgwcSC8g$98BmZUa5A/3t5wb3ZxFLBg'
+  u'$argon2i$m=512,t=2,p=2$0FFfEeL6JmUnpxwgwcSC8g$98BmZUa5A/3t5wb3ZxFLBg'
   >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
-  >>> ph.verify(hash, b"t0t411ywr0ng")
+  >>> ph.verify(hash, "t0t411ywr0ng")
   Traceback (most recent call last):
     ...
   argon2.exceptions.VerificationError: Decoding failed
