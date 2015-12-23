@@ -8,7 +8,7 @@ The third digit is only for regressions.
 16.0.0 (UNRELEASED)
 -------------------
 
-Vendoring ``argon2`` @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
+Vendoring ``argon2`` @ 335b5eb77aa0de62dccc934578664c8b273a8360_.
 
 Deprecations:
 ^^^^^^^^^^^^^
@@ -65,4 +65,5 @@ Previous betas were only for fixing Windows packaging.
 The authors of ``argon2`` were kind enough to `help me <https://github.com/P-H-C/phc-winner-argon2/issues/44>`_ to get it building under Visual Studio 2008 that we’re forced to use for Python 2.7 on Windows.
 
 
+.. _335b5eb77aa0de62dccc934578664c8b273a8360: https://github.com/P-H-C/phc-winner-argon2/tree/335b5eb77aa0de62dccc934578664c8b273a8360
 .. _4fe0d8cda37691228dd5a96a310be57369403a4b: https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b
