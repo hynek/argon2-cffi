@@ -10,6 +10,14 @@ The third digit is only for regressions.
 
 Vendoring ``argon2`` @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
 
+Deprecations:
+^^^^^^^^^^^^^
+
+- ``hash_password()``, ``hash_password_raw()``, and ``verify_password()`` should not be used anymore.
+  For hashing passwords, use the new ``argon2.PasswordHasher``.
+  If you want to implement your own higher-level abstractions, use the new low-level APIs ``hash_secret()``, ``hash_secret_raw()``, and ``verify_secret()`` from the ``argon2.low_level`` module.
+  The old functions will *not* raise any warnings though and there are *no* immediate plans to remove them.
+
 Changes:
 ^^^^^^^^
 

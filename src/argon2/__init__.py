@@ -2,19 +2,21 @@
 
 from __future__ import absolute_import, division, print_function
 
-from . import exceptions
-from ._util import Type
-from ._api import (
+from . import exceptions, low_level
+from ._legacy import (
+    hash_password,
+    hash_password_raw,
+    verify_password,
+)
+from ._password_hasher import (
     DEFAULT_HASH_LENGTH,
     DEFAULT_MEMORY_COST,
     DEFAULT_PARALLELISM,
     DEFAULT_RANDOM_SALT_LENGTH,
     DEFAULT_TIME_COST,
-    hash_password,
-    hash_password_raw,
-    verify_password,
+    PasswordHasher,
 )
-from ._password_hasher import PasswordHasher
+from ._util import Type
 
 
 __version__ = "16.0.0.dev0"
@@ -41,5 +43,9 @@ __all__ = [
     "exceptions",
     "hash_password",
     "hash_password_raw",
+    "hash_secret",
+    "hash_secret_raw",
+    "low_level",
     "verify_password",
+    "verify_secret",
 ]

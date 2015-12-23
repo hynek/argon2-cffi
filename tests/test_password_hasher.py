@@ -45,7 +45,7 @@ class TestPasswordHasher(object):
         """
         Hashing works with unicode and bytes.  Uses correct parameters.
         """
-        ph = PasswordHasher(1, 8, 1, 16, "latin1")
+        ph = PasswordHasher(1, 8, 1, 16, 16, "latin1")
 
         h = ph.hash(password)
 
@@ -57,7 +57,7 @@ class TestPasswordHasher(object):
         """
         Verification works with unicode and bytes.
         """
-        ph = PasswordHasher(1, 8, 1, 16, "latin1")
+        ph = PasswordHasher(1, 8, 1, 16, 16, "latin1")
         hash = (  # handrolled artisanal test vector
             u"$argon2i$m=8,t=1,p=1$"
             u"bL/lLsegFKTuR+5vVyA8tA$VKz5CHavCtFOL1N5TIXWSA"

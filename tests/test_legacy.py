@@ -2,8 +2,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import binascii
-
 import pytest
 
 from hypothesis import given
@@ -16,71 +14,32 @@ from argon2 import (
 from argon2.exceptions import VerificationError, HashingError
 from argon2._util import _encoded_str_len
 
-# Example data obtained using the official Argon2 CLI client:
-#
-# $ echo -n "password" | ./argon2 somesalt -t 2 -m 16 -p 4
-# Type:       Argon2i
-# Iterations: 2
-# Memory:     65536 KiB
-# Parallelism:    4
-# Hash:       4162f32384d8f4790bd994cb73c83a4a29f076165ec18af3cfdcf10a8d1b9066
-# Encoded:    $argon2i$m=65536,t=2,p=4$c29tZXNhbHQAAAAAAAAAAA$QWLzI4TY9HkL2ZTLc
-#             8g6SinwdhZewYrzz9zxCo0bkGY
-# 0.176 seconds
-# Verification ok
-#
-# $ echo -n "password" | ./argon2 somesalt -t 2 -m 16 -p 4 -d
-# Type:       Argon2d
-# Iterations: 2
-# Memory:     65536 KiB
-# Parallelism:    4
-# Hash:       9ca3b9fc007d09daf489dcf854e9a785ff5a32c62ec50acf26477977add23225
-# Encoded:    $argon2d$m=65536,t=2,p=4$c29tZXNhbHQAAAAAAAAAAA$nKO5/AB9Cdr0idz4V
-#             Omnhf9aMsYuxQrPJkd5d63SMiU
-# 0.189 seconds
-# Verification ok
-
-TEST_HASH_I = (
-    b"$argon2i$m=65536,t=2,p=4"
-    b"$c29tZXNhbHQAAAAAAAAAAA"
-    b"$QWLzI4TY9HkL2ZTLc8g6SinwdhZewYrzz9zxCo0bkGY"
+from .test_low_level import (
+    TEST_PASSWORD,
+    TEST_SALT,
+    TEST_TIME,
+    TEST_MEMORY,
+    TEST_PARALLELISM,
+    TEST_HASH_LEN,
+    TEST_HASH_I,
+    i_and_d_encoded,
+    i_and_d_raw,
 )
-TEST_HASH_D = (
-    b"$argon2d$m=65536,t=2,p=4"
-    b"$c29tZXNhbHQAAAAAAAAAAA$"
-    b"nKO5/AB9Cdr0idz4VOmnhf9aMsYuxQrPJkd5d63SMiU"
-)
-TEST_RAW_I = binascii.unhexlify(
-    b"4162f32384d8f4790bd994cb73c83a4a29f076165ec18af3cfdcf10a8d1b9066"
-)
-TEST_RAW_D = binascii.unhexlify(  # N.B. includes NUL byte!
-    b"9ca3b9fc007d09daf489dcf854e9a785ff5a32c62ec50acf26477977add23225"
-)
-TEST_HASH_FAST = (
-    b"$argon2i$m=8,t=1,p=1$c29tZXNhbHQAAAAAAAAAAA$owd7NH5aC7mrx3sIc0zMF+R8RkPH"
-    b"S23ZuFM0IO3uck8"
-)  # same password/salt, but much cheaper.
-
-TEST_PASSWORD = b"password"
-TEST_SALT_LEN = 16
-TEST_SALT = b"somesalt"
-TEST_SALT += b"\x00" * (TEST_SALT_LEN - len(TEST_SALT))
-TEST_TIME = 2
-TEST_MEMORY = 65536
-TEST_PARALLELISM = 4
-TEST_HASH_LEN = 32
-
-i_and_d_encoded = pytest.mark.parametrize("type,hash", [
-    (Type.I, TEST_HASH_I,),
-    (Type.D, TEST_HASH_D,),
-])
-i_and_d_raw = pytest.mark.parametrize("type,hash", [
-    (Type.I, TEST_RAW_I,),
-    (Type.D, TEST_RAW_D,),
-])
 
 
 class TestHash(object):
+    def test_hash_defaults(self):
+        """
+        Calling without arguments works.
+        """
+        hash_password(b"secret")
+
+    def test_raw_defaults(self):
+        """
+        Calling without arguments works.
+        """
+        hash_password_raw(b"secret")
+
     @i_and_d_encoded
     def test_hash_password(self, type, hash):
         """

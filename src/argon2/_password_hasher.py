@@ -1,14 +1,19 @@
 from __future__ import absolute_import, division, print_function
 
-from ._api import (
-    DEFAULT_HASH_LENGTH,
-    DEFAULT_MEMORY_COST,
-    DEFAULT_PARALLELISM,
-    DEFAULT_TIME_COST,
-    hash_password,
-    verify_password,
+import os
+
+from .low_level import (
+    hash_secret,
+    verify_secret,
 )
 from ._util import Type, _check_types
+
+
+DEFAULT_RANDOM_SALT_LENGTH = 16
+DEFAULT_HASH_LENGTH = 16
+DEFAULT_TIME_COST = 2
+DEFAULT_MEMORY_COST = 512
+DEFAULT_PARALLELISM = 2
 
 
 def _ensure_bytes(s, encoding):
@@ -24,7 +29,7 @@ class PasswordHasher(object):
     """
     High level class to hash passwords with sensible defaults.
 
-    Uses *always* Argon2\ **i** and a random salt.
+    Uses *always* Argon2\ **i** and a random salt_.
 
     The reason for this being a class is both for convenience to carry
     parameters and to verify the parameters only *once*.   Any unnecessary
@@ -36,14 +41,20 @@ class PasswordHasher(object):
     :param int parallelism: Defines the number of parallel threads (*changes*
         the resulting hash value).
     :param int hash_len: Length of the hash in bytes.
+    :param int salt_len: Length of random salt to be generated for each
+        password.
     :param str encoding: The Argon2 C library expects bytes.  So if
         :meth:`hash` or :meth:`verify` are passed an unicode string, it will be
         encoded using this encoding.
 
     .. versionadded:: 16.0.0
+
+    .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
+    .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
     __slots__ = [
-        "time_cost", "memory_cost", "parallelism", "hash_len", "encoding",
+        "time_cost", "memory_cost", "parallelism", "hash_len", "salt_len",
+        "encoding",
     ]
 
     def __init__(
@@ -52,6 +63,7 @@ class PasswordHasher(object):
         memory_cost=DEFAULT_MEMORY_COST,
         parallelism=DEFAULT_PARALLELISM,
         hash_len=DEFAULT_HASH_LENGTH,
+        salt_len=DEFAULT_RANDOM_SALT_LENGTH,
         encoding="utf-8",
     ):
         e = _check_types(
@@ -59,6 +71,7 @@ class PasswordHasher(object):
             memory_cost=(memory_cost, int),
             parallelism=(parallelism, int),
             hash_len=(hash_len, int),
+            salt_len=(salt_len, int),
             encoding=(encoding, str),
         )
         if e:
@@ -67,6 +80,7 @@ class PasswordHasher(object):
         self.memory_cost = memory_cost
         self.parallelism = parallelism
         self.hash_len = hash_len
+        self.salt_len = salt_len
         self.encoding = encoding
 
     def hash(self, password):
@@ -80,8 +94,9 @@ class PasswordHasher(object):
 
         :rtype: unicode
         """
-        return hash_password(
-            _ensure_bytes(password, self.encoding), None,
+        return hash_secret(
+            secret=_ensure_bytes(password, self.encoding),
+            salt=os.urandom(self.salt_len),
             time_cost=self.time_cost,
             memory_cost=self.memory_cost,
             parallelism=self.parallelism,
@@ -104,7 +119,7 @@ class PasswordHasher(object):
             :exc:`~argon2.exceptions.VerificationError` otherwise.
         :rtype: bool
         """
-        return verify_password(
+        return verify_secret(
             _ensure_bytes(hash, "ascii"),
             _ensure_bytes(password, self.encoding),
             Type.I,
