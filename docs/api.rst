@@ -71,6 +71,12 @@ The raw hash can also be computed:
 Deprecated APIs
 ---------------
 
+These APIs are from the first release of ``argon2_cffi`` and proved to live in an unfortunate mid-level.
+On one hand they have defaults and check parameters but on the other hand they only consume byte strings.
+
+Therefore the decision has been made to replace them by a high-level (:class:`argon2.PasswordHasher`) and a low-level (:mod:`argon2.low_level`) solution.
+There are no immediate plans to remove them though.
+
 .. autofunction:: argon2.hash_password
 .. autofunction:: argon2.hash_password_raw
 .. autofunction:: argon2.verify_password
