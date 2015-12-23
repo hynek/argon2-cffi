@@ -28,7 +28,7 @@ def hash_password(password, salt=None,
     Legacy alias for :func:`hash_secret` with default parameters.
 
     .. deprecated:: 16.0.0
-        Use :class:`PasswordHasher` for passwords.
+        Use :class:`argon2.PasswordHasher` for passwords.
     """
     if salt is None:
         salt = os.urandom(DEFAULT_RANDOM_SALT_LENGTH)
@@ -47,7 +47,7 @@ def hash_password_raw(password, salt=None,
     Legacy alias for :func:`hash_secret_raw` with default parameters.
 
     .. deprecated:: 16.0.0
-        Use :class:`PasswordHasher` for passwords.
+        Use :class:`argon2.PasswordHasher` for passwords.
     """
     if salt is None:
         salt = os.urandom(DEFAULT_RANDOM_SALT_LENGTH)
@@ -61,6 +61,6 @@ def verify_password(hash, password, type=Type.I):
     Legacy alias for :func:`verify_secret` with default parameters.
 
     .. deprecated:: 16.0.0
-        Use :class:`PasswordHasher` for passwords.
+        Use :class:`argon2.PasswordHasher` for passwords.
     """
     return verify_secret(hash, password, type)
