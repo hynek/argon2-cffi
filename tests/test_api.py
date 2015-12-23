@@ -10,7 +10,7 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from argon2 import (
-    hash_password, hash_password_raw, verify_password, Type,
+    hash_password, hash_password_raw, verify_password, Type, core,
     DEFAULT_RANDOM_SALT_LENGTH,
 )
 from argon2.exceptions import VerificationError, HashingError
@@ -186,3 +186,34 @@ class TestVerify(object):
         """
         with pytest.raises(TypeError):
             verify_password(TEST_HASH_I, TEST_PASSWORD.decode("ascii"))
+
+
+class TestCore(object):
+    @i_and_d_raw
+    def test_hash_password_raw(self, type, hash):
+        """
+        Creates the same raw hash as the Argon2 CLI client.
+        """
+        rv = core(
+            TEST_PASSWORD,
+            TEST_SALT,
+            None,
+            None,
+            TEST_TIME,
+            TEST_MEMORY,
+            TEST_PARALLELISM,
+            None,
+            TEST_HASH_LEN,
+            type,
+        )
+
+        assert hash == rv
+        assert isinstance(rv, bytes)
+
+    def test_hash_nul_bytes(self):
+        """
+        Hashing passwords with NUL bytes works as expected.
+        """
+        rv = core(b"abc\x00", TEST_SALT)
+
+        assert rv != core(b"abc", TEST_SALT)

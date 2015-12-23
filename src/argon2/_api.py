@@ -19,6 +19,7 @@ __all__ = [
     "hash_password",
     "hash_password_raw",
     "verify_password",
+    "core",
 ]
 
 DEFAULT_RANDOM_SALT_LENGTH = 16
@@ -132,3 +133,73 @@ def verify_password(hash, password, type=Type.I):
         return True
     else:
         raise VerificationError(_error_to_str(rv))
+
+
+def core(password,
+         salt=None,
+         secret=None,
+         associated_data=None,
+         time_cost=DEFAULT_TIME_COST,
+         memory_cost=DEFAULT_MEMORY_COST,
+         parallelism=DEFAULT_PARALLELISM,
+         threads=None,
+         hash_len=DEFAULT_HASH_LENGTH,
+         type=Type.I):
+    """
+    Performs the core argon2 key-derivation.
+
+        This function takes the same parameters as :func:`hash_password`
+            and additionally the optional arguments
+
+        :param bytes secret:
+        :param bytes associated_data:
+        :param int threads: actual maximum number of threads to spawn
+        :rtype: bool
+    """
+    # Check parameters
+    if salt is None:
+        salt = os.urandom(DEFAULT_RANDOM_SALT_LENGTH)
+    if threads is None:
+        threads = parallelism
+
+    out_buf = ffi.new('char[]', hash_len)
+    salt_buf = ffi.new('char[]', salt)
+
+    # Set up context
+    context = ffi.new('argon2_context *')
+    context.out = out_buf
+    context.outlen = hash_len
+    context.pwd = ffi.new('char[]', password)
+    context.pwdlen = len(password)
+    context.salt = salt_buf
+    context.saltlen = len(salt)
+    context.t_cost = time_cost
+    context.m_cost = memory_cost
+    context.lanes = parallelism
+    context.threads = threads
+    context.allocate_cbk = ffi.NULL
+    context.free_cbk = ffi.NULL
+    context.flags = 4  # XXX
+
+    if secret is None:
+        context.secret = ffi.NULL
+        context.secretlen = 0
+    else:
+        secretbuf = ffi.new('char[]', secret)
+        context.secret = secretbuf
+        context.secretlen = len(secret)
+
+    if associated_data is None:
+        context.ad = ffi.NULL
+        context.adlen = 0
+    else:
+        adbuf = ffi.new('char[]', associated_data)
+        context.ad = adbuf
+        context.adlen = len(associated_data)
+
+    # Run!
+    rv = lib.argon2_core(context, type.value)
+    if rv != lib.ARGON2_OK:
+        raise HashingError(_error_to_str(rv))
+
+    return bytes(ffi.buffer(out_buf))

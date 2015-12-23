@@ -13,6 +13,7 @@ from ._api import (
     hash_password,
     hash_password_raw,
     verify_password,
+    core,
 )
 from ._password_hasher import PasswordHasher
 
@@ -42,4 +43,5 @@ __all__ = [
     "hash_password",
     "hash_password_raw",
     "verify_password",
+    "core",
 ]
