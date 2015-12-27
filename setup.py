@@ -143,8 +143,8 @@ if __name__ == "__main__":
         long_description=(
             read("README.rst") + "\n\n" +
             read("FAQ.rst") + "\n\n" +
-            read("AUTHORS.rst") + "\n\n" +
-            read("CHANGELOG.rst")
+            read("CHANGELOG.rst") + "\n\n" +
+            read("AUTHORS.rst")
         ),
         keywords=KEYWORDS,
         packages=PACKAGES,
