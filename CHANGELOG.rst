@@ -8,7 +8,7 @@ The third digit is only for regressions.
 16.0.0 (UNRELEASED)
 -------------------
 
-Vendoring ``argon2`` @ 69cb15836e31c65edb515f94da0ee31e88705189_.
+Vendoring ``argon2`` @ 39382287249765049b9982942f6849ab7ee11ce9_.
 
 Deprecations:
 ^^^^^^^^^^^^^
@@ -23,6 +23,7 @@ Changes:
 
 - Add ``argon2.PasswordHasher``.
   A higher-level class specifically for hashing passwords that also works on unicode.
+- Add ``argon2.low_level`` module with low-level API bindings for building own high-level abstractions.
 
 
 15.0.1 (2015-12-18)
@@ -65,5 +66,5 @@ Previous betas were only for fixing Windows packaging.
 The authors of ``argon2`` were kind enough to `help me <https://github.com/P-H-C/phc-winner-argon2/issues/44>`_ to get it building under Visual Studio 2008 that we’re forced to use for Python 2.7 on Windows.
 
 
-.. _69cb15836e31c65edb515f94da0ee31e88705189: https://github.com/P-H-C/phc-winner-argon2/tree/69cb15836e31c65edb515f94da0ee31e88705189
+.. _39382287249765049b9982942f6849ab7ee11ce9: https://github.com/P-H-C/phc-winner-argon2/commit/39382287249765049b9982942f6849ab7ee11ce9
 .. _4fe0d8cda37691228dd5a96a310be57369403a4b: https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b
