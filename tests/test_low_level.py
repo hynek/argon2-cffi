@@ -8,8 +8,8 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from argon2.low_level import (
-    Type, Flags,
-    ffi, hash_secret, hash_secret_raw, make_context, verify_secret,
+    Type,
+    hash_secret, hash_secret_raw, verify_secret,
 )
 from argon2.exceptions import VerificationError, HashingError
 
