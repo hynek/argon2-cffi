@@ -4,7 +4,7 @@ Low-level functions if you want to build your own higher level abstractions.
 
 .. warning::
     This is a "Hazardous Materials" module.  You should **ONLY** use it if
-    you’re 100% absolutely sure that you know what you’re doing because this
+    you're 100% absolutely sure that you know what you’re doing because this
     module is full of land mines, dragons, and dinosaurs with laser guns.
 """
 
