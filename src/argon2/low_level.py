@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Low-level functions if you want to build your own higher level abstractions.
 
