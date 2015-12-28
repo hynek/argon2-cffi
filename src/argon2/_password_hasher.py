@@ -3,10 +3,11 @@ from __future__ import absolute_import, division, print_function
 import os
 
 from .low_level import (
+    Type,
     hash_secret,
     verify_secret,
 )
-from ._util import Type, _check_types
+from ._util import _check_types
 
 
 DEFAULT_RANDOM_SALT_LENGTH = 16

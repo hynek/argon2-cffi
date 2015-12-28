@@ -35,13 +35,10 @@ But of course the :class:`PasswordHasher` class has all the parametrization you'
 Low Level
 ---------
 
-Use these functions if you want to build your own high-level abstraction.
+.. automodule:: argon2.low_level
 
 .. autoclass:: Type
   :members: D, I
-
-
-.. module:: argon2.low_level
 
 .. autofunction:: hash_secret
 
@@ -50,7 +47,7 @@ Use these functions if you want to build your own high-level abstraction.
   >>> import argon2
   >>> argon2.low_level.hash_secret(
   ...     b"secret", b"somesalt",
-  ...     time_cost=1, memory_cost=8, parallelism=1, hash_len=64, type=argon2.Type.D
+  ...     time_cost=1, memory_cost=8, parallelism=1, hash_len=64, type=argon2.low_level.Type.D
   ... )
   b'$argon2d$m=8,t=1,p=1$c29tZXNhbHQ$H0oN1/L3H8t8hcg47pAyJZ8toBh2UbgcMt0zRFrqt4mEJCeKSEWGxt+KpZrMwxvr7M5qktNcc/bk/hvbinueJA'
 

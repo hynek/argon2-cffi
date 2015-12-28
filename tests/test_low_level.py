@@ -7,8 +7,10 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from argon2 import Type
-from argon2.low_level import hash_secret, hash_secret_raw, verify_secret
+from argon2.low_level import (
+    Type, Flags,
+    ffi, hash_secret, hash_secret_raw, make_context, verify_secret,
+)
 from argon2.exceptions import VerificationError, HashingError
 
 # Example data obtained using the official Argon2 CLI client:

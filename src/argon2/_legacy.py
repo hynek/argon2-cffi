@@ -6,8 +6,6 @@ from __future__ import absolute_import, division, print_function
 
 import os
 
-from ._util import Type
-
 from ._password_hasher import (
     DEFAULT_HASH_LENGTH,
     DEFAULT_MEMORY_COST,
@@ -15,7 +13,7 @@ from ._password_hasher import (
     DEFAULT_RANDOM_SALT_LENGTH,
     DEFAULT_TIME_COST,
 )
-from .low_level import hash_secret, hash_secret_raw, verify_secret
+from .low_level import Type, hash_secret, hash_secret_raw, verify_secret
 
 
 def hash_password(password, salt=None,

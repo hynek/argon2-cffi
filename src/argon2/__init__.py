@@ -16,7 +16,7 @@ from ._password_hasher import (
     DEFAULT_TIME_COST,
     PasswordHasher,
 )
-from ._util import Type
+from .low_level import Type
 
 
 __version__ = "16.0.0.dev0"

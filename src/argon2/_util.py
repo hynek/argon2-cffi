@@ -2,29 +2,8 @@
 
 from __future__ import absolute_import, division, print_function
 
-from enum import Enum
-from six import iteritems, PY3
 
-
-from ._ffi import ffi, lib
-
-
-class Type(Enum):
-    """
-    Enum of Argon2 variants.
-    """
-    D = lib.Argon2_d
-    """
-    Argon2\ **d** is faster and uses data-depending memory access, which makes
-    it less suitable for hashing secrets and more suitable for cryptocurrencies
-    and applications with no threats from side-channel timing attacks.
-    """
-    I = lib.Argon2_i
-    """
-    Argon2\ **i** uses data-independent memory access, which is preferred for
-    password hashing and password-based key derivation.  Argon2i is slower as
-    it makes more passes over the memory to protect from tradeoff attacks.
-    """
+from six import iteritems
 
 
 NoneType = type(None)
@@ -51,16 +30,6 @@ def _check_types(**kw):
 
     if errors != []:
         return ", ".join(errors) + "."
-
-
-def _error_to_str(error):
-    """
-    Convert an Argon2 error code into a native string.
-    """
-    msg = ffi.string(lib.error_message(error))
-    if PY3:
-        msg = msg.decode("ascii")
-    return msg
 
 
 def _encoded_str_len(l):

@@ -1,12 +1,20 @@
 """
 Low-level functions if you want to build your own higher level abstractions.
+
+.. warning::
+    This is a "Hazardous Materials" module.  You should **ONLY** use it if
+    you’re 100% absolutely sure that you know what you’re doing because this
+    module is full of land mines, dragons, and dinosaurs with laser guns.
 """
 
 from __future__ import absolute_import, division, print_function
 
-from ._util import (
-    _error_to_str, ffi, lib, _get_encoded_len
-)
+from enum import Enum
+
+from six import PY3
+
+from ._ffi import ffi, lib
+from ._util import _get_encoded_len
 from .exceptions import VerificationError, HashingError
 
 
@@ -15,6 +23,24 @@ __all__ = [
     "hash_secret_raw",
     "verify_secret",
 ]
+
+
+class Type(Enum):
+    """
+    Enum of Argon2 variants.
+    """
+    D = lib.Argon2_d
+    """
+    Argon2\ **d** is faster and uses data-depending memory access, which makes
+    it less suitable for hashing secrets and more suitable for cryptocurrencies
+    and applications with no threats from side-channel timing attacks.
+    """
+    I = lib.Argon2_i
+    """
+    Argon2\ **i** uses data-independent memory access, which is preferred for
+    password hashing and password-based key derivation.  Argon2i is slower as
+    it makes more passes over the memory to protect from tradeoff attacks.
+    """
 
 
 def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
@@ -42,17 +68,17 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
     size = _get_encoded_len(hash_len, len(salt))
-    buf = ffi.new("char[]", size)
+    buf = ffi.new("uint8_t[]", size)
     rv = lib.argon2_hash(
         time_cost, memory_cost, parallelism,
-        ffi.new("char[]", secret), len(secret),
-        ffi.new("char[]", salt), len(salt),
+        ffi.new("uint8_t[]", secret), len(secret),
+        ffi.new("uint8_t[]", salt), len(salt),
         ffi.NULL, hash_len,
         buf, size,
         type.value,
     )
     if rv != lib.ARGON2_OK:
-        raise HashingError(_error_to_str(rv))
+        raise HashingError(error_to_str(rv))
 
     return ffi.string(buf)
 
@@ -64,20 +90,20 @@ def hash_secret_raw(secret, salt, time_cost, memory_cost, parallelism,
 
     This function takes the same parameters as :func:`hash_secret`.
     """
-    buf = ffi.new("char[]", hash_len)
+    buf = ffi.new("uint8_t[]", hash_len)
 
     rv = lib.argon2_hash(
         time_cost, memory_cost, parallelism,
-        ffi.new("char[]", secret), len(secret),
-        ffi.new("char[]", salt), len(salt),
+        ffi.new("uint8_t[]", secret), len(secret),
+        ffi.new("uint8_t[]", salt), len(salt),
         buf, hash_len,
         ffi.NULL, 0,
         type.value,
     )
     if rv != lib.ARGON2_OK:
-        raise HashingError(_error_to_str(rv))
+        raise HashingError(error_to_str(rv))
 
-    return bytes(ffi.buffer(buf))
+    return bytes(ffi.buffer(buf, hash_len))
 
 
 def verify_secret(hash, secret, type):
@@ -97,12 +123,28 @@ def verify_secret(hash, secret, type):
     :rtype: bool
     """
     rv = lib.argon2_verify(
-        ffi.new("char[]", hash),
-        ffi.new("char[]", secret),
+        ffi.new("uint8_t[]", hash),
+        ffi.new("uint8_t[]", secret),
         len(secret),
         type.value,
     )
     if rv == lib.ARGON2_OK:
         return True
     else:
-        raise VerificationError(_error_to_str(rv))
+        raise VerificationError(error_to_str(rv))
+
+
+def error_to_str(error):
+    """
+    Convert an Argon2 error code into a native string.
+
+    :param int error: An Argon2 error code as returned by :func:`core`.
+
+    :rtype: str
+
+    .. versionadded:: 16.0.0
+    """
+    msg = ffi.string(lib.error_message(error))
+    if PY3:
+        msg = msg.decode("ascii")
+    return msg
