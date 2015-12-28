@@ -9,7 +9,7 @@ from hypothesis import strategies as st
 
 from argon2.low_level import (
     Type,
-    hash_secret, hash_secret_raw, verify_secret,
+    core, ffi, hash_secret, hash_secret_raw, lib, verify_secret,
 )
 from argon2.exceptions import VerificationError, HashingError
 
@@ -197,3 +197,53 @@ class TestVerify(object):
         """
         with pytest.raises(TypeError):
             verify_secret(TEST_HASH_I, TEST_PASSWORD.decode("ascii"))
+
+
+def test_core():
+    """
+    If called with equal parameters, core() will return the same as
+    hash_secret().
+    """
+    pwd = b"secret"
+    salt = b"12345678"
+    hash_len = 8
+
+    # Keep FFI objects alive throughout the function.
+    cout = ffi.new("uint8_t[]", hash_len)
+    cpwd = ffi.new("uint8_t[]", pwd)
+    csalt = ffi.new("uint8_t[]", salt)
+
+    ctx = ffi.new(
+        "argon2_context *", dict(
+            out=cout,
+            outlen=hash_len,
+            pwd=cpwd,
+            pwdlen=len(pwd),
+            salt=csalt,
+            saltlen=len(salt),
+            secret=ffi.NULL,
+            secretlen=0,
+            ad=ffi.NULL,
+            adlen=0,
+            t_cost=1,
+            m_cost=8,
+            lanes=1,
+            threads=1,
+            allocate_cbk=ffi.NULL,
+            free_cbk=ffi.NULL,
+            flags=lib.ARGON2_DEFAULT_FLAGS,
+        )
+    )
+
+    rv = core(ctx, Type.D.value)
+
+    assert 0 == rv
+    assert hash_secret_raw(
+        pwd,
+        salt=salt,
+        time_cost=1,
+        memory_cost=8,
+        parallelism=1,
+        hash_len=hash_len,
+        type=Type.D,
+    ) == bytes(ffi.buffer(ctx.out, ctx.outlen))

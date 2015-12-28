@@ -16,6 +16,7 @@ Deprecations:
 - ``hash_password()``, ``hash_password_raw()``, and ``verify_password()`` should not be used anymore.
   For hashing passwords, use the new ``argon2.PasswordHasher``.
   If you want to implement your own higher-level abstractions, use the new low-level APIs ``hash_secret()``, ``hash_secret_raw()``, and ``verify_secret()`` from the ``argon2.low_level`` module.
+  If you want to go *really* low-level, ``core()`` is for you.
   The old functions will *not* raise any warnings though and there are *no* immediate plans to remove them.
 
 Changes:

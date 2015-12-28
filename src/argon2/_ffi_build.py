@@ -45,6 +45,39 @@ int argon2_verify(const char *encoded, const void *pwd, const size_t pwdlen,
 
 const char *error_message(int error_code);
 
+
+typedef int (*allocate_fptr)(uint8_t **memory, size_t bytes_to_allocate);
+typedef void (*deallocate_fptr)(uint8_t *memory, size_t bytes_to_allocate);
+
+typedef struct Argon2_Context {
+    uint8_t *out;    /* output array */
+    uint32_t outlen; /* digest length */
+
+    uint8_t *pwd;    /* password array */
+    uint32_t pwdlen; /* password length */
+
+    uint8_t *salt;    /* salt array */
+    uint32_t saltlen; /* salt length */
+
+    uint8_t *secret;    /* key array */
+    uint32_t secretlen; /* key length */
+
+    uint8_t *ad;    /* associated data array */
+    uint32_t adlen; /* associated data length */
+
+    uint32_t t_cost;  /* number of passes */
+    uint32_t m_cost;  /* amount of memory requested (KB) */
+    uint32_t lanes;   /* number of lanes */
+    uint32_t threads; /* maximum number of threads */
+
+    allocate_fptr allocate_cbk; /* pointer to memory allocator */
+    deallocate_fptr free_cbk;   /* pointer to memory deallocator */
+
+    uint32_t flags; /* array of bool options */
+} argon2_context;
+
+int argon2_core(argon2_context *context, argon2_type type);
+
 /* Error codes */
 typedef enum Argon2_ErrorCodes {
     ARGON2_OK = 0,
@@ -103,6 +136,11 @@ typedef enum Argon2_ErrorCodes {
                                  this
                                  error code */
 } argon2_error_codes;
+
+#define ARGON2_FLAG_CLEAR_PASSWORD ...
+#define ARGON2_FLAG_CLEAR_SECRET ...
+#define ARGON2_FLAG_CLEAR_MEMORY ...
+#define ARGON2_DEFAULT_FLAGS ...
 """)
 
 if __name__ == '__main__':

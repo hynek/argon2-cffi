@@ -19,6 +19,8 @@ from .exceptions import VerificationError, HashingError
 
 
 __all__ = [
+    "Type",
+    "ffi",
     "hash_secret",
     "hash_secret_raw",
     "verify_secret",
@@ -132,6 +134,33 @@ def verify_secret(hash, secret, type):
         return True
     else:
         raise VerificationError(error_to_str(rv))
+
+
+def core(context, type):
+    """
+    Direct binding to the Argon2 ``core`` function.
+
+    .. warning::
+        This is a strictly advanced function working on raw C data structures.
+        Both Argon2's and ``argon2_cffi``'s' higher-level bindings do a lot of
+        sanity checks and housekeeping work that *you* are now responsible for
+        (e.g. clearing buffers).
+
+        Use at your own peril; ``argon2_cffi`` does *not* use this binding
+        itself.
+
+    :param context: A CFFI Argon2 context object (i.e. an ``struct
+        Argon2_Context``/``argon2_context``).
+    :param int type: Which Argon2 variant to use.  You can use the ``value``
+        field of :class:`Type`'s fields.
+
+    :rtype: int
+    :return: An Argon2 error code.  Can be transformed into a string using
+        :func:`error_to_str`.
+
+    .. versionadded:: 16.0.0
+    """
+    return lib.argon2_core(context, type)
 
 
 def error_to_str(error):

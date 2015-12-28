@@ -64,6 +64,51 @@ The raw hash can also be computed:
   >>> argon2.low_level.hash_password_raw(b"secret", b"somesalt")
   b'\xd8\x87h5X%U<[\xf7\x0e\x18T\x9a\x96\xf3'
 
+The super low-level ``argon2_core()`` function is exposed too if you need access to very specific options:
+
+.. autofunction:: core
+
+In order to use :func:`core`, you need access to ``argon2_cffi``'s FFI objects.
+Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` when working with it:
+
+.. doctest::
+
+  >>> from argon2.low_level import Type, core, ffi, lib
+  >>> pwd = b"secret"
+  >>> salt = b"12345678"
+  >>> hash_len = 8
+  >>> # Make sure you keep FFI objects alive until *after* the core call!
+  >>> cout = ffi.new("uint8_t[]", hash_len)
+  >>> cpwd = ffi.new("uint8_t[]", pwd)
+  >>> csalt = ffi.new("uint8_t[]", salt)
+  >>> ctx = ffi.new(
+  ...     "argon2_context *", dict(
+  ...         out=cout, outlen=hash_len,
+  ...         pwd=cpwd, pwdlen=len(pwd),
+  ...         salt=csalt, saltlen=len(salt),
+  ...         secret=ffi.NULL, secretlen=0,
+  ...         ad=ffi.NULL, adlen=0,
+  ...         t_cost=1,
+  ...         m_cost=8,
+  ...         lanes=1, threads=1,
+  ...         allocate_cbk=ffi.NULL, free_cbk=ffi.NULL,
+  ...         flags=lib.ARGON2_DEFAULT_FLAGS,
+  ...     )
+  ... )
+  >>> ctx
+  <cdata 'struct Argon2_Context *' owning 120 bytes>
+  >>> core(ctx, Type.D.value)
+  0
+  >>> out = bytes(ffi.buffer(ctx.out, ctx.outlen))
+  >>> out
+  b'j\x9ap\xb4\xe7\xd6\x9c\xcf'
+  >>> out == argon2.low_level.hash_secret_raw(pwd, salt, 1, 8, 1, 8, Type.D)
+  True
+
+All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as long they are not altered by Argon2 itself.
+
+.. autofunction:: error_to_str
+
 
 Deprecated APIs
 ---------------
