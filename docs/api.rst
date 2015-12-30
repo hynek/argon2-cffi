@@ -26,6 +26,19 @@ But of course the :class:`PasswordHasher` class has all the parametrization you'
 .. autoclass:: PasswordHasher
   :members: hash, verify
 
+If you don't specify any parameters, the following constants are used:
+
+.. data:: DEFAULT_RANDOM_SALT_LENGTH
+.. data:: DEFAULT_HASH_LENGTH
+.. data:: DEFAULT_TIME_COST
+.. data:: DEFAULT_MEMORY_COST
+.. data:: DEFAULT_PARALLELISM
+
+You can see their values in :class:`PasswordHasher`.
+
+
+Exceptions
+^^^^^^^^^^
 
 .. autoexception:: argon2.exceptions.VerificationError
 
