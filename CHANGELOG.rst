@@ -5,7 +5,7 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-16.0.0 (UNRELEASED)
+16.0.0 (2016-01-02)
 -------------------
 
 Vendoring ``argon2`` @ 39382287249765049b9982942f6849ab7ee11ce9_.
@@ -23,7 +23,7 @@ Changes:
 ^^^^^^^^
 
 - Add ``argon2.PasswordHasher``.
-  A higher-level class specifically for hashing passwords that also works on unicode.
+  A higher-level class specifically for hashing passwords that also works on Unicode strings.
 - Add ``argon2.low_level`` module with low-level API bindings for building own high-level abstractions.
 
 
