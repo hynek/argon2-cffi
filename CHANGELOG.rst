@@ -5,6 +5,22 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
+16.1.0 (UNRELEASED)
+-------------------
+
+Vendoring ``argon2`` @ 421dafd2a8af5cbb215e16da5953663eb101d139_.
+
+Deprecations:
+^^^^^^^^^^^^^
+
+*none*
+
+Changes:
+^^^^^^^^
+
+*none*
+
+
 16.0.0 (2016-01-02)
 -------------------
 
