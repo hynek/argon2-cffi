@@ -132,7 +132,7 @@ class TestVerify(object):
         """
         assert True is verify_password(hash, TEST_PASSWORD, type)
 
-    def test_fail(self):
+    def test_fail_wrong_argon2_type(self):
         """
         Given a valid hash and password and wrong type, we fail.
         """

@@ -139,7 +139,7 @@ def verify_secret(hash, secret, type):
 
 def core(context, type):
     """
-    Direct binding to the Argon2 ``core`` function.
+    Direct binding to the ``argon2_ctx`` function.
 
     .. warning::
         This is a strictly advanced function working on raw C data structures.
@@ -161,7 +161,7 @@ def core(context, type):
 
     .. versionadded:: 16.0.0
     """
-    return lib.argon2_core(context, type)
+    return lib.argon2_ctx(context, type)
 
 
 def error_to_str(error):
@@ -174,7 +174,7 @@ def error_to_str(error):
 
     .. versionadded:: 16.0.0
     """
-    msg = ffi.string(lib.error_message(error))
+    msg = ffi.string(lib.argon2_error_message(error))
     if PY3:
         msg = msg.decode("ascii")
     return msg

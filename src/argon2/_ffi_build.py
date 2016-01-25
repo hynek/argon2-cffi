@@ -32,7 +32,7 @@ ffi.set_source(
 )
 
 ffi.cdef("""\
-typedef enum Argon2_type { Argon2_d = 0, Argon2_i = 1 } argon2_type;
+typedef enum Argon2_type { Argon2_d = ..., Argon2_i = ... } argon2_type;
 
 int argon2_hash(const uint32_t t_cost, const uint32_t m_cost,
                 const uint32_t parallelism, const void *pwd,
@@ -43,7 +43,7 @@ int argon2_hash(const uint32_t t_cost, const uint32_t m_cost,
 int argon2_verify(const char *encoded, const void *pwd, const size_t pwdlen,
                   argon2_type type);
 
-const char *error_message(int error_code);
+const char *argon2_error_message(int error_code);
 
 
 typedef int (*allocate_fptr)(uint8_t **memory, size_t bytes_to_allocate);
@@ -76,63 +76,66 @@ typedef struct Argon2_Context {
     uint32_t flags; /* array of bool options */
 } argon2_context;
 
-int argon2_core(argon2_context *context, argon2_type type);
+int argon2_ctx(argon2_context *context, argon2_type type);
 
 /* Error codes */
 typedef enum Argon2_ErrorCodes {
-    ARGON2_OK = 0,
+    ARGON2_OK = ...,
 
-    ARGON2_OUTPUT_PTR_NULL = 1,
+    ARGON2_OUTPUT_PTR_NULL = ...,
 
-    ARGON2_OUTPUT_TOO_SHORT = 2,
-    ARGON2_OUTPUT_TOO_LONG = 3,
+    ARGON2_OUTPUT_TOO_SHORT = ...,
+    ARGON2_OUTPUT_TOO_LONG = ...,
 
-    ARGON2_PWD_TOO_SHORT = 4,
-    ARGON2_PWD_TOO_LONG = 5,
+    ARGON2_PWD_TOO_SHORT = ...,
+    ARGON2_PWD_TOO_LONG = ...,
 
-    ARGON2_SALT_TOO_SHORT = 6,
-    ARGON2_SALT_TOO_LONG = 7,
+    ARGON2_SALT_TOO_SHORT = ...,
+    ARGON2_SALT_TOO_LONG = ...,
 
-    ARGON2_AD_TOO_SHORT = 8,
-    ARGON2_AD_TOO_LONG = 9,
+    ARGON2_AD_TOO_SHORT = ...,
+    ARGON2_AD_TOO_LONG = ...,
 
-    ARGON2_SECRET_TOO_SHORT = 10,
-    ARGON2_SECRET_TOO_LONG = 11,
+    ARGON2_SECRET_TOO_SHORT = ...,
+    ARGON2_SECRET_TOO_LONG = ...,
 
-    ARGON2_TIME_TOO_SMALL = 12,
-    ARGON2_TIME_TOO_LARGE = 13,
+    ARGON2_TIME_TOO_SMALL = ...,
+    ARGON2_TIME_TOO_LARGE = ...,
 
-    ARGON2_MEMORY_TOO_LITTLE = 14,
-    ARGON2_MEMORY_TOO_MUCH = 15,
+    ARGON2_MEMORY_TOO_LITTLE = ...,
+    ARGON2_MEMORY_TOO_MUCH = ...,
 
-    ARGON2_LANES_TOO_FEW = 16,
-    ARGON2_LANES_TOO_MANY = 17,
 
-    ARGON2_PWD_PTR_MISMATCH = 18,    /* NULL ptr with non-zero length */
-    ARGON2_SALT_PTR_MISMATCH = 19,   /* NULL ptr with non-zero length */
-    ARGON2_SECRET_PTR_MISMATCH = 20, /* NULL ptr with non-zero length */
-    ARGON2_AD_PTR_MISMATCH = 21,     /* NULL ptr with non-zero length */
+    ARGON2_LANES_TOO_FEW = ...,
+    ARGON2_LANES_TOO_MANY = ...,
 
-    ARGON2_MEMORY_ALLOCATION_ERROR = 22,
+    ARGON2_PWD_PTR_MISMATCH = ...,    /* NULL ptr with non-zero length */
+    ARGON2_SALT_PTR_MISMATCH = ...,   /* NULL ptr with non-zero length */
+    ARGON2_SECRET_PTR_MISMATCH = ..., /* NULL ptr with non-zero length */
+    ARGON2_AD_PTR_MISMATCH = ...,     /* NULL ptr with non-zero length */
 
-    ARGON2_FREE_MEMORY_CBK_NULL = 23,
-    ARGON2_ALLOCATE_MEMORY_CBK_NULL = 24,
+    ARGON2_MEMORY_ALLOCATION_ERROR = ...,
 
-    ARGON2_INCORRECT_PARAMETER = 25,
-    ARGON2_INCORRECT_TYPE = 26,
+    ARGON2_FREE_MEMORY_CBK_NULL = ...,
+    ARGON2_ALLOCATE_MEMORY_CBK_NULL = ...,
 
-    ARGON2_OUT_PTR_MISMATCH = 27,
+    ARGON2_INCORRECT_PARAMETER = ...,
+    ARGON2_INCORRECT_TYPE = ...,
 
-    ARGON2_THREADS_TOO_FEW = 28,
-    ARGON2_THREADS_TOO_MANY = 29,
+    ARGON2_OUT_PTR_MISMATCH = ...,
 
-    ARGON2_MISSING_ARGS = 30,
+    ARGON2_THREADS_TOO_FEW = ...,
+    ARGON2_THREADS_TOO_MANY = ...,
 
-    ARGON2_ENCODING_FAIL = 31,
+    ARGON2_MISSING_ARGS = ...,
 
-    ARGON2_DECODING_FAIL = 32,
+    ARGON2_ENCODING_FAIL = ...,
 
-    ARGON2_THREAD_FAIL = 33,
+    ARGON2_DECODING_FAIL = ...,
+
+    ARGON2_THREAD_FAIL = ...,
+
+    ARGON2_DECODING_LENGTH_FAIL= ...,
 
     ARGON2_ERROR_CODES_LENGTH /* Do NOT remove; Do NOT add error codes after
                                  this
@@ -143,6 +146,18 @@ typedef enum Argon2_ErrorCodes {
 #define ARGON2_FLAG_CLEAR_SECRET ...
 #define ARGON2_FLAG_CLEAR_MEMORY ...
 #define ARGON2_DEFAULT_FLAGS ...
+
+#define ARGON2_MIN_LANES ...
+#define ARGON2_MAX_LANES ...
+#define ARGON2_MIN_OUTLEN ...
+#define ARGON2_MAX_OUTLEN ...
+#define ARGON2_MIN_TIME ...
+#define ARGON2_MAX_TIME ...
+#define ARGON2_MIN_PWD_LENGTH ...
+#define ARGON2_MAX_PWD_LENGTH ...
+#define ARGON2_MIN_SALT_LENGTH ...
+#define ARGON2_MAX_SALT_LENGTH ...
+
 """)
 
 if __name__ == '__main__':

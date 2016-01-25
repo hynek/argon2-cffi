@@ -1,10 +1,11 @@
 from __future__ import absolute_import, division, print_function
 
 import binascii
+import os
 
 import pytest
 
-from hypothesis import given
+from hypothesis import given, assume
 from hypothesis import strategies as st
 
 from argon2.low_level import (
@@ -184,10 +185,20 @@ class TestVerify(object):
         """
         assert True is verify_secret(hash, TEST_PASSWORD, type)
 
-    def test_fail(self):
+    @i_and_d_encoded
+    def test_fail(self, type, hash):
+        """
+        Wrong password fails.
+        """
+        with pytest.raises(VerificationError):
+            verify_secret(hash, bytes(reversed(TEST_PASSWORD)), type)
+
+    def test_fail_wrong_argon2_type(self):
         """
         Given a valid hash and secret and wrong type, we fail.
         """
+        verify_secret(TEST_HASH_D, TEST_PASSWORD, Type.D)
+        verify_secret(TEST_HASH_I, TEST_PASSWORD, Type.I)
         with pytest.raises(VerificationError):
             verify_secret(TEST_HASH_I, TEST_PASSWORD, Type.D)
 
@@ -197,6 +208,35 @@ class TestVerify(object):
         """
         with pytest.raises(TypeError):
             verify_secret(TEST_HASH_I, TEST_PASSWORD.decode("ascii"))
+
+
+@given(
+    password=st.binary(lib.ARGON2_MIN_PWD_LENGTH, 65),
+    time_cost=st.integers(lib.ARGON2_MIN_TIME, 3),
+    parallelism=st.integers(lib.ARGON2_MIN_LANES, 5),
+    memory_cost=st.integers(0, 1025),
+    hash_len=st.integers(lib.ARGON2_MIN_OUTLEN, 513),
+    salt_len=st.integers(lib.ARGON2_MIN_SALT_LENGTH, 513),
+)
+def test_argument_ranges(password, time_cost, parallelism, memory_cost,
+                         hash_len, salt_len):
+    """
+    Ensure that both hashing and verifying works for most combinations of legal
+    values.
+
+    Limits are intentionally chosen to be *not* on 2^x boundaries.
+
+    This test is rather slow.
+    """
+    assume(parallelism * 8 <= memory_cost)
+    hash = hash_secret(
+        secret=password, salt=os.urandom(salt_len),
+        time_cost=time_cost, parallelism=parallelism,
+        memory_cost=memory_cost,
+        hash_len=hash_len,
+        type=Type.I,
+    )
+    assert verify_secret(hash, password, Type.I)
 
 
 def test_core():
