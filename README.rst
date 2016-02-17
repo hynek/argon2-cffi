@@ -38,4 +38,4 @@ CFFI-based Argon2 Bindings for Python
 
 
 ``argon2_cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.org/>`_, the code on `GitHub <https://github.com/hynek/argon2_cffi>`_.
-It’s rigorously tested on Python 2.6, 2.7, 3.3+, and PyPy.
+It’s rigorously tested on Python 2.7, 3.4+, and PyPy.
