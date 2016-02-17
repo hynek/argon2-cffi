@@ -28,15 +28,26 @@ matrix:
     - python: "3.5"
       env: TOXENV=readme
 
-
-  allow_failures:
-    - python: "pypy"        # PyPy & bundled CFFI are too old on Travis
-
-
 install:
+  - |
+    if [[ "${TOXENV}" = pypy* ]]; then
+        git clone --depth 1 https://github.com/yyuu/pyenv.git ~/.pyenv
+        PYENV_ROOT="$HOME/.pyenv"
+        PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+        pyenv install pypy-4.0.1
+        pyenv global pypy-4.0.1
+    fi
   - pip install tox
 
 script:
+  - |
+    # activate the pypy env we installed via our custom pyenv in the install stage
+    if [[ "${TOXENV}" == "pypy" ]]; then
+        PYENV_ROOT="$HOME/.pyenv"
+        PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init -)"
+    fi
   - tox --hashseed 0
 
 before_install:
