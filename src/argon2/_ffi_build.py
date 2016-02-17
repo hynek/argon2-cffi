@@ -8,7 +8,7 @@ import sys
 from cffi import FFI
 
 
-include_dirs = [os.path.join("extras", "libargon2", "src")]
+include_dirs = [os.path.join("extras", "libargon2", "include")]
 
 # Add vendored integer types headers.
 if "win32" in str(sys.platform).lower():

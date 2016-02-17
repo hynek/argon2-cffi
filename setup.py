@@ -16,7 +16,10 @@ PACKAGES = find_packages(where="src")
 
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 lib_base = os.path.join("extras", "libargon2", "src")
-include_dirs = [lib_base, os.path.join(lib_base, "blake2")]
+include_dirs = [
+    os.path.join(lib_base, "..", "include"),
+    os.path.join(lib_base, "blake2"),
+]
 
 # Add vendored integer types headers if necessary.
 is_windows = "win32" in str(sys.platform).lower()
