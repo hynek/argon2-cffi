@@ -33,12 +33,17 @@ ffi.set_source(
 
 ffi.cdef("""\
 typedef enum Argon2_type { Argon2_d = ..., Argon2_i = ... } argon2_type;
+typedef enum Argon2_version {
+    ARGON2_OLD_VERSION_NUMBER = ...,
+    ARGON2_VERSION_NUMBER = ...
+} argon2_version;
 
 int argon2_hash(const uint32_t t_cost, const uint32_t m_cost,
                 const uint32_t parallelism, const void *pwd,
                 const size_t pwdlen, const void *salt, const size_t saltlen,
                 void *hash, const size_t hashlen, char *encoded,
-                const size_t encodedlen, argon2_type type);
+                const size_t encodedlen, argon2_type type,
+                const uint32_t version);
 
 int argon2_verify(const char *encoded, const void *pwd, const size_t pwdlen,
                   argon2_type type);
@@ -52,6 +57,8 @@ typedef void (*deallocate_fptr)(uint8_t *memory, size_t bytes_to_allocate);
 typedef struct Argon2_Context {
     uint8_t *out;    /* output array */
     uint32_t outlen; /* digest length */
+
+    uint32_t version; /*version number*/
 
     uint8_t *pwd;    /* password array */
     uint32_t pwdlen; /* password length */
@@ -137,9 +144,7 @@ typedef enum Argon2_ErrorCodes {
 
     ARGON2_DECODING_LENGTH_FAIL= ...,
 
-    ARGON2_ERROR_CODES_LENGTH /* Do NOT remove; Do NOT add error codes after
-                                 this
-                                 error code */
+    ARGON2_VERIFY_MISMATCH = ...,
 } argon2_error_codes;
 
 #define ARGON2_FLAG_CLEAR_PASSWORD ...
@@ -157,6 +162,10 @@ typedef enum Argon2_ErrorCodes {
 #define ARGON2_MAX_PWD_LENGTH ...
 #define ARGON2_MIN_SALT_LENGTH ...
 #define ARGON2_MAX_SALT_LENGTH ...
+
+uint32_t argon2_encodedlen(uint32_t t_cost, uint32_t m_cost,
+                           uint32_t parallelism, uint32_t saltlen,
+                           uint32_t hashlen);
 
 """)
 

@@ -4,14 +4,7 @@ from __future__ import absolute_import, division, print_function
 
 from six import PY3
 
-from argon2._util import _get_encoded_len, _check_types, NoneType
-
-
-def test_get_encoded_len():
-    """
-    Verify we get the same result as the official example.
-    """
-    assert 104 == _get_encoded_len(32, 16)
+from argon2._util import _check_types, NoneType
 
 
 class TestCheckTypes(object):

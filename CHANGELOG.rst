@@ -8,7 +8,7 @@ The third digit is only for regressions.
 16.1.0 (UNRELEASED)
 -------------------
 
-Vendoring ``argon2`` @ UNRELEASED
+Vendoring Argon2 @ UNRELEASED
 
 Backward-incompatible changes:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -24,13 +24,17 @@ Backward-incompatible changes:
 Changes:
 ^^^^^^^^
 
-*none*
+- Add support for `Argon2 1.3 <https://www.ietf.org/mail-archive/web/cfrg/current/msg07948.html>`_.
+  Old hashes remain functional but opportunistic rehashing is strongly recommended.
+
+
+----
 
 
 16.0.0 (2016-01-02)
 -------------------
 
-Vendoring ``argon2`` @ 421dafd2a8af5cbb215e16da5953663eb101d139_.
+Vendoring Argon2 @ 421dafd2a8af5cbb215e16da5953663eb101d139_.
 
 Deprecations:
 ^^^^^^^^^^^^^
@@ -49,10 +53,13 @@ Changes:
 - Add ``argon2.low_level`` module with low-level API bindings for building own high-level abstractions.
 
 
+----
+
+
 15.0.1 (2015-12-18)
 -------------------
 
-Vendoring ``argon2`` @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
+Vendoring Argon2 @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
 
 Changes:
 ^^^^^^^^
@@ -60,10 +67,13 @@ Changes:
 - Fix ``long_description`` on PyPI.
 
 
+----
+
+
 15.0.0 (2015-12-18)
 -------------------
 
-Vendoring ``argon2`` @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
+Vendoring Argon2 @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
 
 Changes:
 ^^^^^^^^
@@ -79,14 +89,17 @@ Changes:
   Verification should take between 0.5ms and 1ms on recent-ish hardware.
 
 
+----
+
+
 15.0.0b5 (2015-12-10)
 ---------------------
 
-Vendoring ``argon2`` @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
+Vendoring Argon2 @ 4fe0d8cda37691228dd5a96a310be57369403a4b_.
 
 Initial work.
 Previous betas were only for fixing Windows packaging.
-The authors of ``argon2`` were kind enough to `help me <https://github.com/P-H-C/phc-winner-argon2/issues/44>`_ to get it building under Visual Studio 2008 that we’re forced to use for Python 2.7 on Windows.
+The authors of Argon2 were kind enough to `help me <https://github.com/P-H-C/phc-winner-argon2/issues/44>`_ to get it building under Visual Studio 2008 that we’re forced to use for Python 2.7 on Windows.
 
 
 .. _421dafd2a8af5cbb215e16da5953663eb101d139: https://github.com/P-H-C/phc-winner-argon2/tree/421dafd2a8af5cbb215e16da5953663eb101d139
