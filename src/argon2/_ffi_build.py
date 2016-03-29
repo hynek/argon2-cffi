@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import absolute_import, division, print_function
 
 import os
@@ -34,7 +32,7 @@ ffi.set_source(
 ffi.cdef("""\
 typedef enum Argon2_type { Argon2_d = ..., Argon2_i = ... } argon2_type;
 typedef enum Argon2_version {
-    ARGON2_OLD_VERSION_NUMBER = ...,
+    ARGON2_VERSION_10 = ...,
     ARGON2_VERSION_NUMBER = ...
 } argon2_version;
 
@@ -58,8 +56,6 @@ typedef struct Argon2_Context {
     uint8_t *out;    /* output array */
     uint32_t outlen; /* digest length */
 
-    uint32_t version; /*version number*/
-
     uint8_t *pwd;    /* password array */
     uint32_t pwdlen; /* password length */
 
@@ -76,6 +72,8 @@ typedef struct Argon2_Context {
     uint32_t m_cost;  /* amount of memory requested (KB) */
     uint32_t lanes;   /* number of lanes */
     uint32_t threads; /* maximum number of threads */
+
+    uint32_t version; /* version number */
 
     allocate_fptr allocate_cbk; /* pointer to memory allocator */
     deallocate_fptr free_cbk;   /* pointer to memory deallocator */
