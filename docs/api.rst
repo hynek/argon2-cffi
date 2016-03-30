@@ -13,13 +13,13 @@ Unless you have any special needs, all you need to know is:
   >>> ph = PasswordHasher()
   >>> hash = ph.hash("s3kr3tp4ssw0rd")
   >>> hash  # doctest: +SKIP
-  u'$argon2i$m=512,t=2,p=2$0FFfEeL6JmUnpxwgwcSC8g$98BmZUa5A/3t5wb3ZxFLBg'
+  u'$argon2i$v=19$m=512,t=2,p=2$5VtWOO3cGWYQHEMaYGbsfQ$AcmqasQgW/wI6wAHAMk4aQ'
   >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
   >>> ph.verify(hash, "t0t411ywr0ng")
   Traceback (most recent call last):
     ...
-  argon2.exceptions.VerificationError: Decoding failed
+  argon2.exceptions.VerificationError: The password does not match the supplied hash
 
 But of course the :class:`PasswordHasher` class has all the parametrization you'll need:
 
@@ -53,6 +53,8 @@ Low Level
 .. autoclass:: Type
   :members: D, I
 
+.. autodata:: ARGON2_VERSION
+
 .. autofunction:: hash_secret
 
 .. doctest::
@@ -62,7 +64,7 @@ Low Level
   ...     b"secret", b"somesalt",
   ...     time_cost=1, memory_cost=8, parallelism=1, hash_len=64, type=argon2.low_level.Type.D
   ... )
-  b'$argon2d$m=8,t=1,p=1$c29tZXNhbHQ$H0oN1/L3H8t8hcg47pAyJZ8toBh2UbgcMt0zRFrqt4mEJCeKSEWGxt+KpZrMwxvr7M5qktNcc/bk/hvbinueJA'
+  b'$argon2d$v=19$m=8,t=1,p=1$c29tZXNhbHQ$ba2qC75j0+JAunZZ/L0hZdQgCv+tOieBuKKXSrQiWm7nlkRcK+YqWr0i0m0WABJKelU8qHJp0SZzH0b1Z+ITvQ'
 
 
 .. autofunction:: verify_secret
@@ -72,10 +74,13 @@ The raw hash can also be computed:
 
 .. autofunction:: hash_secret_raw
 
-.. code-block:: pycon
+.. doctest::
 
-  >>> argon2.low_level.hash_password_raw(b"secret", b"somesalt")
-  b'\xd8\x87h5X%U<[\xf7\x0e\x18T\x9a\x96\xf3'
+  >>> argon2.low_level.hash_secret_raw(
+  ...     b"secret", b"somesalt",
+  ...     time_cost=1, memory_cost=8, parallelism=1, hash_len=8, type=argon2.low_level.Type.D
+  ... )
+  b'\xe4n\xf5\xc8|\xa3>\x1d'
 
 The super low-level ``argon2_core()`` function is exposed too if you need access to very specific options:
 
@@ -86,7 +91,7 @@ Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` 
 
 .. doctest::
 
-  >>> from argon2.low_level import Type, core, ffi, lib
+  >>> from argon2.low_level import ARGON2_VERSION, Type, core, ffi, lib
   >>> pwd = b"secret"
   >>> salt = b"12345678"
   >>> hash_len = 8
@@ -96,6 +101,7 @@ Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` 
   >>> csalt = ffi.new("uint8_t[]", salt)
   >>> ctx = ffi.new(
   ...     "argon2_context *", dict(
+  ...         version=ARGON2_VERSION,
   ...         out=cout, outlen=hash_len,
   ...         pwd=cpwd, pwdlen=len(pwd),
   ...         salt=csalt, saltlen=len(salt),
@@ -114,7 +120,7 @@ Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` 
   0
   >>> out = bytes(ffi.buffer(ctx.out, ctx.outlen))
   >>> out
-  b'j\x9ap\xb4\xe7\xd6\x9c\xcf'
+  b'\xb4\xe2HjO\x14d\x9b'
   >>> out == argon2.low_level.hash_secret_raw(pwd, salt, 1, 8, 1, 8, Type.D)
   True
 

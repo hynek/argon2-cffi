@@ -49,8 +49,10 @@ class TestPasswordHasher(object):
 
         h = ph.hash(password)
 
+        prefix = u"$argon2i$v=19$m=8,t=1,p=1$"
+
         assert isinstance(h, six.text_type)
-        assert h[:21] == u"$argon2i$m=8,t=1,p=1$"
+        assert h[:len(prefix)] == prefix
 
     @bytes_and_unicode_password
     def test_verify(self, password):

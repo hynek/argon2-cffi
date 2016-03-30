@@ -9,7 +9,7 @@ from hypothesis import given, assume
 from hypothesis import strategies as st
 
 from argon2.low_level import (
-    Type,
+    ARGON2_VERSION, Type,
     core, ffi, hash_secret, hash_secret_raw, lib, verify_secret,
 )
 from argon2.exceptions import VerificationError, HashingError
@@ -17,52 +17,50 @@ from argon2.exceptions import VerificationError, HashingError
 # Example data obtained using the official Argon2 CLI client:
 #
 # $ echo -n "password" | ./argon2 somesalt -t 2 -m 16 -p 4
-# Type:       Argon2i
-# Iterations: 2
-# Memory:     65536 KiB
-# Parallelism:    4
-# Hash:       4162f32384d8f4790bd994cb73c83a4a29f076165ec18af3cfdcf10a8d1b9066
-# Encoded:    $argon2i$m=65536,t=2,p=4$c29tZXNhbHQAAAAAAAAAAA$QWLzI4TY9HkL2ZTLc
-#             8g6SinwdhZewYrzz9zxCo0bkGY
-# 0.176 seconds
+# Type:		Argon2i
+# Iterations:	2
+# Memory:		65536 KiB
+# Parallelism:	4
+# Hash:		20c8adf6a90550b08c03f5628b32f9edc9d32ce6b90e254cf5e330a40bcfc2be
+# Encoded:	$argon2i$v=19$m=65536,t=2,p=4$
+#           c29tZXNhbHQ$IMit9qkFULCMA/ViizL57cnTLOa5DiVM9eMwpAvPwr4
+# 0.120 seconds
 # Verification ok
 #
 # $ echo -n "password" | ./argon2 somesalt -t 2 -m 16 -p 4 -d
-# Type:       Argon2d
-# Iterations: 2
-# Memory:     65536 KiB
-# Parallelism:    4
-# Hash:       9ca3b9fc007d09daf489dcf854e9a785ff5a32c62ec50acf26477977add23225
-# Encoded:    $argon2d$m=65536,t=2,p=4$c29tZXNhbHQAAAAAAAAAAA$nKO5/AB9Cdr0idz4V
-#             Omnhf9aMsYuxQrPJkd5d63SMiU
-# 0.189 seconds
+# Type:		Argon2d
+# Iterations:	2
+# Memory:		65536 KiB
+# Parallelism:	4
+# Hash:		7199f977eac587e65fb91866da21941a072b5b960b78ceaaecbdef06c766140d
+# Encoded:	$argon2d$v=19$m=65536,t=2,p=4$
+#           c29tZXNhbHQ$cZn5d+rFh+ZfuRhm2iGUGgcrW5YLeM6q7L3vBsdmFA0
+# 0.119 seconds
 # Verification ok
 
-TEST_HASH_I = (
+TEST_HASH_I_OLD = (
     b"$argon2i$m=65536,t=2,p=4"
     b"$c29tZXNhbHQAAAAAAAAAAA"
     b"$QWLzI4TY9HkL2ZTLc8g6SinwdhZewYrzz9zxCo0bkGY"
+)  # a v1.2 hash without a version tag
+TEST_HASH_I = (
+    b"$argon2i$v=19$m=65536,t=2,p=4$"
+    b"c29tZXNhbHQ$IMit9qkFULCMA/ViizL57cnTLOa5DiVM9eMwpAvPwr4"
 )
 TEST_HASH_D = (
-    b"$argon2d$m=65536,t=2,p=4"
-    b"$c29tZXNhbHQAAAAAAAAAAA$"
-    b"nKO5/AB9Cdr0idz4VOmnhf9aMsYuxQrPJkd5d63SMiU"
+    b"$argon2d$v=19$m=65536,t=2,p=4$"
+    b"c29tZXNhbHQ$cZn5d+rFh+ZfuRhm2iGUGgcrW5YLeM6q7L3vBsdmFA0"
 )
 TEST_RAW_I = binascii.unhexlify(
-    b"4162f32384d8f4790bd994cb73c83a4a29f076165ec18af3cfdcf10a8d1b9066"
+    b"20c8adf6a90550b08c03f5628b32f9edc9d32ce6b90e254cf5e330a40bcfc2be"
 )
-TEST_RAW_D = binascii.unhexlify(  # N.B. includes NUL byte!
-    b"9ca3b9fc007d09daf489dcf854e9a785ff5a32c62ec50acf26477977add23225"
+TEST_RAW_D = binascii.unhexlify(
+    b"7199f977eac587e65fb91866da21941a072b5b960b78ceaaecbdef06c766140d"
 )
-TEST_HASH_FAST = (
-    b"$argon2i$m=8,t=1,p=1$c29tZXNhbHQAAAAAAAAAAA$owd7NH5aC7mrx3sIc0zMF+R8RkPH"
-    b"S23ZuFM0IO3uck8"
-)  # same password/salt, but much cheaper.
 
 TEST_PASSWORD = b"password"
 TEST_SALT_LEN = 16
 TEST_SALT = b"somesalt"
-TEST_SALT += b"\x00" * (TEST_SALT_LEN - len(TEST_SALT))
 TEST_TIME = 2
 TEST_MEMORY = 65536
 TEST_PARALLELISM = 4
@@ -206,8 +204,18 @@ class TestVerify(object):
         """
         Passing an argument of wrong type raises TypeError.
         """
-        with pytest.raises(TypeError):
-            verify_secret(TEST_HASH_I, TEST_PASSWORD.decode("ascii"))
+        with pytest.raises(TypeError) as e:
+            verify_secret(TEST_HASH_I, TEST_PASSWORD.decode("ascii"), Type.I)
+
+        assert e.value.args[0].startswith(
+            "initializer for ctype 'uint8_t[]' must be a"
+        )
+
+    def test_old_hash(self):
+        """
+        Hashes without a version tag are recognized and verified correctly.
+        """
+        assert True is verify_secret(TEST_HASH_I_OLD, TEST_PASSWORD, Type.I)
 
 
 @given(
@@ -257,6 +265,7 @@ def test_core():
         "argon2_context *", dict(
             out=cout,
             outlen=hash_len,
+            version=ARGON2_VERSION,
             pwd=cpwd,
             pwdlen=len(pwd),
             salt=csalt,

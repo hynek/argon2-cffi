@@ -15,17 +15,25 @@ from enum import Enum
 from six import PY3
 
 from ._ffi import ffi, lib
-from ._util import _get_encoded_len
 from .exceptions import VerificationError, HashingError
 
 
 __all__ = [
+    "ARGON2_VERSION",
     "Type",
     "ffi",
     "hash_secret",
     "hash_secret_raw",
     "verify_secret",
 ]
+
+ARGON2_VERSION = lib.ARGON2_VERSION_NUMBER
+"""
+The latest version of the Argon2 algorithm that is supported (and used by
+default).
+
+.. versionadded:: 16.1.0
+"""
 
 
 class Type(Enum):
@@ -47,7 +55,7 @@ class Type(Enum):
 
 
 def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
-                type):
+                type, version=ARGON2_VERSION):
     """
     Hash *secret* and return an **encoded** hash.
 
@@ -58,6 +66,7 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
     :param bytes salt: A salt_.  Should be random and different for each
         secret.
     :param Type type: Which Argon2 variant to use.
+    :param int version: Which Argon2 version to use.
 
     For an explanation of the Argon2 parameters see :class:`PasswordHasher`.
 
@@ -70,7 +79,9 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
-    size = _get_encoded_len(hash_len, len(salt))
+    size = lib.argon2_encodedlen(
+        time_cost, memory_cost, parallelism, len(salt), hash_len,
+    ) + 1
     buf = ffi.new("uint8_t[]", size)
     rv = lib.argon2_hash(
         time_cost, memory_cost, parallelism,
@@ -79,6 +90,7 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
         ffi.NULL, hash_len,
         buf, size,
         type.value,
+        version,
     )
     if rv != lib.ARGON2_OK:
         raise HashingError(error_to_str(rv))
@@ -87,7 +99,7 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
 
 
 def hash_secret_raw(secret, salt, time_cost, memory_cost, parallelism,
-                    hash_len, type):
+                    hash_len, type, version=ARGON2_VERSION):
     """
     Hash *password* and return a **raw** hash.
 
@@ -102,6 +114,7 @@ def hash_secret_raw(secret, salt, time_cost, memory_cost, parallelism,
         buf, hash_len,
         ffi.NULL, 0,
         type.value,
+        version,
     )
     if rv != lib.ARGON2_OK:
         raise HashingError(error_to_str(rv))
@@ -143,9 +156,10 @@ def core(context, type):
 
     .. warning::
         This is a strictly advanced function working on raw C data structures.
-        Both Argon2's and ``argon2_cffi``'s' higher-level bindings do a lot of
+        Both Argon2's and ``argon2_cffi``'s higher-level bindings do a lot of
         sanity checks and housekeeping work that *you* are now responsible for
-        (e.g. clearing buffers).
+        (e.g. clearing buffers). The structure of the *context* object can,
+        has, and will change with *any* release!
 
         Use at your own peril; ``argon2_cffi`` does *not* use this binding
         itself.
