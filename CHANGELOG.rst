@@ -24,6 +24,8 @@ Backward-incompatible changes:
 Changes:
 ^^^^^^^^
 
+- Add ``VerifyMismatchError`` that is raised if verification fails only because of a password/hash mismatch.
+  It's a sub-class of ``VerificationError`` therefore this change is completely backward compatible.
 - Add support for `Argon2 1.3 <https://www.ietf.org/mail-archive/web/cfrg/current/msg07948.html>`_.
   Old hashes remain functional but opportunistic rehashing is strongly recommended.
 

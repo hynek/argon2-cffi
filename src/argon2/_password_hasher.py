@@ -114,7 +114,10 @@ class PasswordHasher(object):
         :param password: The password to verify.
         :type password: ``bytes`` or ``unicode``
 
-        :raises argon2.exceptions.VerificationError: If verification fails.
+        :raises argon2.exceptions.VerifyMismatchError: If verification fails
+            because *hash* is not valid for *secret* of *type*.
+        :raises argon2.exceptions.VerificationError: If verification fails for
+            other reasons.
 
         :return: ``True`` on success, raise
             :exc:`~argon2.exceptions.VerificationError` otherwise.

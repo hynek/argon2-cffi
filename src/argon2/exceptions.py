@@ -13,9 +13,17 @@ class Argon2Error(Exception):
 
 class VerificationError(Argon2Error):
     """
-    Raised if verification failed.
+    Verification failed.
 
     You can find the original error message from Argon2 in ``args[0]``.
+    """
+
+
+class VerifyMismatchError(VerificationError):
+    """
+    The secret does not match the hash.
+
+    .. versionadded:: 16.1.0
     """
 
 

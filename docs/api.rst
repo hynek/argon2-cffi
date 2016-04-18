@@ -13,13 +13,13 @@ Unless you have any special needs, all you need to know is:
   >>> ph = PasswordHasher()
   >>> hash = ph.hash("s3kr3tp4ssw0rd")
   >>> hash  # doctest: +SKIP
-  u'$argon2i$v=19$m=512,t=2,p=2$5VtWOO3cGWYQHEMaYGbsfQ$AcmqasQgW/wI6wAHAMk4aQ'
+  '$argon2i$v=19$m=512,t=2,p=2$5VtWOO3cGWYQHEMaYGbsfQ$AcmqasQgW/wI6wAHAMk4aQ'
   >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
   >>> ph.verify(hash, "t0t411ywr0ng")
   Traceback (most recent call last):
     ...
-  argon2.exceptions.VerificationError: The password does not match the supplied hash
+  argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash
 
 But of course the :class:`PasswordHasher` class has all the parametrization you'll need:
 
@@ -41,6 +41,8 @@ Exceptions
 ^^^^^^^^^^
 
 .. autoexception:: argon2.exceptions.VerificationError
+
+.. autoexception:: argon2.exceptions.VerifyMismatchError
 
 .. autoexception:: argon2.exceptions.HashingError
 

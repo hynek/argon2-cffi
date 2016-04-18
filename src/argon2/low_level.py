@@ -15,7 +15,7 @@ from enum import Enum
 from six import PY3
 
 from ._ffi import ffi, lib
-from .exceptions import VerificationError, HashingError
+from .exceptions import HashingError, VerificationError, VerifyMismatchError
 
 
 __all__ = [
@@ -132,7 +132,10 @@ def verify_secret(hash, secret, type):
         in *hash*.
     :param Type type: Type for *hash*.
 
-    :raises argon2.exceptions.VerificationError: If verification fails.
+    :raises argon2.exceptions.VerifyMismatchError: If verification fails
+        because *hash* is not valid for *secret* of *type*.
+    :raises argon2.exceptions.VerificationError: If verification fails for
+        other reasons.
 
     :return: ``True`` on success, raise
             :exc:`~argon2.exceptions.VerificationError` otherwise.
@@ -146,6 +149,8 @@ def verify_secret(hash, secret, type):
     )
     if rv == lib.ARGON2_OK:
         return True
+    elif rv == lib.ARGON2_VERIFY_MISMATCH:
+        raise VerifyMismatchError(error_to_str(rv))
     else:
         raise VerificationError(error_to_str(rv))
 

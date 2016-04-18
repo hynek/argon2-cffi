@@ -12,7 +12,9 @@ from argon2.low_level import (
     ARGON2_VERSION, Type,
     core, ffi, hash_secret, hash_secret_raw, lib, verify_secret,
 )
-from argon2.exceptions import VerificationError, HashingError
+from argon2.exceptions import (
+    HashingError, VerificationError, VerifyMismatchError,
+)
 
 # Example data obtained using the official Argon2 CLI client:
 #
@@ -188,7 +190,7 @@ class TestVerify(object):
         """
         Wrong password fails.
         """
-        with pytest.raises(VerificationError):
+        with pytest.raises(VerifyMismatchError):
             verify_secret(hash, bytes(reversed(TEST_PASSWORD)), type)
 
     def test_fail_wrong_argon2_type(self):

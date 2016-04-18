@@ -26,15 +26,15 @@ CFFI-based Argon2 Bindings for Python
 
   >>> from argon2 import PasswordHasher
   >>> ph = PasswordHasher()
-  >>> hash = ph.hash("secret")
-  >>> hash   # doctest: +SKIP
-  '$argon2i$v=19$m=512,t=2,p=2$+wIVY8td/rsil7jUtM2ygA$8FzE0rSJFlxdDK2lRd72Dg'
-  >>> ph.verify(hash, "secret")
+  >>> hash = ph.hash("s3kr3tp4ssw0rd")
+  >>> hash  # doctest: +SKIP
+  '$argon2i$v=19$m=512,t=2,p=2$5VtWOO3cGWYQHEMaYGbsfQ$AcmqasQgW/wI6wAHAMk4aQ'
+  >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
-  >>> ph.verify(hash, "wrong")
+  >>> ph.verify(hash, "t0t411ywr0ng")
   Traceback (most recent call last):
     ...
-  argon2.exceptions.VerificationError: The password does not match the supplied hash
+  argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash
 
 
 ``argon2_cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.org/>`_, the code on `GitHub <https://github.com/hynek/argon2_cffi>`_.

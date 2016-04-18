@@ -8,8 +8,8 @@ I'm using ``bcrypt``/``scrypt``/``PBKDF2``, do I need to migrate?
   But if you already use one of the hashes mentioned in the question, you should be fine for the foreseeable future.
 
 Why do the ``verify()`` methods raise an Exception instead of returning ``False``?
-   #. The Argon2 library has no concept of a "wrong password" error.
-      Therefore an exception with the full error is raised so you can inspect what went actually wrong.
+   #. The Argon2 library had no concept of a "wrong password" error in the beginning.
+      Therefore when writing these bindings, an exception with the full error had to be raised so you could inspect what went actually wrong.
    #. In my opinion, a wrong password should raise an exception such that it can't pass unnoticed by accident.
       See also The Zen of Python: "Errors should never pass silently."
    #. It's more `Pythonic <https://docs.python.org/3/glossary.html#term-eafp>`_.
