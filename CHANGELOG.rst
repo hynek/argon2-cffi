@@ -5,10 +5,22 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-16.1.0 (2016-04-19)
+16.2.0 (UNRELEASED)
 -------------------
 
 Vendoring Argon2 @ UNRELEASED
+
+Changes:
+^^^^^^^^
+
+*none*
+
+----
+
+16.1.0 (2016-04-19)
+-------------------
+
+Vendoring Argon2 @ 00aaa6604501fade85853a4b2f5695611ff6e7c5_.
 
 Backward-incompatible changes:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -106,3 +118,4 @@ The authors of Argon2 were kind enough to `help me <https://github.com/P-H-C/phc
 
 .. _421dafd2a8af5cbb215e16da5953663eb101d139: https://github.com/P-H-C/phc-winner-argon2/tree/421dafd2a8af5cbb215e16da5953663eb101d139
 .. _4fe0d8cda37691228dd5a96a310be57369403a4b: https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b
+.. _00aaa6604501fade85853a4b2f5695611ff6e7c5: https://github.com/P-H-C/phc-winner-argon2/tree/00aaa6604501fade85853a4b2f5695611ff6e7c5
