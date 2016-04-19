@@ -5,7 +5,7 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-16.1.0 (UNRELEASED)
+16.1.0 (2016-04-19)
 -------------------
 
 Vendoring Argon2 @ UNRELEASED
@@ -25,7 +25,7 @@ Changes:
 ^^^^^^^^
 
 - Add ``VerifyMismatchError`` that is raised if verification fails only because of a password/hash mismatch.
-  It's a sub-class of ``VerificationError`` therefore this change is completely backward compatible.
+  It's a subclass of ``VerificationError`` therefore this change is completely backward compatible.
 - Add support for `Argon2 1.3 <https://www.ietf.org/mail-archive/web/cfrg/current/msg07948.html>`_.
   Old hashes remain functional but opportunistic rehashing is strongly recommended.
 
