@@ -38,14 +38,6 @@ if is_windows:
 # Optimized version requires SSE2 extensions.  They have been around since
 # 2001 so we try to compile it on every recent-ish x86.
 optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
-if optimized:
-    print("Building SSE2-optimized version.")
-else:
-    print(
-        "Building unoptimized reference implementation because",
-        platform.machine(),
-        "is not known to support SSE2."
-    )
 
 LIBRARIES = [
     ("libargon2", {
