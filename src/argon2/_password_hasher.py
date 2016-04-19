@@ -7,7 +7,7 @@ from .low_level import (
     hash_secret,
     verify_secret,
 )
-from ._util import _check_types
+from ._utils import _check_types
 
 
 DEFAULT_RANDOM_SALT_LENGTH = 16

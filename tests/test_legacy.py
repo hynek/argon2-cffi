@@ -12,7 +12,7 @@ from argon2 import (
     DEFAULT_RANDOM_SALT_LENGTH,
 )
 from argon2.exceptions import VerificationError, HashingError
-from argon2._util import _encoded_str_len
+from argon2._utils import _encoded_str_len
 
 from .test_low_level import (
     TEST_PASSWORD,
