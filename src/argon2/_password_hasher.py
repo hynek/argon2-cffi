@@ -122,6 +122,10 @@ class PasswordHasher(object):
         :return: ``True`` on success, raise
             :exc:`~argon2.exceptions.VerificationError` otherwise.
         :rtype: bool
+
+        .. versionchanged:: 16.1.0
+            Raise :exc:`~argon2.exceptions.VerifyMismatchError` on mismatches
+            instead of its more generic superclass.
         """
         return verify_secret(
             _ensure_bytes(hash, "ascii"),

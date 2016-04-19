@@ -104,6 +104,8 @@ def hash_secret_raw(secret, salt, time_cost, memory_cost, parallelism,
     Hash *password* and return a **raw** hash.
 
     This function takes the same parameters as :func:`hash_secret`.
+
+    .. versionadded:: 16.0.0
     """
     buf = ffi.new("uint8_t[]", hash_len)
 
@@ -138,8 +140,13 @@ def verify_secret(hash, secret, type):
         other reasons.
 
     :return: ``True`` on success, raise
-            :exc:`~argon2.exceptions.VerificationError` otherwise.
+        :exc:`~argon2.exceptions.VerificationError` otherwise.
     :rtype: bool
+
+    .. versionadded:: 16.0.0
+    .. versionchanged:: 16.1.0
+        Raise :exc:`~argon2.exceptions.VerifyMismatchError` on mismatches
+        instead of its more generic superclass.
     """
     rv = lib.argon2_verify(
         ffi.new("uint8_t[]", hash),
