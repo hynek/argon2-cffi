@@ -43,9 +43,6 @@ __all__ = [
     "exceptions",
     "hash_password",
     "hash_password_raw",
-    "hash_secret",
-    "hash_secret_raw",
     "low_level",
     "verify_password",
-    "verify_secret",
 ]
