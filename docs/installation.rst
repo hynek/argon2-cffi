@@ -37,4 +37,4 @@ If you've been able to compile Python CFFI extensions before, ``argon2_cffi`` sh
 
 .. _SSE2: https://en.wikipedia.org/wiki/SSE2
 .. _PyPI: https://pypi.python.org/pypi/argon2_cffi/
-.. _CFFI environment: https://cffi.readthedocs.org/en/latest/installation.html
+.. _CFFI environment: https://cffi.readthedocs.io/en/latest/installation.html

@@ -3,7 +3,7 @@ CFFI-based Argon2 Bindings for Python
 =====================================
 
 .. image:: https://readthedocs.org/projects/argon2-cffi/badge/?version=stable
-  :target: http://argon2-cffi.readthedocs.org/en/latest/?badge=stable
+  :target: http://argon2-cffi.readthedocs.io/en/latest/?badge=stable
   :alt: Documentation Status
 
 .. image:: https://travis-ci.org/hynek/argon2_cffi.svg?branch=master
@@ -37,5 +37,5 @@ CFFI-based Argon2 Bindings for Python
   argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash
 
 
-``argon2_cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.org/>`_, the code on `GitHub <https://github.com/hynek/argon2_cffi>`_.
+``argon2_cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.io/>`_, the code on `GitHub <https://github.com/hynek/argon2_cffi>`_.
 It’s rigorously tested on Python 2.7, 3.4+, and PyPy.

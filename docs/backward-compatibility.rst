@@ -12,4 +12,4 @@ If breaking changes are needed do be done, they are:
 
 What explicitly *may* change over time are the default hashing parameters and the behavior of the :doc:`cli`.
 
-.. _changelog: https://argon2-cffi.readthedocs.org/en/stable/changelog.html
+.. _changelog: https://argon2-cffi.readthedocs.io/en/stable/changelog.html
