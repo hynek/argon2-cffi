@@ -9,7 +9,7 @@ CFFI-based Argon2 Bindings for Python
 .. image:: https://travis-ci.org/hynek/argon2_cffi.svg?branch=master
   :target: https://travis-ci.org/hynek/argon2_cffi
 
-.. image:: https://codecov.io/github/hynek/argon2_cffi/coverage.svg?branch=master
+.. image:: https://codecov.io/github/hynek/argon2_cffi/branch/master/graph/badge.svg
   :target: https://codecov.io/github/hynek/argon2_cffi
 
 .. image:: https://ci.appveyor.com/api/projects/status/3faufu7qgwc8nv2v/branch/master?svg=true
