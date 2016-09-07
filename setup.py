@@ -1,5 +1,8 @@
 from __future__ import absolute_import, division, print_function
 
+from distutils.command.build_clib import build_clib
+from distutils.errors import DistutilsSetupError
+
 from setuptools import setup, find_packages
 
 import sys
@@ -135,6 +138,48 @@ LONG = (
 )
 
 
+class BuildCLibWithCompilerFlags(build_clib):
+    """
+    We need to pass ``-msse2`` for the optimized build.
+    """
+    def build_libraries(self, libraries):
+        """
+        Mostly copy pasta from ``distutils.command.build_clib``.
+        """
+        for (lib_name, build_info) in libraries:
+            sources = build_info.get('sources')
+            if sources is None or not isinstance(sources, (list, tuple)):
+                raise DistutilsSetupError(
+                       "in 'libraries' option (library '%s'), "
+                       "'sources' must be present and must be "
+                       "a list of source filenames" % lib_name)
+            sources = list(sources)
+
+            print("building '%s' library" % (lib_name,))
+
+            # First, compile the source code to object files in the library
+            # directory.  (This should probably change to putting object
+            # files in a temporary build directory.)
+            macros = build_info.get('macros')
+            include_dirs = build_info.get('include_dirs')
+            print(optimized)
+            objects = self.compiler.compile(
+                sources,
+                extra_preargs=["-msse2"] if optimized else [],
+                output_dir=self.build_temp,
+                macros=macros,
+                include_dirs=include_dirs,
+                debug=self.debug
+            )
+
+            # Now "link" the object files together into a static library.
+            # (On Unix at least, this isn't really linking -- it just
+            # builds an archive.  Whatever.)
+            self.compiler.create_static_lib(objects, lib_name,
+                                            output_dir=self.build_clib,
+                                            debug=self.debug)
+
+
 if __name__ == "__main__":
     setup(
         name=NAME,
@@ -153,6 +198,7 @@ if __name__ == "__main__":
         cffi_modules=CFFI_MODULES,
         ext_package="argon2",
         libraries=LIBRARIES,
+        cmdclass={"build_clib": BuildCLibWithCompilerFlags},
         zip_safe=False,
         classifiers=CLASSIFIERS,
         setup_requires=SETUP_REQUIRES,
