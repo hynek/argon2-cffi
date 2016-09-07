@@ -25,8 +25,8 @@ include_dirs = [
 ]
 
 # Add vendored integer types headers if necessary.
-is_windows = "win32" in str(sys.platform).lower()
-if is_windows:
+windows = "win32" in str(sys.platform).lower()
+if windows:
     int_base = "extras/msinttypes/"
     inttypes = int_base + "inttypes"
     stdint = int_base + "stdint"
@@ -83,7 +83,7 @@ CLASSIFIERS = [
 ]
 
 SETUP_REQUIRES = ["cffi"]
-if is_windows and sys.version_info[0] == 2:
+if windows and sys.version_info[0] == 2:
     # required for "Microsoft Visual C++ Compiler for Python 2.7"
     # https://www.microsoft.com/en-us/download/details.aspx?id=44266
     SETUP_REQUIRES.append("setuptools>=6.0")
@@ -162,10 +162,9 @@ class BuildCLibWithCompilerFlags(build_clib):
             # files in a temporary build directory.)
             macros = build_info.get('macros')
             include_dirs = build_info.get('include_dirs')
-            print(optimized)
             objects = self.compiler.compile(
                 sources,
-                extra_preargs=["-msse2"] if optimized else [],
+                extra_preargs=["-msse2"] if optimized and not windows else [],
                 output_dir=self.build_temp,
                 macros=macros,
                 include_dirs=include_dirs,
