@@ -13,7 +13,8 @@ Vendoring Argon2 @ UNRELEASED
 Changes:
 ^^^^^^^^
 
-*none*
+- Fix compilation on debian jessie.
+  `#13 <https://github.com/hynek/argon2_cffi/pull/13>`_
 
 
 ----
