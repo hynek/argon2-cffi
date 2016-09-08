@@ -81,9 +81,7 @@ master_doc = 'index'
 # General information about the project.
 project = u'argon2_cffi'
 year = datetime.date.today().year
-copyright = u'2015{0}, Hynek Schlawack'.format(
-    u'-{0}'.format(year) if year != 2015 else u""
-)
+copyright = u'2015, Hynek Schlawack'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
