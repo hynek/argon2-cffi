@@ -58,7 +58,7 @@ LIBRARIES = [
         ],
     }),
 ]
-META_PATH = ("src", "argon2", "__init__.py")
+META_PATH = os.path.join("src", "argon2", "__init__.py")
 KEYWORDS = ["password", "hash", "hashing", "security"]
 CLASSIFIERS = [
     "Development Status :: 5 - Production/Stable",
@@ -109,7 +109,7 @@ def read(*parts):
         return f.read()
 
 
-META_FILE = read(*META_PATH)
+META_FILE = read(META_PATH)
 
 
 def find_meta(meta):
@@ -125,6 +125,7 @@ def find_meta(meta):
     raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
 
 
+VERSION = find_meta("version")
 URI = find_meta("uri")
 LONG = (
     read("README.rst") + "\n\n" +
@@ -185,7 +186,7 @@ if __name__ == "__main__":
         description=find_meta("description"),
         license=find_meta("license"),
         url=URI,
-        version=find_meta("version"),
+        version=VERSION,
         author=find_meta("author"),
         author_email=find_meta("email"),
         maintainer=find_meta("author"),
