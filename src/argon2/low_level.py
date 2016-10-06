@@ -82,7 +82,7 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
     size = lib.argon2_encodedlen(
         time_cost, memory_cost, parallelism, len(salt), hash_len,
     ) + 1
-    buf = ffi.new("uint8_t[]", size)
+    buf = ffi.new("char[]", size)
     rv = lib.argon2_hash(
         time_cost, memory_cost, parallelism,
         ffi.new("uint8_t[]", secret), len(secret),
@@ -149,7 +149,7 @@ def verify_secret(hash, secret, type):
         instead of its more generic superclass.
     """
     rv = lib.argon2_verify(
-        ffi.new("uint8_t[]", hash),
+        ffi.new("char[]", hash),
         ffi.new("uint8_t[]", secret),
         len(secret),
         type.value,
