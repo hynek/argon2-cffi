@@ -80,7 +80,7 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
     size = lib.argon2_encodedlen(
-        time_cost, memory_cost, parallelism, len(salt), hash_len,
+        time_cost, memory_cost, parallelism, len(salt), hash_len, type.value,
     ) + 1
     buf = ffi.new("char[]", size)
     rv = lib.argon2_hash(

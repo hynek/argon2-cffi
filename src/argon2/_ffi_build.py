@@ -148,7 +148,6 @@ typedef enum Argon2_ErrorCodes {
 
 #define ARGON2_FLAG_CLEAR_PASSWORD ...
 #define ARGON2_FLAG_CLEAR_SECRET ...
-#define ARGON2_FLAG_CLEAR_MEMORY ...
 #define ARGON2_DEFAULT_FLAGS ...
 
 #define ARGON2_MIN_LANES ...
@@ -174,7 +173,7 @@ typedef enum Argon2_ErrorCodes {
 
 uint32_t argon2_encodedlen(uint32_t t_cost, uint32_t m_cost,
                            uint32_t parallelism, uint32_t saltlen,
-                           uint32_t hashlen);
+                           uint32_t hashlen, argon2_type type);
 
 """)
 
