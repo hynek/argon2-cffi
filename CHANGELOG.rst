@@ -11,7 +11,11 @@ The third digit is only for regressions.
 Changes:
 ^^^^^^^^
 
-*none*
+- Prevent side-effects like the installation of ``cffi`` if ``setup.py`` is called with a command that doesn't require it.
+  `#20 <https://github.com/hynek/argon2_cffi/pull/20>`_
+- Fix a bunch of warnings with new ``cffi`` versions and Python 3.6.
+  `#14 <https://github.com/hynek/argon2_cffi/pull/14>`_
+  `#16 <https://github.com/hynek/argon2_cffi/pull/16>`_
 
 
 ----
