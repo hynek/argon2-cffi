@@ -53,7 +53,7 @@ Low Level
 .. automodule:: argon2.low_level
 
 .. autoclass:: Type
-  :members: D, I
+  :members: D, I, ID
 
 .. autodata:: ARGON2_VERSION
 

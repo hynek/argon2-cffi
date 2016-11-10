@@ -52,6 +52,15 @@ class Type(Enum):
     password hashing and password-based key derivation.  Argon2i is slower as
     it makes more passes over the memory to protect from tradeoff attacks.
     """
+    ID = lib.Argon2_id
+    r"""
+    Argon2\ **id** is a hybrid of Argon2i and Argon2d, using a combination of
+    data-depending and data-independent memory accesses, which gives some of
+    Argon2i's resistance to side-channel cache timing attacks and much of
+    Argon2d's resistance to GPU cracking attacks.
+
+    .. versionadded:: 16.3.0
+    """
 
 
 def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,

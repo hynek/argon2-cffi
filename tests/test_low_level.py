@@ -39,6 +39,16 @@ from argon2.exceptions import (
 #           c29tZXNhbHQ$cZn5d+rFh+ZfuRhm2iGUGgcrW5YLeM6q7L3vBsdmFA0
 # 0.119 seconds
 # Verification ok
+#
+# Type:		Argon2id
+# Iterations:	2
+# Memory:		65536 KiB
+# Parallelism:	4
+# Hash:		1a9677b0afe81fda7b548895e7a1bfeb8668ffc19a530e37e088a668fab1c02a
+# Encoded:	$argon2id$v=19$m=65536,t=2,p=4$
+#           c29tZXNhbHQ$GpZ3sK/oH9p7VIiV56G/64Zo/8GaUw434IimaPqxwCo
+# 0.154 seconds
+# Verification ok
 
 TEST_HASH_I_OLD = (
     b"$argon2i$m=65536,t=2,p=4"
@@ -53,11 +63,18 @@ TEST_HASH_D = (
     b"$argon2d$v=19$m=65536,t=2,p=4$"
     b"c29tZXNhbHQ$cZn5d+rFh+ZfuRhm2iGUGgcrW5YLeM6q7L3vBsdmFA0"
 )
+TEST_HASH_ID = (
+    b"$argon2id$v=19$m=65536,t=2,p=4$"
+    b"c29tZXNhbHQ$GpZ3sK/oH9p7VIiV56G/64Zo/8GaUw434IimaPqxwCo"
+)
 TEST_RAW_I = binascii.unhexlify(
     b"20c8adf6a90550b08c03f5628b32f9edc9d32ce6b90e254cf5e330a40bcfc2be"
 )
 TEST_RAW_D = binascii.unhexlify(
     b"7199f977eac587e65fb91866da21941a072b5b960b78ceaaecbdef06c766140d"
+)
+TEST_RAW_ID = binascii.unhexlify(
+    b"1a9677b0afe81fda7b548895e7a1bfeb8668ffc19a530e37e088a668fab1c02a"
 )
 
 TEST_PASSWORD = b"password"
@@ -71,10 +88,12 @@ TEST_HASH_LEN = 32
 i_and_d_encoded = pytest.mark.parametrize("type,hash", [
     (Type.I, TEST_HASH_I,),
     (Type.D, TEST_HASH_D,),
+    (Type.ID, TEST_HASH_ID,),
 ])
 i_and_d_raw = pytest.mark.parametrize("type,hash", [
     (Type.I, TEST_RAW_I,),
     (Type.D, TEST_RAW_D,),
+    (Type.ID, TEST_RAW_ID,),
 ])
 
 both_hash_funcs = pytest.mark.parametrize("func", [

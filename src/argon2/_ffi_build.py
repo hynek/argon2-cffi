@@ -30,7 +30,11 @@ ffi.set_source(
 )
 
 ffi.cdef("""\
-typedef enum Argon2_type { Argon2_d = ..., Argon2_i = ... } argon2_type;
+typedef enum Argon2_type {
+    Argon2_d = ...,
+    Argon2_i = ...,
+    Argon2_id = ...,
+} argon2_type;
 typedef enum Argon2_version {
     ARGON2_VERSION_10 = ...,
     ARGON2_VERSION_13 = ...,
