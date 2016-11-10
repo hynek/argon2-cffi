@@ -27,7 +27,7 @@ def _ensure_bytes(s, encoding):
 
 
 class PasswordHasher(object):
-    """
+    r"""
     High level class to hash passwords with sensible defaults.
 
     Uses *always* Argon2\ **i** and a random salt_.
