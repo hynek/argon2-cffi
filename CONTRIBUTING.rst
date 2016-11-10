@@ -7,10 +7,13 @@ Here are a few guidelines to get you started:
 
 - If you want to install a *development version* of ``argon2_cffi`` into your current ``virtualenv``, you have to remember to:
 
+  #. ``git submodule init`` (to initialize git submodule mechanics)
+  #. ``git submodule update`` (to update the vendored Argon2 C library to the version ``argon2_cffi`` is currently packaging)
   #. ``python setup.py build`` (to build the CFFI module)
   #. ``pip install -e .``  (to [re-]install it along with the Python code)
+  #. To run tests, you also need to run ``pip install -r dev-requirements.txt``.
 
-  You have to perform both of those two steps whenever something changes in the Argon2 C code (e.g. if the vendorized code has been updated).
+  You have to perform steps 2, 3, and 4 whenever something changes in the Argon2 C code (e.g. if the vendored code has been updated).
 - Try to limit each pull request to one change only.
 - To run the test suite, all you need is a recent tox_.
   It will ensure the test suite runs with all dependencies against all Python versions just as it will on `Travis CI`_.
