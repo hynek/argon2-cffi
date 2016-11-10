@@ -8,6 +8,8 @@ The third digit is only for regressions.
 16.3.0 (UNRELEASED)
 -------------------
 
+Vendoring Argon2 @ UNRELEASED
+
 Changes:
 ^^^^^^^^
 
