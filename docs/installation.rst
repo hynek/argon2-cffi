@@ -21,17 +21,17 @@ If something goes wrong, please try to update your ``cffi``, ``pip`` and ``setup
   pip install -U cffi pip setuptools
 
 
-OS X & Windows
---------------
+Wheels
+------
 
-Binary `wheels <http://pythonwheels.com>`_ are provided on PyPI_.
+Binary `wheels <http://pythonwheels.com>`_ for macOS, Windows, and Linux are provided on PyPI_.
 With a recent-enough ``pip`` and ``setuptools``, they should be used automatically.
 
 
-Linux
------
+Source Distribution
+-------------------
 
-A working C compiler and `CFFI environment`_ is required.
+A working C compiler and `CFFI environment`_ are required.
 If you've been able to compile Python CFFI extensions before, ``argon2_cffi`` should install without any problems.
 
 
