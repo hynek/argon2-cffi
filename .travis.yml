@@ -18,7 +18,7 @@ matrix:
     - python: "pypy"
       env: TOXENV=pypy
     - python: pypy3.3-5.2-alpha1
-      env: TOXENV=pypy3
+          env: TOXENV=pypy3
 
     # Meta
     - python: "3.5"
