@@ -17,6 +17,8 @@ matrix:
       env: TOXENV=py35
     - python: "pypy"
       env: TOXENV=pypy
+    - python: pypy3.3-5.2-alpha1
+      env: TOXENV=pypy3
 
     # Meta
     - python: "3.5"
@@ -38,7 +40,7 @@ install:
         pyenv install pypy-5.4.1
         pyenv global pypy-5.4.1
     fi
-  - pip install tox
+  - pip install tox-travis
 
 script:
   - |
