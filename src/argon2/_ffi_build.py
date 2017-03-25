@@ -88,6 +88,7 @@ typedef struct Argon2_Context {
 } argon2_context;
 
 int argon2_ctx(argon2_context *context, argon2_type type);
+int argon2i_verify_ctx(argon2_context *context, const char *hash);
 
 /* Error codes */
 typedef enum Argon2_ErrorCodes {

@@ -317,3 +317,109 @@ def test_core():
         hash_len=hash_len,
         type=Type.D,
     ) == bytes(ffi.buffer(ctx.out, ctx.outlen))
+
+
+def test_verify_ctx():
+    """
+    If called with equal parameters, argon2i_verify_ctx() should validate the
+    raw hash from hash_secret_raw().
+    """
+    pwd = b"password"
+    salt = b"somesalt"
+    hash_len = 32
+    time_cost = 1
+    memory_cost = 8
+    parallelism = 1
+
+    # Keep FFI objects alive throughout the function.
+    cout = ffi.new("uint8_t[]", hash_len)
+    cpwd = ffi.new("uint8_t[]", pwd)
+    csalt = ffi.new("uint8_t[]", salt)
+
+    raw_hash = hash_secret_raw(
+        pwd,
+        salt,
+        time_cost=time_cost,
+        memory_cost=memory_cost,
+        parallelism=parallelism,
+        hash_len=hash_len,
+        type=Type.I,
+    )
+
+    ctx = ffi.new(
+        "argon2_context *", dict(
+            out=cout,
+            outlen=hash_len,
+            version=ARGON2_VERSION,
+            pwd=cpwd,
+            pwdlen=len(pwd),
+            salt=csalt,
+            saltlen=len(salt),
+            secret=ffi.NULL,
+            secretlen=0,
+            ad=ffi.NULL,
+            adlen=0,
+            t_cost=time_cost,
+            m_cost=memory_cost,
+            lanes=parallelism,
+            threads=parallelism,
+            allocate_cbk=ffi.NULL,
+            free_cbk=ffi.NULL,
+            flags=lib.ARGON2_DEFAULT_FLAGS,
+        )
+    )
+
+    assert lib.argon2i_verify_ctx(ctx, raw_hash) == 0
+
+
+def test_verify_ctx_wrong_password():
+    """
+    If called with different password, argon2i_verify_ctx() should not validate
+    the raw hash from hash_secret_raw().
+    """
+    pwd = b"notthepassword"
+    salt = b"somesalt"
+    hash_len = 32
+    time_cost = 1
+    memory_cost = 8
+    parallelism = 1
+
+    # Keep FFI objects alive throughout the function.
+    cout = ffi.new("uint8_t[]", hash_len)
+    cpwd = ffi.new("uint8_t[]", pwd)
+    csalt = ffi.new("uint8_t[]", salt)
+
+    raw_hash = hash_secret_raw(
+        b'password',
+        salt,
+        time_cost=time_cost,
+        memory_cost=memory_cost,
+        parallelism=parallelism,
+        hash_len=hash_len,
+        type=Type.I,
+    )
+
+    ctx = ffi.new(
+        "argon2_context *", dict(
+            out=cout,
+            outlen=hash_len,
+            version=ARGON2_VERSION,
+            pwd=cpwd,
+            pwdlen=len(pwd),
+            salt=csalt,
+            saltlen=len(salt),
+            secret=ffi.NULL,
+            secretlen=0,
+            ad=ffi.NULL,
+            adlen=0,
+            t_cost=time_cost,
+            m_cost=memory_cost,
+            lanes=parallelism,
+            threads=parallelism,
+            allocate_cbk=ffi.NULL,
+            free_cbk=ffi.NULL,
+            flags=lib.ARGON2_DEFAULT_FLAGS,
+        )
+    )
+
+    assert lib.argon2i_verify_ctx(ctx, raw_hash) != 0
