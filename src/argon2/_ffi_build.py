@@ -26,7 +26,7 @@ ffi = FFI()
 ffi.set_source(
     "_ffi", "#include <argon2.h>",
     include_dirs=include_dirs,
-    libraries=["libargon2"],
+    libraries=["argon2"],
 )
 
 ffi.cdef("""\

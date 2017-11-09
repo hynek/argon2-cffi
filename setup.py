@@ -45,7 +45,7 @@ if windows:
 optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
 
 LIBRARIES = [
-    ("libargon2", {
+    ("argon2", {
         "include_dirs": include_dirs,
         "sources": [
             os.path.join(lib_base, path)
