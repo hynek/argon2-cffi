@@ -19,11 +19,26 @@ import re
 NAME = "argon2_cffi"
 PACKAGES = find_packages(where="src")
 
+# Optimized version requires SSE2 extensions.  They have been around since
+# 2001 so we try to compile it on every recent-ish x86.
+optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
+
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 lib_base = os.path.join("extras", "libargon2", "src")
 include_dirs = [
     os.path.join(lib_base, "..", "include"),
     os.path.join(lib_base, "blake2"),
+]
+sources = [
+    os.path.join(lib_base, path)
+    for path in [
+        "argon2.c",
+        os.path.join("blake2", "blake2b.c"),
+        "core.c",
+        "encoding.c",
+        "opt.c" if optimized else "ref.c",
+        "thread.c",
+    ]
 ]
 
 # Add vendored integer types headers if necessary.
@@ -40,24 +55,10 @@ if windows:
         # VS 2010 needs inttypes.h and fails with both.
         include_dirs += [inttypes]
 
-# Optimized version requires SSE2 extensions.  They have been around since
-# 2001 so we try to compile it on every recent-ish x86.
-optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
-
 LIBRARIES = [
     ("argon2", {
         "include_dirs": include_dirs,
-        "sources": [
-            os.path.join(lib_base, path)
-            for path in [
-                "argon2.c",
-                os.path.join("blake2", "blake2b.c"),
-                "core.c",
-                "encoding.c",
-                "opt.c" if optimized else "ref.c",
-                "thread.c",
-            ]
-        ],
+        "sources": sources,
     }),
 ]
 META_PATH = os.path.join("src", "argon2", "__init__.py")
