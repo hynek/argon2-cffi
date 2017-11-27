@@ -189,6 +189,13 @@ def keywords_with_side_effects(argv):
             }
         }
     else:
+        use_system_argon2 = os.environ.get(
+            'ARGON2_CFFI_USE_SYSTEM', '0') == '1'
+        if use_system_argon2:
+            for build_phase, method in build.sub_commands:
+                if build_phase == 'build_clib':
+                    build.sub_commands.remove((build_phase, method))
+                    break
         return {
             "setup_requires": SETUP_REQUIRES,
             "cffi_modules": CFFI_MODULES,
@@ -281,9 +288,9 @@ class BuildCLibWithCompilerFlags(build_clib):
             sources = build_info.get('sources')
             if sources is None or not isinstance(sources, (list, tuple)):
                 raise DistutilsSetupError(
-                       "in 'libraries' option (library '%s'), "
-                       "'sources' must be present and must be "
-                       "a list of source filenames" % lib_name)
+                    "in 'libraries' option (library '%s'), "
+                    "'sources' must be present and must be "
+                    "a list of source filenames" % lib_name)
             sources = list(sources)
 
             print("building '%s' library" % (lib_name,))
