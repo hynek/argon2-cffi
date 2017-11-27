@@ -192,10 +192,7 @@ def keywords_with_side_effects(argv):
         use_system_argon2 = os.environ.get(
             'ARGON2_CFFI_USE_SYSTEM', '0') == '1'
         if use_system_argon2:
-            for build_phase, method in build.sub_commands:
-                if build_phase == 'build_clib':
-                    build.sub_commands.remove((build_phase, method))
-                    break
+            disable_subcommand(build, 'build_clib')
         return {
             "setup_requires": SETUP_REQUIRES,
             "cffi_modules": CFFI_MODULES,
@@ -204,6 +201,13 @@ def keywords_with_side_effects(argv):
                 "build_clib": BuildCLibWithCompilerFlags,
             },
         }
+
+
+def disable_subcommand(command, subcommand_name):
+    for name, method in command.sub_commands:
+        if name == subcommand_name:
+            command.sub_commands.remove((subcommand_name, method))
+            break
 
 
 setup_requires_error = (
