@@ -5,8 +5,10 @@ import sys
 
 from cffi import FFI
 
-
 include_dirs = [os.path.join("extras", "libargon2", "include")]
+use_system_argon2 = os.environ.get('ARGON2_CFFI_USE_SYSTEM', '0') == '1'
+if use_system_argon2:
+    include_dirs = []
 
 # Add vendored integer types headers.
 if "win32" in str(sys.platform).lower():
