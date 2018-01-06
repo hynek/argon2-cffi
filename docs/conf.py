@@ -17,6 +17,7 @@ import datetime
 import os
 import re
 
+
 try:
     import sphinx_rtd_theme
 except ImportError:
@@ -45,6 +46,7 @@ def find_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -58,13 +60,13 @@ def find_version(*file_paths):
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
 ]
-
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -136,11 +138,13 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-if sphinx_rtd_theme:
-    html_theme = "sphinx_rtd_theme"
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-else:
-    html_theme = "default"
+html_theme = "alabaster"
+html_theme_options = {
+    "font_family": '"Avenir Next", Calibri, "PT Sans", sans-serif',
+    "head_font_family": '"Avenir Next", Calibri, "PT Sans", sans-serif',
+    "font_size": "18px",
+    "page_width": "980px",
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

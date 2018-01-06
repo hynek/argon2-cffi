@@ -45,10 +45,10 @@ def main(argv):
         "hash_len": args.l,
     }
 
-    print("Running Argon2i {0} times with:".format(args.n))
+    print("Running Argon2i %d times with:" % (args.n,))
 
     for k, v in sorted(six.iteritems(params)):
-        print("{0}: {1}".format(k, v))
+        print("%s: %d" % (k, v))
 
     print("\nMeasuring...")
     duration = timeit.timeit(

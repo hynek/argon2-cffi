@@ -1,5 +1,5 @@
-argon2_cffi
-===========
+``argon2_cffi``
+===============
 
 Release v\ |release| (:doc:`What's new? <changelog>`).
 
@@ -32,7 +32,6 @@ Project Information
    contributing
    changelog
    license
-
 
 
 Indices and tables

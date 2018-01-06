@@ -42,16 +42,19 @@ If you've been able to compile Python CFFI extensions before, ``argon2_cffi`` sh
 Using a System-wide Installation of Argon2
 ------------------------------------------
 
-If you set ``ARGON2_CFFI_USE_SYSTEM`` to ``1`` (and *only* ``1``), ``argon2_cffi`` will not build it's bindings.
-However if you use a binary wheel, they are preferred and Argon2 gets installed.
+If you set ``ARGON2_CFFI_USE_SYSTEM`` to ``1`` (and *only* ``1``), ``argon2_cffi`` will not build its bindings.
+However binary wheels are preerred by ``pip`` and Argon2 gets installed along with ``argon2_cffi`` anyway.
 
 Therefore you also have to instruct ``pip`` to use a source distribution:
 
 .. code-block:: bash
 
-  env ARGON2_CFFI_USE_SYSTEM=1 pip install --no-binary=argon2_cffi argon2_cffi
+  env ARGON2_CFFI_USE_SYSTEM=1 \
+    pip install --no-binary=argon2_cffi argon2_cffi
 
 This approach can lead to problems around your build chain and you can run into incompatabilities between Argon2 and ``argon2_cffi`` if the latter has been tested against a different version.
+
+**It is your own responsibility to deal with these risks if you choose this path.**
 
 
 .. _SSE2: https://en.wikipedia.org/wiki/SSE2
