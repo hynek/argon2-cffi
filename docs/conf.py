@@ -18,12 +18,6 @@ import os
 import re
 
 
-try:
-    import sphinx_rtd_theme
-except ImportError:
-    sphinx_rtd_theme = None
-
-
 def read(*parts):
     """
     Build an absolute path from *parts* and and return the contents of the
