@@ -85,6 +85,7 @@ build_script:
 test_script:
   # Run the project tests
   - "%CMD_IN_ENV% python -m pytest"
+  - "%CMD_IN_ENV% python -m argon2 -n 1 -t 1 -m 8 -p 1"
 
 after_test:
   # If tests are successful, create binary packages for the project.
