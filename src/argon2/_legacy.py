@@ -7,11 +7,8 @@ from __future__ import absolute_import, division, print_function
 import os
 
 from ._password_hasher import (
-    DEFAULT_HASH_LENGTH,
-    DEFAULT_MEMORY_COST,
-    DEFAULT_PARALLELISM,
-    DEFAULT_RANDOM_SALT_LENGTH,
-    DEFAULT_TIME_COST,
+    DEFAULT_HASH_LENGTH, DEFAULT_MEMORY_COST, DEFAULT_PARALLELISM,
+    DEFAULT_RANDOM_SALT_LENGTH, DEFAULT_TIME_COST
 )
 from .low_level import Type, hash_secret, hash_secret_raw, verify_secret
 

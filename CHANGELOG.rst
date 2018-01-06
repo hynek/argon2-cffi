@@ -5,7 +5,7 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-16.4.0 (UNRELEASED)
+18.1.0 (UNRELEASED)
 -------------------
 Vendoring Argon2 @ UNRELEASED
 
@@ -25,7 +25,7 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-*none*
+- It is now possible to use the ``argon2_cffi`` bindings against an Argon2 library that is provided by the system.
 
 
 ----

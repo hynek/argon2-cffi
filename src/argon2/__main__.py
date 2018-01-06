@@ -9,11 +9,8 @@ import timeit
 import six
 
 from . import (
-    PasswordHasher,
-    DEFAULT_TIME_COST,
-    DEFAULT_MEMORY_COST,
-    DEFAULT_PARALLELISM,
-    DEFAULT_HASH_LENGTH,
+    DEFAULT_HASH_LENGTH, DEFAULT_MEMORY_COST, DEFAULT_PARALLELISM,
+    DEFAULT_TIME_COST, PasswordHasher
 )
 
 

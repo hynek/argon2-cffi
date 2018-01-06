@@ -5,8 +5,9 @@ import sys
 
 from cffi import FFI
 
+
 include_dirs = [os.path.join("extras", "libargon2", "include")]
-use_system_argon2 = os.environ.get('ARGON2_CFFI_USE_SYSTEM', '0') == '1'
+use_system_argon2 = os.environ.get("ARGON2_CFFI_USE_SYSTEM", "0") == "1"
 if use_system_argon2:
     include_dirs = []
 
@@ -183,5 +184,5 @@ uint32_t argon2_encodedlen(uint32_t t_cost, uint32_t m_cost,
 
 """)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ffi.compile()

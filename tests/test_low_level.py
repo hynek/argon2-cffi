@@ -5,16 +5,17 @@ import os
 
 import pytest
 
-from hypothesis import given, assume
 from hypothesis import strategies as st
+from hypothesis import assume, given
 
-from argon2.low_level import (
-    ARGON2_VERSION, Type,
-    core, ffi, hash_secret, hash_secret_raw, lib, verify_secret,
-)
 from argon2.exceptions import (
-    HashingError, VerificationError, VerifyMismatchError,
+    HashingError, VerificationError, VerifyMismatchError
 )
+from argon2.low_level import (
+    ARGON2_VERSION, Type, core, ffi, hash_secret, hash_secret_raw, lib,
+    verify_secret
+)
+
 
 # Example data obtained using the official Argon2 CLI client:
 #

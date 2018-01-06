@@ -4,7 +4,7 @@ from __future__ import absolute_import, division, print_function
 
 from six import PY3
 
-from argon2._utils import _check_types, NoneType
+from argon2._utils import NoneType, _check_types
 
 
 class TestCheckTypes(object):

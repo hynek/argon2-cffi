@@ -1,17 +1,17 @@
 from __future__ import absolute_import, division, print_function
 
-from distutils.command.build_clib import build_clib
-from distutils.command.build import build
-from distutils.errors import DistutilsSetupError
-
-from setuptools import setup, find_packages
-from setuptools.command.install import install
-
-import sys
 import codecs
 import os
 import platform
 import re
+import sys
+
+from distutils.command.build import build
+from distutils.command.build_clib import build_clib
+from distutils.errors import DistutilsSetupError
+
+from setuptools import find_packages, setup
+from setuptools.command.install import install
 
 
 ###############################################################################
@@ -97,7 +97,19 @@ INSTALL_REQUIRES = ["six", "cffi>=1.0.0"]
 if sys.version_info[0:2] < (3, 4):
     INSTALL_REQUIRES += ["enum34"]
 
-EXTRAS_REQUIRE = {}
+EXTRAS_REQUIRE = {
+    "docs": [
+        "sphinx",
+    ],
+    "tests": [
+        "coverage",
+        "hypothesis",
+        "pytest",
+    ],
+}
+EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["docs"] + [
+    "wheel"
+]
 
 ###############################################################################
 

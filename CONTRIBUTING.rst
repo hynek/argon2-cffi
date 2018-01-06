@@ -10,18 +10,20 @@ Here are a few guidelines to get you started:
   #. ``git submodule init`` (to initialize git submodule mechanics)
   #. ``git submodule update`` (to update the vendored Argon2 C library to the version ``argon2_cffi`` is currently packaging)
   #. ``python setup.py build`` (to build the CFFI module)
-  #. ``pip install -e .``  (to [re-]install it along with the Python code)
-  #. To run tests, you also need to run ``pip install -r dev-requirements.txt``.
+  #. ``pip install -e .[dev]``  (to [re-]install it along with the Python code and test dependencies)
 
   You have to perform steps 2, 3, and 4 whenever something changes in the Argon2 C code (e.g. if the vendored code has been updated).
+
 - Try to limit each pull request to one change only.
 - To run the test suite, all you need is a recent tox_.
   It will ensure the test suite runs with all dependencies against all Python versions just as it will on `Travis CI`_.
-  If you lack some Python version, you can can always limit the environments like ``tox -e py27,py35`` (in that case you may want to look into pyenv_ that makes it very easy to install many different Python versions in parallel).
+  If you lack some Python versions, you can can make it a non-failure using ``tox --skip-missing-interpreters`` (in that case you may want to look into pyenv_ that makes it very easy to install many different Python versions in parallel).
+
+  One of the environments requires a system-wide installation of Argon2.
+  On macOS, it's available in Homebrew and recent Ubuntus (zesty and later) ship it too.
 - Make sure your changes pass our CI.
   You won't get any feedback until it's green unless you ask for it.
-- If you address review feedback, make sure to bump the pull request.
-  Maintainers don’t receive notifications if you push new commits.
+- Once you've addressed review feedback, make sure to bump the pull request with a short note, so we know you're done.
 - If your change is noteworthy, add an entry to the changelog_.
   Use present tense, semantic newlines, and add link to your pull request.
 - No contribution is too small; please submit as many fixes for typos and grammar bloopers as you can!
@@ -44,6 +46,6 @@ Thank you for considering to contribute!
 .. _`good test docstrings`: https://jml.io/pages/test-docstrings.html
 .. _`Code of Conduct`: https://github.com/hynek/argon2_cffi/blob/master/CODE_OF_CONDUCT.rst
 .. _changelog: https://github.com/hynek/argon2_cffi/blob/master/CHANGELOG.rst
-.. _`tox`: https://testrun.org/tox/
+.. _`tox`: https://tox.readthedocs.io/
 .. _`Travis CI`: https://travis-ci.org/
 .. _pyenv: https://github.com/yyuu/pyenv

@@ -1,12 +1,14 @@
 [run]
 branch = True
 source = argon2
+omit =
+    src/argon2/_ffi_build.py
 
 [paths]
 source =
    src/argon2
    .tox/*/lib/python*/site-packages/argon2
-   .tox/pypy/site-packages/argon2
+   .tox/pypy*/site-packages/argon2
 
 [report]
 show_missing = True

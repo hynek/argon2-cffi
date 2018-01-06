@@ -4,26 +4,19 @@ from __future__ import absolute_import, division, print_function
 
 import pytest
 
-from hypothesis import given
 from hypothesis import strategies as st
+from hypothesis import given
 
 from argon2 import (
-    hash_password, hash_password_raw, verify_password, Type,
-    DEFAULT_RANDOM_SALT_LENGTH,
+    DEFAULT_RANDOM_SALT_LENGTH, Type, hash_password, hash_password_raw,
+    verify_password
 )
-from argon2.exceptions import VerificationError, HashingError
 from argon2._utils import _encoded_str_len
+from argon2.exceptions import HashingError, VerificationError
 
 from .test_low_level import (
-    TEST_PASSWORD,
-    TEST_SALT,
-    TEST_TIME,
-    TEST_MEMORY,
-    TEST_PARALLELISM,
-    TEST_HASH_LEN,
-    TEST_HASH_I,
-    i_and_d_encoded,
-    i_and_d_raw,
+    TEST_HASH_I, TEST_HASH_LEN, TEST_MEMORY, TEST_PARALLELISM, TEST_PASSWORD,
+    TEST_SALT, TEST_TIME, i_and_d_encoded, i_and_d_raw
 )
 
 
