@@ -26,14 +26,14 @@ Overall this should be the safest bet because ``argon2_cffi`` has been specifica
 
 
 Wheels
-++++++
+^^^^^^
 
 Binary `wheels <https://pythonwheels.com>`_ for macOS, Windows, and Linux are provided on PyPI_.
 With a recent-enough ``pip`` and ``setuptools``, they should be used automatically.
 
 
 Source Distribution
-+++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^
 
 A working C compiler and `CFFI environment`_ are required.
 If you've been able to compile Python CFFI extensions before, ``argon2_cffi`` should install without any problems.
