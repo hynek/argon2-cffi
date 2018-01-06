@@ -42,7 +42,7 @@ This time future-proof and with committee-vetting instead of single implementors
 
 .. _bcrypt: https://en.wikipedia.org/wiki/Bcrypt
 .. _PBKDF2: https://en.wikipedia.org/wiki/PBKDF2
-.. _GPU: http://hashcat.net/hashcat/
+.. _GPU: https://hashcat.net/hashcat/
 .. _ASIC: https://en.wikipedia.org/wiki/Application-specific_integrated_circuit
 .. _scrypt: https://en.wikipedia.org/wiki/Scrypt
 .. _Argon2 paper: https://password-hashing.net/argon2-specs.pdf

@@ -28,7 +28,7 @@ Overall this should be the safest bet because ``argon2_cffi`` has been specifica
 Wheels
 ++++++
 
-Binary `wheels <http://pythonwheels.com>`_ for macOS, Windows, and Linux are provided on PyPI_.
+Binary `wheels <https://pythonwheels.com>`_ for macOS, Windows, and Linux are provided on PyPI_.
 With a recent-enough ``pip`` and ``setuptools``, they should be used automatically.
 
 

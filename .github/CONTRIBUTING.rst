@@ -44,8 +44,8 @@ Thank you for considering to contribute!
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
 .. _`PEP 257`: https://www.python.org/dev/peps/pep-0257/
 .. _`good test docstrings`: https://jml.io/pages/test-docstrings.html
-.. _`Code of Conduct`: https://github.com/hynek/argon2_cffi/blob/master/CODE_OF_CONDUCT.rst
+.. _`Code of Conduct`: https://github.com/hynek/argon2_cffi/blob/master/.github/CODE_OF_CONDUCT.rst
 .. _changelog: https://github.com/hynek/argon2_cffi/blob/master/CHANGELOG.rst
 .. _`tox`: https://tox.readthedocs.io/
 .. _`Travis CI`: https://travis-ci.org/
-.. _pyenv: https://github.com/yyuu/pyenv
+.. _pyenv: https://github.com/pyenv/pyenv

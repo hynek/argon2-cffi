@@ -33,7 +33,7 @@ msinttypes
 ^^^^^^^^^^
 
 In order to be able to compile on Visual Studio 2008 and Visual Studio 2010 which are required for Python 2.7 and 3.4 respectively, we also ship two C headers with integer types.
-They are from the `msinttypes project <https://code.google.com/p/msinttypes/>`_ (`auto-import on GitHub <https://github.com/chemeris/msinttypes>`_) and licensed under New BSD:
+They are from the `msinttypes project <https://code.google.com/archive/p/msinttypes>`_ (`auto-import on GitHub <https://github.com/chemeris/msinttypes>`_) and licensed under New BSD:
 
 Copyright (c) 2006-2013 Alexander Chemeris
 
