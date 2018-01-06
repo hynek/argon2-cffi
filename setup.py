@@ -103,7 +103,10 @@ EXTRAS_REQUIRE = {
     "tests": ["coverage", "hypothesis", "pytest"],
 }
 EXTRAS_REQUIRE["dev"] = (
-    EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["docs"] + ["wheel", "pre-commit"]
+    EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["docs"] + [
+        "wheel>=0.30",  # required for py_limited_api option
+        "pre-commit",
+    ]
 )
 
 ###############################################################################
