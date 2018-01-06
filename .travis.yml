@@ -3,6 +3,8 @@ cache:
   directories:
     - $HOME/.cache/pip
     - $HOME/argon2_cffi/.eggs
+git:
+  submodules: false
 
 language: python
 
@@ -29,6 +31,8 @@ matrix:
       env: TOXENV=docs
     - python: "3.6"
       env: TOXENV=readme
+    - python: "3.6"
+      env: TOXENV=system-argon2
 
 install:
   - |
@@ -54,6 +58,16 @@ script:
 
 before_install:
   - pip install codecov
+  - |
+    if [[ "${TOXENV}" == "system-argon2" ]]; then
+        wget http://de.archive.ubuntu.com/ubuntu/pool/universe/a/argon2/libargon2-0_0~20161029-1_amd64.deb
+        wget http://de.archive.ubuntu.com/ubuntu/pool/universe/a/argon2/libargon2-0-dev_0~20161029-1_amd64.deb
+        sudo dpkg -i libargon2-0_0~20161029-1_amd64.deb
+        sudo dpkg -i libargon2-0-dev_0~20161029-1_amd64.deb
+    else
+        # If the system argon2 library should not be used, clone the submodule containing the vendored argon2 library
+        git submodule update --init --recursive
+    fi
 
 after_success:
   - tox -e coverage-report

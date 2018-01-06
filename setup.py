@@ -19,11 +19,26 @@ import re
 NAME = "argon2_cffi"
 PACKAGES = find_packages(where="src")
 
+# Optimized version requires SSE2 extensions.  They have been around since
+# 2001 so we try to compile it on every recent-ish x86.
+optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
+
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 lib_base = os.path.join("extras", "libargon2", "src")
 include_dirs = [
     os.path.join(lib_base, "..", "include"),
     os.path.join(lib_base, "blake2"),
+]
+sources = [
+    os.path.join(lib_base, path)
+    for path in [
+        "argon2.c",
+        os.path.join("blake2", "blake2b.c"),
+        "core.c",
+        "encoding.c",
+        "opt.c" if optimized else "ref.c",
+        "thread.c",
+    ]
 ]
 
 # Add vendored integer types headers if necessary.
@@ -40,24 +55,10 @@ if windows:
         # VS 2010 needs inttypes.h and fails with both.
         include_dirs += [inttypes]
 
-# Optimized version requires SSE2 extensions.  They have been around since
-# 2001 so we try to compile it on every recent-ish x86.
-optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
-
 LIBRARIES = [
-    ("libargon2", {
+    ("argon2", {
         "include_dirs": include_dirs,
-        "sources": [
-            os.path.join(lib_base, path)
-            for path in [
-                "argon2.c",
-                os.path.join("blake2", "blake2b.c"),
-                "core.c",
-                "encoding.c",
-                "opt.c" if optimized else "ref.c",
-                "thread.c",
-            ]
-        ],
+        "sources": sources,
     }),
 ]
 META_PATH = os.path.join("src", "argon2", "__init__.py")
@@ -188,6 +189,10 @@ def keywords_with_side_effects(argv):
             }
         }
     else:
+        use_system_argon2 = os.environ.get(
+            'ARGON2_CFFI_USE_SYSTEM', '0') == '1'
+        if use_system_argon2:
+            disable_subcommand(build, 'build_clib')
         return {
             "setup_requires": SETUP_REQUIRES,
             "cffi_modules": CFFI_MODULES,
@@ -196,6 +201,13 @@ def keywords_with_side_effects(argv):
                 "build_clib": BuildCLibWithCompilerFlags,
             },
         }
+
+
+def disable_subcommand(command, subcommand_name):
+    for name, method in command.sub_commands:
+        if name == subcommand_name:
+            command.sub_commands.remove((subcommand_name, method))
+            break
 
 
 setup_requires_error = (
@@ -280,9 +292,9 @@ class BuildCLibWithCompilerFlags(build_clib):
             sources = build_info.get('sources')
             if sources is None or not isinstance(sources, (list, tuple)):
                 raise DistutilsSetupError(
-                       "in 'libraries' option (library '%s'), "
-                       "'sources' must be present and must be "
-                       "a list of source filenames" % lib_name)
+                    "in 'libraries' option (library '%s'), "
+                    "'sources' must be present and must be "
+                    "a list of source filenames" % lib_name)
             sources = list(sources)
 
             print("building '%s' library" % (lib_name,))
