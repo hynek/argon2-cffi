@@ -25,7 +25,7 @@ Here are a few guidelines to get you started:
   You won't get any feedback until it's green unless you ask for it.
 - Once you've addressed review feedback, make sure to bump the pull request with a short note, so we know you're done.
 - If your change is noteworthy, add an entry to the changelog_.
-  Use present tense, semantic newlines, and add link to your pull request.
+  Use semantic newlines and add a link to your pull request.
 - No contribution is too small; please submit as many fixes for typos and grammar bloopers as you can!
 - Don’t break backward compatibility.
 - *Always* add tests and docs for your code.

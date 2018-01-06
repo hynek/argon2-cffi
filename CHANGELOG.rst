@@ -11,18 +11,6 @@ The third digit is only for regressions.
 Vendoring Argon2 @ UNRELEASED
 
 
-Backward-incompatible changes:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-*none*
-
-
-Deprecations:
-^^^^^^^^^^^^^
-
-*none*
-
-
 Changes:
 ^^^^^^^^
 
