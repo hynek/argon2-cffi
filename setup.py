@@ -86,14 +86,19 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-SETUP_REQUIRES = ["cffi"]
+SETUP_REQUIRES = [
+    "cffi",
+]
 if windows and sys.version_info[0] == 2:
     # required for "Microsoft Visual C++ Compiler for Python 2.7"
     # https://www.microsoft.com/en-us/download/details.aspx?id=44266
     SETUP_REQUIRES.append("setuptools>=6.0")
 
-INSTALL_REQUIRES = ["six", "cffi>=1.0.0"]
-# we're not building universal wheel so this works.
+INSTALL_REQUIRES = [
+    "six",
+    "cffi>=1.0.0",
+]
+# We're not building an universal wheel so this works.
 if sys.version_info[0:2] < (3, 4):
     INSTALL_REQUIRES += ["enum34"]
 

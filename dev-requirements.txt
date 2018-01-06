@@ -1,4 +1,0 @@
-coverage
-hypothesis
-pytest
-wheel
