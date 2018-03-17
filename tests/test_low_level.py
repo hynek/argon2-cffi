@@ -5,8 +5,8 @@ import os
 
 import pytest
 
-from hypothesis import strategies as st
 from hypothesis import assume, given
+from hypothesis import strategies as st
 
 from argon2.exceptions import (
     HashingError, VerificationError, VerifyMismatchError

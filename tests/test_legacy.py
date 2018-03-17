@@ -4,8 +4,8 @@ from __future__ import absolute_import, division, print_function
 
 import pytest
 
-from hypothesis import strategies as st
 from hypothesis import given
+from hypothesis import strategies as st
 
 from argon2 import (
     DEFAULT_RANDOM_SALT_LENGTH, Type, hash_password, hash_password_raw,
