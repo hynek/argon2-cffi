@@ -12,3 +12,4 @@ __pycache__
 *.so
 .hypothesis
 _build
+.pytest_cache/

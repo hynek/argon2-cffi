@@ -1,8 +1,6 @@
 [run]
 branch = True
 source = argon2
-omit =
-    src/argon2/_ffi_build.py
 
 [paths]
 source =
@@ -12,3 +10,5 @@ source =
 
 [report]
 show_missing = True
+omit =
+    src/argon2/_ffi_build.py
