@@ -11,7 +11,7 @@ from ._password_hasher import (
 from .low_level import Type
 
 
-__version__ = "18.2.0.dev0.0"
+__version__ = "18.2.0.dev0"
 
 __title__ = "argon2_cffi"
 __description__ = "The secure Argon2 password hashing algorithm."
