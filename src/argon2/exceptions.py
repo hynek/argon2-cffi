@@ -35,3 +35,11 @@ class HashingError(Argon2Error):
 
     You can find the original error message from Argon2 in ``args[0]``.
     """
+
+
+class InvalidHash(ValueError):
+    """
+    Raised if the hash is invalid before passing it to Argon2.
+
+    .. versionadded:: 18.2.0
+    """
