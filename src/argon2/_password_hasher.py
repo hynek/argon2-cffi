@@ -27,7 +27,7 @@ class PasswordHasher(object):
     r"""
     High level class to hash passwords with sensible defaults.
 
-    Uses *always* Argon2\ **id** and a random salt_ for hashing, but it can
+    *Always* uses Argon2\ **id** and a random salt_ for hashing, but it can
     verify any type of Argon2 as long as the hash is correctly encoded.
 
     The reason for this being a class is both for convenience to carry
@@ -118,6 +118,12 @@ class PasswordHasher(object):
         """
         Verify that *password* matches *hash*.
 
+        .. warning::
+
+            It is assumed that the caller is in full control of the hash.  No
+            other parsing than the determination of the hash type is done by
+            ``argon2_cffi``.
+
         :param hash: An encoded hash as returned from
             :meth:`PasswordHasher.hash`.
         :type hash: ``bytes`` or ``unicode``
@@ -144,7 +150,7 @@ class PasswordHasher(object):
         hash = _ensure_bytes(hash, "ascii")
         try:
             hash_type = self._header_to_type[hash[:9]]
-        except (IndexError, KeyError):
+        except (IndexError, KeyError, LookupError):
             raise InvalidHash()
 
         return verify_secret(

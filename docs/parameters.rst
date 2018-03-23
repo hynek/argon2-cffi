@@ -21,10 +21,10 @@ The current recommended best practice is as follow:
 #. Select the salt length.
    16 bytes is sufficient for all applications, but can be reduced to 8 bytes in the case of space constraints.
 #. Choose a hash length (``hash_len``, called "tag length" in the documentation).
-   16 bytes is sufficient for most applications, including key derivation.
+   16 bytes is sufficient for password verification.
 #. Figure out how long each call can take.
-   One `recommendation <https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2015/march/enough-with-the-salts-updates-on-secure-password-schemes/>`_ for concurent user logins is to keep it under 0.5 **ms**.
-   The RFC recommends under 0.5 **s**.
+   One `recommendation <https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2015/march/enough-with-the-salts-updates-on-secure-password-schemes/>`_ for concurent user logins is to keep it under 0.5 ms.
+   The RFC recommends under 500 ms.
 #. Measure the time for hashing using your chosen parameters.
    Find a ``time_cost`` that is within your accounted time.
    If ``time_cost=1`` takes too long, lower ``memory_cost``.
