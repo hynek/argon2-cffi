@@ -25,6 +25,9 @@ The current recommended best practice is as follow:
 #. Figure out how long each call can take.
    One `recommendation <https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2015/march/enough-with-the-salts-updates-on-secure-password-schemes/>`_ for concurent user logins is to keep it under 0.5 ms.
    The RFC recommends under 500 ms.
+   The truth is somwhere between those two values: more is more secure, less is a better user experience.
+
+   Please note though, that even a verification time of 1 second won't protect you against bad passwords from the "top 10,000 passwords" lists that you can find online.
 #. Measure the time for hashing using your chosen parameters.
    Find a ``time_cost`` that is within your accounted time.
    If ``time_cost=1`` takes too long, lower ``memory_cost``.

@@ -241,7 +241,7 @@ class TestVerify(object):
 
 
 @given(
-    password=st.binary(lib.ARGON2_MIN_PWD_LENGTH, 65),
+    password=st.binary(min_size=lib.ARGON2_MIN_PWD_LENGTH, max_size=65),
     time_cost=st.integers(lib.ARGON2_MIN_TIME, 3),
     parallelism=st.integers(lib.ARGON2_MIN_LANES, 5),
     memory_cost=st.integers(0, 1025),
