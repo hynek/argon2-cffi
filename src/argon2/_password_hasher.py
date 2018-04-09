@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function
 import os
 
 from ._utils import _check_types
+from .exceptions import InvalidHash
 from .low_level import Type, hash_secret, verify_secret
 
 
@@ -26,10 +27,11 @@ class PasswordHasher(object):
     r"""
     High level class to hash passwords with sensible defaults.
 
-    Uses *always* Argon2\ **i** and a random salt_.
+    *Always* uses Argon2\ **id** and a random salt_ for hashing, but it can
+    verify any type of Argon2 as long as the hash is correctly encoded.
 
     The reason for this being a class is both for convenience to carry
-    parameters and to verify the parameters only *once*.   Any unnecessary
+    parameters and to verify the parameters only *once*.  Any unnecessary
     slowdown when hashing is a tangible advantage for a brute force attacker.
 
     :param int time_cost: Defines the amount of computation realized and
@@ -45,9 +47,14 @@ class PasswordHasher(object):
         encoded using this encoding.
 
     .. versionadded:: 16.0.0
+    .. versionchanged:: 18.2.0
+        Switch from Argon2i to Argon2id based on the recommendation by the
+        current RFC_ draft.
+    .. versionchanged:: 18.2.0 ``verify`` now will determine the type of hash.
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
+    .. _RFC: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-03#section-4
     """
     __slots__ = [
         "time_cost", "memory_cost", "parallelism", "hash_len", "salt_len",
@@ -98,22 +105,38 @@ class PasswordHasher(object):
             memory_cost=self.memory_cost,
             parallelism=self.parallelism,
             hash_len=self.hash_len,
-            type=Type.I,
+            type=Type.ID,
         ).decode("ascii")
+
+    _header_to_type = {
+        b"$argon2i$": Type.I,
+        b"$argon2d$": Type.D,
+        b"$argon2id": Type.ID,
+    }
 
     def verify(self, hash, password):
         """
         Verify that *password* matches *hash*.
 
-        :param unicode hash: An encoded hash as returned from
+        .. warning::
+
+            It is assumed that the caller is in full control of the hash.  No
+            other parsing than the determination of the hash type is done by
+            ``argon2_cffi``.
+
+        :param hash: An encoded hash as returned from
             :meth:`PasswordHasher.hash`.
+        :type hash: ``bytes`` or ``unicode``
+
         :param password: The password to verify.
         :type password: ``bytes`` or ``unicode``
 
         :raises argon2.exceptions.VerifyMismatchError: If verification fails
-            because *hash* is not valid for *secret* of *type*.
+            because *hash* is not valid for *password*.
         :raises argon2.exceptions.VerificationError: If verification fails for
             other reasons.
+        :raises argon2.exceptions.InvalidHash: If *hash* is so clearly
+            invalid, that it couldn't be passed to Argon2.
 
         :return: ``True`` on success, raise
             :exc:`~argon2.exceptions.VerificationError` otherwise.
@@ -122,9 +145,16 @@ class PasswordHasher(object):
         .. versionchanged:: 16.1.0
             Raise :exc:`~argon2.exceptions.VerifyMismatchError` on mismatches
             instead of its more generic superclass.
+        .. versionadded:: 18.2.0 Hash type agility.
         """
+        hash = _ensure_bytes(hash, "ascii")
+        try:
+            hash_type = self._header_to_type[hash[:9]]
+        except (IndexError, KeyError, LookupError):
+            raise InvalidHash()
+
         return verify_secret(
-            _ensure_bytes(hash, "ascii"),
+            hash,
             _ensure_bytes(password, self.encoding),
-            Type.I,
+            hash_type
         )

@@ -11,22 +11,15 @@ The third digit is only for regressions.
 Vendoring Argon2 @ UNRELEASED
 
 
-Backward-incompatible changes:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-*none*
-
-
-Deprecations:
-^^^^^^^^^^^^^
-
-*none*
-
-
 Changes:
 ^^^^^^^^
 
-*none*
+- The hash type for ``argon2.PasswordHasher`` is Argon2\ **id** now.
+
+  This decision has been made based on the recommendations in the latest `Argon2 RFC draft <https://tools.ietf.org/html/draft-irtf-cfrg-argon2-03#section-4>`_.
+  `#33 <https://github.com/hynek/argon2_cffi/pull/33>`_
+  `#34 <https://github.com/hynek/argon2_cffi/pull/34>`_
+- To make the change of hash type backward compatible, ``argon2.PasswordHasher.verify()`` now determines the type of the hash and verifies it accordingly.
 
 
 ----

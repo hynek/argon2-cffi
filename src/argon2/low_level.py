@@ -39,6 +39,8 @@ default).
 class Type(Enum):
     """
     Enum of Argon2 variants.
+
+    Please see :doc:`parameters` on how to pick one.
     """
     D = lib.Argon2_d
     r"""
@@ -48,8 +50,7 @@ class Type(Enum):
     """
     I = lib.Argon2_i
     r"""
-    Argon2\ **i** uses data-independent memory access, which is preferred for
-    password hashing and password-based key derivation.  Argon2i is slower as
+    Argon2\ **i** uses data-independent memory access.  Argon2i is slower as
     it makes more passes over the memory to protect from tradeoff attacks.
     """
     ID = lib.Argon2_id
@@ -58,6 +59,9 @@ class Type(Enum):
     data-depending and data-independent memory accesses, which gives some of
     Argon2i's resistance to side-channel cache timing attacks and much of
     Argon2d's resistance to GPU cracking attacks.
+
+    That makes it the preferred type for password hashing and password-based
+    key derivation.
 
     .. versionadded:: 16.3.0
     """

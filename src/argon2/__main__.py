@@ -45,7 +45,7 @@ def main(argv):
         "hash_len": args.l,
     }
 
-    print("Running Argon2i %d times with:" % (args.n,))
+    print("Running Argon2id %d times with:" % (args.n,))
 
     for k, v in sorted(six.iteritems(params)):
         print("%s: %d" % (k, v))
