@@ -6,7 +6,7 @@ Using the Vendored Argon2
 
 .. code-block:: bash
 
-  pip install argon2_cffi
+  python -m pip install argon2_cffi
 
 should be all it takes.
 
@@ -19,7 +19,7 @@ If something goes wrong, please try to update your ``cffi``, ``pip`` and ``setup
 
 .. code-block:: bash
 
-  pip install -U cffi pip setuptools
+  python -m pip install -U cffi pip setuptools
 
 
 Overall this should be the safest bet because ``argon2_cffi`` has been specifically tested against the vendored version.
@@ -50,7 +50,7 @@ Therefore you also have to instruct ``pip`` to use a source distribution:
 .. code-block:: bash
 
   env ARGON2_CFFI_USE_SYSTEM=1 \
-    pip install --no-binary=argon2_cffi argon2_cffi
+    python -m pip install --no-binary=argon2_cffi argon2_cffi
 
 This approach can lead to problems around your build chain and you can run into incompatabilities between Argon2 and ``argon2_cffi`` if the latter has been tested against a different version.
 
