@@ -71,7 +71,7 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.  Also upgrade setuptools.
-  - "pip install --disable-pip-version-check --user --upgrade pip setuptools"
+  - "python -m pip install --disable-pip-version-check --user --upgrade pip setuptools"
 
   # Fetch Argon2 submodule.
   - "git submodule init"
@@ -80,7 +80,7 @@ install:
 build_script:
   # Build the compiled extension
   - "%CMD_IN_ENV% python setup.py build"
-  - "%CMD_IN_ENV% pip install .[tests]"
+  - "%CMD_IN_ENV% python -m pip install .[tests]"
 
 test_script:
   # Run the project tests
@@ -89,7 +89,7 @@ test_script:
 
 after_test:
   # If tests are successful, create binary packages for the project.
-  - "%CMD_IN_ENV% pip install --upgrade wheel"
+  - "%CMD_IN_ENV% python -m pip install --upgrade wheel"
   - "%CMD_IN_ENV% python setup.py bdist_wheel"
   - ps: "ls dist"
 
