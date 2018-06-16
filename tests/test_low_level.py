@@ -9,11 +9,19 @@ from hypothesis import assume, given
 from hypothesis import strategies as st
 
 from argon2.exceptions import (
-    HashingError, VerificationError, VerifyMismatchError
+    HashingError,
+    VerificationError,
+    VerifyMismatchError,
 )
 from argon2.low_level import (
-    ARGON2_VERSION, Type, core, ffi, hash_secret, hash_secret_raw, lib,
-    verify_secret
+    ARGON2_VERSION,
+    Type,
+    core,
+    ffi,
+    hash_secret,
+    hash_secret_raw,
+    lib,
+    verify_secret,
 )
 
 
@@ -86,21 +94,18 @@ TEST_MEMORY = 65536
 TEST_PARALLELISM = 4
 TEST_HASH_LEN = 32
 
-i_and_d_encoded = pytest.mark.parametrize("type,hash", [
-    (Type.I, TEST_HASH_I,),
-    (Type.D, TEST_HASH_D,),
-    (Type.ID, TEST_HASH_ID,),
-])
-i_and_d_raw = pytest.mark.parametrize("type,hash", [
-    (Type.I, TEST_RAW_I,),
-    (Type.D, TEST_RAW_D,),
-    (Type.ID, TEST_RAW_ID,),
-])
+i_and_d_encoded = pytest.mark.parametrize(
+    "type,hash",
+    [(Type.I, TEST_HASH_I), (Type.D, TEST_HASH_D), (Type.ID, TEST_HASH_ID)],
+)
+i_and_d_raw = pytest.mark.parametrize(
+    "type,hash",
+    [(Type.I, TEST_RAW_I), (Type.D, TEST_RAW_D), (Type.ID, TEST_RAW_ID)],
+)
 
-both_hash_funcs = pytest.mark.parametrize("func", [
-    hash_secret,
-    hash_secret_raw,
-])
+both_hash_funcs = pytest.mark.parametrize(
+    "func", [hash_secret, hash_secret_raw]
+)
 
 
 class TestHash(object):
@@ -248,8 +253,9 @@ class TestVerify(object):
     hash_len=st.integers(lib.ARGON2_MIN_OUTLEN, 513),
     salt_len=st.integers(lib.ARGON2_MIN_SALT_LENGTH, 513),
 )
-def test_argument_ranges(password, time_cost, parallelism, memory_cost,
-                         hash_len, salt_len):
+def test_argument_ranges(
+    password, time_cost, parallelism, memory_cost, hash_len, salt_len
+):
     """
     Ensure that both hashing and verifying works for most combinations of legal
     values.
@@ -260,8 +266,10 @@ def test_argument_ranges(password, time_cost, parallelism, memory_cost,
     """
     assume(parallelism * 8 <= memory_cost)
     hash = hash_secret(
-        secret=password, salt=os.urandom(salt_len),
-        time_cost=time_cost, parallelism=parallelism,
+        secret=password,
+        salt=os.urandom(salt_len),
+        time_cost=time_cost,
+        parallelism=parallelism,
         memory_cost=memory_cost,
         hash_len=hash_len,
         type=Type.I,
@@ -284,7 +292,8 @@ def test_core():
     csalt = ffi.new("uint8_t[]", salt)
 
     ctx = ffi.new(
-        "argon2_context *", dict(
+        "argon2_context *",
+        dict(
             out=cout,
             outlen=hash_len,
             version=ARGON2_VERSION,
@@ -303,7 +312,7 @@ def test_core():
             allocate_cbk=ffi.NULL,
             free_cbk=ffi.NULL,
             flags=lib.ARGON2_DEFAULT_FLAGS,
-        )
+        ),
     )
 
     rv = core(ctx, Type.D.value)

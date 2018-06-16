@@ -42,6 +42,7 @@ class Type(Enum):
 
     Please see :doc:`parameters` on how to pick one.
     """
+
     D = lib.Argon2_d
     r"""
     Argon2\ **d** is faster and uses data-depending memory access, which makes
@@ -67,8 +68,16 @@ class Type(Enum):
     """
 
 
-def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
-                type, version=ARGON2_VERSION):
+def hash_secret(
+    secret,
+    salt,
+    time_cost,
+    memory_cost,
+    parallelism,
+    hash_len,
+    type,
+    version=ARGON2_VERSION,
+):
     """
     Hash *secret* and return an **encoded** hash.
 
@@ -92,16 +101,30 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
-    size = lib.argon2_encodedlen(
-        time_cost, memory_cost, parallelism, len(salt), hash_len, type.value,
-    ) + 1
+    size = (
+        lib.argon2_encodedlen(
+            time_cost,
+            memory_cost,
+            parallelism,
+            len(salt),
+            hash_len,
+            type.value,
+        )
+        + 1
+    )
     buf = ffi.new("char[]", size)
     rv = lib.argon2_hash(
-        time_cost, memory_cost, parallelism,
-        ffi.new("uint8_t[]", secret), len(secret),
-        ffi.new("uint8_t[]", salt), len(salt),
-        ffi.NULL, hash_len,
-        buf, size,
+        time_cost,
+        memory_cost,
+        parallelism,
+        ffi.new("uint8_t[]", secret),
+        len(secret),
+        ffi.new("uint8_t[]", salt),
+        len(salt),
+        ffi.NULL,
+        hash_len,
+        buf,
+        size,
         type.value,
         version,
     )
@@ -111,8 +134,16 @@ def hash_secret(secret, salt, time_cost, memory_cost, parallelism, hash_len,
     return ffi.string(buf)
 
 
-def hash_secret_raw(secret, salt, time_cost, memory_cost, parallelism,
-                    hash_len, type, version=ARGON2_VERSION):
+def hash_secret_raw(
+    secret,
+    salt,
+    time_cost,
+    memory_cost,
+    parallelism,
+    hash_len,
+    type,
+    version=ARGON2_VERSION,
+):
     """
     Hash *password* and return a **raw** hash.
 
@@ -123,11 +154,17 @@ def hash_secret_raw(secret, salt, time_cost, memory_cost, parallelism,
     buf = ffi.new("uint8_t[]", hash_len)
 
     rv = lib.argon2_hash(
-        time_cost, memory_cost, parallelism,
-        ffi.new("uint8_t[]", secret), len(secret),
-        ffi.new("uint8_t[]", salt), len(salt),
-        buf, hash_len,
-        ffi.NULL, 0,
+        time_cost,
+        memory_cost,
+        parallelism,
+        ffi.new("uint8_t[]", secret),
+        len(secret),
+        ffi.new("uint8_t[]", salt),
+        len(salt),
+        buf,
+        hash_len,
+        ffi.NULL,
+        0,
         type.value,
         version,
     )

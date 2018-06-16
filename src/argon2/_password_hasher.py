@@ -57,7 +57,11 @@ class PasswordHasher(object):
     .. _RFC: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-03#section-4
     """
     __slots__ = [
-        "time_cost", "memory_cost", "parallelism", "hash_len", "salt_len",
+        "time_cost",
+        "memory_cost",
+        "parallelism",
+        "hash_len",
+        "salt_len",
         "encoding",
     ]
 
@@ -154,7 +158,5 @@ class PasswordHasher(object):
             raise InvalidHash()
 
         return verify_secret(
-            hash,
-            _ensure_bytes(password, self.encoding),
-            hash_type
+            hash, _ensure_bytes(password, self.encoding), hash_type
         )

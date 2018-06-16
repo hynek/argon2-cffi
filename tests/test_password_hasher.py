@@ -34,10 +34,9 @@ class TestEnsureBytes(object):
         assert s.encode("latin1") == rv
 
 
-bytes_and_unicode_password = pytest.mark.parametrize("password", [
-    u"pässword".encode("latin1"),
-    u"pässword",
-])
+bytes_and_unicode_password = pytest.mark.parametrize(
+    "password", [u"pässword".encode("latin1"), u"pässword"]
+)
 
 
 class TestPasswordHasher(object):
@@ -53,7 +52,7 @@ class TestPasswordHasher(object):
         prefix = u"$argon2id$v=19$m=8,t=1,p=1$"
 
         assert isinstance(h, six.text_type)
-        assert h[:len(prefix)] == prefix
+        assert h[: len(prefix)] == prefix
 
     @bytes_and_unicode_password
     def test_verify_agility(self, password):

@@ -27,12 +27,14 @@ if "win32" in str(sys.platform).lower():
 
 ffi = FFI()
 ffi.set_source(
-    "_ffi", "#include <argon2.h>",
+    "_ffi",
+    "#include <argon2.h>",
     include_dirs=include_dirs,
     libraries=["argon2"],
 )
 
-ffi.cdef("""\
+ffi.cdef(
+    """\
 typedef enum Argon2_type {
     Argon2_d = ...,
     Argon2_i = ...,
@@ -182,7 +184,8 @@ uint32_t argon2_encodedlen(uint32_t t_cost, uint32_t m_cost,
                            uint32_t parallelism, uint32_t saltlen,
                            uint32_t hashlen, argon2_type type);
 
-""")
+"""
+)
 
 if __name__ == "__main__":
     ffi.compile()

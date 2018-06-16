@@ -34,8 +34,9 @@ def find_version(*file_paths):
     string inside.
     """
     version_file = read(*file_paths)
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
+    version_match = re.search(
+        r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M
+    )
     if version_match:
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
@@ -56,28 +57,28 @@ def find_version(*file_paths):
 # ones.
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix of source filenames.
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
-project = u'argon2_cffi'
+project = u"argon2_cffi"
 year = datetime.date.today().year
-copyright = u'2015, Hynek Schlawack'
+copyright = u"2015, Hynek Schlawack"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -100,7 +101,7 @@ version = release.rsplit(u".", 1)[0]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ["_build"]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -118,7 +119,7 @@ exclude_patterns = ['_build']
 # show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
@@ -216,7 +217,7 @@ html_theme_options = {
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'argon2_cffidoc'
+htmlhelp_basename = "argon2_cffidoc"
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -224,10 +225,8 @@ htmlhelp_basename = 'argon2_cffidoc'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     # 'preamble': '',
 }
@@ -236,8 +235,13 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    ('index', 'argon2_cffi.tex', u'argon2_cffi Documentation',
-     u'Hynek Schlawack', 'manual'),
+    (
+        "index",
+        "argon2_cffi.tex",
+        u"argon2_cffi Documentation",
+        u"Hynek Schlawack",
+        "manual",
+    )
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -266,8 +270,13 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'argon2_cffi', u'argon2_cffi Documentation',
-     [u'Hynek Schlawack'], 1)
+    (
+        "index",
+        "argon2_cffi",
+        u"argon2_cffi Documentation",
+        [u"Hynek Schlawack"],
+        1,
+    )
 ]
 
 # If true, show URL addresses after external links.
@@ -280,9 +289,15 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'argon2_cffi', u'argon2_cffi Documentation',
-     u'Hynek Schlawack', 'argon2_cffi',
-     'One line description of project.', 'Miscellaneous'),
+    (
+        "index",
+        "argon2_cffi",
+        u"argon2_cffi Documentation",
+        u"Hynek Schlawack",
+        "argon2_cffi",
+        "One line description of project.",
+        "Miscellaneous",
+    )
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -299,6 +314,4 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {
-    "https://docs.python.org/3": None,
-}
+intersphinx_mapping = {"https://docs.python.org/3": None}

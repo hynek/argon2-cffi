@@ -7,18 +7,24 @@ from __future__ import absolute_import, division, print_function
 import os
 
 from ._password_hasher import (
-    DEFAULT_HASH_LENGTH, DEFAULT_MEMORY_COST, DEFAULT_PARALLELISM,
-    DEFAULT_RANDOM_SALT_LENGTH, DEFAULT_TIME_COST
+    DEFAULT_HASH_LENGTH,
+    DEFAULT_MEMORY_COST,
+    DEFAULT_PARALLELISM,
+    DEFAULT_RANDOM_SALT_LENGTH,
+    DEFAULT_TIME_COST,
 )
 from .low_level import Type, hash_secret, hash_secret_raw, verify_secret
 
 
-def hash_password(password, salt=None,
-                  time_cost=DEFAULT_TIME_COST,
-                  memory_cost=DEFAULT_MEMORY_COST,
-                  parallelism=DEFAULT_PARALLELISM,
-                  hash_len=DEFAULT_HASH_LENGTH,
-                  type=Type.I):
+def hash_password(
+    password,
+    salt=None,
+    time_cost=DEFAULT_TIME_COST,
+    memory_cost=DEFAULT_MEMORY_COST,
+    parallelism=DEFAULT_PARALLELISM,
+    hash_len=DEFAULT_HASH_LENGTH,
+    type=Type.I,
+):
     """
     Legacy alias for :func:`hash_secret` with default parameters.
 
@@ -32,12 +38,15 @@ def hash_password(password, salt=None,
     )
 
 
-def hash_password_raw(password, salt=None,
-                      time_cost=DEFAULT_TIME_COST,
-                      memory_cost=DEFAULT_MEMORY_COST,
-                      parallelism=DEFAULT_PARALLELISM,
-                      hash_len=DEFAULT_HASH_LENGTH,
-                      type=Type.I):
+def hash_password_raw(
+    password,
+    salt=None,
+    time_cost=DEFAULT_TIME_COST,
+    memory_cost=DEFAULT_MEMORY_COST,
+    parallelism=DEFAULT_PARALLELISM,
+    hash_len=DEFAULT_HASH_LENGTH,
+    type=Type.I,
+):
     """
     Legacy alias for :func:`hash_secret_raw` with default parameters.
 

@@ -55,12 +55,7 @@ if windows:
         # VS 2010 needs inttypes.h and fails with both.
         include_dirs += [inttypes]
 
-LIBRARIES = [
-    ("argon2", {
-        "include_dirs": include_dirs,
-        "sources": sources,
-    }),
-]
+LIBRARIES = [("argon2", {"include_dirs": include_dirs, "sources": sources})]
 META_PATH = os.path.join("src", "argon2", "__init__.py")
 KEYWORDS = ["password", "hash", "hashing", "security"]
 CLASSIFIERS = [
@@ -86,35 +81,24 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-SETUP_REQUIRES = [
-    "cffi",
-]
+SETUP_REQUIRES = ["cffi"]
 if windows and sys.version_info[0] == 2:
     # required for "Microsoft Visual C++ Compiler for Python 2.7"
     # https://www.microsoft.com/en-us/download/details.aspx?id=44266
     SETUP_REQUIRES.append("setuptools>=6.0")
 
-INSTALL_REQUIRES = [
-    "six",
-    "cffi>=1.0.0",
-]
+INSTALL_REQUIRES = ["six", "cffi>=1.0.0"]
 # We're not building an universal wheel so this works.
 if sys.version_info[0:2] < (3, 4):
     INSTALL_REQUIRES += ["enum34"]
 
 EXTRAS_REQUIRE = {
-    "docs": [
-        "sphinx",
-    ],
-    "tests": [
-        "coverage",
-        "hypothesis",
-        "pytest",
-    ],
+    "docs": ["sphinx"],
+    "tests": ["coverage", "hypothesis", "pytest"],
 }
-EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["docs"] + [
-    "wheel"
-]
+EXTRAS_REQUIRE["dev"] = (
+    EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["docs"] + ["wheel", "pre-commit"]
+)
 
 ###############################################################################
 
@@ -136,47 +120,52 @@ def keywords_with_side_effects(argv):
     Stolen from pyca/cryptography.
     """
     no_setup_requires_arguments = (
-        '-h', '--help',
-        '-n', '--dry-run',
-        '-q', '--quiet',
-        '-v', '--verbose',
-        '-V', '--version',
-        '--author',
-        '--author-email',
-        '--classifiers',
-        '--contact',
-        '--contact-email',
-        '--description',
-        '--egg-base',
-        '--fullname',
-        '--help-commands',
-        '--keywords',
-        '--licence',
-        '--license',
-        '--long-description',
-        '--maintainer',
-        '--maintainer-email',
-        '--name',
-        '--no-user-cfg',
-        '--obsoletes',
-        '--platforms',
-        '--provides',
-        '--requires',
-        '--url',
-        'clean',
-        'egg_info',
-        'register',
-        'sdist',
-        'upload',
+        "-h",
+        "--help",
+        "-n",
+        "--dry-run",
+        "-q",
+        "--quiet",
+        "-v",
+        "--verbose",
+        "-V",
+        "--version",
+        "--author",
+        "--author-email",
+        "--classifiers",
+        "--contact",
+        "--contact-email",
+        "--description",
+        "--egg-base",
+        "--fullname",
+        "--help-commands",
+        "--keywords",
+        "--licence",
+        "--license",
+        "--long-description",
+        "--maintainer",
+        "--maintainer-email",
+        "--name",
+        "--no-user-cfg",
+        "--obsoletes",
+        "--platforms",
+        "--provides",
+        "--requires",
+        "--url",
+        "clean",
+        "egg_info",
+        "register",
+        "sdist",
+        "upload",
     )
 
     def is_short_option(argument):
         """Check whether a command line argument is a short option."""
-        return len(argument) >= 2 and argument[0] == '-' and argument[1] != '-'
+        return len(argument) >= 2 and argument[0] == "-" and argument[1] != "-"
 
     def expand_short_options(argument):
         """Expand combined short options into canonical short options."""
-        return ('-' + char for char in argument[1:])
+        return ("-" + char for char in argument[1:])
 
     def argument_without_setup_requirements(argv, i):
         """Check whether a command line argument needs setup requirements."""
@@ -184,39 +173,36 @@ def keywords_with_side_effects(argv):
             # Simple case: An argument which is either an option or a command
             # which doesn't need setup requirements.
             return True
-        elif (is_short_option(argv[i]) and
-              all(option in no_setup_requires_arguments
-                  for option in expand_short_options(argv[i]))):
+        elif is_short_option(argv[i]) and all(
+            option in no_setup_requires_arguments
+            for option in expand_short_options(argv[i])
+        ):
             # Not so simple case: Combined short options none of which need
             # setup requirements.
             return True
-        elif argv[i - 1:i] == ['--egg-base']:
+        elif argv[i - 1 : i] == ["--egg-base"]:  # noqa -- black does this
             # Tricky case: --egg-info takes an argument which should not make
             # us use setup_requires (defeating the purpose of this code).
             return True
         else:
             return False
 
-    if all(argument_without_setup_requirements(argv, i)
-           for i in range(1, len(argv))):
-        return {
-            "cmdclass": {
-                "build": DummyBuild,
-                "install": DummyInstall,
-            }
-        }
+    if all(
+        argument_without_setup_requirements(argv, i)
+        for i in range(1, len(argv))
+    ):
+        return {"cmdclass": {"build": DummyBuild, "install": DummyInstall}}
     else:
-        use_system_argon2 = os.environ.get(
-            'ARGON2_CFFI_USE_SYSTEM', '0') == '1'
+        use_system_argon2 = (
+            os.environ.get("ARGON2_CFFI_USE_SYSTEM", "0") == "1"
+        )
         if use_system_argon2:
-            disable_subcommand(build, 'build_clib')
+            disable_subcommand(build, "build_clib")
         return {
             "setup_requires": SETUP_REQUIRES,
             "cffi_modules": CFFI_MODULES,
             "libraries": LIBRARIES,
-            "cmdclass": {
-                "build_clib": BuildCLibWithCompilerFlags,
-            },
+            "cmdclass": {"build_clib": BuildCLibWithCompilerFlags},
         }
 
 
@@ -275,8 +261,7 @@ def find_meta(meta):
     Extract __*meta*__ from META_FILE.
     """
     meta_match = re.search(
-        r"^__{meta}__ = ['\"]([^'\"]*)['\"]".format(meta=meta),
-        META_FILE, re.M
+        r"^__{meta}__ = ['\"]([^'\"]*)['\"]".format(meta=meta), META_FILE, re.M
     )
     if meta_match:
         return meta_match.group(1)
@@ -286,14 +271,18 @@ def find_meta(meta):
 VERSION = find_meta("version")
 URI = find_meta("uri")
 LONG = (
-    read("README.rst") + "\n\n" +
-    "Release Information\n" +
-    "===================\n\n" +
-    re.search(r"(\d+.\d.\d \(.*?\)\n.*?)\n\n\n----\n\n\n",
-              read("CHANGELOG.rst"), re.S).group(1) +
-    "\n\n`Full changelog " +
-    "<{uri}en/stable/changelog.html>`_.\n\n".format(uri=URI) +
-    read("AUTHORS.rst")
+    read("README.rst")
+    + "\n\n"
+    + "Release Information\n"
+    + "===================\n\n"
+    + re.search(
+        r"(\d+.\d.\d \(.*?\)\n.*?)\n\n\n----\n\n\n",
+        read("CHANGELOG.rst"),
+        re.S,
+    ).group(1)
+    + "\n\n`Full changelog "
+    + "<{uri}en/stable/changelog.html>`_.\n\n".format(uri=URI)
+    + read("AUTHORS.rst")
 )
 
 
@@ -301,17 +290,19 @@ class BuildCLibWithCompilerFlags(build_clib):
     """
     We need to pass ``-msse2`` for the optimized build.
     """
+
     def build_libraries(self, libraries):
         """
         Mostly copy pasta from ``distutils.command.build_clib``.
         """
         for (lib_name, build_info) in libraries:
-            sources = build_info.get('sources')
+            sources = build_info.get("sources")
             if sources is None or not isinstance(sources, (list, tuple)):
                 raise DistutilsSetupError(
                     "in 'libraries' option (library '%s'), "
                     "'sources' must be present and must be "
-                    "a list of source filenames" % lib_name)
+                    "a list of source filenames" % lib_name
+                )
             sources = list(sources)
 
             print("building '%s' library" % (lib_name,))
@@ -319,23 +310,23 @@ class BuildCLibWithCompilerFlags(build_clib):
             # First, compile the source code to object files in the library
             # directory.  (This should probably change to putting object
             # files in a temporary build directory.)
-            macros = build_info.get('macros')
-            include_dirs = build_info.get('include_dirs')
+            macros = build_info.get("macros")
+            include_dirs = build_info.get("include_dirs")
             objects = self.compiler.compile(
                 sources,
                 extra_preargs=["-msse2"] if optimized and not windows else [],
                 output_dir=self.build_temp,
                 macros=macros,
                 include_dirs=include_dirs,
-                debug=self.debug
+                debug=self.debug,
             )
 
             # Now "link" the object files together into a static library.
             # (On Unix at least, this isn't really linking -- it just
             # builds an archive.  Whatever.)
-            self.compiler.create_static_lib(objects, lib_name,
-                                            output_dir=self.build_clib,
-                                            debug=self.debug)
+            self.compiler.create_static_lib(
+                objects, lib_name, output_dir=self.build_clib, debug=self.debug
+            )
 
 
 if __name__ == "__main__":
@@ -356,7 +347,6 @@ if __name__ == "__main__":
         classifiers=CLASSIFIERS,
         install_requires=INSTALL_REQUIRES,
         extras_require=EXTRAS_REQUIRE,
-
         # CFFI
         zip_safe=False,
         ext_package="argon2",

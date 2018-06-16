@@ -23,8 +23,7 @@ class TestCheckTypes(object):
         Returns summary of failures.
         """
         rv = _check_types(
-            bytes=(u"not bytes", bytes),
-            str_or_None=(42, (str, NoneType))
+            bytes=(u"not bytes", bytes), str_or_None=(42, (str, NoneType))
         )
 
         assert "." == rv[-1]  # proper grammar FTW
