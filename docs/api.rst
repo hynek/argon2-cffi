@@ -3,7 +3,7 @@ API Reference
 
 .. module:: argon2
 
-``argon2_cffi`` comes with an high-level API and hopefully reasonable defaults for Argon2 parameters that result in a verification time of between 0.5ms and 1ms on recent-ish hardware.
+``argon2_cffi`` comes with an high-level API and hopefully reasonable defaults for Argon2 parameters that result in a verification time of 40--50ms on recent-ish hardware.
 
 Unless you have any special needs, all you need to know is:
 
@@ -13,18 +13,20 @@ Unless you have any special needs, all you need to know is:
   >>> ph = PasswordHasher()
   >>> hash = ph.hash("s3kr3tp4ssw0rd")
   >>> hash  # doctest: +SKIP
-  '$argon2id$v=19$m=512,t=2,p=2$Wd3CJItnL93pSLG/Mvel2g$DnsqcrS7+Enwu8EdJrUX2Q'
+  '$argon2id$v=19$m=102400,t=2,p=8$tSm+JOWigOgPZx/g44K5fQ$WDyus6py50bVFIPkjA28lQ'
   >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
   >>> ph.verify(hash, "t0t411ywr0ng")
   Traceback (most recent call last):
     ...
   argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash
+  >>> ph.check_needs_rehash(hash)
+  False
 
 But of course the :class:`PasswordHasher` class has all the parametrization you'll need:
 
 .. autoclass:: PasswordHasher
-  :members: hash, verify
+  :members: hash, verify, check_needs_rehash
 
 If you don't specify any parameters, the following constants are used:
 
@@ -38,7 +40,7 @@ You can see their values in :class:`PasswordHasher`.
 
 
 Exceptions
-^^^^^^^^^^
+----------
 
 .. autoexception:: argon2.exceptions.VerificationError
 
@@ -47,6 +49,15 @@ Exceptions
 .. autoexception:: argon2.exceptions.HashingError
 
 .. autoexception:: argon2.exceptions.InvalidHash
+
+
+Utilities
+---------
+
+
+.. autofunction:: extract_parameters
+
+.. autoclass:: Parameters
 
 
 Low Level

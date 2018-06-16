@@ -43,7 +43,7 @@ Using a System-wide Installation of Argon2
 ------------------------------------------
 
 If you set ``ARGON2_CFFI_USE_SYSTEM`` to ``1`` (and *only* ``1``), ``argon2_cffi`` will not build its bindings.
-However binary wheels are preerred by ``pip`` and Argon2 gets installed along with ``argon2_cffi`` anyway.
+However binary wheels are preferred by ``pip`` and Argon2 gets installed along with ``argon2_cffi`` anyway.
 
 Therefore you also have to instruct ``pip`` to use a source distribution:
 

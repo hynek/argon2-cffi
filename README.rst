@@ -40,7 +40,7 @@ CFFI-based Argon2 Bindings for Python
   >>> ph = PasswordHasher()
   >>> hash = ph.hash("s3kr3tp4ssw0rd")
   >>> hash  # doctest: +SKIP
-  '$argon2id$v=19$m=512,t=2,p=2$Z0tsPw0iK7Ky2Iwp63HKBA$psMUXgYOIaAhaZ990uep8w'
+  '$argon2id$v=19$m=102400,t=2,p=8$tSm+JOWigOgPZx/g44K5fQ$WDyus6py50bVFIPkjA28lQ'
   >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
   >>> ph.verify(hash, "t0t411ywr0ng")

@@ -7,15 +7,15 @@ You can use command line arguments to set hashing parameters:
 
 .. code-block:: text
 
-  $ python -m argon2 -t 1 -m 512 -p 2
+   $ python -m argon2
    Running Argon2id 100 times with:
-   hash_len: 16
-   memory_cost: 512
-   parallelism: 2
-   time_cost: 1
+   hash_len: 16 bytes
+   memory_cost: 102400 KiB
+   parallelism: 8 threads
+   time_cost: 2 iterations
 
    Measuring...
 
-   0.432ms per password verification
+   45.3ms per password verification
 
 This should make it much easier to determine the right parameters for your use case and your environment.
