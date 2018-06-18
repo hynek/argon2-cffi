@@ -180,7 +180,7 @@ def keywords_with_side_effects(argv):
             # Not so simple case: Combined short options none of which need
             # setup requirements.
             return True
-        elif argv[i - 1 : i] == ["--egg-base"]:  # noqa -- black does this
+        elif argv[i - 1 : i] == ["--egg-base"]:
             # Tricky case: --egg-info takes an argument which should not make
             # us use setup_requires (defeating the purpose of this code).
             return True
