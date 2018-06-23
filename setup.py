@@ -58,6 +58,11 @@ if windows:
 LIBRARIES = [("argon2", {"include_dirs": include_dirs, "sources": sources})]
 META_PATH = os.path.join("src", "argon2", "__init__.py")
 KEYWORDS = ["password", "hash", "hashing", "security"]
+PROJECT_URLS = {
+    "Documentation": "https://argon2-cffi.readthedocs.io/",
+    "Bug Tracker": "https://github.com/hynek/argon2-cffi/issues",
+    "Source Code": "https://github.com/hynek/argon2-cffi",
+}
 CLASSIFIERS = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -73,6 +78,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.4",
     "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python",
@@ -269,7 +275,7 @@ def find_meta(meta):
 
 
 VERSION = find_meta("version")
-URI = find_meta("uri")
+URL = find_meta("url")
 LONG = (
     read("README.rst")
     + "\n\n"
@@ -281,7 +287,7 @@ LONG = (
         re.S,
     ).group(1)
     + "\n\n`Full changelog "
-    + "<{uri}en/stable/changelog.html>`_.\n\n".format(uri=URI)
+    + "<{url}en/stable/changelog.html>`_.\n\n".format(url=URL)
     + read("AUTHORS.rst")
 )
 
@@ -334,7 +340,8 @@ if __name__ == "__main__":
         name=NAME,
         description=find_meta("description"),
         license=find_meta("license"),
-        url=URI,
+        url=URL,
+        project_urls=PROJECT_URLS,
         version=VERSION,
         author=find_meta("author"),
         author_email=find_meta("email"),

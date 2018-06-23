@@ -19,14 +19,15 @@ __version__ = "18.2.0.dev0"
 
 __title__ = "argon2_cffi"
 __description__ = "The secure Argon2 password hashing algorithm."
-__uri__ = "https://argon2-cffi.readthedocs.io/"
-__doc__ = __description__ + " <" + __uri__ + ">"
+__url__ = "https://argon2-cffi.readthedocs.io/"
+__uri__ = __url__
+__doc__ = __description__ + " <" + __url__ + ">"
 
 __author__ = "Hynek Schlawack"
 __email__ = "hs@ox.cx"
 
 __license__ = "MIT"
-__copyright__ = "Copyright (c) 2015 {author}".format(author=__author__)
+__copyright__ = "Copyright (c) 2015 " + __author__
 
 
 __all__ = [
