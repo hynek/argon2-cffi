@@ -1,5 +1,5 @@
 [build-system]
-requires = ["cffi>=1.0.0", "setuptools>=6.0", "wheel"]
+requires = ["cffi>=1.0 ; platform_python_implementation != 'PyPy'", "setuptools>=6.0", "wheel"]
 
 
 [tool.black]
