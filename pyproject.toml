@@ -1,2 +1,6 @@
+[build-system]
+requires = ["cffi>=1.0.0" "setuptools>=6.0", "wheel"]
+
+
 [tool.black]
 line-length = 79
