@@ -1,6 +1,2 @@
-[build-system]
-requires = ["cffi ; platform_python_implementation != 'PyPy'", "setuptools", "wheel"]
-
-
 [tool.black]
 line-length = 79
