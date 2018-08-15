@@ -94,7 +94,7 @@ class PasswordHasher(object):
         self.salt_len = salt_len
         self.encoding = encoding
 
-        # Cache a Parameters object for check_neeeds_rehash.
+        # Cache a Parameters object for check_needs_rehash.
         self._parameters = Parameters(
             type=Type.ID,
             version=19,
