@@ -22,8 +22,11 @@ Changes:
 - To make the change of hash type backward compatible, ``argon2.PasswordHasher.verify()`` now determines the type of the hash and verifies it accordingly.
 - Some of the hash parameters have been made stricter to be closer to said recommendations.
   The current goal for a hash verification times is around 50ms.
-- To allow for bespoke decisions about upgrading Argon2 parameters, it's now possible to extract them from a has via the ``argon2.extract_parameters()`` function.
+  `#41 <https://github.com/hynek/argon2_cffi/pull/41>`_
+- To allow for bespoke decisions about upgrading Argon2 parameters, it's now possible to extract them from a hash via the ``argon2.extract_parameters()`` function.
+  `#41 <https://github.com/hynek/argon2_cffi/pull/41>`_
 - Additionally ``argon2.PasswordHasher`` now has a ``check_needs_rehash()`` method that allows to verify whether a hash has been created with the instance's parameters or whether it should be rehashed.
+  `#41 <https://github.com/hynek/argon2_cffi/pull/41>`_
 
 
 ----
