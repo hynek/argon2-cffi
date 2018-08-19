@@ -52,7 +52,7 @@ CFFI-based Argon2 Bindings for Python
 
 
 .. note::
-   `passlib <https://pypi.org/project/passlib/>`_ 1.7.0 and later offers `Argon2 support <http://passlib.readthedocs.io/en/stable/lib/passlib.hash.argon2.html>`_ using this library too.
+   `passlib <https://pypi.org/project/passlib/>`_ 1.7.0 and later offers `Argon2 support <https://passlib.readthedocs.io/en/stable/lib/passlib.hash.argon2.html>`_ using this library too.
 
 ``argon2_cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.io/>`_, the code on `GitHub <https://github.com/hynek/argon2_cffi>`_.
 It’s rigorously tested on Python 2.7, 3.4+, and PyPy.

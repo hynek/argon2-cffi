@@ -58,5 +58,5 @@ This approach can lead to problems around your build chain and you can run into 
 
 
 .. _SSE2: https://en.wikipedia.org/wiki/SSE2
-.. _PyPI: https://pypi.python.org/pypi/argon2_cffi/
+.. _PyPI: https://pypi.org/project/argon2_cffi/
 .. _CFFI environment: https://cffi.readthedocs.io/en/latest/installation.html
