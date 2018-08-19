@@ -67,8 +67,8 @@ class Parameters(object):
     :ivar int version: Argon2 version.
     :ivar int salt_len: Length of the salt in bytes.
     :ivar int hash_len: Length of the hash in bytes.
-    :ivar int time_cost: Time cost.
-    :ivar int memory_cost: Memory cost.
+    :ivar int time_cost: Time cost in iterations.
+    :ivar int memory_cost: Memory cost in kibibytes.
     :ivar int parallelism: Number of parallel threads.
 
     .. versionadded:: 18.2.0

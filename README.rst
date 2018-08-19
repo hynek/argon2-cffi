@@ -43,6 +43,8 @@ CFFI-based Argon2 Bindings for Python
   '$argon2id$v=19$m=102400,t=2,p=8$tSm+JOWigOgPZx/g44K5fQ$WDyus6py50bVFIPkjA28lQ'
   >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
+  >>> ph.check_needs_rehash(hash)
+  False
   >>> ph.verify(hash, "t0t411ywr0ng")
   Traceback (most recent call last):
     ...

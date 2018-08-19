@@ -182,11 +182,11 @@ class PasswordHasher(object):
         Whenever your Argon2 parameters -- or ``argon2_cffi``'s defaults! --
         change, you should rehash your passwords at the next opportunity.  The
         common approach is to do that whenever a user logs in, since that
-        should be the only time when you have access to the clear text
+        should be the only time when you have access to the cleartext
         password.
 
         Therefore it's best practice to check -- and if necessary rehash --
-        passwords after each successful authenticaion.
+        passwords after each successful authentication.
 
         :rtype: bool
 

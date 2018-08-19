@@ -16,14 +16,22 @@ Unless you have any special needs, all you need to know is:
   '$argon2id$v=19$m=102400,t=2,p=8$tSm+JOWigOgPZx/g44K5fQ$WDyus6py50bVFIPkjA28lQ'
   >>> ph.verify(hash, "s3kr3tp4ssw0rd")
   True
+  >>> ph.check_needs_rehash(hash)
+  False
   >>> ph.verify(hash, "t0t411ywr0ng")
   Traceback (most recent call last):
     ...
   argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash
-  >>> ph.check_needs_rehash(hash)
-  False
 
-But of course the :class:`PasswordHasher` class has all the parametrization you'll need:
+
+A login function could thus look like this:
+
+.. literalinclude:: login_example.py
+   :language: python
+
+----
+
+While the :class:`PasswordHasher` class has the aspiration to be good to use out of the box, it has all the parametrization you'll need:
 
 .. autoclass:: PasswordHasher
   :members: hash, verify, check_needs_rehash
