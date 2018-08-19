@@ -12,6 +12,7 @@ from ._password_hasher import (
     DEFAULT_TIME_COST,
     PasswordHasher,
 )
+from ._utils import Parameters, extract_parameters
 from .low_level import Type
 
 
@@ -36,9 +37,11 @@ __all__ = [
     "DEFAULT_PARALLELISM",
     "DEFAULT_RANDOM_SALT_LENGTH",
     "DEFAULT_TIME_COST",
+    "Parameters",
     "PasswordHasher",
     "Type",
     "exceptions",
+    "extract_parameters",
     "hash_password",
     "hash_password_raw",
     "low_level",

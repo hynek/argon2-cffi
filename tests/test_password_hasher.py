@@ -92,3 +92,20 @@ class TestPasswordHasher(object):
         """
         with pytest.raises(InvalidHash):
             PasswordHasher().verify("tiger", "does not matter")
+
+    def test_check_needs_rehash_no(self):
+        """
+        Return False if the hash has the correct parameters.
+        """
+        ph = PasswordHasher(1, 8, 1, 16, 16)
+
+        assert not ph.check_needs_rehash(ph.hash("foo"))
+
+    def test_check_needs_rehash_yes(self):
+        """
+        Return True if any of the parameters changes.
+        """
+        ph = PasswordHasher(1, 8, 1, 16, 16)
+        ph_old = PasswordHasher(1, 8, 1, 8, 8)
+
+        assert ph.check_needs_rehash(ph_old.hash("foo"))

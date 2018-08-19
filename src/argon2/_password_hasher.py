@@ -2,7 +2,7 @@ from __future__ import absolute_import, division, print_function
 
 import os
 
-from ._utils import _check_types
+from ._utils import Parameters, _check_types, extract_parameters
 from .exceptions import InvalidHash
 from .low_level import Type, hash_secret, verify_secret
 
@@ -10,8 +10,8 @@ from .low_level import Type, hash_secret, verify_secret
 DEFAULT_RANDOM_SALT_LENGTH = 16
 DEFAULT_HASH_LENGTH = 16
 DEFAULT_TIME_COST = 2
-DEFAULT_MEMORY_COST = 512
-DEFAULT_PARALLELISM = 2
+DEFAULT_MEMORY_COST = 102400
+DEFAULT_PARALLELISM = 8
 
 
 def _ensure_bytes(s, encoding):
@@ -48,8 +48,10 @@ class PasswordHasher(object):
 
     .. versionadded:: 16.0.0
     .. versionchanged:: 18.2.0
-        Switch from Argon2i to Argon2id based on the recommendation by the
-        current RFC_ draft.
+       Switch from Argon2i to Argon2id based on the recommendation by the
+       current RFC_ draft.
+    .. versionchanged:: 18.2.0
+       Changed default *memory_cost* to 100 MiB and default *parallelism* to 8.
     .. versionchanged:: 18.2.0 ``verify`` now will determine the type of hash.
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
@@ -63,6 +65,7 @@ class PasswordHasher(object):
         "hash_len",
         "salt_len",
         "encoding",
+        "_parameters",
     ]
 
     def __init__(
@@ -90,6 +93,17 @@ class PasswordHasher(object):
         self.hash_len = hash_len
         self.salt_len = salt_len
         self.encoding = encoding
+
+        # Cache a Parameters object for check_needs_rehash.
+        self._parameters = Parameters(
+            type=Type.ID,
+            version=19,
+            salt_len=salt_len,
+            hash_len=hash_len,
+            time_cost=time_cost,
+            memory_cost=memory_cost,
+            parallelism=parallelism,
+        )
 
     def hash(self, password):
         """
@@ -160,3 +174,22 @@ class PasswordHasher(object):
         return verify_secret(
             hash, _ensure_bytes(password, self.encoding), hash_type
         )
+
+    def check_needs_rehash(self, hash):
+        """
+        Check whether *hash* was created using the instance's parameters.
+
+        Whenever your Argon2 parameters -- or ``argon2_cffi``'s defaults! --
+        change, you should rehash your passwords at the next opportunity.  The
+        common approach is to do that whenever a user logs in, since that
+        should be the only time when you have access to the clear text
+        password.
+
+        Therefore it's best practice to check -- and if necessary rehash --
+        passwords after each successful authenticaion.
+
+        :rtype: bool
+
+        .. versionadded:: 18.2.0
+        """
+        return self._parameters != extract_parameters(hash)

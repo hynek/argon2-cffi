@@ -47,16 +47,16 @@ def main(argv):
     hash = ph.hash(password)
 
     params = {
-        "time_cost": args.t,
-        "memory_cost": args.m,
-        "parallelism": args.p,
-        "hash_len": args.l,
+        "time_cost": (args.t, "iterations"),
+        "memory_cost": (args.m, "KiB"),
+        "parallelism": (args.p, "threads"),
+        "hash_len": (args.l, "bytes"),
     }
 
     print("Running Argon2id %d times with:" % (args.n,))
 
     for k, v in sorted(six.iteritems(params)):
-        print("%s: %d" % (k, v))
+        print("%s: %d %s" % (k, v[0], v[1]))
 
     print("\nMeasuring...")
     duration = timeit.timeit(
