@@ -27,8 +27,9 @@ class PasswordHasher(object):
     r"""
     High level class to hash passwords with sensible defaults.
 
-    *Always* uses Argon2\ **id** and a random salt_ for hashing, but it can
-    verify any type of Argon2 as long as the hash is correctly encoded.
+    Uses Argon2\ **id** by default and always uses a random salt_ for hashing.
+    But it can verify any type of Argon2 as long as the hash is correctly
+    encoded.
 
     The reason for this being a class is both for convenience to carry
     parameters and to verify the parameters only *once*.  Any unnecessary
@@ -45,6 +46,8 @@ class PasswordHasher(object):
     :param str encoding: The Argon2 C library expects bytes.  So if
         :meth:`hash` or :meth:`verify` are passed an unicode string, it will be
         encoded using this encoding.
+    :param Type type: Argon2 type to use.  Only change for interoperability
+        with legacy systems.
 
     .. versionadded:: 16.0.0
     .. versionchanged:: 18.2.0
@@ -53,20 +56,13 @@ class PasswordHasher(object):
     .. versionchanged:: 18.2.0
        Changed default *memory_cost* to 100 MiB and default *parallelism* to 8.
     .. versionchanged:: 18.2.0 ``verify`` now will determine the type of hash.
+    .. versionchanged:: 18.3.0 The Argon2 type is configurable now.
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     .. _RFC: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-03#section-4
     """
-    __slots__ = [
-        "time_cost",
-        "memory_cost",
-        "parallelism",
-        "hash_len",
-        "salt_len",
-        "encoding",
-        "_parameters",
-    ]
+    __slots__ = ["_parameters", "encoding"]
 
     def __init__(
         self,
@@ -76,6 +72,7 @@ class PasswordHasher(object):
         hash_len=DEFAULT_HASH_LENGTH,
         salt_len=DEFAULT_RANDOM_SALT_LENGTH,
         encoding="utf-8",
+        type=Type.ID,
     ):
         e = _check_types(
             time_cost=(time_cost, int),
@@ -84,19 +81,14 @@ class PasswordHasher(object):
             hash_len=(hash_len, int),
             salt_len=(salt_len, int),
             encoding=(encoding, str),
+            type=(type, Type),
         )
         if e:
             raise TypeError(e)
-        self.time_cost = time_cost
-        self.memory_cost = memory_cost
-        self.parallelism = parallelism
-        self.hash_len = hash_len
-        self.salt_len = salt_len
-        self.encoding = encoding
 
         # Cache a Parameters object for check_needs_rehash.
         self._parameters = Parameters(
-            type=Type.ID,
+            type=type,
             version=19,
             salt_len=salt_len,
             hash_len=hash_len,
@@ -104,6 +96,31 @@ class PasswordHasher(object):
             memory_cost=memory_cost,
             parallelism=parallelism,
         )
+        self.encoding = encoding
+
+    @property
+    def time_cost(self):
+        return self._parameters.time_cost
+
+    @property
+    def memory_cost(self):
+        return self._parameters.memory_cost
+
+    @property
+    def parallelism(self):
+        return self._parameters.parallelism
+
+    @property
+    def hash_len(self):
+        return self._parameters.hash_len
+
+    @property
+    def salt_len(self):
+        return self._parameters.salt_len
+
+    @property
+    def type(self):
+        return self._parameters.type
 
     def hash(self, password):
         """
@@ -123,7 +140,7 @@ class PasswordHasher(object):
             memory_cost=self.memory_cost,
             parallelism=self.parallelism,
             hash_len=self.hash_len,
-            type=Type.ID,
+            type=self.type,
         ).decode("ascii")
 
     _header_to_type = {

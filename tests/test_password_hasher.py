@@ -5,7 +5,7 @@ from __future__ import absolute_import, division, print_function
 import pytest
 import six
 
-from argon2 import PasswordHasher
+from argon2 import PasswordHasher, Type, extract_parameters
 from argon2._password_hasher import _ensure_bytes
 from argon2.exceptions import InvalidHash
 
@@ -109,3 +109,19 @@ class TestPasswordHasher(object):
         ph_old = PasswordHasher(1, 8, 1, 8, 8)
 
         assert ph.check_needs_rehash(ph_old.hash("foo"))
+
+    def test_type_is_configurable(self):
+        """
+        Argon2id is default but can be changed.
+        """
+        ph = PasswordHasher(time_cost=1, memory_cost=64)
+        default_hash = ph.hash("foo")
+
+        assert Type.ID is ph.type is ph._parameters.type
+        assert Type.ID is extract_parameters(default_hash).type
+
+        ph = PasswordHasher(time_cost=1, memory_cost=64, type=Type.I)
+
+        assert Type.I is ph.type is ph._parameters.type
+        assert Type.I is extract_parameters(ph.hash("foo")).type
+        assert ph.check_needs_rehash(default_hash)

@@ -26,7 +26,7 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-*none*
+- ``argon2.PasswordHasher``'s hash type is configurable now.
 
 
 ----
