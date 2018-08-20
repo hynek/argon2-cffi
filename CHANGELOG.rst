@@ -26,7 +26,7 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-*none*
+- Added support for Argon2 v1.2 hashes in ``argon2.extract_parameters()``.
 
 
 ----

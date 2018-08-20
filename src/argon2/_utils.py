@@ -162,6 +162,10 @@ def extract_parameters(hash):
     """
     parts = hash.split("$")
 
+    # Backwards compatibility for Argon v1.2 hashes
+    if len(parts) == 5:
+        parts.insert(2, "v=18")
+
     if len(parts) != 6:
         raise InvalidHash
 

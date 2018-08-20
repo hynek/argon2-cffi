@@ -65,6 +65,20 @@ VALID_PARAMETERS = Parameters(
     parallelism=4,
 )
 
+VALID_HASH_V18 = (
+    "$argon2i$m=8,t=1,p=1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO"
+    "4NAYysnqRt1GSQLE55m+2GYDt9FEjPMHhP2Cuf0nOEXXMocVrsJAtNSsKyfg"
+)
+VALID_PARAMETERS_V18 = Parameters(
+    type=Type.I,
+    salt_len=8,
+    hash_len=64,
+    version=18,
+    memory_cost=8,
+    time_cost=1,
+    parallelism=1,
+)
+
 
 class TestExtractParameters(object):
     def test_valid_hash(self):
@@ -74,6 +88,15 @@ class TestExtractParameters(object):
         parsed = extract_parameters(VALID_HASH)
 
         assert VALID_PARAMETERS == parsed
+
+    def test_valid_hash_v18(self):
+        """
+        A valid Argon v1.2 hash is parsed.
+        """
+
+        parsed = extract_parameters(VALID_HASH_V18)
+
+        assert VALID_PARAMETERS_V18 == parsed
 
     @pytest.mark.parametrize(
         "hash",
