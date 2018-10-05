@@ -60,8 +60,8 @@ META_PATH = os.path.join("src", "argon2", "__init__.py")
 KEYWORDS = ["password", "hash", "hashing", "security"]
 PROJECT_URLS = {
     "Documentation": "https://argon2-cffi.readthedocs.io/",
-    "Bug Tracker": "https://github.com/hynek/argon2-cffi/issues",
-    "Source Code": "https://github.com/hynek/argon2-cffi",
+    "Bug Tracker": "https://github.com/hynek/argon2_cffi/issues",
+    "Source Code": "https://github.com/hynek/argon2_cffi",
 }
 CLASSIFIERS = [
     "Development Status :: 5 - Production/Stable",
