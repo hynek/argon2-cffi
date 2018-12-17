@@ -20,7 +20,7 @@ Here are a few guidelines to get you started:
   If you lack some Python versions, you can can make it a non-failure using ``tox --skip-missing-interpreters`` (in that case you may want to look into pyenv_ that makes it very easy to install many different Python versions in parallel).
 
   One of the environments requires a system-wide installation of Argon2.
-  On macOS, it's available in Homebrew and recent Ubuntus (zesty and later) ship it too.
+  On macOS, it's available in Homebrew (`brew install argon2`, but you also will have to update your `LDFLAGS` so you compiler finds it) and recent Ubuntus (zesty and later) ship it too.
 - Make sure your changes pass our CI.
   You won't get any feedback until it's green unless you ask for it.
 - Once you've addressed review feedback, make sure to bump the pull request with a short note, so we know you're done.
