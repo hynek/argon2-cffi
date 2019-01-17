@@ -5,6 +5,14 @@ API Reference
 
 ``argon2_cffi`` comes with an high-level API and hopefully reasonable defaults for Argon2 parameters that result in a verification time of 40--50ms on recent-ish hardware.
 
+.. warning::
+
+   The current memory requirement is set to rather conservative 100 MB.
+   However, in memory constrained environments like Docker containers that can lead to problems.
+   One possible non-obvious symptom are apparent freezes that are caused by swapping.
+
+   Please check :doc:`parameters` for more details.
+
 Unless you have any special needs, all you need to know is:
 
 .. doctest::
