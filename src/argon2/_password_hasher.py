@@ -56,7 +56,7 @@ class PasswordHasher(object):
     .. versionchanged:: 18.2.0
        Changed default *memory_cost* to 100 MiB and default *parallelism* to 8.
     .. versionchanged:: 18.2.0 ``verify`` now will determine the type of hash.
-    .. versionchanged:: 18.3.0 The Argon2 type is configurable now.
+    .. versionchanged:: 19.1.0 The Argon2 type is configurable now.
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
