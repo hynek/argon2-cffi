@@ -5,7 +5,7 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-18.4.0 (UNRELEASED)
+19.1.0 (UNRELEASED)
 -------------------
 
 Vendoring Argon2 @ UNRELEASED
