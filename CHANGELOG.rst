@@ -32,7 +32,7 @@ Changes:
 ----
 
 
-19.1.0 (2018-08-19)
+18.3.0 (2018-08-19)
 -------------------
 
 Vendoring Argon2 @ `670229c <https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6>`_ (20171227)
