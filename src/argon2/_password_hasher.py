@@ -60,7 +60,7 @@ class PasswordHasher(object):
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
-    .. _RFC: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-03#section-4
+    .. _RFC: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-04#section-4
     """
     __slots__ = ["_parameters", "encoding"]
 
