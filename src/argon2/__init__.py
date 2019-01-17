@@ -16,7 +16,7 @@ from ._utils import Parameters, extract_parameters
 from .low_level import Type
 
 
-__version__ = "19.1.0"
+__version__ = "19.2.0.dev0"
 
 __title__ = "argon2_cffi"
 __description__ = "The secure Argon2 password hashing algorithm."
