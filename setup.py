@@ -93,11 +93,7 @@ if windows and sys.version_info[0] == 2:
     # https://www.microsoft.com/en-us/download/details.aspx?id=44266
     SETUP_REQUIRES.append("setuptools>=6.0")
 
-INSTALL_REQUIRES = ["cffi>=1.0.0", "six"]
-# We're not building an universal wheel so this works.
-if sys.version_info[0:2] < (3, 4):
-    INSTALL_REQUIRES += ["enum34"]
-
+INSTALL_REQUIRES = ["cffi>=1.0.0", "six", "enum34; python_version<'3.4'"]
 EXTRAS_REQUIRE = {
     "docs": ["sphinx"],
     "tests": ["coverage", "hypothesis", "pytest"],

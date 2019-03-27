@@ -26,7 +26,9 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-*none*
+- The dependency on ``enum34`` is now protected using a PEP 508 marker.
+  This fixes problems when the sdist is handled by a different interpreter version than the one running it.
+  `#48 <https://github.com/hynek/argon2_cffi/pull/48>`_
 
 
 ----
