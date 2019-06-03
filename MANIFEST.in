@@ -1,4 +1,4 @@
-include *.rst *.txt tox.ini .coveragerc LICENSE .pre-commit-config.yaml pyproject.toml
+include *.rst *.md *.txt tox.ini .coveragerc LICENSE .pre-commit-config.yaml pyproject.toml
 exclude src/argon2/_ffi.py .gitmodules extras/libargon2/.git *.yml
 graft tests
 graft .github
