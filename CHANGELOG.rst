@@ -28,7 +28,7 @@ Changes:
 
 - The dependency on ``enum34`` is now protected using a PEP 508 marker.
   This fixes problems when the sdist is handled by a different interpreter version than the one running it.
-  `#48 <https://github.com/hynek/argon2_cffi/pull/48>`_
+  `#48 <https://github.com/hynek/argon2-cffi/pull/48>`_
 
 
 ----
@@ -100,16 +100,16 @@ Changes:
 - The hash type for ``argon2.PasswordHasher`` is Argon2\ **id** now.
 
   This decision has been made based on the recommendations in the latest `Argon2 RFC draft <https://tools.ietf.org/html/draft-irtf-cfrg-argon2-04#section-4>`_.
-  `#33 <https://github.com/hynek/argon2_cffi/pull/33>`_
-  `#34 <https://github.com/hynek/argon2_cffi/pull/34>`_
+  `#33 <https://github.com/hynek/argon2-cffi/pull/33>`_
+  `#34 <https://github.com/hynek/argon2-cffi/pull/34>`_
 - To make the change of hash type backward compatible, ``argon2.PasswordHasher.verify()`` now determines the type of the hash and verifies it accordingly.
 - Some of the hash parameters have been made stricter to be closer to said recommendations.
   The current goal for a hash verification times is around 50ms.
-  `#41 <https://github.com/hynek/argon2_cffi/pull/41>`_
+  `#41 <https://github.com/hynek/argon2-cffi/pull/41>`_
 - To allow for bespoke decisions about upgrading Argon2 parameters, it's now possible to extract them from a hash via the ``argon2.extract_parameters()`` function.
-  `#41 <https://github.com/hynek/argon2_cffi/pull/41>`_
+  `#41 <https://github.com/hynek/argon2-cffi/pull/41>`_
 - Additionally ``argon2.PasswordHasher`` now has a ``check_needs_rehash()`` method that allows to verify whether a hash has been created with the instance's parameters or whether it should be rehashed.
-  `#41 <https://github.com/hynek/argon2_cffi/pull/41>`_
+  `#41 <https://github.com/hynek/argon2-cffi/pull/41>`_
 
 
 ----
@@ -124,7 +124,7 @@ Vendoring Argon2 @ `670229c <https://github.com/P-H-C/phc-winner-argon2/tree/670
 Changes:
 ^^^^^^^^
 
-- It is now possible to use the ``argon2_cffi`` bindings against an Argon2 library that is provided by the system.
+- It is now possible to use the ``argon2-cffi`` bindings against an Argon2 library that is provided by the system.
 
 
 ----
@@ -139,10 +139,10 @@ Changes:
 ^^^^^^^^
 
 - Prevent side-effects like the installation of ``cffi`` if ``setup.py`` is called with a command that doesn't require it.
-  `#20 <https://github.com/hynek/argon2_cffi/pull/20>`_
+  `#20 <https://github.com/hynek/argon2-cffi/pull/20>`_
 - Fix a bunch of warnings with new ``cffi`` versions and Python 3.6.
-  `#14 <https://github.com/hynek/argon2_cffi/pull/14>`_
-  `#16 <https://github.com/hynek/argon2_cffi/pull/16>`_
+  `#14 <https://github.com/hynek/argon2-cffi/pull/14>`_
+  `#16 <https://github.com/hynek/argon2-cffi/pull/16>`_
 - Add low-level bindings for Argon2id functions.
 
 
@@ -158,7 +158,7 @@ Changes:
 ^^^^^^^^
 
 - Fix compilation on debian jessie.
-  `#13 <https://github.com/hynek/argon2_cffi/pull/13>`_
+  `#13 <https://github.com/hynek/argon2-cffi/pull/13>`_
 
 
 ----

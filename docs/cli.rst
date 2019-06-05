@@ -1,7 +1,7 @@
 CLI
 ===
 
-To aid you with finding the parameters, ``argon2_cffi`` offers a CLI interface that can be accessed using ``python -m argon2``.
+To aid you with finding the parameters, ``argon2-cffi`` offers a CLI interface that can be accessed using ``python -m argon2``.
 It will benchmark Argon2’s password *verification* in the current environment.
 You can use command line arguments to set hashing parameters:
 

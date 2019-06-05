@@ -1,4 +1,4 @@
-``argon2_cffi``
+``argon2-cffi``
 ===============
 
 Release v\ |release| (:doc:`What's new? <changelog>`).

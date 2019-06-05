@@ -1,11 +1,11 @@
 Credits & License
 =================
 
-``argon2_cffi`` is maintained by Hynek Schlawack and released under the `MIT license <https://github.com/hynek/argon2_cffi/blob/master/LICENSE>`_.
+``argon2-cffi`` is maintained by Hynek Schlawack and released under the `MIT license <https://github.com/hynek/argon2-cffi/blob/master/LICENSE>`_.
 
 The development is kindly supported by `Variomedia AG <https://www.variomedia.de/>`_.
 
-A full list of contributors can be found in GitHub's `overview <https://github.com/hynek/argon2_cffi/graphs/contributors>`_.
+A full list of contributors can be found in GitHub's `overview <https://github.com/hynek/argon2-cffi/graphs/contributors>`_.
 
 
 Vendored Code

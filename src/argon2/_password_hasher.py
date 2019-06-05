@@ -157,7 +157,7 @@ class PasswordHasher(object):
 
             It is assumed that the caller is in full control of the hash.  No
             other parsing than the determination of the hash type is done by
-            ``argon2_cffi``.
+            ``argon2-cffi``.
 
         :param hash: An encoded hash as returned from
             :meth:`PasswordHasher.hash`.
@@ -196,7 +196,7 @@ class PasswordHasher(object):
         """
         Check whether *hash* was created using the instance's parameters.
 
-        Whenever your Argon2 parameters -- or ``argon2_cffi``'s defaults! --
+        Whenever your Argon2 parameters -- or ``argon2-cffi``'s defaults! --
         change, you should rehash your passwords at the next opportunity.  The
         common approach is to do that whenever a user logs in, since that
         should be the only time when you have access to the cleartext

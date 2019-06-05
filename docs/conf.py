@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# argon2_cffi documentation build configuration file, created by
+# argon2-cffi documentation build configuration file, created by
 # sphinx-quickstart on Sun May 11 16:17:15 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -76,7 +76,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"argon2_cffi"
+project = u"argon2-cffi"
 year = datetime.date.today().year
 copyright = u"2015, Hynek Schlawack"
 
@@ -218,7 +218,7 @@ html_theme_options = {
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "argon2_cffidoc"
+htmlhelp_basename = "argon2-cffidoc"
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -238,8 +238,8 @@ latex_elements = {
 latex_documents = [
     (
         "index",
-        "argon2_cffi.tex",
-        u"argon2_cffi Documentation",
+        "argon2-cffi.tex",
+        u"argon2-cffi Documentation",
         u"Hynek Schlawack",
         "manual",
     )
@@ -273,8 +273,8 @@ latex_documents = [
 man_pages = [
     (
         "index",
-        "argon2_cffi",
-        u"argon2_cffi Documentation",
+        "argon2-cffi",
+        u"argon2-cffi Documentation",
         [u"Hynek Schlawack"],
         1,
     )
@@ -292,10 +292,10 @@ man_pages = [
 texinfo_documents = [
     (
         "index",
-        "argon2_cffi",
-        u"argon2_cffi Documentation",
+        "argon2-cffi",
+        u"argon2-cffi Documentation",
         u"Hynek Schlawack",
-        "argon2_cffi",
+        "argon2-cffi",
         "One line description of project.",
         "Miscellaneous",
     )

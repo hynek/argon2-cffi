@@ -18,7 +18,7 @@ from .low_level import Type
 
 __version__ = "19.2.0.dev0"
 
-__title__ = "argon2_cffi"
+__title__ = "argon2-cffi"
 __description__ = "The secure Argon2 password hashing algorithm."
 __url__ = "https://argon2-cffi.readthedocs.io/"
 __uri__ = __url__
