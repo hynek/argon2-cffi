@@ -71,8 +71,8 @@ before_install:
   - pip install codecov
   - |
     if [[ "${TOXENV}" == "system-argon2" ]]; then
-        wget http://de.archive.ubuntu.com/ubuntu/pool/universe/a/argon2/libargon2-0_0~20161029-1_amd64.deb
-        wget http://de.archive.ubuntu.com/ubuntu/pool/universe/a/argon2/libargon2-0-dev_0~20161029-1_amd64.deb
+        wget http://archive.ubuntu.com/ubuntu/pool/main/a/argon2/libargon2-1_0~20171227-0.2_i386.deb
+        wget http://archive.ubuntu.com/ubuntu/pool/main/a/argon2/libargon2-dev_0~20171227-0.2_i386.deb
         sudo dpkg -i libargon2-0_0~20161029-1_amd64.deb
         sudo dpkg -i libargon2-0-dev_0~20161029-1_amd64.deb
     else
