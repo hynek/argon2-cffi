@@ -14,7 +14,10 @@ Vendoring Argon2 @ UNRELEASED
 Backward-incompatible changes:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-*none*
+- Python 3.4 is not supported anymore.
+  It has been unsupported by the Python core team for a while now and its PyPI downloads are negligible.
+
+  It's very unlikely that ``argon2-cffi`` will break under 3.4 anytime soon, but we don't test it and don't ship binary wheels for it anymore.
 
 
 Deprecations:
