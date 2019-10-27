@@ -193,14 +193,14 @@ Thank you for considering to contribute!
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
 .. _`PEP 257`: https://www.python.org/dev/peps/pep-0257/
 .. _`good test docstrings`: https://jml.io/pages/test-docstrings.html
-.. _`Code of Conduct`: https://github.com/hynek/argon2_cffi/blob/master/.github/CODE_OF_CONDUCT.rst
-.. _changelog: https://github.com/hynek/argon2_cffi/blob/master/CHANGELOG.rst
+.. _`Code of Conduct`: https://github.com/hynek/argon2-cffi/blob/master/.github/CODE_OF_CONDUCT.rst
+.. _changelog: https://github.com/hynek/argon2-cffi/blob/master/CHANGELOG.rst
 .. _`tox`: https://tox.readthedocs.io/
 .. _pyenv: https://github.com/pyenv/pyenv
 .. _reStructuredText: https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 .. _semantic newlines: https://rhodesmill.org/brandon/2012/one-sentence-per-line/
 .. _CI: https://travis-ci.org/hynek/argon2_cffi/
-.. _black: https://github.com/ambv/black
+.. _black: https://github.com/psf/black
 .. _pre-commit: https://pre-commit.com/
 .. _isort: https://github.com/timothycrosley/isort
 .. _`backward compatibility`: https://argon2-cffi.readthedocs.io/en/stable/backward-compatibility.html
