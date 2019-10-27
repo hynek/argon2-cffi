@@ -66,7 +66,7 @@ jobs:
       steps:
           - script: /opt/python/$PYTHON_VERSION/bin/python -m virtualenv .venv
             displayName: Create virtualenv
-          - script: .venv/bin/pip install six cffi "enum34; python_version < '3'"
+          - script: .venv/bin/pip install -U six cffi "enum34; python_version < '3'" pip==10.0.1
             displayName: Install our Python dependencies
           - script: |
               set -e
@@ -76,7 +76,7 @@ jobs:
               if [[ "$PYTHON_VERSION" =~ $REGEX ]]; then
                   PY_LIMITED_API="--build-option --py-limited-api=cp3${BASH_REMATCH[1]}"
               fi
-              .venv/bin/pip wheel --no-use-pep517 --no-binary argon2_cffi --no-deps argon2_cffi -w tmpwheelhouse/ $PY_LIMITED_API
+              .venv/bin/pip wheel --no-binary argon2_cffi --no-deps argon2_cffi -w tmpwheelhouse/ $PY_LIMITED_API
             displayName: Build the wheel
           - script: auditwheel repair tmpwheelhouse/argon2_cffi*.whl -w wheelhouse/
             displayName: Run auditwheel
