@@ -29,7 +29,7 @@ jobs:
             displayName: Create virtualenv
           - script: .venv/bin/pip install -U wheel
             displayName: Update wheel to the latest version
-          - script: .venv/bin/pip install six cffi "enum34; python_version < '3'"
+          - script: .venv/bin/pip install -U six cffi "enum34; python_version < '3'" pip==10.0.1
             displayName: Install our Python dependencies
 
           - script: |
@@ -39,7 +39,7 @@ jobs:
               if [[ "${PYTHON_VERSION}" =~ $REGEX ]]; then
                   PY_LIMITED_API="--build-option --py-limited-api=cp3${BASH_REMATCH[1]}"
               fi
-              .venv/bin/pip wheel argon2_cffi --no-use-pep517 --wheel-dir=wheelhouse $PY_LIMITED_API --no-binary argon2_cffi --no-deps
+              .venv/bin/pip wheel argon2_cffi --wheel-dir=wheelhouse $PY_LIMITED_API --no-binary argon2_cffi --no-deps
             displayName: Build the wheel
           - script: .venv/bin/pip install --no-index -f wheelhouse argon2_cffi
             displayName: Test installing the wheel
@@ -146,10 +146,10 @@ jobs:
                   WINDOWS_ARCH: 'x86_64'
       steps:
           - script: |
-              "C:/Python%PYTHON_VERSION%/Scripts/pip" install six cffi "enum34; python_version < '3'"
+              "C:/Python%PYTHON_VERSION%/Scripts/pip" install -U six cffi "enum34; python_version < '3' pip==10.0.1"
             displayName: Install our Python dependencies
           - script: |
-                    C:/Python%PYTHON_VERSION%/Scripts/pip wheel --no-use-pep517 argon2_cffi --wheel-dir=wheelhouse --no-binary argon2_cffi
+                    C:/Python%PYTHON_VERSION%/Scripts/pip wheel argon2_cffi --wheel-dir=wheelhouse --no-binary argon2_cffi
             displayName: Build the wheel
           - script: '"C:/Python%PYTHON_VERSION%/Scripts/pip" install -f wheelhouse argon2_cffi --no-index'
             displayName: Test installing the wheel
