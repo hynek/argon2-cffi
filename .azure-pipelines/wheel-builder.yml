@@ -146,7 +146,7 @@ jobs:
                   WINDOWS_ARCH: 'x86_64'
       steps:
           - script: |
-              "C:/Python%PYTHON_VERSION%/Scripts/pip" install -U six cffi "enum34; python_version < '3' pip=='10.0.1'"
+              "C:/Python%PYTHON_VERSION%/Scripts/pip" install -U six cffi "enum34; python_version < '3'"
             displayName: Install our Python dependencies
           - script: |
                     C:/Python%PYTHON_VERSION%/Scripts/pip wheel argon2_cffi --wheel-dir=wheelhouse --no-binary argon2_cffi
