@@ -5,6 +5,33 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
+19.3.0 (UNRELEASED)
+-------------------
+
+Vendoring Argon2 @ UNRELEASED
+
+
+Backward-incompatible changes:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+*none*
+
+
+Deprecations:
+^^^^^^^^^^^^^
+
+*none*
+
+
+Changes:
+^^^^^^^^
+
+*none*
+
+
+----
+
+
 19.2.0 (2019-10-27)
 -------------------
 
