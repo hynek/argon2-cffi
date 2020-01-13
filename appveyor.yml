@@ -75,7 +75,7 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.  Also upgrade setuptools.
-  - "python -m pip install --disable-pip-version-check --user --upgrade pip setuptools"
+  - "python -m pip install --disable-pip-version-check --user --upgrade pip setuptools wheel"
 
   # Fetch Argon2 submodule.
   - "git submodule init"
