@@ -3,6 +3,19 @@ requires = ["setuptools>=40.6.0", "wheel", "cffi>=1.0"]
 build-backend = "setuptools.build_meta"
 
 
+[tool.coverage.run]
+parallel = true
+branch = true
+source = ["argon2"]
+
+[tool.coverage.paths]
+source = ["src", ".tox/*/site-packages"]
+
+[tool.coverage.report]
+show_missing = true
+omit = ["src/argon2/_ffi_build.py"]
+
+
 [tool.black]
 line-length = 79
 
