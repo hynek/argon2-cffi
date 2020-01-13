@@ -48,7 +48,7 @@ environment:
       PYTHON_VERSION: "3.7.x"
       PYTHON_ARCH: "64"
 
-    - PYTHON: "C:\\Python37-x64"
+    - PYTHON: "C:\\Python38-x64"
       PYTHON_VERSION: "3.8.x"
       PYTHON_ARCH: "64"
 
@@ -94,7 +94,7 @@ test_script:
 after_test:
   # If tests are successful, create binary packages for the project.
   - "%CMD_IN_ENV% python -m pip install --upgrade pep517"
-  - "%CMD_IN_ENV% python -m pep517.build --source .
+  - "%CMD_IN_ENV% python -m pep517.build --source ."
   - ps: "ls dist"
 
 artifacts:
