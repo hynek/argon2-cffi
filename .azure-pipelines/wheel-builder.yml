@@ -29,17 +29,13 @@ jobs:
             displayName: Create virtualenv
           - script: .venv/bin/pip install -U wheel
             displayName: Update wheel to the latest version
-          - script: .venv/bin/pip install -U six cffi "enum34; python_version < '3'" pip==10.0.1
+          - script: .venv/bin/pip install -U six cffi "enum34; python_version < '3'" pip
             displayName: Install our Python dependencies
 
           - script: |
               set -e
               set -x
-              REGEX="3\.([0-9])*"
-              if [[ "${PYTHON_VERSION}" =~ $REGEX ]]; then
-                  PY_LIMITED_API="--build-option --py-limited-api=cp3${BASH_REMATCH[1]}"
-              fi
-              .venv/bin/pip wheel argon2_cffi --wheel-dir=wheelhouse $PY_LIMITED_API --no-binary argon2_cffi --no-deps
+              .venv/bin/pip wheel argon2_cffi --wheel-dir=wheelhouse --no-binary argon2_cffi --no-deps
             displayName: Build the wheel
           - script: .venv/bin/pip install --no-index -f wheelhouse argon2_cffi
             displayName: Test installing the wheel
@@ -66,17 +62,13 @@ jobs:
       steps:
           - script: /opt/python/$PYTHON_VERSION/bin/python -m virtualenv .venv
             displayName: Create virtualenv
-          - script: .venv/bin/pip install -U six cffi "enum34; python_version < '3'" pip==10.0.1
+          - script: .venv/bin/pip install -U six cffi "enum34; python_version < '3'" pip
             displayName: Install our Python dependencies
           - script: |
               set -e
               set -x
 
-              REGEX="cp3([0-9])*"
-              if [[ "$PYTHON_VERSION" =~ $REGEX ]]; then
-                  PY_LIMITED_API="--build-option --py-limited-api=cp3${BASH_REMATCH[1]}"
-              fi
-              .venv/bin/pip wheel --no-binary argon2_cffi --no-deps argon2_cffi -w tmpwheelhouse/ $PY_LIMITED_API
+              .venv/bin/pip wheel --no-binary argon2_cffi --no-deps argon2_cffi -w tmpwheelhouse/
             displayName: Build the wheel
           - script: auditwheel repair tmpwheelhouse/argon2_cffi*.whl -w wheelhouse/
             displayName: Run auditwheel
