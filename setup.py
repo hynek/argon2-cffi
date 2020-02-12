@@ -200,11 +200,14 @@ def keywords_with_side_effects(argv):
         )
         if use_system_argon2:
             disable_subcommand(build, "build_clib")
+        cmdclass = {"build_clib": BuildCLibWithCompilerFlags}
+        if BDistWheel is not None:
+            cmdclass["bdist_wheel"] = BDistWheel
         return {
             "setup_requires": SETUP_REQUIRES,
             "cffi_modules": CFFI_MODULES,
             "libraries": LIBRARIES,
-            "cmdclass": {"build_clib": BuildCLibWithCompilerFlags},
+            "cmdclass": cmdclass,
         }
 
 
@@ -329,6 +332,27 @@ class BuildCLibWithCompilerFlags(build_clib):
             self.compiler.create_static_lib(
                 objects, lib_name, output_dir=self.build_clib, debug=self.debug
             )
+
+
+if (
+    sys.platform != "win32"
+    and sys.version_info > (3,)
+    and platform.python_implementation() == "CPython"
+):
+    try:
+        import wheel.bdist_wheel
+    except ImportError:
+        BDistWheel = None
+    else:
+
+        class BDistWheel(wheel.bdist_wheel.bdist_wheel):
+            def finalize_options(self):
+                self.py_limited_api = "cp3{}".format(sys.version_info[1])
+                wheel.bdist_wheel.bdist_wheel.finalize_options(self)
+
+
+else:
+    BDistWheel = None
 
 
 if __name__ == "__main__":
