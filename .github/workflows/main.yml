@@ -50,6 +50,26 @@ jobs:
         if: "contains(env.USING_COVERAGE, matrix.python-version)"
         with:
           fail_ci_if_error: true
+          
+  system-package:
+    runs-on: "ubuntu-latest"
+    name: "Install and test with system package of Argon2."
+    steps:
+      - uses: "actions/checkout@v2"
+      - uses: "actions/setup-python@v1"
+        with:
+          python-version: "3.8"
+      - name: "Install dependencies"
+        run: |
+          set -xe
+          apt-get install libargon2-0 libargon2-0-dev
+          python -VV
+          python -m site
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install --upgrade virtualenv tox
+
+      - name: "Run tox -e system-argon2"
+        run: "python -m tox -e system-argon2"
 
   package:
     name: "Build & verify package"
