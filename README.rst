@@ -2,21 +2,13 @@
 CFFI-based Argon2 Bindings for Python
 =====================================
 
-.. image:: https://img.shields.io/pypi/v/argon2-cffi.svg
-   :target: https://pypi.org/project/argon2-cffi/
-   :alt: PyPI
-
 .. image:: https://readthedocs.org/projects/argon2-cffi/badge/?version=stable
    :target: http://argon2-cffi.readthedocs.io/en/stable/?badge=stable
    :alt: Documentation Status
 
-.. image:: https://travis-ci.org/hynek/argon2-cffi.svg?branch=master
-   :target: https://travis-ci.org/hynek/argon2-cffi
-   :alt: Travis CI status
-
-.. image:: https://ci.appveyor.com/api/projects/status/3faufu7qgwc8nv2v/branch/master?svg=true
-   :target: https://ci.appveyor.com/project/hynek/argon2-cffi
-   :alt: AppVeyor CI Status
+.. image:: https://github.com/hynek/argon2-cffi/workflows/CI/badge.svg?branch=master
+   :target: https://github.com/hynek/argon2-cffi/actions?workflow=CI
+   :alt: CI Status
 
 .. image:: https://codecov.io/github/hynek/argon2-cffi/branch/master/graph/badge.svg
    :target: https://codecov.io/github/hynek/argon2-cffi
