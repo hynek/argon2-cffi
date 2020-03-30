@@ -82,10 +82,11 @@ jobs:
 
     steps:
       - uses: "actions/checkout@v2"
+        with:
+          submodules: "recursive"
       - uses: "actions/setup-python@v1"
         with:
           python-version: "3.8"
-          submodules: "recursive"
       - name: "Install in dev mode"
         run: |
           set -xe
