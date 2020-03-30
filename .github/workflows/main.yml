@@ -62,7 +62,7 @@ jobs:
       - name: "Install dependencies"
         run: |
           set -xe
-          apt-get install libargon2-0 libargon2-0-dev
+          sudo apt-get install libargon2-0 libargon2-0-dev
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
