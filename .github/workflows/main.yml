@@ -89,7 +89,6 @@ jobs:
           python-version: "3.8"
       - name: "Install in dev mode"
         run: |
-          set -xe
           python setup.py build
           python -m pip install -e .[dev]
       - name: "Import package"
