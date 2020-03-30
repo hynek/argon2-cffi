@@ -50,7 +50,7 @@ jobs:
         if: "contains(env.USING_COVERAGE, matrix.python-version)"
         with:
           fail_ci_if_error: true
-          
+
   system-package:
     runs-on: "ubuntu-latest"
     name: "Install and test with system package of Argon2."
@@ -63,6 +63,8 @@ jobs:
         run: |
           set -xe
           sudo apt-get install libargon2-0 libargon2-0-dev
+          # Ensure we cannot use our own Argon2 by accident.
+          rm -rf extras
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
