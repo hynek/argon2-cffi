@@ -19,9 +19,15 @@ from setuptools.command.install import install
 NAME = "argon2-cffi"
 PACKAGES = find_packages(where="src")
 
-# Optimized version requires SSE2 extensions.  They have been around since
-# 2001 so we try to compile it on every recent-ish x86.
-optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
+use_sse2 = os.environ.get("ARGON2_CFFI_USE_SSE2", None)
+if use_sse2 == "1":
+    optimized = True
+elif use_sse2 == "0":
+    optimized = False
+else:
+    # Optimized version requires SSE2 extensions.  They have been around since
+    # 2001 so we try to compile it on every recent-ish x86.
+    optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
 
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 lib_base = os.path.join("extras", "libargon2", "src")

@@ -26,7 +26,7 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-*none*
+- Added ``ARGON2_CFFI_USE_SSE2`` env variable to override SSE2 autodetection.
 
 
 ----
