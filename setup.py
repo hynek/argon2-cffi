@@ -8,7 +8,7 @@ import sys
 
 from distutils.command.build import build
 from distutils.command.build_clib import build_clib
-from distutils.errors import DistutilsSetupError
+from distutils.errors import CompileError, DistutilsSetupError
 
 from setuptools import find_packages, setup
 from setuptools.command.install import install
@@ -19,9 +19,42 @@ from setuptools.command.install import install
 NAME = "argon2-cffi"
 PACKAGES = find_packages(where="src")
 
-# Optimized version requires SSE2 extensions.  They have been around since
-# 2001 so we try to compile it on every recent-ish x86.
-optimized = platform.machine() in ("i686", "x86", "x86_64", "AMD64")
+
+def has_sse_flag():
+    """
+    Return a boolean indicating whether the sse flag name is supported on
+    the default compiler.
+    """
+    import tempfile
+    from distutils.ccompiler import new_compiler
+    from distutils.sysconfig import customize_compiler
+
+    compiler = new_compiler()
+    customize_compiler(compiler)
+    with tempfile.NamedTemporaryFile("w", suffix=".c") as f:
+        f.write("int main (int argc, char **argv) { return 0; }")
+        f.flush()
+        try:
+            compiler.compile([f.name], extra_preargs=["-msse2"])
+        except CompileError:
+            return False
+    return True
+
+
+windows = "win32" in str(sys.platform).lower()
+use_sse2 = os.environ.get("ARGON2_CFFI_USE_SSE2", None)
+if use_sse2 == "1":
+    optimized = True
+elif use_sse2 == "0":
+    optimized = False
+else:
+    if windows:
+        if platform.machine() in ("i686", "x86", "x86_64", "AMD64"):
+            optimized = True
+        else:
+            optimized = False
+    else:
+        optimized = has_sse_flag()
 
 CFFI_MODULES = ["src/argon2/_ffi_build.py:ffi"]
 lib_base = os.path.join("extras", "libargon2", "src")
@@ -42,7 +75,6 @@ sources = [
 ]
 
 # Add vendored integer types headers if necessary.
-windows = "win32" in str(sys.platform).lower()
 if windows:
     int_base = "extras/msinttypes/"
     inttypes = int_base + "inttypes"
@@ -310,7 +342,10 @@ class BuildCLibWithCompilerFlags(build_clib):
                 )
             sources = list(sources)
 
-            print("building '%s' library" % (lib_name,))
+            print(
+                "building '%s' library %s sse optimizations"
+                % (lib_name, "with" if optimized else "without")
+            )
 
             # First, compile the source code to object files in the library
             # directory.  (This should probably change to putting object

@@ -26,7 +26,7 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-*none*
+- Replace ``platform.machine()`` based SSE2 autodetection with compile test for cross-compilation compatibility.
 
 
 ----
