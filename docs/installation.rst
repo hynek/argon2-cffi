@@ -57,6 +57,16 @@ This approach can lead to problems around your build chain and you can run into 
 **It is your own responsibility to deal with these risks if you choose this path.**
 
 
+Override Automatic SSE2 Detection
+------------------------------------------
+
+If you set ``ARGON2_CFFI_USE_SSE2`` to ``1`` (and *only* ``1``), ``argon2-cffi`` will build with sse2 support.
+
+If you set ``ARGON2_CFFI_USE_SSE2`` to ``0`` (and *only* ``0``), ``argon2-cffi`` will build without sse2 support.
+
+This should generally only be used if the sse2 autodetection causes a compilation failure or if you are cross compiling.
+
+
 .. _SSE2: https://en.wikipedia.org/wiki/SSE2
 .. _PyPI: https://pypi.org/project/argon2-cffi/
 .. _CFFI environment: https://cffi.readthedocs.io/en/latest/installation.html
