@@ -5,7 +5,7 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-19.3.0 (UNRELEASED)
+20.1.0 (UNRELEASED)
 -------------------
 
 Vendoring Argon2 @ UNRELEASED
@@ -26,7 +26,7 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-- Added ``ARGON2_CFFI_USE_SSE2`` env variable to override SSE2 autodetection.
+- It is now possible to manually override the detection of SSE2 using the ``ARGON2_CFFI_USE_SSE2`` environment variable.
 
 
 ----

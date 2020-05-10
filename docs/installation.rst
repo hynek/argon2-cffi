@@ -52,19 +52,26 @@ Therefore you also have to instruct ``pip`` to use a source distribution:
   env ARGON2_CFFI_USE_SYSTEM=1 \
     python -m pip install --no-binary=argon2-cffi argon2-cffi
 
-This approach can lead to problems around your build chain and you can run into incompatabilities between Argon2 and ``argon2-cffi`` if the latter has been tested against a different version.
+This approach can lead to problems around your build chain and you can run into incompatibilities between Argon2 and ``argon2-cffi`` if the latter has been tested against a different version.
 
 **It is your own responsibility to deal with these risks if you choose this path.**
 
+Available since version 18.1.0.
+
 
 Override Automatic SSE2 Detection
-------------------------------------------
+---------------------------------
 
-If you set ``ARGON2_CFFI_USE_SSE2`` to ``1`` (and *only* ``1``), ``argon2-cffi`` will build with sse2 support.
+Usually the build process tries to guess whether or not it should use SSE2_-optimized code.
+This can go wrong and is problematic for cross-compiling.
 
-If you set ``ARGON2_CFFI_USE_SSE2`` to ``0`` (and *only* ``0``), ``argon2-cffi`` will build without sse2 support.
+Therefore you can use the ``ARGON2_CFFI_USE_SSE2`` environment variable to control the process:
 
-This should generally only be used if the sse2 autodetection causes a compilation failure or if you are cross compiling.
+- If you set it to ``1``, ``argon2-cffi`` will build **with** SSE2 support.
+- If you set it to ``0``, ``argon2-cffi`` will build **without** SSE2 support.
+- If you set it to anything else, it will be ignored and ``argon2-cffi`` will try to guess.
+
+Available since version 20.1.0.
 
 
 .. _SSE2: https://en.wikipedia.org/wiki/SSE2
