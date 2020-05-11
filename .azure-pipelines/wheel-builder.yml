@@ -57,8 +57,8 @@ jobs:
                   PYTHON_VERSION: 'cp27-cp27m'
               Python27mu:
                   PYTHON_VERSION: 'cp27-cp27mu'
-              Python34m:
-                  PYTHON_VERSION: 'cp34-cp34m'
+              Python35m:
+                  PYTHON_VERSION: 'cp35-cp35m'
       steps:
           - script: /opt/python/$PYTHON_VERSION/bin/python -m virtualenv .venv
             displayName: Create virtualenv
@@ -95,14 +95,6 @@ jobs:
               Python27-x86-64:
                   containerImage: 'pyca/cryptography-runner-windows:py27-x86_64'
                   PYTHON_VERSION: '27'
-                  WINDOWS_ARCH: 'x86_64'
-              Python34-x86:
-                  containerImage: 'pyca/cryptography-runner-windows:py34-x86'
-                  PYTHON_VERSION: '34'
-                  WINDOWS_ARCH: 'x86'
-              Python34-x86-64:
-                  containerImage: 'pyca/cryptography-runner-windows:py34-x86_64'
-                  PYTHON_VERSION: '34'
                   WINDOWS_ARCH: 'x86_64'
               Python35-x86:
                   containerImage: 'pyca/cryptography-runner-windows:py35-x86'
