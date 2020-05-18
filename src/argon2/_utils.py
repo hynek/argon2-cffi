@@ -105,7 +105,7 @@ class Parameters(object):
     def __repr__(self):
         return (
             "<Parameters(type=%r, version=%d, hash_len=%d, salt_len=%d, "
-            "time_cost=%d, memory_cost=%d, parallelelism=%d)>"
+            "time_cost=%d, memory_cost=%d, parallelism=%d)>"
             % (
                 self.type,
                 self.version,
