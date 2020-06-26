@@ -45,3 +45,6 @@ CFFI-based Argon2 Bindings for Python
 
 ``argon2-cffi``\ ’s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.io/>`_, the code on `GitHub <https://github.com/hynek/argon2-cffi>`_.
 It’s rigorously tested on Python 2.7, 3.5+, and PyPy.
+
+It implements Argon2 version 1.3, as described in
+`Argon2: the memory-hard function for password hashing and other applications <https://www.cryptolux.org/images/0/0d/Argon2.pdf>`_.
