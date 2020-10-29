@@ -62,7 +62,7 @@ jobs:
       - name: "Install dependencies"
         run: |
           set -xe
-          sudo apt-get install libargon2-0 libargon2-0-dev
+          sudo apt-get install libargon2-0
           # Ensure we cannot use our own Argon2 by accident.
           rm -rf extras
           python -VV
