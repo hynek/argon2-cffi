@@ -341,11 +341,7 @@ class BuildCLibWithCompilerFlags(build_clib):
             )
 
 
-if (
-    sys.platform != "win32"
-    and sys.version_info > (3,)
-    and platform.python_implementation() == "CPython"
-):
+if sys.version_info > (3,) and platform.python_implementation() == "CPython":
     try:
         import wheel.bdist_wheel
     except ImportError:
