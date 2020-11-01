@@ -1,0 +1,100 @@
+name: wheels
+on:
+  pull_request:
+  push:
+    branches: [master, test-me-*]
+    tags: ['*']
+
+jobs:
+  manylinux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+        - name: cp27-cp27mu
+          image: quay.io/pypa/manylinux1_x86_64
+        - name: cp27-cp27m
+          image: quay.io/pypa/manylinux1_x86_64
+        - name: cp35-cp35m
+          image: quay.io/pypa/manylinux1_x86_64
+        - name: pp27-pypy_73
+          image: pypywheels/manylinux2010-pypy_x86_64
+        - name: pp36-pypy36_pp73
+          image: pypywheels/manylinux2010-pypy_x86_64
+        - name: pp37-pypy37_pp73
+          image: pypywheels/manylinux2010-pypy_x86_64
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - run: |
+        mkdir dist
+        podman run --rm \
+          -v $PWD:/src:ro \
+          -v $PWD/dist:/dist:rw \
+          ${{ matrix.image }} \
+          bash -exc '\
+            yum install -y libffi-devel && \
+            /opt/python/${{ matrix.name }}/bin/pip wheel \
+              --no-deps --wheel-dir /tmp/wheels /src && \
+            auditwheel repair /tmp/wheels/* --wheel-dir /dist && \
+            find /dist -type f | xargs --verbose --replace unzip -l {} \
+          '
+      name: build wheel
+    - uses: actions/upload-artifact@v2
+      with:
+        name: wheels-manylinux-${{ matrix.name }}
+        path: dist/*.whl
+  macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        include:
+        - name: cp27
+          py: 2.7
+        - name: cp35
+          py: 3.5
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.py }}
+    - run: python -m pip wheel --no-deps --wheel-dir dist .
+    - uses: actions/upload-artifact@v2
+      with:
+        name: wheels-macos-${{ matrix.name }}
+        path: dist/*.whl
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+        - name: cp27-x86
+          py: 2.7
+          arch: x86
+        - name: cp27-x64
+          py: 2.7
+          arch: x64
+        - name: cp35-x86
+          py: 3.5
+          arch: x86
+        - name: cp35-x64
+          py: 3.5
+          arch: x64
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.py }}
+        architecture: ${{ matrix.arch }}
+    - run: choco install vcpython27
+      if: matrix.py == 2.7
+    - run: python -m pip wheel --no-deps --wheel-dir dist .
+    - uses: actions/upload-artifact@v2
+      with:
+        name: wheels-windows-${{ matrix.name }}
+        path: dist/*.whl
