@@ -1,9 +1,10 @@
 name: wheels
 on:
-  pull_request:
-  push:
-    branches: [master, test-me-*]
-    tags: ['*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: pypi version (sdist already uploaded)
+        required: true
 
 jobs:
   manylinux:
@@ -24,19 +25,16 @@ jobs:
         - name: pp37-pypy37_pp73
           image: pypywheels/manylinux2010-pypy_x86_64
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
     - run: |
         mkdir dist
         podman run --rm \
-          -v $PWD:/src:ro \
           -v $PWD/dist:/dist:rw \
           ${{ matrix.image }} \
           bash -exc '\
             yum install -y libffi-devel && \
             /opt/python/${{ matrix.name }}/bin/pip wheel \
-              --no-deps --wheel-dir /tmp/wheels /src && \
+              --no-deps --wheel-dir /tmp/wheels --no-binary :all: \
+              argon2-cffi==${{ github.event.inputs.version }} && \
             auditwheel repair /tmp/wheels/* --wheel-dir /dist && \
             find /dist -type f | xargs --verbose --replace unzip -l {} \
           '
@@ -55,13 +53,11 @@ jobs:
         - name: cp35
           py: 3.5
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
     - uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.py }}
-    - run: python -m pip wheel --no-deps --wheel-dir dist .
+    - run: python -m pip install --upgrade pip setuptools wheel
+    - run: 'python -m pip wheel --no-deps --wheel-dir dist --no-binary :all: argon2-cffi==${{ github.event.inputs.version }}'
     - uses: actions/upload-artifact@v2
       with:
         name: wheels-macos-${{ matrix.name }}
@@ -84,16 +80,14 @@ jobs:
           py: 3.5
           arch: x64
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: recursive
     - uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.py }}
         architecture: ${{ matrix.arch }}
     - run: choco install vcpython27
       if: matrix.py == 2.7
-    - run: python -m pip wheel --no-deps --wheel-dir dist .
+    - run: python -m pip install --upgrade pip setuptools wheel
+    - run: 'python -m pip wheel --no-deps --wheel-dir dist --no-binary :all: argon2-cffi==${{ github.event.inputs.version }}'
     - uses: actions/upload-artifact@v2
       with:
         name: wheels-windows-${{ matrix.name }}
