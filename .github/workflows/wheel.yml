@@ -79,6 +79,12 @@ jobs:
         - name: cp35-x64
           py: 3.5
           arch: x64
+        - name: cp35-x86
+          py: "3.9"
+          arch: x86
+        - name: cp35-x64
+          py: "3.9"
+          arch: x64
     steps:
     - uses: actions/setup-python@v2
       with:
