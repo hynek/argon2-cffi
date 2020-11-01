@@ -22,6 +22,3 @@ line-length = 79
 
 [tool.isort]
 profile = "attrs"
-
-known_first_party = "argon2"
-known_third_party = ["argon2", "cffi", "hypothesis", "pytest", "setuptools", "six"]
