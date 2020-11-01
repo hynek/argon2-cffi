@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: pypi version (sdist already uploaded)
+        description: PyPI version (sdist already uploaded)
         required: true
 
 jobs:
@@ -49,9 +49,9 @@ jobs:
       matrix:
         include:
         - name: cp27
-          py: 2.7
+          py: "2.7"
         - name: cp35
-          py: 3.5
+          py: "3.5"
     steps:
     - uses: actions/setup-python@v2
       with:
@@ -68,22 +68,16 @@ jobs:
       matrix:
         include:
         - name: cp27-x86
-          py: 2.7
+          py: "2.7"
           arch: x86
         - name: cp27-x64
-          py: 2.7
+          py: "2.7"
           arch: x64
         - name: cp35-x86
-          py: 3.5
+          py: "3.5"
           arch: x86
         - name: cp35-x64
-          py: 3.5
-          arch: x64
-        - name: cp39-x86
-          py: "3.9"
-          arch: x86
-        - name: cp39-x64
-          py: "3.9"
+          py: "3.5"
           arch: x64
     steps:
     - uses: actions/setup-python@v2
