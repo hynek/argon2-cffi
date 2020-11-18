@@ -43,6 +43,42 @@ jobs:
       with:
         name: wheels-manylinux-${{ matrix.name }}
         path: dist/*.whl
+  aarch64_manylinux:
+    strategy:
+      matrix:
+        pyver: [cp36-cp36m, cp37-cp37m, cp38-cp38, cp39-cp39]
+        arch: [aarch64]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    env:
+      py: /opt/python/${{ matrix.pyver }}/bin/python
+      img: quay.io/pypa/manylinux2014_${{ matrix.arch }}
+    steps:
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Available platforms
+      run: echo ${{ steps.qemu.outputs.platforms }}
+    - name: mkdir dist
+      run: |
+        podman run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+         ${{ env.img }} mkdir dist
+    - name: Build wheel
+      run: |
+        podman run --rm -v $PWD/dist:/dist:rw --workdir=/ws \
+          ${{ env.img }} \
+          bash -exc '\
+            yum install -y libffi-devel && \
+            /opt/python/${{ matrix.pyver }}/bin/pip wheel \
+              --no-deps --wheel-dir /tmp/wheels --no-binary :all: \
+              argon2-cffi==${{ github.event.inputs.version }} && \
+            auditwheel repair /tmp/wheels/* --wheel-dir /dist && \
+            find /dist -type f | xargs --verbose --replace unzip -l {} \
+          '
+    - uses: actions/upload-artifact@v2
+      with:
+        name: wheels-aarch64_manylinux-${{ matrix.pyver }}
+        path: dist/*.whl
   macos:
     runs-on: macos-latest
     strategy:
