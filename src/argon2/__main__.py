@@ -81,7 +81,9 @@ gc.enable()""".format(
         number=args.n,
     )
     print(
-        "\n{0:.3}ms per password verification".format(duration / args.n * 1000)
+        "\n{0:.1f}ms per password verification".format(
+            duration / args.n * 1000
+        )
     )
 
 
