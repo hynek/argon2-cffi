@@ -29,7 +29,7 @@ def main(argv):
         "-m", type=int, help="`memory_cost`", default=DEFAULT_MEMORY_COST
     )
     parser.add_argument(
-        "-p", type=int, help="`parallellism`", default=DEFAULT_PARALLELISM
+        "-p", type=int, help="`parallelism`", default=DEFAULT_PARALLELISM
     )
     parser.add_argument(
         "-l", type=int, help="`hash_length`", default=DEFAULT_HASH_LENGTH
@@ -81,7 +81,9 @@ gc.enable()""".format(
         number=args.n,
     )
     print(
-        "\n{0:.3}ms per password verification".format(duration / args.n * 1000)
+        "\n{0:.1f}ms per password verification".format(
+            duration / args.n * 1000
+        )
     )
 
 
