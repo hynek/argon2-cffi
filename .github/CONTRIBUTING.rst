@@ -202,5 +202,5 @@ Thank you for considering to contribute!
 .. _CI: https://github.com/hynek/argon2-cffi/actions?query=workflow%3ACI
 .. _black: https://github.com/psf/black
 .. _pre-commit: https://pre-commit.com/
-.. _isort: https://github.com/timothycrosley/isort
+.. _isort: https://github.com/PyCQA/isort
 .. _`backward compatibility`: https://argon2-cffi.readthedocs.io/en/stable/backward-compatibility.html
