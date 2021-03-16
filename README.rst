@@ -6,11 +6,11 @@ CFFI-based Argon2 Bindings for Python
    :target: http://argon2-cffi.readthedocs.io/en/stable/?badge=stable
    :alt: Documentation Status
 
-.. image:: https://github.com/hynek/argon2-cffi/workflows/CI/badge.svg?branch=master
+.. image:: https://github.com/hynek/argon2-cffi/workflows/CI/badge.svg?branch=main
    :target: https://github.com/hynek/argon2-cffi/actions?workflow=CI
    :alt: CI Status
 
-.. image:: https://codecov.io/github/hynek/argon2-cffi/branch/master/graph/badge.svg
+.. image:: https://codecov.io/github/hynek/argon2-cffi/branch/main/graph/badge.svg
    :target: https://codecov.io/github/hynek/argon2-cffi
    :alt: Test Coverage
 
