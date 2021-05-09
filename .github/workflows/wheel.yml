@@ -52,6 +52,10 @@ jobs:
           py: "2.7"
         - name: cp35
           py: "3.5"
+        - name: pp36
+          py: pypy-3.6
+        - name: pp37
+          py: pypy-3.7
     steps:
     - uses: actions/setup-python@v2
       with:
@@ -79,6 +83,12 @@ jobs:
         - name: cp35-x64
           py: "3.5"
           arch: x64
+        - name: pp36
+          py: pypy-3.6
+          arch: x86
+        - name: pp37
+          py: pypy-3.7
+          arch: x86
     steps:
     - uses: actions/setup-python@v2
       with:
