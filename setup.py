@@ -102,7 +102,7 @@ if windows and sys.version_info[0] == 2:
 
 INSTALL_REQUIRES = ["cffi>=1.0.0", "six", "enum34; python_version<'3.4'"]
 EXTRAS_REQUIRE = {
-    "docs": ["sphinx"],
+    "docs": ["sphinx", "furo"],
     "tests": ["coverage[toml]>=5.0.2", "hypothesis", "pytest"],
 }
 EXTRAS_REQUIRE["dev"] = (
