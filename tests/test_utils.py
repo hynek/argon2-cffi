@@ -134,18 +134,19 @@ class TestParameters(object):
         """
         __repr__ returns s ensible string.
         """
-        assert (
-            "<Parameters(type=<Type.ID: 2>, version=19, hash_len=32, "
-            "salt_len=8, time_cost=2, memory_cost=65536, parallelism=4)>"
-            == repr(
-                Parameters(
-                    type=Type.ID,
-                    salt_len=8,
-                    hash_len=32,
-                    version=19,
-                    memory_cost=65536,
-                    time_cost=2,
-                    parallelism=4,
-                )
+        assert repr(
+            Parameters(
+                type=Type.ID,
+                salt_len=8,
+                hash_len=32,
+                version=19,
+                memory_cost=65536,
+                time_cost=2,
+                parallelism=4,
             )
-        )
+        ) in [
+            "<Parameters(type=<Type.ID: 2>, version=19, hash_len=32, "
+            "salt_len=8, time_cost=2, memory_cost=65536, parallelism=4)>",
+            "<Parameters(type=Type.ID, version=19, hash_len=32, "
+            "salt_len=8, time_cost=2, memory_cost=65536, parallelism=4)>",
+        ]
