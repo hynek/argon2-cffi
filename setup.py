@@ -68,6 +68,10 @@ PROJECT_URLS = {
     "Documentation": "https://argon2-cffi.readthedocs.io/",
     "Bug Tracker": "https://github.com/hynek/argon2-cffi/issues",
     "Source Code": "https://github.com/hynek/argon2-cffi",
+    "Funding": "https://github.com/sponsors/hynek",
+    "Tidelift": "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?"
+    "utm_source=pypi-argon2-cffi&utm_medium=pypi",
+    "Ko-fi": "https://ko-fi.com/the_hynek",
 }
 CLASSIFIERS = [
     "Development Status :: 5 - Production/Stable",
