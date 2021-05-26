@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We are following [CalVer](https://calver.org) with generous backward-compatability guarantees. Therefore we only support the latest version.
+We are following [CalVer](https://calver.org) with generous backward-compatibility guarantees. Therefore we only support the latest version.
 
 
 ## Reporting a Vulnerability

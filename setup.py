@@ -68,6 +68,10 @@ PROJECT_URLS = {
     "Documentation": "https://argon2-cffi.readthedocs.io/",
     "Bug Tracker": "https://github.com/hynek/argon2-cffi/issues",
     "Source Code": "https://github.com/hynek/argon2-cffi",
+    "Funding": "https://github.com/sponsors/hynek",
+    "Tidelift": "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?"
+    "utm_source=pypi-argon2-cffi&utm_medium=pypi",
+    "Ko-fi": "https://ko-fi.com/the_hynek",
 }
 CLASSIFIERS = [
     "Development Status :: 5 - Production/Stable",
@@ -86,6 +90,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Programming Language :: Python",
@@ -102,7 +107,7 @@ if windows and sys.version_info[0] == 2:
 
 INSTALL_REQUIRES = ["cffi>=1.0.0", "six", "enum34; python_version<'3.4'"]
 EXTRAS_REQUIRE = {
-    "docs": ["sphinx"],
+    "docs": ["sphinx", "furo"],
     "tests": ["coverage[toml]>=5.0.2", "hypothesis", "pytest"],
 }
 EXTRAS_REQUIRE["dev"] = (

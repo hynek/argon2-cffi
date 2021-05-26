@@ -52,6 +52,10 @@ jobs:
           py: "2.7"
         - name: cp35
           py: "3.5"
+        - name: pp36
+          py: pypy-3.6
+        - name: pp37
+          py: pypy-3.7
     steps:
     - uses: actions/setup-python@v2
       with:
@@ -67,25 +71,23 @@ jobs:
     strategy:
       matrix:
         include:
-        - name: cp27-x86
-          py: "2.7"
-          arch: x86
-        - name: cp27-x64
-          py: "2.7"
-          arch: x64
         - name: cp35-x86
           py: "3.5"
           arch: x86
         - name: cp35-x64
           py: "3.5"
           arch: x64
+        - name: pp36
+          py: pypy-3.6
+          arch: x86
+        - name: pp37
+          py: pypy-3.7
+          arch: x86
     steps:
     - uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.py }}
         architecture: ${{ matrix.arch }}
-    - run: choco install vcpython27
-      if: matrix.py == 2.7
     - run: python -m pip install --upgrade pip setuptools wheel
     - run: 'python -m pip wheel --no-deps --wheel-dir dist --no-binary :all: argon2-cffi==${{ github.event.inputs.version }}'
     - uses: actions/upload-artifact@v2
