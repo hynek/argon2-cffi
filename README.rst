@@ -2,16 +2,20 @@
 Argon2 for Python
 =================
 
-.. image:: https://github.com/hynek/argon2-cffi/workflows/CI/badge.svg?branch=main
-   :target: https://github.com/hynek/argon2-cffi/actions?workflow=CI
-   :alt: CI Status
+.. image:: https://img.shields.io/badge/Docs-Read%20The%20Docs-black
+   :target: https://argon2-cffi.readthedocs.io/
+   :alt: Documentation
 
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://github.com/ambv/black
-   :alt: Code style: black
+.. image:: https://img.shields.io/badge/license-MIT-C06524
+   :target: https://github.com/hynek/argon2-cffi/blob/main/LICENSE
+   :alt: License: MIT
 
-.. image:: https://static.pepy.tech/personalized-badge/argon2-cffi?period=month&units=international_system&left_color=black&right_color=blue&left_text=Downloads%20/%20Month
+.. image:: https://img.shields.io/pypi/v/argon2-cffi
+   :alt: PyPI version
+
+.. image:: https://static.pepy.tech/personalized-badge/argon2-cffi?period=month&units=international_system&left_color=grey&right_color=blue&left_text=Downloads%20/%20Month
    :target: https://pepy.tech/project/argon2-cffi
+   :alt: Downloads / Month
 
 
 .. teaser-begin
