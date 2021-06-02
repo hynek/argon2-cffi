@@ -11,6 +11,7 @@ Argon2 for Python
    :alt: License: MIT
 
 .. image:: https://img.shields.io/pypi/v/argon2-cffi
+   :target: https://pypi.org/project/argon2-cffi/
    :alt: PyPI version
 
 .. image:: https://static.pepy.tech/personalized-badge/argon2-cffi?period=month&units=international_system&left_color=grey&right_color=blue&left_text=Downloads%20/%20Month
