@@ -37,5 +37,5 @@ The current recommended best practice is as follow:
 ``argon2-cffi``'s :doc:`cli` will help you with this process.
 
 
-.. _`RFC draft`: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-08#section-4
+.. _`RFC draft`: https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-argon2-13#section-4
 .. _kibibytes: https://en.wikipedia.org/wiki/Kibibyte
