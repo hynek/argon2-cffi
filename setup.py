@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division, print_function
-
 import codecs
 import os
 import platform
@@ -88,7 +86,7 @@ CLASSIFIERS = [
 
 PYTHON_REQUIRES = ">=3.5"
 SETUP_REQUIRES = ["cffi"]
-INSTALL_REQUIRES = ["cffi>=1.0.0", "six"]
+INSTALL_REQUIRES = ["cffi>=1.0.0"]
 EXTRAS_REQUIRE = {
     "docs": ["sphinx", "furo"],
     "tests": ["coverage[toml]>=5.0.2", "hypothesis", "pytest"],
@@ -305,7 +303,7 @@ class BuildCLibWithCompilerFlags(build_clib):
                 )
             sources = list(sources)
 
-            print("building '%s' library" % (lib_name,))
+            print("building '{}' library".format(lib_name))
 
             # First, compile the source code to object files in the library
             # directory.  (This should probably change to putting object

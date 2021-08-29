@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division, print_function
-
 import os
 
 from ._utils import Parameters, _check_types, extract_parameters
@@ -23,7 +21,7 @@ def _ensure_bytes(s, encoding):
     return s.encode(encoding)
 
 
-class PasswordHasher(object):
+class PasswordHasher:
     r"""
     High level class to hash passwords with sensible defaults.
 

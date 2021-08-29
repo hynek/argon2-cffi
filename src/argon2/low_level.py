@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Low-level functions if you want to build your own higher level abstractions.
 
@@ -8,11 +7,8 @@ Low-level functions if you want to build your own higher level abstractions.
     module is full of land mines, dragons, and dinosaurs with laser guns.
 """
 
-from __future__ import absolute_import, division, print_function
 
 from enum import Enum
-
-from six import PY3
 
 from ._ffi import ffi, lib
 from .exceptions import HashingError, VerificationError, VerifyMismatchError
@@ -251,6 +247,5 @@ def error_to_str(error):
     .. versionadded:: 16.0.0
     """
     msg = ffi.string(lib.argon2_error_message(error))
-    if PY3:
-        msg = msg.decode("ascii")
+    msg = msg.decode("ascii")
     return msg

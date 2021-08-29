@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division, print_function
-
 import binascii
 import os
 
@@ -108,7 +106,7 @@ both_hash_funcs = pytest.mark.parametrize(
 )
 
 
-class TestHash(object):
+class TestHash:
     @i_and_d_encoded
     def test_hash_secret(self, type, hash):
         """
@@ -167,7 +165,7 @@ class TestHash(object):
         Passing an argument of wrong type raises TypeError.
         """
         with pytest.raises(TypeError):
-            func(u"oh no, unicode!")
+            func("oh no, unicode!")
 
     @both_hash_funcs
     def test_illegal_argon2_parameter(self, func):
@@ -202,7 +200,7 @@ class TestHash(object):
         )
 
 
-class TestVerify(object):
+class TestVerify:
     @i_and_d_encoded
     def test_success(self, type, hash):
         """

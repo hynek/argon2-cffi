@@ -1,21 +1,16 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, division, print_function
-
 import pytest
-import six
 
 from argon2 import PasswordHasher, Type, extract_parameters
 from argon2._password_hasher import _ensure_bytes
 from argon2.exceptions import InvalidHash
 
 
-class TestEnsureBytes(object):
+class TestEnsureBytes:
     def test_is_bytes(self):
         """
         Bytes are just returned.
         """
-        s = u"föö".encode("utf-8")
+        s = "föö".encode()
 
         rv = _ensure_bytes(s, "doesntmatter")
 
@@ -26,7 +21,7 @@ class TestEnsureBytes(object):
         """
         Unicode is encoded using the specified encoding.
         """
-        s = u"föö"
+        s = "föö"
 
         rv = _ensure_bytes(s, "latin1")
 
@@ -35,11 +30,11 @@ class TestEnsureBytes(object):
 
 
 bytes_and_unicode_password = pytest.mark.parametrize(
-    "password", [u"pässword".encode("latin1"), u"pässword"]
+    "password", ["pässword".encode("latin1"), "pässword"]
 )
 
 
-class TestPasswordHasher(object):
+class TestPasswordHasher:
     @bytes_and_unicode_password
     def test_hash(self, password):
         """
@@ -49,9 +44,9 @@ class TestPasswordHasher(object):
 
         h = ph.hash(password)
 
-        prefix = u"$argon2id$v=19$m=8,t=1,p=1$"
+        prefix = "$argon2id$v=19$m=8,t=1,p=1$"
 
-        assert isinstance(h, six.text_type)
+        assert isinstance(h, str)
         assert h[: len(prefix)] == prefix
 
     @bytes_and_unicode_password
@@ -62,8 +57,8 @@ class TestPasswordHasher(object):
         """
         ph = PasswordHasher(1, 8, 1, 16, 16, "latin1")
         hash = (  # handrolled artisanal test vector
-            u"$argon2i$m=8,t=1,p=1$"
-            u"bL/lLsegFKTuR+5vVyA8tA$VKz5CHavCtFOL1N5TIXWSA"
+            "$argon2i$m=8,t=1,p=1$"
+            "bL/lLsegFKTuR+5vVyA8tA$VKz5CHavCtFOL1N5TIXWSA"
         )
 
         assert ph.verify(hash, password)
