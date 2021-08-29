@@ -14,8 +14,8 @@ Workflow
 - No contribution is too small!
   Please submit as many fixes for typos and grammar bloopers as you can!
 - Try to limit each pull request to *one* change only.
-- Since we squash on merge, it's up to you how you handle updates to the master branch.
-  Whether you prefer to rebase on master or merge master into your branch, do whatever is more comfortable for you.
+- Since we squash on merge, it's up to you how you handle updates to the main branch.
+  Whether you prefer to rebase on main or merge main into your branch, do whatever is more comfortable for you.
 - *Always* add tests and docs for your code.
   This is a hard rule; patches with missing tests or documentation can't be merged.
 - Make sure your changes pass our CI_.
@@ -193,8 +193,8 @@ Thank you for considering to contribute!
 .. _`PEP 8`: https://www.python.org/dev/peps/pep-0008/
 .. _`PEP 257`: https://www.python.org/dev/peps/pep-0257/
 .. _`good test docstrings`: https://jml.io/pages/test-docstrings.html
-.. _`Code of Conduct`: https://github.com/hynek/argon2-cffi/blob/master/.github/CODE_OF_CONDUCT.rst
-.. _changelog: https://github.com/hynek/argon2-cffi/blob/master/CHANGELOG.rst
+.. _`Code of Conduct`: https://github.com/hynek/argon2-cffi/blob/main/.github/CODE_OF_CONDUCT.rst
+.. _changelog: https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.rst
 .. _`tox`: https://tox.readthedocs.io/
 .. _pyenv: https://github.com/pyenv/pyenv
 .. _reStructuredText: https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
