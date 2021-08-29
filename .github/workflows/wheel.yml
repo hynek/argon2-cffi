@@ -12,14 +12,8 @@ jobs:
     strategy:
       matrix:
         include:
-        - name: cp27-cp27mu
-          image: quay.io/pypa/manylinux1_x86_64
-        - name: cp27-cp27m
-          image: quay.io/pypa/manylinux1_x86_64
         - name: cp35-cp35m
           image: quay.io/pypa/manylinux1_x86_64
-        - name: pp27-pypy_73
-          image: pypywheels/manylinux2010-pypy_x86_64
         - name: pp36-pypy36_pp73
           image: pypywheels/manylinux2010-pypy_x86_64
         - name: pp37-pypy37_pp73
@@ -48,8 +42,6 @@ jobs:
     strategy:
       matrix:
         include:
-        - name: cp27
-          py: "2.7"
         - name: cp35
           py: "3.5"
         - name: pp36
