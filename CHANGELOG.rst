@@ -14,7 +14,7 @@ Vendoring Argon2 @ UNRELEASED
 Backward-incompatible changes:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- While ``argon2-cffi`` remains Python 2-compatible, we're not able to ship binary wheels for Microsoft Windows for Python 2.7 anymore.
+- While *argon2-cffi* remains Python 2-compatible, we're not able to ship binary wheels for Microsoft Windows for Python 2.7 anymore.
   Microsoft stopped providing the necessary SDKs and there's nothing we can do about that.
 
 
@@ -27,8 +27,8 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-There are indeed no changes whatsoever to the code of ``argon2-cffi``, because the ``argon2`` project hasn't released a new tag since July 2019.
-There also doesn't seem to be any important pending fixes too.
+There are indeed no changes whatsoever to the code of *argon2-cffi*, because the *Argon2* project hasn't released a new tag since July 2019.
+There also don't seem to be any important pending fixes.
 
 This release is mainly about improving the way wheels are built (abi3 on all platforms).
 
