@@ -37,5 +37,9 @@ The current recommended best practice is as follow:
 ``argon2-cffi``'s :doc:`cli` will help you with this process.
 
 
+.. note::
+   Alternatively, you can also refer to the `OWASP cheatsheet <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#argon2id>`_.
+
+
 .. _`RFC draft`: https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-argon2-13#section-4
 .. _kibibytes: https://en.wikipedia.org/wiki/Kibibyte
