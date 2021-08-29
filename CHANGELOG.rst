@@ -5,10 +5,10 @@ Versions are year-based with a strict backward compatibility policy.
 The third digit is only for regressions.
 
 
-21.1.0 (UNRELEASED)
+21.1.0 (2021-08-29)
 -------------------
 
-Vendoring Argon2 @ UNRELEASED
+Vendoring Argon2 @ `62358ba <https://github.com/P-H-C/phc-winner-argon2/tree/62358ba2123abd17fccf2a108a301d4b52c01a7c>`_ (20190702)
 
 
 Backward-incompatible changes:
