@@ -3,6 +3,15 @@ requires = ["setuptools>=40.6.0", "wheel", "cffi>=1.0"]
 build-backend = "setuptools.build_meta"
 
 
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --capture=no"
+xfail_strict = true
+testpaths = "tests"
+filterwarnings = [
+    "once::Warning",
+]
+
+
 [tool.coverage.run]
 parallel = true
 branch = true
