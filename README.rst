@@ -21,7 +21,7 @@ Argon2 for Python
 
 .. teaser-begin
 
-`Argon2 <https://github.com/p-h-c/phc-winner-argon2>`_ won the `Password Hashing Competition <https://password-hashing.net/>`_ and *argon2-cffi* is the simplest way to use it in Python and PyPy:
+`Argon2 <https://github.com/p-h-c/phc-winner-argon2>`_ won the `Password Hashing Competition <https://www.password-hashing.net/>`_ and *argon2-cffi* is the simplest way to use it in Python and PyPy:
 
 .. code-block:: pycon
 

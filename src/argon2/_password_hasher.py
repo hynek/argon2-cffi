@@ -50,7 +50,7 @@ class PasswordHasher:
     .. versionadded:: 16.0.0
     .. versionchanged:: 18.2.0
        Switch from Argon2i to Argon2id based on the recommendation by the
-       current RFC_ draft.
+       current RFC draft. See also :doc:`parameters`.
     .. versionchanged:: 18.2.0
        Changed default *memory_cost* to 100 MiB and default *parallelism* to 8.
     .. versionchanged:: 18.2.0 ``verify`` now will determine the type of hash.
@@ -58,7 +58,6 @@ class PasswordHasher:
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
-    .. _RFC: https://tools.ietf.org/html/draft-irtf-cfrg-argon2-04#section-4
     """
     __slots__ = ["_parameters", "encoding"]
 

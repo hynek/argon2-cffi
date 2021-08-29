@@ -45,7 +45,7 @@ This time future-proof and with committee-vetting instead of single implementors
 .. _GPU: https://hashcat.net/hashcat/
 .. _ASIC: https://en.wikipedia.org/wiki/Application-specific_integrated_circuit
 .. _scrypt: https://en.wikipedia.org/wiki/Scrypt
-.. _Argon2 paper: https://password-hashing.net/argon2-specs.pdf
+.. _Argon2 paper: https://www.password-hashing.net/argon2-specs.pdf
 
 
 Password Hashing Competition
@@ -57,6 +57,6 @@ So a group of independent cryptographers and security researchers came together.
 
 In the end, Argon2 was announced_ as the winner.
 
-.. _Password Hashing Competition: https://password-hashing.net/
+.. _Password Hashing Competition: https://www.password-hashing.net/
 .. _revelations: https://en.wikipedia.org/wiki/Dual_EC_DRBG
 .. _announced: https://groups.google.com/forum/#!topic/crypto-competitions/3QNdmwBS98o

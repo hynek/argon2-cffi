@@ -24,7 +24,7 @@ The current recommended best practice is as follow:
 #. Choose a hash length (``hash_len``, called "tag length" in the documentation).
    16 bytes is sufficient for password verification.
 #. Figure out how long each call can take.
-   One `recommendation <https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2015/march/enough-with-the-salts-updates-on-secure-password-schemes/>`_ for concurent user logins is to keep it under 0.5 ms.
+   One `recommendation <https://web.archive.org/web/20160304024620/https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2015/march/enough-with-the-salts-updates-on-secure-password-schemes/>`_ for concurent user logins is to keep it under 0.5 ms.
    The RFC recommends under 500 ms.
    The truth is somewhere between those two values: more is more secure, less is a better user experience.
    ``argon2-cffi``'s defaults try to land somewhere in the middle and aim for ~50ms, but the actual time depends on your hardware.
