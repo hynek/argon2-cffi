@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, division, print_function
-
 from . import exceptions, low_level
 from ._legacy import hash_password, hash_password_raw, verify_password
 from ._password_hasher import (

@@ -1,5 +1,3 @@
-from __future__ import absolute_import, division, print_function
-
 import codecs
 import os
 import platform
@@ -49,17 +47,6 @@ sources = [
 
 # Add vendored integer types headers if necessary.
 windows = "win32" in str(sys.platform).lower()
-if windows:
-    int_base = "extras/msinttypes/"
-    inttypes = int_base + "inttypes"
-    stdint = int_base + "stdint"
-    vi = sys.version_info[0:2]
-    if vi in [(2, 6), (2, 7)]:
-        # VS 2008 needs both.
-        include_dirs += [inttypes, stdint]
-    elif vi in [(3, 3), (3, 4)]:
-        # VS 2010 needs inttypes.h and fails with both.
-        include_dirs += [inttypes]
 
 LIBRARIES = [("argon2", {"include_dirs": include_dirs, "sources": sources})]
 META_PATH = os.path.join("src", "argon2", "__init__.py")
@@ -82,8 +69,6 @@ CLASSIFIERS = [
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: Unix",
-    "Programming Language :: Python :: 2",
-    "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
@@ -99,13 +84,9 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
+PYTHON_REQUIRES = ">=3.5"
 SETUP_REQUIRES = ["cffi"]
-if windows and sys.version_info[0] == 2:
-    # required for "Microsoft Visual C++ Compiler for Python 2.7"
-    # https://www.microsoft.com/en-us/download/details.aspx?id=44266
-    SETUP_REQUIRES.append("setuptools>=6.0")
-
-INSTALL_REQUIRES = ["cffi>=1.0.0", "six", "enum34; python_version<'3.4'"]
+INSTALL_REQUIRES = ["cffi>=1.0.0"]
 EXTRAS_REQUIRE = {
     "docs": ["sphinx", "furo"],
     "tests": ["coverage[toml]>=5.0.2", "hypothesis", "pytest"],
@@ -322,7 +303,7 @@ class BuildCLibWithCompilerFlags(build_clib):
                 )
             sources = list(sources)
 
-            print("building '%s' library" % (lib_name,))
+            print("building '{}' library".format(lib_name))
 
             # First, compile the source code to object files in the library
             # directory.  (This should probably change to putting object
@@ -381,6 +362,7 @@ if __name__ == "__main__":
         packages=PACKAGES,
         package_dir={"": "src"},
         classifiers=CLASSIFIERS,
+        python_requires=PYTHON_REQUIRES,
         install_requires=INSTALL_REQUIRES,
         extras_require=EXTRAS_REQUIRE,
         # CFFI

@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, division, print_function
-
-from six import iteritems
-
 from .exceptions import InvalidHash
 from .low_level import Type
 
@@ -18,7 +12,7 @@ def _check_types(**kw):
     Returns a human-readable string of all violations or `None``.
     """
     errors = []
-    for name, (value, types) in iteritems(kw):
+    for name, (value, types) in kw.items():
         if not isinstance(value, types):
             if isinstance(types, tuple):
                 types = ", or ".join(t.__name__ for t in types)
@@ -57,7 +51,7 @@ def _decoded_str_len(l):
     return l // 4 * 3 + last_group_len
 
 
-class Parameters(object):
+class Parameters:
     """
     Argon2 hash parameters.
 

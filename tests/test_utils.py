@@ -1,21 +1,16 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, division, print_function
-
 from base64 import b64encode
 
 import pytest
 
 from hypothesis import given
 from hypothesis import strategies as st
-from six import PY3
 
 from argon2 import Parameters, Type, extract_parameters
 from argon2._utils import NoneType, _check_types, _decoded_str_len
 from argon2.exceptions import InvalidHash
 
 
-class TestCheckTypes(object):
+class TestCheckTypes:
     def test_success(self):
         """
         Returns None if all types are okay.
@@ -31,16 +26,13 @@ class TestCheckTypes(object):
         Returns summary of failures.
         """
         rv = _check_types(
-            bytes=(u"not bytes", bytes), str_or_None=(42, (str, NoneType))
+            bytes=("not bytes", bytes), str_or_None=(42, (str, NoneType))
         )
 
         assert "." == rv[-1]  # proper grammar FTW
         assert "'str_or_None' must be a str, or NoneType (got int)" in rv
 
-        if PY3:
-            assert "'bytes' must be a bytes (got str)" in rv
-        else:
-            assert "'bytes' must be a str (got unicode)" in rv
+        assert "'bytes' must be a bytes (got str)" in rv
 
 
 @given(st.binary())
@@ -80,7 +72,7 @@ VALID_PARAMETERS_V18 = Parameters(
 )
 
 
-class TestExtractParameters(object):
+class TestExtractParameters:
     def test_valid_hash(self):
         """
         A valid hash is parsed.
@@ -115,7 +107,7 @@ class TestExtractParameters(object):
             extract_parameters(hash)
 
 
-class TestParameters(object):
+class TestParameters:
     def test_eq(self):
         """
         Parameters are iff every attribute is equal.

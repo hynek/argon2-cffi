@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, division, print_function
-
 import pytest
 
 from hypothesis import given
@@ -30,7 +26,7 @@ from .test_low_level import (
 )
 
 
-class TestHash(object):
+class TestHash:
     def test_hash_defaults(self):
         """
         Calling without arguments works.
@@ -104,7 +100,7 @@ class TestHash(object):
         Passing an argument of wrong type raises TypeError.
         """
         with pytest.raises(TypeError):
-            hash_password(u"oh no, unicode!")
+            hash_password("oh no, unicode!")
 
     def test_illegal_argon2_parameter(self):
         """
@@ -128,7 +124,7 @@ class TestHash(object):
         )
 
 
-class TestVerify(object):
+class TestVerify:
     @i_and_d_encoded
     def test_success(self, type, hash):
         """
