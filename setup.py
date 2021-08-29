@@ -86,7 +86,7 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-PYTHON_REQUIRES = ">=3.6"
+PYTHON_REQUIRES = ">=3.5"
 SETUP_REQUIRES = ["cffi"]
 INSTALL_REQUIRES = ["cffi>=1.0.0", "six"]
 EXTRAS_REQUIRE = {
