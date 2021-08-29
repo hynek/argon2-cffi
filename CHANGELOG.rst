@@ -27,7 +27,10 @@ Deprecations:
 Changes:
 ^^^^^^^^
 
-*none*
+There are indeed no changes whatsoever to the code of ``argon2-cffi``, because the ``argon2`` project hasn't released a new tag since July 2019.
+There also doesn't seem to be any important pending fixes too.
+
+This release is mainly about improving the way wheels are built (abi3 on all platforms).
 
 
 ----
