@@ -70,7 +70,6 @@ CLASSIFIERS = [
     "Operating System :: POSIX",
     "Operating System :: Unix",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.5",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
@@ -84,7 +83,7 @@ CLASSIFIERS = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-PYTHON_REQUIRES = ">=3.5"
+PYTHON_REQUIRES = ">=3.6"
 SETUP_REQUIRES = ["cffi"]
 INSTALL_REQUIRES = ["cffi>=1.0.0"]
 EXTRAS_REQUIRE = {
@@ -259,11 +258,11 @@ def find_meta(meta):
     Extract __*meta*__ from META_FILE.
     """
     meta_match = re.search(
-        r"^__{meta}__ = ['\"]([^'\"]*)['\"]".format(meta=meta), META_FILE, re.M
+        fr"^__{meta}__ = ['\"]([^'\"]*)['\"]", META_FILE, re.M
     )
     if meta_match:
         return meta_match.group(1)
-    raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
+    raise RuntimeError(f"Unable to find __{meta}__ string.")
 
 
 VERSION = find_meta("version")
@@ -279,7 +278,7 @@ LONG = (
         re.S,
     ).group(1)
     + "\n\n`Full changelog "
-    + "<{url}en/stable/changelog.html>`_.\n\n".format(url=URL)
+    + f"<{URL}en/stable/changelog.html>`_.\n\n"
     + read("AUTHORS.rst")
 )
 
@@ -303,7 +302,7 @@ class BuildCLibWithCompilerFlags(build_clib):
                 )
             sources = list(sources)
 
-            print("building '{}' library".format(lib_name))
+            print(f"building '{lib_name}' library")
 
             # First, compile the source code to object files in the library
             # directory.  (This should probably change to putting object
@@ -336,7 +335,7 @@ if sys.version_info > (3,) and platform.python_implementation() == "CPython":
 
         class BDistWheel(wheel.bdist_wheel.bdist_wheel):
             def finalize_options(self):
-                self.py_limited_api = "cp3{}".format(sys.version_info[1])
+                self.py_limited_api = f"cp3{sys.version_info[1]}"
                 wheel.bdist_wheel.bdist_wheel.finalize_options(self)
 
 
@@ -368,5 +367,5 @@ if __name__ == "__main__":
         # CFFI
         zip_safe=False,
         ext_package="argon2",
-        **keywords_with_side_effects(sys.argv)
+        **keywords_with_side_effects(sys.argv),
     )

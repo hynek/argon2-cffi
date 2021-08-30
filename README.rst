@@ -41,7 +41,9 @@ Argon2 for Python
 
 
 *argon2-cffi*'s documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.io/>`_, the code on `GitHub <https://github.com/hynek/argon2-cffi>`_.
-It’s rigorously tested on Python 3.5+, and PyPy3.
+It’s rigorously tested on Python 3.6+, and PyPy3.
+
+The last version that works with Python 2.7 is 20.1.0, and the last version that works with Python 3.5 is 21.1.0.
 
 It implements *Argon2* version 1.3, as described in
 `Argon2: the memory-hard function for password hashing and other applications <https://www.cryptolux.org/images/0/0d/Argon2.pdf>`_.

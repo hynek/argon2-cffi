@@ -74,10 +74,8 @@ gc.enable()""".format(
         ),
         number=args.n,
     )
-    print(
-        "\n{:.1f}ms per password verification".format(duration / args.n * 1000)
-    )
+    print(f"\n{duration / args.n * 1000:.1f}ms per password verification")
 
 
-if __name__ == "__main__":  # pragma: nocover
+if __name__ == "__main__":  # pragma: no cover
     main(sys.argv)

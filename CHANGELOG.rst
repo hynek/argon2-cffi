@@ -14,7 +14,7 @@ Vendoring Argon2 @ UNRELEASED
 Backward-incompatible changes:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-*none*
+- Python 3.5 is not supported anymore.
 
 
 Deprecations:
