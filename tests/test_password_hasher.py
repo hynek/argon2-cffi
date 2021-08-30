@@ -17,9 +17,9 @@ class TestEnsureBytes:
         assert isinstance(rv, bytes)
         assert s == rv
 
-    def test_is_unicode(self):
+    def test_is_str(self):
         """
-        Unicode is encoded using the specified encoding.
+        Unicode str is encoded using the specified encoding.
         """
         s = "föö"
 
@@ -29,16 +29,16 @@ class TestEnsureBytes:
         assert s.encode("latin1") == rv
 
 
-bytes_and_unicode_password = pytest.mark.parametrize(
+bytes_and_str_password = pytest.mark.parametrize(
     "password", ["pässword".encode("latin1"), "pässword"]
 )
 
 
 class TestPasswordHasher:
-    @bytes_and_unicode_password
+    @bytes_and_str_password
     def test_hash(self, password):
         """
-        Hashing works with unicode and bytes.  Uses correct parameters.
+        Hashing works with str and bytes.  Uses correct parameters.
         """
         ph = PasswordHasher(1, 8, 1, 16, 16, "latin1")
 
@@ -49,10 +49,10 @@ class TestPasswordHasher:
         assert isinstance(h, str)
         assert h[: len(prefix)] == prefix
 
-    @bytes_and_unicode_password
+    @bytes_and_str_password
     def test_verify_agility(self, password):
         """
-        Verification works with unicode and bytes and variant is correctly
+        Verification works with str and bytes and variant is correctly
         detected.
         """
         ph = PasswordHasher(1, 8, 1, 16, 16, "latin1")
@@ -63,7 +63,7 @@ class TestPasswordHasher:
 
         assert ph.verify(hash, password)
 
-    @bytes_and_unicode_password
+    @bytes_and_str_password
     def test_hash_verify(self, password):
         """
         Hashes are valid and can be verified.

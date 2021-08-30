@@ -42,7 +42,7 @@ class PasswordHasher:
     :param int salt_len: Length of random salt to be generated for each
         password.
     :param str encoding: The Argon2 C library expects bytes.  So if
-        :meth:`hash` or :meth:`verify` are passed an unicode string, it will be
+        :meth:`hash` or :meth:`verify` are passed a ``str``, it will be
         encoded using this encoding.
     :param Type type: Argon2 type to use.  Only change for interoperability
         with legacy systems.
@@ -124,11 +124,11 @@ class PasswordHasher:
         Hash *password* and return an encoded hash.
 
         :param password: Password to hash.
-        :type password: ``bytes`` or ``unicode``
+        :type password: ``bytes`` or ``str``
 
         :raises argon2.exceptions.HashingError: If hashing fails.
 
-        :rtype: unicode
+        :rtype: str
         """
         return hash_secret(
             secret=_ensure_bytes(password, self.encoding),
@@ -158,10 +158,10 @@ class PasswordHasher:
 
         :param hash: An encoded hash as returned from
             :meth:`PasswordHasher.hash`.
-        :type hash: ``bytes`` or ``unicode``
+        :type hash: ``bytes`` or ``str``
 
         :param password: The password to verify.
-        :type password: ``bytes`` or ``unicode``
+        :type password: ``bytes`` or ``str``
 
         :raises argon2.exceptions.VerifyMismatchError: If verification fails
             because *hash* is not valid for *password*.
