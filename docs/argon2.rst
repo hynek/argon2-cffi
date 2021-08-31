@@ -1,5 +1,5 @@
-Argon2
-======
+What is Argon2?
+===============
 
 .. note::
 
