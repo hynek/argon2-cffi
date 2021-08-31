@@ -1,7 +1,7 @@
 Backward Compatibility
 ======================
 
-``argon2-cffi`` has a very strong backward compatibility policy.
+*argon2-cffi* has a very strong backward compatibility policy.
 Generally speaking, you shouldn't ever be afraid of updating.
 
 If breaking changes are needed do be done, they are:

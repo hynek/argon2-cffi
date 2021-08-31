@@ -1,7 +1,7 @@
 How To Contribute
 =================
 
-First off, thank you for considering contributing to ``argon2-cffi``!
+First off, thank you for considering contributing to *argon2-cffi*!
 It's people like *you* who make it such a great tool for everyone.
 
 This document intends to make contribution more accessible by codifying tribal knowledge and expectations.
@@ -96,10 +96,10 @@ Documentation
 
      - Added ``argon2_cffi.func()`` that does foo.
        It's pretty cool.
-       [`#1 <https://github.com/hynek/argon2_cffi/pull/1>`_]
+       `#1 <https://github.com/hynek/argon2_cffi/pull/1>`_
      - ``argon2_cffi.func()`` now doesn't crash the Large Hadron Collider anymore.
        That was a nasty bug!
-       [`#2 <https://github.com/hynek/argon2_cffi/pull/2>`_]
+       `#2 <https://github.com/hynek/argon2_cffi/pull/2>`_
 
 
 Local Development Environment
@@ -107,36 +107,36 @@ Local Development Environment
 
 You can (and should) run our test suite using tox_.
 However, you’ll probably want a more traditional environment as well.
-We highly recommend to develop using the latest Python 3 release because ``argon2_cffi`` tries to take advantage of modern features whenever possible.
+We highly recommend to develop using the latest Python 3 release because *argon2-cffi* tries to take advantage of modern features whenever possible.
 
 First create a `virtual environment <https://virtualenv.pypa.io/>`_.
 It’s out of scope for this document to list all the ways to manage virtual environments in Python, but if you don’t already have a pet way, take some time to look at tools like `pew <https://github.com/berdario/pew>`_, `virtualfish <https://virtualfish.readthedocs.io/>`_, and `virtualenvwrapper <https://virtualenvwrapper.readthedocs.io/>`_.
 
-Next, get an up to date checkout of the ``argon2_cffi`` repository:
+Next, get an up to date checkout of the *argon2-cffi* repository:
 
 .. code-block:: bash
 
-    $ git clone git@github.com:hynek/argon2_cffi.git
+    $ git clone git@github.com:hynek/argon2-cffi.git
 
 or if you want to use git via ``https``:
 
 .. code-block:: bash
 
-    $ git clone https://github.com/hynek/argon2_cffi.git
+    $ git clone https://github.com/hynek/argon2-cffi.git
 
-Change into the newly created directory and **after activating your virtual environment** install an editable version of ``argon2_cffi`` along with its tests and docs requirements:
+Change into the newly created directory and **after activating your virtual environment** install an editable version of *argon2-cffi* along with its tests and docs requirements:
 
-- First you have to make sure, that our git submodules are up to date and the Argon2 extension is built:
+- First you have to make sure, that our git submodules are up to date and the *Argon2* extension is built:
 
   #. ``git submodule init`` (to initialize git submodule mechanics)
-  #. ``git submodule update`` (to update the vendored Argon2 C library to the version ``argon2_cffi`` is currently packaging)
+  #. ``git submodule update`` (to update the vendored *Argon2* C library to the version *argon2-cffi* is currently packaging)
   #. ``python setup.py build`` (to build the CFFI module)
 
-  One of the environments requires a system-wide installation of Argon2.
+  One of the environments requires a system-wide installation of *Argon2*.
   On macOS, it's available in Homebrew (`brew install argon2`, but you also will have to update your `LDFLAGS` so you compiler finds it) and recent Ubuntus (zesty and later) ship it too.
 
 
-- Next (re-)install ``argon2_cffi`` along with its developement requirements:
+- Next (re-)install *argon2-cffi* along with its developement requirements:
 
   .. code-block:: bash
 
@@ -144,7 +144,7 @@ Change into the newly created directory and **after activating your virtual envi
 
 ****
 
-**Whenever the Argon2 C code changes**: you will have to perform the steps above again except of ``git submodule init``.
+**Whenever the *Argon2 C* code changes**: you will have to perform the steps above again except of ``git submodule init``.
 
 ****
 

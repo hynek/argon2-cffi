@@ -1,5 +1,5 @@
-What is Argon2?
-===============
+What is *Argon2*?
+=================
 
 .. note::
 
@@ -7,12 +7,12 @@ What is Argon2?
 
   You do **not** need to read or understand anything below this box.
 
-Argon2 is a secure password hashing algorithm.
+*Argon2* is a secure password hashing algorithm.
 It is designed to have both a configurable runtime as well as memory consumption.
 
 This means that you can decide how long it takes to hash a password and how much memory is required.
 
-Argon2 comes in three variants:
+*Argon2* comes in three variants:
 
 Argon2d
   is faster and uses data-depending memory access, which makes it less suitable for hashing secrets and more suitable for cryptocurrencies and applications with no threats from side-channel timing attacks.
@@ -55,7 +55,7 @@ The `Password Hashing Competition`_ took place between 2012 and 2015 to find a n
 Previously the NIST was in charge but after certain events and revelations_ their integrity has been put into question by the general public.
 So a group of independent cryptographers and security researchers came together.
 
-In the end, Argon2 was announced_ as the winner.
+In the end, *Argon2* was announced_ as the winner.
 
 .. _Password Hashing Competition: https://www.password-hashing.net/
 .. _revelations: https://en.wikipedia.org/wiki/Dual_EC_DRBG

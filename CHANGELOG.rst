@@ -103,7 +103,7 @@ Backward-incompatible changes:
 - Python 3.4 is not supported anymore.
   It has been unsupported by the Python core team for a while now and its PyPI downloads are negligible.
 
-  It's very unlikely that ``argon2-cffi`` will break under 3.4 anytime soon, but we don't test it and don't ship binary wheels for it anymore.
+  It's very unlikely that *argon2-cffi* will break under 3.4 anytime soon, but we don't test it and don't ship binary wheels for it anymore.
 
 
 Deprecations:
@@ -213,7 +213,7 @@ Vendoring Argon2 @ `670229c <https://github.com/P-H-C/phc-winner-argon2/tree/670
 Changes:
 ^^^^^^^^
 
-- It is now possible to use the ``argon2-cffi`` bindings against an Argon2 library that is provided by the system.
+- It is now possible to use the *argon2-cffi* bindings against an Argon2 library that is provided by the system.
 
 
 ----

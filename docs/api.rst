@@ -3,7 +3,7 @@ API Reference
 
 .. module:: argon2
 
-``argon2-cffi`` comes with an high-level API and hopefully reasonable defaults for Argon2 parameters that result in a verification time of 40--50ms on recent-ish hardware.
+*argon2-cffi* comes with an high-level API and hopefully reasonable defaults for *Argon2* parameters that result in a verification time of 40--50ms on recent-ish hardware.
 
 .. warning::
 
@@ -117,7 +117,7 @@ The super low-level ``argon2_core()`` function is exposed too if you need access
 
 .. autofunction:: core
 
-In order to use :func:`core`, you need access to ``argon2-cffi``'s FFI objects.
+In order to use :func:`core`, you need access to *argon2-cffi*'s FFI objects.
 Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` when working with it:
 
 .. doctest::
@@ -155,7 +155,7 @@ Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` 
   >>> out == argon2.low_level.hash_secret_raw(pwd, salt, 1, 8, 1, 8, Type.D)
   True
 
-All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as long they are not altered by Argon2 itself.
+All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as long they are not altered by *Argon2* itself.
 
 .. autofunction:: error_to_str
 
@@ -163,7 +163,7 @@ All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as lo
 Deprecated APIs
 ---------------
 
-These APIs are from the first release of ``argon2-cffi`` and proved to live in an unfortunate mid-level.
+These APIs are from the first release of *argon2-cffi* and proved to live in an unfortunate mid-level.
 On one hand they have defaults and check parameters but on the other hand they only consume byte strings.
 
 Therefore the decision has been made to replace them by a high-level (:class:`argon2.PasswordHasher`) and a low-level (:mod:`argon2.low_level`) solution.
