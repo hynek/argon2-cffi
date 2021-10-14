@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10.0-beta - 3.10", "pypy3"]
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "pypy3"]
 
     steps:
       - uses: "actions/checkout@v2"
@@ -46,7 +46,7 @@ jobs:
           python -m coverage xml
         if: "contains(env.USING_COVERAGE, matrix.python-version)"
       - name: "Upload coverage to Codecov"
-        uses: "codecov/codecov-action@v1"
+        uses: "codecov/codecov-action@v2"
         if: "contains(env.USING_COVERAGE, matrix.python-version)"
         with:
           fail_ci_if_error: true
