@@ -5,11 +5,11 @@ from .exceptions import InvalidHash
 from .low_level import Type, hash_secret, verify_secret
 
 
-DEFAULT_RANDOM_SALT_LENGTH = 16
-DEFAULT_HASH_LENGTH = 16
-DEFAULT_TIME_COST = 2
-DEFAULT_MEMORY_COST = 102400
-DEFAULT_PARALLELISM = 8
+DEFAULT_RANDOM_SALT_LENGTH = 16  # 128-bit salt
+DEFAULT_HASH_LENGTH = 32  # 256-bit tag size
+DEFAULT_TIME_COST = 3  # 3 iterations
+DEFAULT_MEMORY_COST = 65536  # m=2^(16) (64 MiB of RAM)
+DEFAULT_PARALLELISM = 4  # 4 lanes
 
 
 def _ensure_bytes(s, encoding):
@@ -118,6 +118,29 @@ class PasswordHasher:
     @property
     def type(self):
         return self._parameters.type
+
+    @classmethod
+    def from_profile(self, profile):
+        """
+        Create a new *PasswordHasher* from a profile.
+
+        :param profile: Profile providing parameters.
+        :type profile: ``Profile``
+
+        :rtype: PasswordHasher
+        """
+        return PasswordHasher(
+            time_cost=profile.time_cost,
+            memory_cost=profile.memory_cost,
+            parallelism=profile.parallelism,
+            hash_len=profile.hash_len,
+            salt_len=profile.salt_len,
+            # QUESTION: encoding and type could also be made optional by making
+            # them Optional in Profile and defaulting them to None to prevent
+            # duplicate defaults; PasswordHasher provides defaults already
+            encoding=profile.encoding,
+            type=profile.type,
+        )
 
     def hash(self, password):
         """

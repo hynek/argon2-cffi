@@ -1,4 +1,4 @@
-from . import exceptions, low_level
+from . import exceptions, low_level, profiles
 from ._legacy import hash_password, hash_password_raw, verify_password
 from ._password_hasher import (
     DEFAULT_HASH_LENGTH,
@@ -42,4 +42,5 @@ __all__ = [
     "hash_password_raw",
     "low_level",
     "verify_password",
+    "profiles",
 ]
