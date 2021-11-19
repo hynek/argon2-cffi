@@ -140,7 +140,8 @@ Change into the newly created directory and **after activating your virtual envi
 
   .. code-block:: bash
 
-      $ pip install -e '.[dev]'
+     $ pip install --upgrade pip setuptools  # PLEASE don't skip this step
+     $ pip install -e '.[dev]'
 
 ****
 
