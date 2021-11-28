@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 import pytest
 
 from argon2 import PasswordHasher, Type, extract_parameters

@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: MIT
+
+
 class Argon2Error(Exception):
     """
     Superclass of all argon2 exceptions.

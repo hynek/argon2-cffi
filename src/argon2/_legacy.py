@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Legacy mid-level functions.
 """

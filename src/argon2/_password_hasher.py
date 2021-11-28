@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 import os
 
 from ._utils import Parameters, _check_types, extract_parameters

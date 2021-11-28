@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from .exceptions import InvalidHash
 from .low_level import Type
 
