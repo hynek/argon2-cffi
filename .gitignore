@@ -13,4 +13,3 @@ __pycache__
 _build
 dist
 pip-wheel-metadata/
-src/argon2/_ffi.py

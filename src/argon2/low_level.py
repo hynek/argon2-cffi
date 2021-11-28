@@ -10,7 +10,8 @@ Low-level functions if you want to build your own higher level abstractions.
 
 from enum import Enum
 
-from ._ffi import ffi, lib
+from _argon2_cffi_bindings import ffi, lib
+
 from .exceptions import HashingError, VerificationError, VerifyMismatchError
 
 

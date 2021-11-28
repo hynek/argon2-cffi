@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: MIT
+
+"""
+The secure Argon2 password hashing algorithm.
+"""
+
 from . import exceptions, low_level
 from ._legacy import hash_password, hash_password_raw, verify_password
 from ._password_hasher import (
@@ -15,10 +21,9 @@ from .low_level import Type
 __version__ = "21.2.0.dev0"
 
 __title__ = "argon2-cffi"
-__description__ = "The secure Argon2 password hashing algorithm."
+__description__ = (__doc__ or "").strip()
 __url__ = "https://argon2-cffi.readthedocs.io/"
 __uri__ = __url__
-__doc__ = __description__ + " <" + __url__ + ">"
 
 __author__ = "Hynek Schlawack"
 __email__ = "hs@ox.cx"

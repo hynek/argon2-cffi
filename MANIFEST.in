@@ -1,9 +1,0 @@
-include *.rst *.md *.txt *.ini .coveragerc LICENSE .pre-commit-config.yaml pyproject.toml
-exclude src/argon2/_ffi.py .gitmodules extras/libargon2/.git *.yml
-graft tests
-graft .github
-graft .azure-pipelines
-recursive-exclude tests *.pyc
-graft extras
-graft docs
-prune docs/_build

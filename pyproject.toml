@@ -1,6 +1,97 @@
+# SPDX-License-Identifier: MIT
+
 [build-system]
-requires = ["setuptools>=40.6.0", "wheel", "cffi>=1.0"]
-build-backend = "setuptools.build_meta"
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "argon2-cffi"
+authors = [{name = "Hynek Schlawack", email = "hs@ox.cx"}]
+dynamic = ["version", "description"]
+requires-python = ">=3.6"
+dependencies = ["argon2-cffi-bindings"]
+license = { file = "LICENSE" }
+readme = "README.rst"
+keywords = ["password", "hash", "hashing", "security"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Python",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Changelog = "https://argon2-cffi.readthedocs.io/en/stable/changelog.html"
+Documentation = "https://argon2-cffi.readthedocs.io/"
+"Bug Tracker" = "https://github.com/hynek/argon2-cffi/issues"
+"Source Code" = "https://github.com/hynek/argon2-cffi"
+Funding = "https://github.com/sponsors/hynek"
+Tidelift = "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=pypi"
+Ko-fi = "https://ko-fi.com/the_hynek"
+
+[tool.flit.sdist]
+include = [
+    ".pre-commit-config.yaml",
+    ".readthedocs.yml",
+    "*.ini",
+    "*.rst",
+    "LICENSE.*",
+    "docs",
+    "tests",
+    ".github",
+    "show_off.py",
+]
+exclude = [
+    "docs/_build",
+    "tests/__pycache__",
+    "tests/.mypy_cache",
+]
+
+[project.optional-dependencies]
+tests = ["coverage[toml]>=5.0.2", "hypothesis", "pytest"]
+docs = ["sphinx", "sphinx-notfound-page", "furo"]
+
+# Combine tests and docs and a few more dev tools to a dev environment.
+# Refresh using `tox -e cog`
+
+dev = [
+    "pre-commit",
+    "cogapp",
+    "tomli",
+    # [[[cog
+    # import pathlib, tomli
+    # cfg = tomli.loads(pathlib.Path("pyproject.toml").read_text())
+    # opt = cfg["project"]["optional-dependencies"]
+    # for dep in opt["tests"] + opt["docs"]:
+    #     print(f'"{dep}",')
+    # ]]]
+    "coverage[toml]>=5.0.2",
+    "hypothesis",
+    "pytest",
+    "sphinx",
+    "sphinx-notfound-page",
+    "furo",
+    # [[[end]]]
+]
+
+[tool.flit.module]
+name = "argon2"
 
 
 [tool.pytest.ini_options]
@@ -39,7 +130,7 @@ exclude_lines = [
     "^ +\\.\\.\\.$",
     "-> ['\"]?NoReturn['\"]?:",
 ]
-omit = ["src/argon2/_ffi_build.py"]
+omit = []
 
 
 [tool.black]

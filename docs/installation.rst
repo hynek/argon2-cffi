@@ -1,8 +1,8 @@
 Installation
 ============
 
-Using the Vendored *Argon2*
----------------------------
+Using a Vendored *Argon2*
+-------------------------
 
 .. code-block:: bash
 
@@ -10,7 +10,7 @@ Using the Vendored *Argon2*
 
 should be all it takes.
 
-But since *argon2-cffi* vendors *Argon2*'s C code by default, it can lead to complications depending on the platform.
+But since *argon2-cffi* depends on `argon2-cffi-bindings`_ that vendors *Argon2*'s C code by default, it can lead to complications depending on the platform.
 
 The C code is known to compile and work on all common platforms (including x86, ARM, and PPC).
 On x86, an SSE2_-optimized version is used.
@@ -28,35 +28,35 @@ Overall this should be the safest bet because *argon2-cffi* has been specificall
 Wheels
 ^^^^^^
 
-Binary `wheels <https://pythonwheels.com>`_ for macOS, Windows, and Linux are provided on PyPI_.
+Binary `wheels <https://pythonwheels.com>`_ for macOS, Windows, and Linux are provided on PyPI_ by `argon2-cffi-bindings`_.
 With a recent-enough *pip* and *setuptools*, they should be used automatically.
 
 
 Source Distribution
 ^^^^^^^^^^^^^^^^^^^
 
-A working C compiler and `CFFI environment`_ are required.
+A working C compiler and `CFFI environment`_ are required to build the `argon2-cffi-bindings`_ dependency.
 If you've been able to compile Python CFFI extensions before, *argon2-cffi* should install without any problems.
 
 
 Using a System-wide Installation of *Argon2*
 --------------------------------------------
 
-If you set ``ARGON2_CFFI_USE_SYSTEM`` to ``1`` (and *only* ``1``), *argon2-cffi* will not build its bindings.
+If you set ``ARGON2_CFFI_USE_SYSTEM`` to ``1`` (and *only* ``1``), *argon2-cffi-bindings* will not build its bindings.
 However binary wheels are preferred by *pip* and *Argon2* gets installed along with *argon2-cffi* anyway.
 
-Therefore you also have to instruct *pip* to use a source distribution:
+Therefore you also have to instruct *pip* to use a source distribution of `argon2-cffi-bindings`_:
 
 .. code-block:: bash
 
   env ARGON2_CFFI_USE_SYSTEM=1 \
-    python -m pip install --no-binary=argon2-cffi argon2-cffi
+    python -m pip install --no-binary=argon2-cffi-bindings argon2-cffi
 
 This approach can lead to problems around your build chain and you can run into incompatibilities between *Argon2* and *argon2-cffi* if the latter has been tested against a different version.
 
 **It is your own responsibility to deal with these risks if you choose this path.**
 
-Available since version 18.1.0.
+Available since version 18.1.0, the ``--no-binary`` option value changed in 21.2.0 due to the outsourcing of the binary bindings.
 
 
 Override Automatic SSE2 Detection
@@ -75,5 +75,6 @@ Available since version 20.1.0.
 
 
 .. _SSE2: https://en.wikipedia.org/wiki/SSE2
-.. _PyPI: https://pypi.org/project/argon2-cffi/
+.. _PyPI: https://pypi.org/project/argon2-cffi-bindings/
 .. _CFFI environment: https://cffi.readthedocs.io/en/latest/installation.html
+.. _`argon2-cffi-bindings`: https://github.com/hynek/argon2-cffi-bindings

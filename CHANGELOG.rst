@@ -2,19 +2,31 @@ Changelog
 =========
 
 Versions are year-based with a strict backward compatibility policy.
-The third digit is only for regressions.
+
+*argon2-cffi* has a very strong backward compatibility policy.
+Generally speaking, you shouldn't ever be afraid of updating.
+
+Whenever breaking changes are needed, they are:
+
+#. …announced here in the changelog.
+#. …the old behavior raises a ``DeprecationWarning`` for a year (if possible).
+#. …are done with another announcement in the changelog.
+
+What explicitly *may* change over time are the default hashing parameters and the behavior of the :doc:`cli`.
 
 
 21.2.0 (UNRELEASED)
 -------------------
 
-Vendoring Argon2 @ UNRELEASED
-
-
 Backward-incompatible changes:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Python 3.5 is not supported anymore.
+- The CFFI bindings have been extracted to a separated project: `argon2-cffi-bindings`_
+  This makes *argon2-cffi* a Python-only project und should make it easier to contribute to and have more frequent releases with high-level features.
+
+  This change is only breaking for users who want to use a system-wide installation of *Argon2* instead of our vendored code.
+  Please refer to the `installation guide <https://argon2-cffi.readthedocs.io/en/stable/installation.html>`_.
 
 
 Deprecations:
@@ -355,3 +367,4 @@ The authors of Argon2 were kind enough to `help me <https://github.com/P-H-C/phc
 .. _421dafd2a8af5cbb215e16da5953663eb101d139: https://github.com/P-H-C/phc-winner-argon2/tree/421dafd2a8af5cbb215e16da5953663eb101d139
 .. _4fe0d8cda37691228dd5a96a310be57369403a4b: https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b
 .. _00aaa6604501fade85853a4b2f5695611ff6e7c5: https://github.com/P-H-C/phc-winner-argon2/tree/00aaa6604501fade85853a4b2f5695611ff6e7c5
+.. _argon2-cffi-bindings: https://github.com/hynek/argon2-cffi-bindings
