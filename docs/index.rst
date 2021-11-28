@@ -31,7 +31,6 @@ User's Guide
 .. toctree::
    :maxdepth: 1
 
-   contributing
    changelog
    license
 
