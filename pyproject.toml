@@ -37,9 +37,8 @@ classifiers = [
 ]
 
 [project.urls]
-Changelog = "https://argon2-cffi.readthedocs.io/en/stable/changelog.html"
+Changelog = "https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md"
 Documentation = "https://argon2-cffi.readthedocs.io/"
-"Bug Tracker" = "https://github.com/hynek/argon2-cffi/issues"
 "Source Code" = "https://github.com/hynek/argon2-cffi"
 Funding = "https://github.com/sponsors/hynek"
 Tidelift = "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=pypi"

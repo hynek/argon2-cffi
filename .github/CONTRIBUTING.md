@@ -150,8 +150,8 @@ If your change is noteworthy, there needs to be a changelog entry in `CHANGELOG.
 - Prefer simple past tense or constructions with "now".
   For example:
 
-  + Added `argon2_cffi.func()`.
-  + `argon2_cffi.func()` now doesn't crash the Large Hadron Collider anymore when passed the *foobar* argument.
+  * Added `argon2_cffi.func()`.
+  * `argon2_cffi.func()` now doesn't crash the Large Hadron Collider anymore when passed the *foobar* argument.
 
 Example entries:
 

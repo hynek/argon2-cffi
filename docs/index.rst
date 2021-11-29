@@ -2,7 +2,7 @@
 *argon2-cffi*: *Argon2* for Python
 ==================================
 
-Release v\ |release| (:doc:`What’s new? <changelog>`)
+Release v\ |release| (|changelog|_)
 
 
 .. include:: ../README.rst
@@ -31,7 +31,6 @@ User's Guide
 .. toctree::
    :maxdepth: 1
 
-   changelog
    license
 
 
