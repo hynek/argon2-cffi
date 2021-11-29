@@ -2,7 +2,7 @@
 *argon2-cffi*: *Argon2* for Python
 ==================================
 
-Release v\ |release| (:doc:`What's new? <changelog>`).
+Release v\ |release| (:doc:`What’s new? <changelog>`)
 
 
 .. include:: ../README.rst
