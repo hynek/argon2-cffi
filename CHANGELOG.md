@@ -24,11 +24,23 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 - Python 3.5 is not supported anymore.
 
-- The *CFFI* bindings have been extracted into a separate project: [argon2-cffi-bindings](https://github.com/hynek/argon2-cffi-bindings)
+- The *CFFI* bindings have been extracted into a separate project: [*argon2-cffi-bindings*]
   This makes *argon2-cffi* a Python-only project und should make it easier to contribute to and have more frequent releases with high-level features.
 
   This change is only breaking for users who want to use a system-wide installation of *Argon2* instead of our vendored code.
   Please refer to the [installation guide](https://argon2-cffi.readthedocs.io/en/stable/installation.html).
+
+
+### Added
+
+- Thanks to lots of work within [*argon2-cffi-bindings*], there're pre-compiled wheels for many new platforms.
+  Including:
+    - Apple Silicon via `universal2`
+    - Linux on `amd64` and `arm64`
+    - [*musl libc*](https://musl.libc.org) ([*Alpine* Linux!](https://www.alpinelinux.org)) on `i686`, `amd64`, and `arm64`
+    - PyPy 3.8
+
+  We hope to provide wheels for Windows on `arm64` soon, but are waiting for GitHub Actions to support that.
 
 
 ## [21.1.0](https://github.com/hynek/argon2-cffi/compare/20.1.0...21.1.0) - 2021-08-29
@@ -243,3 +255,6 @@ Vendoring *Argon2* @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.c
 - Initial work.
   Previous betas were only for fixing Windows packaging.
   The authors of *Argon2* were kind enough to [help me](https://github.com/P-H-C/phc-winner-argon2/issues/44) to get it building under Visual Studio 2008 that we’re forced to use for Python 2.7 on Windows.
+
+
+[*argon2-cffi-bindings*]: https://github.com/hynek/argon2-cffi-bindings
