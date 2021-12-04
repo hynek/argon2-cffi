@@ -23,6 +23,10 @@ def _ensure_bytes(s, encoding):
     return s.encode(encoding)
 
 
+def verify_coverage_check_and_upload_works():
+    return 42
+
+
 class PasswordHasher:
     r"""
     High level class to hash passwords with sensible defaults.
