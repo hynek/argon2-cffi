@@ -64,16 +64,17 @@ jobs:
         with:
           name: coverage-data
 
-      - run: python -m coverage combine
-      - run: python -m coverage html --skip-covered --skip-empty
+      - run: |
+          python -m coverage combine
+          python -m coverage html --skip-covered --skip-empty
+          python -m coverage report --fail-under=100
 
-      - name: Upload coverage report
+      - name: Upload HTML report for failed check
         uses: "actions/upload-artifact@v2"
         with:
           name: html-report
           path: htmlcov
-
-      - run: python -m coverage report --fail-under=100
+        if: ${{ failure() }}
 
 
   system-package:
