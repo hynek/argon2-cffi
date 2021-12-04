@@ -16,29 +16,29 @@ env:
 
 jobs:
   tests:
-    name: "tox on ${{ matrix.python-version }}"
+    name: tox on ${{ matrix.python-version }}
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
         python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "pypy-3.7"]
 
     steps:
-      - uses: "actions/checkout@v2"
-      - uses: "actions/setup-python@v2"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
         with:
           python-version: "${{ matrix.python-version }}"
-      - name: "Install dependencies"
+      - name: Install dependencies
         run: |
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install --upgrade coverage[toml] virtualenv tox tox-gh-actions
 
-      - name: "Run tox targets for ${{ matrix.python-version }}"
-        run: "python -m tox"
+      - name: Run tox targets for ${{ matrix.python-version }}
+        run: python -m tox
 
       - name: Upload coverage data
-        uses: "actions/upload-artifact@v2"
+        uses: actions/upload-artifact@v2
         with:
           name: coverage-data
           path: ".coverage.*"
@@ -56,21 +56,22 @@ jobs:
           # Use latest Python, so it understands all syntax.
           python-version: ${{env.PYTHON_LATEST}}
 
-      - name: "Install Coverage.py"
-        run: "python -m pip install --upgrade coverage[toml]"
+      - name: Install Coverage.py
+        run: python -m pip install --upgrade coverage[toml]
 
-      - name: "Download coverage data"
+      - name: Download coverage data
         uses: actions/download-artifact@v2
         with:
           name: coverage-data
 
-      - run: |
+      - name: Combine coverage and fail if it's <100%
+        run: |
           python -m coverage combine
           python -m coverage html --skip-covered --skip-empty
           python -m coverage report --fail-under=100
 
       - name: Upload HTML report for failed check
-        uses: "actions/upload-artifact@v2"
+        uses: actions/upload-artifact@v2
         with:
           name: html-report
           path: htmlcov
