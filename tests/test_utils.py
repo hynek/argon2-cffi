@@ -138,9 +138,7 @@ class TestParameters:
                 time_cost=2,
                 parallelism=4,
             )
-        ) in [
-            "<Parameters(type=<Type.ID: 2>, version=19, hash_len=32, "
-            "salt_len=8, time_cost=2, memory_cost=65536, parallelism=4)>",
-            "<Parameters(type=Type.ID, version=19, hash_len=32, "
-            "salt_len=8, time_cost=2, memory_cost=65536, parallelism=4)>",
-        ]
+        ) == (
+            "Parameters(type=<Type.ID: 2>, version=19, salt_len=8, "
+            "hash_len=32, time_cost=2, memory_cost=65536, parallelism=4)"
+        )
