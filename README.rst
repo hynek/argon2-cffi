@@ -27,14 +27,14 @@
 
   >>> from argon2 import PasswordHasher
   >>> ph = PasswordHasher()
-  >>> hash = ph.hash("s3kr3tp4ssw0rd")
+  >>> hash = ph.hash("correct horse battery staple")
   >>> hash  # doctest: +SKIP
-  '$argon2id$v=19$m=102400,t=2,p=8$tSm+JOWigOgPZx/g44K5fQ$WDyus6py50bVFIPkjA28lQ'
-  >>> ph.verify(hash, "s3kr3tp4ssw0rd")
+  '$argon2id$v=19$m=65536,t=3,p=4$MIIRqgvgQbgj220jfp0MPA$YfwJSVjtjSU0zzV/P3S9nnQ/USre2wvJMjfCIjrTQbg'
+  >>> ph.verify(hash, "correct horse battery staple")
   True
   >>> ph.check_needs_rehash(hash)
   False
-  >>> ph.verify(hash, "t0t411ywr0ng")
+  >>> ph.verify(hash, "Tr0ub4dor&3")
   Traceback (most recent call last):
     ...
   argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash

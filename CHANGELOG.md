@@ -42,6 +42,18 @@ What explicitly *may* change over time are the default hashing parameters and th
 
   We hope to provide wheels for Windows on `arm64` soon, but are waiting for GitHub Actions to support that.
 
+- `argon2.Parameters.from_parameters()` together with the `argon2.profiles` module that offers easy access to the RFC-recommended configuration parameters and then some.
+  [#101](https://github.com/hynek/argon2-cffi/pull/101)
+  [#110](https://github.com/hynek/argon2-cffi/pull/110)
+
+- The CLI interface now has a `--profile` option that takes any name from `argon2.profiles`.
+
+
+## Changed
+
+- `argon2.PasswordHasher` now uses the RFC 9106 low-memory profile by default.
+  The old defaults are available as `argon2.profiles.PRE_21_2`.
+
 
 ## [21.1.0](https://github.com/hynek/argon2-cffi/compare/20.1.0...21.1.0) - 2021-08-29
 

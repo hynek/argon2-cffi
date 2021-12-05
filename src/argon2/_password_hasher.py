@@ -5,13 +5,14 @@ import os
 from ._utils import Parameters, _check_types, extract_parameters
 from .exceptions import InvalidHash
 from .low_level import Type, hash_secret, verify_secret
+from .profiles import RFC_9106_LOW_MEMORY
 
 
-DEFAULT_RANDOM_SALT_LENGTH = 16
-DEFAULT_HASH_LENGTH = 16
-DEFAULT_TIME_COST = 2
-DEFAULT_MEMORY_COST = 102400
-DEFAULT_PARALLELISM = 8
+DEFAULT_RANDOM_SALT_LENGTH = RFC_9106_LOW_MEMORY.salt_len
+DEFAULT_HASH_LENGTH = RFC_9106_LOW_MEMORY.hash_len
+DEFAULT_TIME_COST = RFC_9106_LOW_MEMORY.time_cost
+DEFAULT_MEMORY_COST = RFC_9106_LOW_MEMORY.memory_cost
+DEFAULT_PARALLELISM = RFC_9106_LOW_MEMORY.parallelism
 
 
 def _ensure_bytes(s, encoding):
@@ -57,6 +58,9 @@ class PasswordHasher:
        Changed default *memory_cost* to 100 MiB and default *parallelism* to 8.
     .. versionchanged:: 18.2.0 ``verify`` now will determine the type of hash.
     .. versionchanged:: 18.3.0 The *Argon2* type is configurable now.
+    .. versionadded:: 21.2.0 :meth:`from_parameters`
+    .. versionchanged:: 21.2.0
+       Changed defaults to :data:`argon2.profiles.RFC_9106_LOW_MEMORY`.
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
@@ -96,6 +100,18 @@ class PasswordHasher:
             parallelism=parallelism,
         )
         self.encoding = encoding
+
+    @classmethod
+    def from_parameters(cls, params: Parameters) -> "PasswordHasher":
+        """
+        Construct a `PasswordHasher` from *params*.
+
+        .. versionadded:: 21.2.0
+        """
+        ph = cls()
+        ph._parameters = params
+
+        return ph
 
     @property
     def time_cost(self):

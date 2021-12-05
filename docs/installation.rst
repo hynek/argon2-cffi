@@ -64,7 +64,7 @@ Override Automatic SSE2 Detection
 ---------------------------------
 
 Usually the build process tries to guess whether or not it should use SSE2_-optimized code.
-This can go wrong and is problematic for cross-compiling.
+Despite our best efforts, this can go wrong.
 
 Therefore you can use the ``ARGON2_CFFI_USE_SSE2`` environment variable to control the process:
 
