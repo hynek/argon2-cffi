@@ -56,7 +56,8 @@ This approach can lead to problems around your build chain and you can run into 
 
 **It is your own responsibility to deal with these risks if you choose this path.**
 
-Available since version 18.1.0, the ``--no-binary`` option value changed in 21.2.0 due to the outsourcing of the binary bindings.
+Available since version 18.1.0.
+The ``--no-binary`` option value changed in 21.2.0 due to the outsourcing of the binary bindings.
 
 
 Override Automatic SSE2 Detection

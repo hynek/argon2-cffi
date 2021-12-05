@@ -27,7 +27,7 @@ What explicitly *may* change over time are the default hashing parameters and th
 - The *CFFI* bindings have been extracted into a separate project: [*argon2-cffi-bindings*]
   This makes *argon2-cffi* a Python-only project und should make it easier to contribute to and have more frequent releases with high-level features.
 
-  This change is only breaking for users who want to use a system-wide installation of *Argon2* instead of our vendored code.
+  This change is breaking for users who want to use a system-wide installation of *Argon2* instead of our vendored code, because the argument to the ``--no-binary`` argument changed.
   Please refer to the [installation guide](https://argon2-cffi.readthedocs.io/en/stable/installation.html).
 
 
