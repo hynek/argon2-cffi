@@ -10,6 +10,7 @@ from . import (
     DEFAULT_PARALLELISM,
     DEFAULT_TIME_COST,
     PasswordHasher,
+    profiles,
 )
 
 
@@ -30,23 +31,34 @@ def main(argv):
     parser.add_argument(
         "-l", type=int, help="`hash_length`", default=DEFAULT_HASH_LENGTH
     )
+    parser.add_argument(
+        "--profile",
+        type=str,
+        help="A profile from `argon2.profiles. Takes precendence.",
+        default=None,
+    )
 
     args = parser.parse_args(argv[1:])
 
     password = b"secret"
-    ph = PasswordHasher(
-        time_cost=args.t,
-        memory_cost=args.m,
-        parallelism=args.p,
-        hash_len=args.l,
-    )
+    if args.profile:
+        ph = PasswordHasher.from_parameters(
+            getattr(profiles, args.profile.upper())
+        )
+    else:
+        ph = PasswordHasher(
+            time_cost=args.t,
+            memory_cost=args.m,
+            parallelism=args.p,
+            hash_len=args.l,
+        )
     hash = ph.hash(password)
 
     params = {
-        "time_cost": (args.t, "iterations"),
-        "memory_cost": (args.m, "KiB"),
-        "parallelism": (args.p, "threads"),
-        "hash_len": (args.l, "bytes"),
+        "time_cost": (ph.time_cost, "iterations"),
+        "memory_cost": (ph.memory_cost, "KiB"),
+        "parallelism": (ph.parallelism, "threads"),
+        "hash_len": (ph.hash_len, "bytes"),
     }
 
     print("Running Argon2id %d times with:" % (args.n,))

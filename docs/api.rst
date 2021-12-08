@@ -3,12 +3,12 @@ API Reference
 
 .. module:: argon2
 
-*argon2-cffi* comes with an high-level API and hopefully reasonable defaults for *Argon2* parameters that result in a verification time of 40--50ms on recent-ish hardware.
+*argon2-cffi* comes with an high-level API and uses the officially recommended low-memory *Argon2* parameters that result in a verification time of 40--50ms on recent-ish hardware.
 
 .. warning::
 
-   The current memory requirement is set to rather conservative 100 MB.
-   However, in memory constrained environments like Docker containers that can lead to problems.
+   The current memory requirement is set to rather conservative 64 MB.
+   However, in memory constrained environments such as *Docker* containers that can lead to problems.
    One possible non-obvious symptom are apparent freezes that are caused by swapping.
 
    Please check :doc:`parameters` for more details.
@@ -19,14 +19,14 @@ Unless you have any special needs, all you need to know is:
 
   >>> from argon2 import PasswordHasher
   >>> ph = PasswordHasher()
-  >>> hash = ph.hash("s3kr3tp4ssw0rd")
+  >>> hash = ph.hash("correct horse battery staple")
   >>> hash  # doctest: +SKIP
-  '$argon2id$v=19$m=102400,t=2,p=8$tSm+JOWigOgPZx/g44K5fQ$WDyus6py50bVFIPkjA28lQ'
-  >>> ph.verify(hash, "s3kr3tp4ssw0rd")
+  '$argon2id$v=19$m=65536,t=3,p=4$MIIRqgvgQbgj220jfp0MPA$YfwJSVjtjSU0zzV/P3S9nnQ/USre2wvJMjfCIjrTQbg'
+  >>> ph.verify(hash, "correct horse battery staple")
   True
   >>> ph.check_needs_rehash(hash)
   False
-  >>> ph.verify(hash, "t0t411ywr0ng")
+  >>> ph.verify(hash, "Tr0ub4dor&3")
   Traceback (most recent call last):
     ...
   argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash
@@ -42,7 +42,7 @@ A login function could thus look like this:
 While the :class:`PasswordHasher` class has the aspiration to be good to use out of the box, it has all the parametrization you'll need:
 
 .. autoclass:: PasswordHasher
-  :members: hash, verify, check_needs_rehash
+  :members: from_parameters, hash, verify, check_needs_rehash
 
 If you don't specify any parameters, the following constants are used:
 
@@ -52,7 +52,72 @@ If you don't specify any parameters, the following constants are used:
 .. data:: DEFAULT_MEMORY_COST
 .. data:: DEFAULT_PARALLELISM
 
-You can see their values in :class:`PasswordHasher`.
+They are taken from :data:`argon2.profiles.RFC_9106_LOW_MEMORY`.
+
+
+Profiles
+--------
+
+.. automodule:: argon2.profiles
+
+
+You can try them out using the :doc:`cli` interface.
+For example:
+
+.. code-block:: console
+
+   $ python -m argon2 --profile RFC_9106_HIGH_MEMORY
+   Running Argon2id 100 times with:
+   hash_len: 32 bytes
+   memory_cost: 2097152 KiB
+   parallelism: 4 threads
+   time_cost: 1 iterations
+
+   Measuring...
+
+   866.5ms per password verification
+
+That should give you a feeling on how they perform in *your* environment.
+
+.. data:: RFC_9106_HIGH_MEMORY
+
+   Called "FIRST RECOMMENDED option" by `RFC 9106`_.
+
+   Requires beefy 2 GiB, so be careful in memory-contrained systems.
+
+   .. versionadded:: 21.2.0
+
+.. data:: RFC_9106_LOW_MEMORY
+
+   Called "SECOND RECOMMENDED option" by `RFC 9106`_.
+
+   The main difference is that it only takes 64 MiB of RAM.
+
+   The values from this profile are the default parameters used by :class:`argon2.PasswordHasher`.
+
+   .. versionadded:: 21.2.0
+
+.. data:: PRE_21_2
+
+   The default values that *argon2-cffi* used from 18.2.0 until 21.2.0.
+
+   Needs 100 MiB of RAM.
+
+   .. versionadded:: 21.2.0
+
+.. data:: CHEAPEST
+
+   This is the cheapest-possible profile.
+
+   .. warning::
+
+      This is only for testing purposes!
+      Do **not** use in production!
+
+   .. versionadded:: 21.2.0
+
+
+.. _`RFC 9106`: https://www.rfc-editor.org/rfc/rfc9106.html
 
 
 Exceptions
@@ -70,10 +135,9 @@ Exceptions
 Utilities
 ---------
 
+.. autofunction:: argon2.extract_parameters
 
-.. autofunction:: extract_parameters
-
-.. autoclass:: Parameters
+.. autoclass:: argon2.Parameters
 
 
 Low Level
