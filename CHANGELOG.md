@@ -1,8 +1,10 @@
 # Changelog
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Calendar Versioning](https://calver.org/).
-The first digit of the version is the year, the second digit is incremented with each release, starting at 1 for each year.
-The third digit is when we need to start branches for older releases (only for emergencies).
+
+The **first digit** of the version is the year.
+The **second digit** is incremented with each release, starting at 1 for each year.
+The **third digit** is when we need to start branches for older releases (only for emergencies).
 
 ---
 
