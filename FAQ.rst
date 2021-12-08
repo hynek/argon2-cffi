@@ -15,4 +15,4 @@ Why do the ``verify()`` methods raise an Exception instead of returning ``False`
       It goes without saying that it's impossible to switch now for backward-compatibility reasons.
    #. In my opinion, a wrong password should raise an exception such that it can't pass unnoticed by accident.
       See also The Zen of Python: "Errors should never pass silently."
-   #. It's more `Pythonic <https://docs.python.org/3/glossary.html#term-eafp>`_.
+   #. It's more `Pythonic <https://docs.python.org/3/glossary.html#term-EAFP>`_.
