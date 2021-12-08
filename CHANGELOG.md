@@ -50,6 +50,10 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 - The CLI interface now has a `--profile` option that takes any name from `argon2.profiles`.
 
+- Types!
+  *argon2-cffi* is now fully typed.
+  [#112](https://github.com/hynek/argon2-cffi/pull/112)
+
 
 ## Changed
 

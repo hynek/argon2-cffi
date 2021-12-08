@@ -9,11 +9,12 @@ Low-level functions if you want to build your own higher level abstractions.
     module is full of land mines, dragons, and dinosaurs with laser guns.
 """
 
-
 from enum import Enum
+from typing import Any
 
 from _argon2_cffi_bindings import ffi, lib
 
+from ._typing import Literal
 from .exceptions import HashingError, VerificationError, VerifyMismatchError
 
 
@@ -68,15 +69,15 @@ class Type(Enum):
 
 
 def hash_secret(
-    secret,
-    salt,
-    time_cost,
-    memory_cost,
-    parallelism,
-    hash_len,
-    type,
-    version=ARGON2_VERSION,
-):
+    secret: bytes,
+    salt: bytes,
+    time_cost: int,
+    memory_cost: int,
+    parallelism: int,
+    hash_len: int,
+    type: Type,
+    version: int = ARGON2_VERSION,
+) -> bytes:
     """
     Hash *secret* and return an **encoded** hash.
 
@@ -134,15 +135,15 @@ def hash_secret(
 
 
 def hash_secret_raw(
-    secret,
-    salt,
-    time_cost,
-    memory_cost,
-    parallelism,
-    hash_len,
-    type,
-    version=ARGON2_VERSION,
-):
+    secret: bytes,
+    salt: bytes,
+    time_cost: int,
+    memory_cost: int,
+    parallelism: int,
+    hash_len: int,
+    type: Type,
+    version: int = ARGON2_VERSION,
+) -> bytes:
     """
     Hash *password* and return a **raw** hash.
 
@@ -173,7 +174,7 @@ def hash_secret_raw(
     return bytes(ffi.buffer(buf, hash_len))
 
 
-def verify_secret(hash, secret, type):
+def verify_secret(hash: bytes, secret: bytes, type: Type) -> Literal[True]:
     """
     Verify whether *secret* is correct for *hash* of *type*.
 
@@ -211,7 +212,7 @@ def verify_secret(hash, secret, type):
         raise VerificationError(error_to_str(rv))
 
 
-def core(context, type):
+def core(context: Any, type: int) -> int:
     """
     Direct binding to the ``argon2_ctx`` function.
 
@@ -239,7 +240,7 @@ def core(context, type):
     return lib.argon2_ctx(context, type)
 
 
-def error_to_str(error):
+def error_to_str(error: int) -> str:
     """
     Convert an Argon2 error code into a native string.
 

@@ -2,6 +2,9 @@
 
 import os
 
+from typing import Union
+
+from ._typing import Literal
 from ._utils import Parameters, _check_types, extract_parameters
 from .exceptions import InvalidHash
 from .low_level import Type, hash_secret, verify_secret
@@ -15,7 +18,7 @@ DEFAULT_MEMORY_COST = RFC_9106_LOW_MEMORY.memory_cost
 DEFAULT_PARALLELISM = RFC_9106_LOW_MEMORY.parallelism
 
 
-def _ensure_bytes(s, encoding):
+def _ensure_bytes(s: Union[bytes, str], encoding: str) -> bytes:
     """
     Ensure *s* is a bytes string.  Encode using *encoding* if it isn't.
     """
@@ -67,15 +70,18 @@ class PasswordHasher:
     """
     __slots__ = ["_parameters", "encoding"]
 
+    _parameters: Parameters
+    encoding: str
+
     def __init__(
         self,
-        time_cost=DEFAULT_TIME_COST,
-        memory_cost=DEFAULT_MEMORY_COST,
-        parallelism=DEFAULT_PARALLELISM,
-        hash_len=DEFAULT_HASH_LENGTH,
-        salt_len=DEFAULT_RANDOM_SALT_LENGTH,
-        encoding="utf-8",
-        type=Type.ID,
+        time_cost: int = DEFAULT_TIME_COST,
+        memory_cost: int = DEFAULT_MEMORY_COST,
+        parallelism: int = DEFAULT_PARALLELISM,
+        hash_len: int = DEFAULT_HASH_LENGTH,
+        salt_len: int = DEFAULT_RANDOM_SALT_LENGTH,
+        encoding: str = "utf-8",
+        type: Type = Type.ID,
     ):
         e = _check_types(
             time_cost=(time_cost, int),
@@ -114,30 +120,30 @@ class PasswordHasher:
         return ph
 
     @property
-    def time_cost(self):
+    def time_cost(self) -> int:
         return self._parameters.time_cost
 
     @property
-    def memory_cost(self):
+    def memory_cost(self) -> int:
         return self._parameters.memory_cost
 
     @property
-    def parallelism(self):
+    def parallelism(self) -> int:
         return self._parameters.parallelism
 
     @property
-    def hash_len(self):
+    def hash_len(self) -> int:
         return self._parameters.hash_len
 
     @property
-    def salt_len(self):
+    def salt_len(self) -> int:
         return self._parameters.salt_len
 
     @property
-    def type(self):
+    def type(self) -> Type:
         return self._parameters.type
 
-    def hash(self, password):
+    def hash(self, password: Union[str, bytes]) -> str:
         """
         Hash *password* and return an encoded hash.
 
@@ -164,7 +170,9 @@ class PasswordHasher:
         b"$argon2id": Type.ID,
     }
 
-    def verify(self, hash, password):
+    def verify(
+        self, hash: Union[str, bytes], password: Union[str, bytes]
+    ) -> Literal[True]:
         """
         Verify that *password* matches *hash*.
 
@@ -207,7 +215,7 @@ class PasswordHasher:
             hash, _ensure_bytes(password, self.encoding), hash_type
         )
 
-    def check_needs_rehash(self, hash):
+    def check_needs_rehash(self, hash: str) -> bool:
         """
         Check whether *hash* was created using the instance's parameters.
 

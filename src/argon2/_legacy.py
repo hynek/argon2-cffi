@@ -4,8 +4,9 @@
 Legacy mid-level functions.
 """
 
-
 import os
+
+from typing import Optional
 
 from ._password_hasher import (
     DEFAULT_HASH_LENGTH,
@@ -14,18 +15,19 @@ from ._password_hasher import (
     DEFAULT_RANDOM_SALT_LENGTH,
     DEFAULT_TIME_COST,
 )
+from ._typing import Literal
 from .low_level import Type, hash_secret, hash_secret_raw, verify_secret
 
 
 def hash_password(
-    password,
-    salt=None,
-    time_cost=DEFAULT_TIME_COST,
-    memory_cost=DEFAULT_MEMORY_COST,
-    parallelism=DEFAULT_PARALLELISM,
-    hash_len=DEFAULT_HASH_LENGTH,
-    type=Type.I,
-):
+    password: bytes,
+    salt: Optional[bytes] = None,
+    time_cost: int = DEFAULT_TIME_COST,
+    memory_cost: int = DEFAULT_MEMORY_COST,
+    parallelism: int = DEFAULT_PARALLELISM,
+    hash_len: int = DEFAULT_HASH_LENGTH,
+    type: Type = Type.I,
+) -> bytes:
     """
     Legacy alias for :func:`hash_secret` with default parameters.
 
@@ -40,14 +42,14 @@ def hash_password(
 
 
 def hash_password_raw(
-    password,
-    salt=None,
-    time_cost=DEFAULT_TIME_COST,
-    memory_cost=DEFAULT_MEMORY_COST,
-    parallelism=DEFAULT_PARALLELISM,
-    hash_len=DEFAULT_HASH_LENGTH,
-    type=Type.I,
-):
+    password: bytes,
+    salt: Optional[bytes] = None,
+    time_cost: int = DEFAULT_TIME_COST,
+    memory_cost: int = DEFAULT_MEMORY_COST,
+    parallelism: int = DEFAULT_PARALLELISM,
+    hash_len: int = DEFAULT_HASH_LENGTH,
+    type: Type = Type.I,
+) -> bytes:
     """
     Legacy alias for :func:`hash_secret_raw` with default parameters.
 
@@ -61,7 +63,9 @@ def hash_password_raw(
     )
 
 
-def verify_password(hash, password, type=Type.I):
+def verify_password(
+    hash: bytes, password: bytes, type: Type = Type.I
+) -> Literal[True]:
     """
     Legacy alias for :func:`verify_secret` with default parameters.
 

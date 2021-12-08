@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 from dataclasses import dataclass
+from typing import Any, Optional
 
 from .exceptions import InvalidHash
 from .low_level import Type
@@ -9,7 +10,7 @@ from .low_level import Type
 NoneType = type(None)
 
 
-def _check_types(**kw):
+def _check_types(**kw: Any) -> Optional[str]:
     """
     Check each ``name: (value, types)`` in *kw*.
 
@@ -31,15 +32,10 @@ def _check_types(**kw):
     if errors != []:
         return ", ".join(errors) + "."
 
-
-def _encoded_str_len(l):
-    """
-    Compute how long a byte string of length *l* becomes if encoded to hex.
-    """
-    return (l << 2) / 3 + 2
+    return None
 
 
-def _decoded_str_len(l):
+def _decoded_str_len(l: int) -> int:
     """
     Compute how long an encoded string of length *l* becomes.
     """
@@ -96,7 +92,7 @@ _NAME_TO_TYPE = {"argon2id": Type.ID, "argon2i": Type.I, "argon2d": Type.D}
 _REQUIRED_KEYS = sorted(("v", "m", "t", "p"))
 
 
-def extract_parameters(hash):
+def extract_parameters(hash: str) -> Parameters:
     """
     Extract parameters from an encoded *hash*.
 
