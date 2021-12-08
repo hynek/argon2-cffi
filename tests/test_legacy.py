@@ -12,7 +12,6 @@ from argon2 import (
     hash_password_raw,
     verify_password,
 )
-from argon2._utils import _encoded_str_len
 from argon2.exceptions import HashingError, VerificationError
 
 from .test_low_level import (
@@ -91,9 +90,10 @@ class TestHash:
         """
         rv = hash_password(b"secret")
         salt = rv.split(b",")[-1].split(b"$")[1]
+
         assert (
             # -1 for not NUL byte
-            int(_encoded_str_len(DEFAULT_RANDOM_SALT_LENGTH)) - 1
+            int((DEFAULT_RANDOM_SALT_LENGTH << 2) / 3 + 2) - 1
             == len(salt)
         )
 

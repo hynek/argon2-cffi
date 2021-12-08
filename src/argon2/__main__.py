@@ -4,6 +4,8 @@ import argparse
 import sys
 import timeit
 
+from typing import List
+
 from . import (
     DEFAULT_HASH_LENGTH,
     DEFAULT_MEMORY_COST,
@@ -14,7 +16,7 @@ from . import (
 )
 
 
-def main(argv):
+def main(argv: List[str]) -> None:
     parser = argparse.ArgumentParser(description="Benchmark Argon2.")
     parser.add_argument(
         "-n", type=int, default=100, help="Number of iterations to measure."
