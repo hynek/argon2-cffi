@@ -19,6 +19,10 @@ Whenever breaking changes are needed, they are:
 
 What explicitly *may* change over time are the default hashing parameters and the behavior of the [CLI interface](https://argon2-cffi.readthedocs.io/en/stable/cli.html).
 
+<-- changelog follows -->
+
+[Unreleased](https://github.com/hynek/argon2-cffi/compare/21.2.0...HEAD)
+
 
 ## [21.2.0](https://github.com/hynek/argon2-cffi/compare/21.1.0...21.2.0) - 2021-12-08
 
