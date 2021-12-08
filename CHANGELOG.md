@@ -59,7 +59,7 @@ What explicitly *may* change over time are the default hashing parameters and th
   [#112](https://github.com/hynek/argon2-cffi/pull/112)
 
 
-## Changed
+### Changed
 
 - `argon2.PasswordHasher` now uses the RFC 9106 low-memory profile by default.
   The old defaults are available as `argon2.profiles.PRE_21_2`.
