@@ -23,6 +23,11 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 ## [Unreleased](https://github.com/hynek/argon2-cffi/compare/21.2.0...HEAD)
 
+### Fixed
+
+- While the last release added type hints, the fact that it's been misssing a `py.typed` file made *Mypy* ignore them.
+  [#113](https://github.com/hynek/argon2-cffi/pull/113)
+
 
 ## [21.2.0](https://github.com/hynek/argon2-cffi/compare/21.1.0...21.2.0) - 2021-12-08
 
