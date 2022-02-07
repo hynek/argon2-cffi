@@ -319,15 +319,12 @@ def test_core():
     rv = core(ctx, Type.D.value)
 
     assert 0 == rv
-    assert (
-        hash_secret_raw(
-            pwd,
-            salt=salt,
-            time_cost=1,
-            memory_cost=8,
-            parallelism=1,
-            hash_len=hash_len,
-            type=Type.D,
-        )
-        == bytes(ffi.buffer(ctx.out, ctx.outlen))
-    )
+    assert hash_secret_raw(
+        pwd,
+        salt=salt,
+        time_cost=1,
+        memory_cost=8,
+        parallelism=1,
+        hash_len=hash_len,
+        type=Type.D,
+    ) == bytes(ffi.buffer(ctx.out, ctx.outlen))
