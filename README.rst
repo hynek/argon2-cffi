@@ -47,15 +47,11 @@
 Project Information
 ===================
 
-
 *argon2-cffi* is available from `PyPI <https://pypi.org/project/argon2-cffi/>`_, the documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.io/>`_, the code on `GitHub <https://github.com/hynek/argon2-cffi>`_.
 The low-level Argon2 CFFI bindings are maintained in the separate project `argon2-cffi-bindings <https://github.com/hynek/argon2-cffi-bindings>`_.
 
 It targets Python 3.6 and newer, and PyPy3.
 The last version that works with Python 2.7 is 20.1.0, and the last version that works with Python 3.5 is 21.1.0.
-
-*argon2-cffi* implements *Argon2* version 1.3, as described in
-`Argon2: the memory-hard function for password hashing and other applications <https://www.cryptolux.org/images/0/0d/Argon2.pdf>`_.
 
 
 *argon2-cffi* for Enterprise
