@@ -1,6 +1,8 @@
 # Changelog
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Calendar Versioning](https://calver.org/).
+All notable changes to this project will be documented in this file.
+
+The format is based on [*Keep a Changelog*](https://keepachangelog.com/en/1.0.0/) and this project adheres to [*Calendar Versioning*](https://calver.org/).
 
 The **first number** of the version is the year.
 The **second number** is incremented with each release, starting at 1 for each year.
@@ -8,7 +10,7 @@ The **third number** is when we need to start branches for older releases (only 
 
 ---
 
-*argon2-cffi* has a very strong backward compatibility policy.
+*argon2-cffi* has a very strong backwards-compatibility policy.
 Generally speaking, you shouldn't ever be afraid of updating.
 
 Whenever breaking changes are needed, they are:
@@ -28,7 +30,7 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 ### Fixed
 
-- While the last release added type hints, the fact that it's been misssing a `py.typed` file made *Mypy* ignore them.
+- While the last release added type hints, the fact that it's been missing a `py.typed` file made *Mypy* ignore them.
   [#113](https://github.com/hynek/argon2-cffi/pull/113)
 
 
