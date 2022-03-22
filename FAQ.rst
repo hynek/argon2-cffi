@@ -12,7 +12,7 @@ Why do the ``verify()`` methods raise an Exception instead of returning ``False`
    #. The *Argon2* library had no concept of a "wrong password" error in the beginning.
       Therefore when writing these bindings, an exception with the full error had to be raised so you could inspect what went actually wrong.
 
-      It goes without saying that it's impossible to switch now for backward-compatibility reasons.
+      Changing that now would be a very dangerous break of backwards-compatibility.
    #. In my opinion, a wrong password should raise an exception such that it can't pass unnoticed by accident.
       See also The Zen of Python: "Errors should never pass silently."
    #. It's more `Pythonic <https://docs.python.org/3/glossary.html#term-EAFP>`_.
