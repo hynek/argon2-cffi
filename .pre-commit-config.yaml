@@ -15,6 +15,12 @@ repos:
       - id: isort
         additional_dependencies: [toml]
 
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.31.1
+    hooks:
+      - id: pyupgrade
+        args: [--py36-plus]
+
   - repo: https://github.com/PyCQA/flake8
     rev: 4.0.1
     hooks:
@@ -27,3 +33,5 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: debug-statements
+      - id: check-toml
+      - id: check-yaml
