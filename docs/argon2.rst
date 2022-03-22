@@ -15,8 +15,14 @@ This means that you can decide how long it takes to hash a password and how much
 In September 2021, *Argon2* has been properly standardized by the IETF in :rfc:`9106`.
 
 *Argon2* comes in three variants: Argon2\ **d**, Argon2\ **i**, and Argon2\ **id**.
-Originally Argon2\ **i** was considered the correct choice for password hashing and password-based key derivation.
-In practice it turned out that a *combination* of 2d and 2i is the better choice and so Argon2id was born and is now considered the *main variant* (and the only variant required by the RFC to be implemented).
+Argon2\ **d**'s strength is the resistance against `time–memory trade-offs`_, while Argon2\ **i**'s focus is on resistance against `side-channel attacks`_.
+
+Accordingly, Argon2\ **i** was originally considered the correct choice for password hashing and password-based key derivation.
+In practice it turned out that a *combination* of d and i -- that combines their strenghts -- is the better choice.
+And so Argon2\ **id** was born and is now considered the *main variant* (and the only variant required by the RFC to be implemented).
+
+.. _`time–memory trade-offs`: https://en.wikipedia.org/wiki/Space–time_tradeoff
+.. _`side-channel attacks`: https://en.wikipedia.org/wiki/Side-channel_attack
 
 
 Why “just use bcrypt” Is Not the Best Answer (Anymore)
@@ -27,12 +33,16 @@ And while they're still fine to use, the password cracking community embraced ne
 
 An effective measure against extreme parallelism proved making computation of password hashes also *memory* hard.
 The best known implementation of that approach is to date scrypt_.
-However according to the `Argon2 paper`_, page 2:
+However according to the `Argon2 paper`_ [#outdated]_, page 2:
 
   […] the existence of a trivial time-memory tradeoff allows compact implementations with the same energy cost.
 
 Therefore a new algorithm was needed.
 This time future-proof and with committee-vetting instead of single implementors.
+
+.. [#outdated] Please note that the paper is in some parts outdated.
+   For instance it predates the genesis of Argon2\ **id**.
+   Generally please refer to :rfc:`9106` instead.
 
 .. _bcrypt: https://en.wikipedia.org/wiki/Bcrypt
 .. _PBKDF2: https://en.wikipedia.org/wiki/PBKDF2
