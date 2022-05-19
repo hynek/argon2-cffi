@@ -128,7 +128,7 @@ $ pre-commit run --all-files
 
 ## Documentation
 
-- Use [semantic newlines] in [Markdown*] files (files ending in `.md`):
+- Use [semantic newlines] in [*Markdown*] files (files ending in `.md`):
 
   ```markdown
   This is a sentence.
@@ -140,7 +140,12 @@ $ pre-commit run --all-files
 
 If your change is noteworthy, there needs to be a changelog entry in `CHANGELOG.md`.
 
+- The changelog follows the [*Keep a Changelog*](https://keepachangelog.com/en/1.0.0/) standard.
+  Please add the best-fitting section if it's missing for the current release.
+  We use the following order: `Security`, `Removed`, `Deprecated`, `Added`, `Changed`, `Fixed`.
 - As with other docs, please use [semantic newlines] in the changelog.
+- Make the last line a link to your pull request.
+  You probably have to open it first to know the number.
 - Wrap symbols like modules, functions, or classes into backticks so they are rendered in a `monospace font`.
 - Wrap arguments into asterisks like in docstrings:
   `Added new argument *an_argument*.`
@@ -153,7 +158,8 @@ If your change is noteworthy, there needs to be a changelog entry in `CHANGELOG.
   * Added `argon2_cffi.func()`.
   * `argon2_cffi.func()` now doesn't crash the Large Hadron Collider anymore when passed the *foobar* argument.
 
-Example entries:
+
+#### Example entries
 
 ```markdown
 Added `argon2_cffi.func()`.
