@@ -50,15 +50,13 @@ Ko-fi = "https://ko-fi.com/the_hynek"
 
 [tool.flit.sdist]
 include = [
-    ".pre-commit-config.yaml",
-    ".readthedocs.yml",
     "*.ini",
     "*.rst",
-    "LICENSE.*",
+    ".github",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yml",
     "docs",
     "tests",
-    ".github",
-    "show_off.py",
 ]
 exclude = [
     "docs/_build",
