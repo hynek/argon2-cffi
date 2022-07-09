@@ -12,7 +12,7 @@ It is designed to have both a configurable runtime as well as memory consumption
 
 This means that you can decide how long it takes to hash a password and how much memory is required.
 
-In September 2021, *Argon2* has been properly standardized by the IETF in :rfc:`9106`.
+In September 2021, *Argon2* has been standardized by the IETF in :rfc:`9106`.
 
 *Argon2* comes in three variants: Argon2\ **d**, Argon2\ **i**, and Argon2\ **id**.
 Argon2\ **d**'s strength is the resistance against `time–memory trade-offs`_, while Argon2\ **i**'s focus is on resistance against `side-channel attacks`_.
