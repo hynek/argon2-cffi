@@ -4,16 +4,12 @@
 requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
+
 [project]
 name = "argon2-cffi"
-authors = [{name = "Hynek Schlawack", email = "hs@ox.cx"}]
+authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 dynamic = ["version", "description"]
 requires-python = ">=3.6"
-dependencies = [
-    "argon2-cffi-bindings",
-    "dataclasses; python_version < '3.7'",
-    "typing-extensions; python_version < '3.8'",  # c.f. _typing.py module
-]
 license = { file = "LICENSE" }
 readme = "README.rst"
 keywords = ["password", "hash", "hashing", "security"]
@@ -39,6 +35,16 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "argon2-cffi-bindings",
+    "dataclasses; python_version < '3.7'",
+    "typing-extensions; python_version < '3.8'", # c.f. _typing.py module
+]
+
+[project.optional-dependencies]
+tests = ["coverage[toml]>=5.0.2", "hypothesis", "pytest"]
+docs = ["sphinx", "sphinx-notfound-page", "furo"]
+dev = ["argon2[tests,docs]", "mypy"]
 
 [project.urls]
 Changelog = "https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md"
@@ -48,60 +54,29 @@ Funding = "https://github.com/sponsors/hynek"
 Tidelift = "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=pypi"
 Ko-fi = "https://ko-fi.com/the_hynek"
 
-[tool.flit.sdist]
-include = [
-    "*.ini",
-    "*.rst",
-    ".github",
-    ".pre-commit-config.yaml",
-    ".readthedocs.yml",
-    "docs",
-    "tests",
-]
-exclude = [
-    "docs/_build",
-    "tests/__pycache__",
-    "tests/.mypy_cache",
-]
-
-[project.optional-dependencies]
-tests = ["coverage[toml]>=5.0.2", "hypothesis", "pytest"]
-docs = ["sphinx", "sphinx-notfound-page", "furo"]
-
-# Combine tests and docs and a few more dev tools to a dev environment.
-# Refresh using `tox -e cog`
-
-dev = [
-    "pre-commit",
-    "cogapp",
-    "tomli",
-    # [[[cog
-    # import pathlib, tomli
-    # cfg = tomli.loads(pathlib.Path("pyproject.toml").read_text())
-    # opt = cfg["project"]["optional-dependencies"]
-    # for dep in opt["tests"] + opt["docs"]:
-    #     print(f'"{dep}",')
-    # ]]]
-    "coverage[toml]>=5.0.2",
-    "hypothesis",
-    "pytest",
-    "sphinx",
-    "sphinx-notfound-page",
-    "furo",
-    # [[[end]]]
-]
 
 [tool.flit.module]
 name = "argon2"
 
+[tool.flit.sdist]
+include = [
+    ".github",
+    ".pre-commit-config.yaml",
+    ".readthedocs.yml",
+    "*.ini",
+    "*.md",
+    "*.rst",
+    "docs",
+    "tests",
+]
+exclude = ["docs/_build", "tests/__pycache__", "tests/.mypy_cache"]
+
 
 [tool.pytest.ini_options]
-addopts = "-ra --strict-markers --capture=no"
+addopts = ["-ra", "--strict-markers", "--strict-config"]
 xfail_strict = true
 testpaths = "tests"
-filterwarnings = [
-    "once::Warning",
-]
+filterwarnings = ["once::Warning"]
 
 
 [tool.coverage.run]
@@ -132,6 +107,38 @@ exclude_lines = [
     "-> ['\"]?NoReturn['\"]?:",
 ]
 omit = []
+
+
+[tool.mypy]
+# show error messages from unrelated files
+follow_imports = "normal"
+
+# suppress errors about unsatisfied imports
+ignore_missing_imports = true
+
+# be strict
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+strict_optional = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_ignores = true
+
+# sometimes redefinition is just fine
+allow_redefinition = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "conftest.*"
+ignore_errors = true
 
 
 [tool.black]
