@@ -125,7 +125,7 @@ texinfo_documents = [
         "argon2-cffi Documentation",
         "Hynek Schlawack",
         "argon2-cffi",
-        "The secure Argon2 password hashing algorithm.",
+        "Argon2 for Python",
         "Miscellaneous",
     )
 ]
