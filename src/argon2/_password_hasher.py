@@ -208,7 +208,7 @@ class PasswordHasher:
         hash = _ensure_bytes(hash, "ascii")
         try:
             hash_type = self._header_to_type[hash[:9]]
-        except (IndexError, KeyError, LookupError):
+        except LookupError:
             raise InvalidHash()
 
         return verify_secret(

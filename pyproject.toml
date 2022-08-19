@@ -42,7 +42,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-tests = ["coverage[toml]>=5.0.2", "hypothesis", "pytest"]
+tests = ["hypothesis", "pytest"]
 docs = ["sphinx", "sphinx-notfound-page", "furo"]
 dev = ["argon2[tests,docs]", "mypy"]
 

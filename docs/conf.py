@@ -53,7 +53,7 @@ version = release.rsplit(".", 1)[0]
 rst_epilog = f"""
 .. |changelog| replace:: What’s new?
 .. _changelog: https://github.com/hynek/argon2-cffi/blob/{release}/CHANGELOG.md
-"""  # noqa
+"""
 
 # In dev mode, always point to main branch. There's no tags yet.
 if release.endswith(".dev0"):
