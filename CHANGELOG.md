@@ -26,6 +26,11 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 ## [Unreleased](https://github.com/hynek/argon2-cffi/compare/21.3.0...HEAD)
 
+### Added
+
+- Official support for Python 3.11.
+
+
 ## [21.3.0](https://github.com/hynek/argon2-cffi/compare/21.2.0...21.3.0) - 2021-12-11
 
 ### Fixed
