@@ -47,11 +47,14 @@
 Project Information
 ===================
 
-*argon2-cffi* is available from `PyPI <https://pypi.org/project/argon2-cffi/>`_, the documentation lives at `Read the Docs <https://argon2-cffi.readthedocs.io/>`_, the code on `GitHub <https://github.com/hynek/argon2-cffi>`_.
-The low-level Argon2 CFFI bindings are maintained in the separate project `argon2-cffi-bindings <https://github.com/hynek/argon2-cffi-bindings>`_.
+- **License**: `MIT <https://choosealicense.com/licenses/mit/>`_
+- **PyPI**: https://pypi.org/project/argon2-cffi/
+- **Source Code**: https://github.com/hynek/argon2-cffi
+- **Documentation**: https://argon2-cffi.readthedocs.io/
+- **Changelog**: https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md
+- **Supported Python Versions**: 3.6 and later
 
-It targets Python 3.6 and newer, and PyPy3.
-The last version that works with Python 2.7 is 20.1.0, and the last version that works with Python 3.5 is 21.1.0.
+The low-level Argon2 CFFI bindings are maintained in the separate project `argon2-cffi-bindings <https://github.com/hynek/argon2-cffi-bindings>`_.
 
 
 *argon2-cffi* for Enterprise
