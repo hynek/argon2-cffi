@@ -11,7 +11,7 @@ As of September 2021, we have the official Internet standard `RFC 9106`_ to help
 
 It comes with two recommendations in `section 4 <https://www.rfc-editor.org/rfc/rfc9106.html#section-4>`_, that (as of *argon2-cffi* 21.2.0) you can load directly from the :mod:`argon2.profiles` module: :data:`argon2.profiles.RFC_9106_HIGH_MEMORY` (called "FIRST RECOMMENDED") and :data:`argon2.profiles.RFC_9106_LOW_MEMORY` ("SECOND RECOMMENDED") into :meth:`argon2.PasswordHasher.from_parameters()`.
 
-Please use the :doc:`cli` interface together with its `\-\-profile` argument to see if they work for you.
+Please use the :doc:`cli` interface together with its ``--profile`` argument to see if they work for you.
 
 ----
 

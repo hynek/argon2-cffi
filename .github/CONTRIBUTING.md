@@ -22,8 +22,11 @@ Please report any harm to [Hynek Schlawack] in any way you find appropriate.
   This is a hard rule; patches with missing tests or documentation can't be merged.
 - Make sure your changes pass our [CI].
   You won't get any feedback until it's green unless you ask for it.
+- For the CI to pass, the coverage must be 100%.
+  If you have problems to test something, open anyway and ask for advice.
+  In some situations, we may agree to add an `# pragma: no cover`.
 - Once you've addressed review feedback, make sure to bump the pull request with a short note, so we know you're done.
-- Don’t break backwards compatibility.
+- Don’t break backwards-compatibility.
 
 
 ## Local Development Environment
@@ -35,13 +38,13 @@ We highly recommend to develop using the latest Python release because we try to
 First create a [virtual environment](https://virtualenv.pypa.io/) so you don't break your system-wide Python installation.
 It’s out of scope for this document to list all the ways to manage virtual environments in Python, but if you don’t already have a pet way, take some time to look at tools like [*direnv*](https://hynek.me/til/python-project-local-venvs/), [*virtualfish*](https://virtualfish.readthedocs.io/), and [*virtualenvwrapper*](https://virtualenvwrapper.readthedocs.io/).
 
-Next, get an up to date checkout of the *argon2-cffi* repository:
+Next, get an up-to-date checkout of the *argon2-cffi* repository:
 
 ```console
 $ git clone git@github.com:hynek/argon2-cffi.git
 ```
 
-or if you want to use git via `https`:
+or if you prefer to use *Git* via `https`:
 
 ```console
 $ git clone https://github.com/hynek/argon2-cffi.git
@@ -51,7 +54,7 @@ Change into the newly created directory and **after activating your virtual envi
 
 ```console
 $ cd argon2-cffi
-$ python -m pip install --upgrade pip setuptools  # PLEASE don't skip this step
+$ python -m pip install --upgrade pip wheel  # PLEASE don't skip this step
 $ python -m pip install -e '.[dev]'
 ```
 
@@ -70,20 +73,20 @@ $ make html
 
 The built documentation can then be found in `docs/_build/html/`.
 
-To avoid committing code that violates our style guide, we strongly advise you to install [*pre-commit*] [^dev] hooks:
+To avoid committing code that violates our style guide, we strongly advise you to install [*pre-commit*] and its hooks:
 
 ```console
 $ pre-commit install
 ```
 
-You can also run them anytime (as our tox does) using:
+This is not strictly necessary, because our [*tox*] file contains an environment that runs:
 
 ```console
 $ pre-commit run --all-files
 ```
 
-[^dev]: *pre-commit* should have been installed into your virtualenv automatically when you ran `pip install -e '.[dev]'` above.
-        If *pre-commit* is missing, your probably need to run `pip install -e '.[dev]'` again.
+and our CI has integration with `pre-commit.ci <https://pre-commit.ci>`_.
+But it's way more comfortable to run it locally and *git* catching avoidable errors.
 
 
 ## Code
@@ -128,9 +131,9 @@ $ pre-commit run --all-files
 
 ## Documentation
 
-- Use [semantic newlines] in [*Markdown*] files (files ending in `.md`):
+- Use [semantic newlines] in [*reStructuredText*] and [*Markdown*](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) files (files ending in `.rst` and `.md`):
 
-  ```markdown
+  ```rst
   This is a sentence.
   This is another sentence.
   ```

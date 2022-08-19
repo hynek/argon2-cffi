@@ -22,16 +22,11 @@ User's Guide
    parameters
    cli
    faq
-
+   license
 
 .. include:: ../README.rst
    :start-after: -begin-meta-
    :end-before: -end-meta-
-
-.. toctree::
-   :maxdepth: 1
-
-   license
 
 
 Indices and tables
