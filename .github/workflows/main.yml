@@ -112,12 +112,19 @@ jobs:
         with:
           python-version: ${{env.PYTHON_LATEST}}
 
-      - run: python -m pip install build twine check-wheel-contents
+      - run: python -m pip install build twine check-wheel-contents wheel
       - run: python -m build
       - run: ls -l dist
       - run: check-wheel-contents dist/*.whl
       - name: Check long_description
         run: python -m twine check dist/*
+      - name: Inspect sdist & wheel contents.
+        run: |
+          cd dist
+          mkdir out
+          python -m wheel unpack --dest out *.whl
+          tar xf *.tar.gz -C out
+          tree -a out
 
   install-dev:
     name: Verify dev env
