@@ -45,7 +45,7 @@ dependencies = [
 [project.optional-dependencies]
 tests = ["hypothesis", "pytest"]
 docs = ["sphinx", "sphinx-notfound-page", "furo"]
-dev = ["argon2[tests,docs]", "mypy"]
+dev = ["argon2-cffi[tests,docs]", "mypy"]
 
 [project.urls]
 Changelog = "https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md"
