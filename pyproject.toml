@@ -41,12 +41,12 @@ classifiers = [
 ]
 dependencies = [
     "argon2-cffi-bindings",
-    "typing-extensions; python_version < '3.8'", # c.f. _typing.py module
+    "typing-extensions; python_version < '3.8'", # cf. _typing.py module
 ]
 
 [project.optional-dependencies]
 tests = ["hypothesis", "pytest"]
-docs = ["sphinx", "sphinx-notfound-page", "furo"]
+docs = ["sphinx", "sphinx-notfound-page", "furo", "myst-parser"]
 dev = ["argon2-cffi[tests,docs]", "mypy"]
 
 [project.urls]
@@ -64,10 +64,10 @@ raw-options = { version_scheme = "no-guess-dev" }
 
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
-content-type = "text/x-rst"
+content-type = "text/markdown"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "README.rst"
+path = "README.md"
 
 
 [tool.pytest.ini_options]

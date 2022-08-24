@@ -8,11 +8,16 @@ from importlib import metadata
 # ones.
 
 extensions = [
+    "myst_parser",
     "notfound.extension",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
+]
+
+myst_enable_extensions = [
+    "deflist",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -39,15 +44,6 @@ copyright = "2015, Hynek Schlawack"
 release = metadata.version("argon2-cffi")
 # The short X.Y version.
 version = release.rsplit(".", 1)[0]
-
-rst_epilog = f"""
-.. |changelog| replace:: What’s new?
-.. _changelog: https://github.com/hynek/argon2-cffi/blob/{release}/CHANGELOG.md
-"""
-
-# In dev mode, always point to main branch. There's no tags yet.
-if release.endswith(".dev0"):
-    rst_epilog = rst_epilog.replace(release, "main")
 
 # Move type hints into the description block, instead of the func definition.
 autodoc_typehints = "description"
