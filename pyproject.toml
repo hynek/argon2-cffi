@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 
@@ -13,10 +13,9 @@ packages = ["src/argon2"]
 name = "argon2-cffi"
 description = "Argon2 for Python"
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
-dynamic = ["version"]
+dynamic = ["version", "readme"]
 requires-python = ">=3.7"
 license = { file = "LICENSE" }
-readme = "README.rst"
 keywords = ["password", "hash", "hashing", "security"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -51,15 +50,24 @@ docs = ["sphinx", "sphinx-notfound-page", "furo"]
 dev = ["argon2-cffi[tests,docs]", "mypy"]
 
 [project.urls]
-Changelog = "https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md"
 Documentation = "https://argon2-cffi.readthedocs.io/"
+Changelog = "https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md"
 "Source Code" = "https://github.com/hynek/argon2-cffi"
 Funding = "https://github.com/sponsors/hynek"
 Tidelift = "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=pypi"
 Ko-fi = "https://ko-fi.com/the_hynek"
 
+
 [tool.hatch.version]
-path = "src/argon2/__init__.py"
+source = "vcs"
+raw-options = { version_scheme = "no-guess-dev" }
+
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/x-rst"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.rst"
 
 
 [tool.pytest.ini_options]
