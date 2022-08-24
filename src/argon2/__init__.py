@@ -18,18 +18,11 @@ from ._utils import Parameters, extract_parameters
 from .low_level import Type
 
 
-__version__ = "22.1.0.dev0"
-
 __title__ = "argon2-cffi"
-__description__ = (__doc__ or "").strip()
-__url__ = "https://argon2-cffi.readthedocs.io/"
-__uri__ = __url__
 
 __author__ = "Hynek Schlawack"
-__email__ = "hs@ox.cx"
-
-__license__ = "MIT"
 __copyright__ = "Copyright (c) 2015 " + __author__
+__license__ = "MIT"
 
 
 __all__ = [
@@ -49,3 +42,40 @@ __all__ = [
     "profiles",
     "verify_password",
 ]
+
+
+def __getattr__(name: str) -> str:
+    dunder_to_metadata = {
+        "__version__": "version",
+        "__description__": "summary",
+        "__uri__": "",
+        "__url__": "",
+        "__email__": "",
+    }
+    if name not in dunder_to_metadata.keys():
+        raise AttributeError(f"module {__name__} has no attribute {name}")
+
+    import sys
+    import warnings
+
+    if sys.version_info < (3, 8):
+        from importlib_metadata import metadata
+    else:
+        from importlib.metadata import metadata
+
+    warnings.warn(
+        f"Accessing argon2.{name} is deprecated and will be "
+        "removed in a future release. Use importlib.metadata directly "
+        "to query for structlog's packaging metadata.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+
+    meta = metadata("argon2-cffi")
+
+    if name in ("__uri__", "__url__"):
+        return meta["Project-URL"].split(" ", 1)[-1]
+    elif name == "__email__":
+        return meta["Author-email"].split("<", 1)[1].rstrip(">")
+
+    return meta[dunder_to_metadata[name]]

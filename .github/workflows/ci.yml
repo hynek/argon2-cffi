@@ -11,6 +11,7 @@ on:
 env:
   FORCE_COLOR: "1" # Make tools pretty.
   TOX_TESTENV_PASSENV: FORCE_COLOR
+  SETUPTOOLS_SCM_PRETEND_VERSION: "1.0" # avoid warnings about shallow checkout
   PYTHON_LATEST: "3.10"
 
 jobs:
@@ -83,9 +84,13 @@ jobs:
   system-package:
     name: Install & test with system package of Argon2.
     runs-on: ubuntu-latest
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: "" # inconsistency error otherwise
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v4
         with:
           python-version: ${{env.PYTHON_LATEST}}
@@ -102,9 +107,13 @@ jobs:
   package:
     name: Build & verify package
     runs-on: ubuntu-latest
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: ""
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: hynek/build-and-inspect-python-package@v1
 
   install-dev:

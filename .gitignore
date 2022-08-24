@@ -4,7 +4,9 @@
 .coverage
 .coverage.*
 .direnv
+.envrc
 .hypothesis
+.mypy_cache
 .pytest_cache/
 .tox
 .vscode
