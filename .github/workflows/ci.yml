@@ -84,9 +84,13 @@ jobs:
   system-package:
     name: Install & test with system package of Argon2.
     runs-on: ubuntu-latest
+    env:
+      SETUPTOOLS_SCM_PRETEND_VERSION: "" # inconsistency error otherwise
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v4
         with:
           python-version: ${{env.PYTHON_LATEST}}
