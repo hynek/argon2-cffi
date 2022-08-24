@@ -23,7 +23,6 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 <!-- changelog follows -->
 
-
 ## [Unreleased](https://github.com/hynek/argon2-cffi/compare/21.3.0...HEAD)
 
 ### Removed
