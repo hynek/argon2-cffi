@@ -1,8 +1,12 @@
 # SPDX-License-Identifier: MIT
 
 [build-system]
-requires = ["flit_core >=3.4,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/argon2"]
 
 
 [project]
@@ -54,22 +58,8 @@ Funding = "https://github.com/sponsors/hynek"
 Tidelift = "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=pypi"
 Ko-fi = "https://ko-fi.com/the_hynek"
 
-
-[tool.flit.module]
-name = "argon2"
-
-[tool.flit.sdist]
-include = [
-    ".github",
-    ".pre-commit-config.yaml",
-    ".readthedocs.yml",
-    "*.ini",
-    "*.md",
-    "*.rst",
-    "docs",
-    "tests",
-]
-exclude = ["docs/_build", "tests/__pycache__", "tests/.mypy_cache"]
+[tool.hatch.version]
+path = "src/argon2/__init__.py"
 
 
 [tool.pytest.ini_options]
@@ -110,6 +100,8 @@ omit = []
 
 
 [tool.mypy]
+show_error_codes = true
+
 # show error messages from unrelated files
 follow_imports = "normal"
 
