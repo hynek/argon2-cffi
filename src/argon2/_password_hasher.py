@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 
-import os
+from __future__ import annotations
 
-from typing import Union
+import os
 
 from ._typing import Literal
 from ._utils import Parameters, _check_types, extract_parameters
@@ -18,7 +18,7 @@ DEFAULT_MEMORY_COST = RFC_9106_LOW_MEMORY.memory_cost
 DEFAULT_PARALLELISM = RFC_9106_LOW_MEMORY.parallelism
 
 
-def _ensure_bytes(s: Union[bytes, str], encoding: str) -> bytes:
+def _ensure_bytes(s: bytes | str, encoding: str) -> bytes:
     """
     Ensure *s* is a bytes string.  Encode using *encoding* if it isn't.
     """
@@ -108,7 +108,7 @@ class PasswordHasher:
         self.encoding = encoding
 
     @classmethod
-    def from_parameters(cls, params: Parameters) -> "PasswordHasher":
+    def from_parameters(cls, params: Parameters) -> PasswordHasher:
         """
         Construct a `PasswordHasher` from *params*.
 
@@ -143,7 +143,7 @@ class PasswordHasher:
     def type(self) -> Type:
         return self._parameters.type
 
-    def hash(self, password: Union[str, bytes]) -> str:
+    def hash(self, password: str | bytes) -> str:
         """
         Hash *password* and return an encoded hash.
 
@@ -171,7 +171,7 @@ class PasswordHasher:
     }
 
     def verify(
-        self, hash: Union[str, bytes], password: Union[str, bytes]
+        self, hash: str | bytes, password: str | bytes
     ) -> Literal[True]:
         """
         Verify that *password* matches *hash*.

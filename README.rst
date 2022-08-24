@@ -52,7 +52,7 @@ Project Information
 - **Source Code**: https://github.com/hynek/argon2-cffi
 - **Documentation**: https://argon2-cffi.readthedocs.io/
 - **Changelog**: https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md
-- **Supported Python Versions**: 3.6 and later
+- **Supported Python Versions**: 3.7 and later
 
 The low-level Argon2 CFFI bindings are maintained in the separate project `argon2-cffi-bindings <https://github.com/hynek/argon2-cffi-bindings>`_.
 

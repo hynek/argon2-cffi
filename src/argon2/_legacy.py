@@ -4,9 +4,9 @@
 Legacy mid-level functions.
 """
 
-import os
+from __future__ import annotations
 
-from typing import Optional
+import os
 
 from ._password_hasher import (
     DEFAULT_HASH_LENGTH,
@@ -21,7 +21,7 @@ from .low_level import Type, hash_secret, hash_secret_raw, verify_secret
 
 def hash_password(
     password: bytes,
-    salt: Optional[bytes] = None,
+    salt: bytes | None = None,
     time_cost: int = DEFAULT_TIME_COST,
     memory_cost: int = DEFAULT_MEMORY_COST,
     parallelism: int = DEFAULT_PARALLELISM,
@@ -43,7 +43,7 @@ def hash_password(
 
 def hash_password_raw(
     password: bytes,
-    salt: Optional[bytes] = None,
+    salt: bytes | None = None,
     time_cost: int = DEFAULT_TIME_COST,
     memory_cost: int = DEFAULT_MEMORY_COST,
     parallelism: int = DEFAULT_PARALLELISM,

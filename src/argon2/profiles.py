@@ -9,6 +9,8 @@ concrete values and :doc:`parameters` for more information.
 .. versionadded:: 21.2.0
 """
 
+from __future__ import annotations
+
 from ._utils import Parameters
 from .low_level import Type
 

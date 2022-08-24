@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-The secure Argon2 password hashing algorithm.
+Argon2 for Python
 """
 
 from . import exceptions, low_level, profiles

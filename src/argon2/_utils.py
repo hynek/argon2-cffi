@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: MIT
 
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 from .exceptions import InvalidHash
 from .low_level import Type
@@ -10,7 +12,7 @@ from .low_level import Type
 NoneType = type(None)
 
 
-def _check_types(**kw: Any) -> Optional[str]:
+def _check_types(**kw: Any) -> str | None:
     """
     Check each ``name: (value, types)`` in *kw*.
 

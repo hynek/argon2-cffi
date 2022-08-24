@@ -7,9 +7,10 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "argon2-cffi"
+description = "Argon2 for Python"
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
-dynamic = ["version", "description"]
-requires-python = ">=3.6"
+dynamic = ["version"]
+requires-python = ">=3.7"
 license = { file = "LICENSE" }
 readme = "README.rst"
 keywords = ["password", "hash", "hashing", "security"]
@@ -23,7 +24,6 @@ classifiers = [
     "Operating System :: POSIX",
     "Operating System :: Unix",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -38,7 +38,6 @@ classifiers = [
 ]
 dependencies = [
     "argon2-cffi-bindings",
-    "dataclasses; python_version < '3.7'",
     "typing-extensions; python_version < '3.8'", # c.f. _typing.py module
 ]
 
