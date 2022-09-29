@@ -30,6 +30,11 @@ jobs:
           - "pypy-3.8"
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
@@ -56,6 +61,11 @@ jobs:
     needs: tests
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
@@ -88,6 +98,11 @@ jobs:
       SETUPTOOLS_SCM_PRETEND_VERSION: "" # inconsistency error otherwise
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -111,6 +126,11 @@ jobs:
       SETUPTOOLS_SCM_PRETEND_VERSION: ""
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -124,6 +144,11 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
