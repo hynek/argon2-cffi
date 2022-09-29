@@ -196,3 +196,28 @@ jobs:
           python-version: ${{env.PYTHON_LATEST}}
       - run: python -m pip install -e .[dev]
       - run: python -m argon2 -n 1 -t 1 -m 8 -p 1
+
+
+  # Ensure everything required is passing for branch protection.
+  required-checks-pass:
+    if: always()
+
+    needs:
+      - coverage
+      - docs
+      - install-dev
+      - package
+      - system-package
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v1
+        with:
+          egress-policy: block
+
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
