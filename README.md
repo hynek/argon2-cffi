@@ -31,11 +31,11 @@ argon2.exceptions.VerifyMismatchError: The password does not match the supplied 
 ## Project Information
 
 - **License**: [MIT](https://choosealicense.com/licenses/mit/)
-- **PyPI**: <https://pypi.org/project/argon2-cffi/>
-- **Source Code**: <https://github.com/hynek/argon2-cffi>
-- **Documentation**: <https://argon2-cffi.readthedocs.io/>
-- **Changelog**: <https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md>
 - **Supported Python Versions**: 3.7 and later
+- [**PyPI**](https://pypi.org/project/argon2-cffi/)
+- [**Source Code**](https://github.com/hynek/argon2-cffi)
+- [**Documentation**](https://argon2-cffi.readthedocs.io/)
+- [**Changelog**](https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md)
 
 The low-level Argon2 CFFI bindings are maintained in the separate [*argon2-cffi-bindings*](https://github.com/hynek/argon2-cffi-bindings) project.
 
