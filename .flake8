@@ -1,0 +1,12 @@
+[flake8]
+exclude = src/argon2/_ffi.py
+ignore =
+    # Ambiguous variable names
+    # Ignored, since there is an enum value "I" for the algorithm type Argon2I
+    E741
+    # Not an actual PEP8 violation
+    W503
+    # Black vs flake8 conflict
+    E203
+
+# vim: ft=dosini

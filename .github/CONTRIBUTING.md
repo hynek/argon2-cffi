@@ -33,7 +33,8 @@ Please report any harm to [Hynek Schlawack] in any way you find appropriate.
 
 You can (and should) run our test suite using [*tox*].
 However, you’ll probably want a more traditional environment as well.
-We highly recommend to develop using the latest Python release because we try to take advantage of modern features whenever possible.
+We highly recommend to develop using the version specified in the `.python-version` file in the project root.
+That's the version used in CI by default.
 
 First create a [virtual environment](https://virtualenv.pypa.io/) so you don't break your system-wide Python installation.
 It’s out of scope for this document to list all the ways to manage virtual environments in Python, but if you don’t already have a pet way, take some time to look at tools like [*direnv*](https://hynek.me/til/python-project-local-venvs/), [*virtualfish*](https://virtualfish.readthedocs.io/), and [*virtualenvwrapper*](https://virtualenvwrapper.readthedocs.io/).

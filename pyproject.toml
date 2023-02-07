@@ -106,7 +106,7 @@ branch = true
 source = ["argon2"]
 
 [tool.coverage.paths]
-source = ["src", ".tox/py*/**/site-packages"]
+source = ["src", ".tox/**/site-packages"]
 
 [tool.coverage.report]
 show_missing = true
