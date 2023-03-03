@@ -162,7 +162,7 @@ class PasswordHasher:
             parallelism=self.parallelism,
             hash_len=self.hash_len,
             type=self.type,
-        ).decode("ascii")
+        ).decode(self.encoding)
 
     _header_to_type = {
         b"$argon2i$": Type.I,
@@ -205,7 +205,7 @@ class PasswordHasher:
             instead of its more generic superclass.
         .. versionadded:: 18.2.0 Hash type agility.
         """
-        hash = _ensure_bytes(hash, "ascii")
+        hash = _ensure_bytes(hash, self.encoding)
         try:
             hash_type = self._header_to_type[hash[:9]]
         except LookupError:
