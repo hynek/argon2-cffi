@@ -129,6 +129,8 @@ Exceptions
 
 .. autoexception:: argon2.exceptions.HashingError
 
+.. autoexception:: argon2.exceptions.InvalidHashError
+
 .. autoexception:: argon2.exceptions.InvalidHash
 
 

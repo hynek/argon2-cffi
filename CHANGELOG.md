@@ -30,10 +30,18 @@ What explicitly *may* change over time are the default hashing parameters and th
 - Python 3.6 is not supported anymore.
 
 
+### Deprecated
+
+- The `InvalidHash` exception is deprecated in favor of `InvalidHashError`.
+  No plans for removal currently exist and the names can (but shouldn't) be used interchangeably.
+
+
 ### Added
 
 - Official support for Python 3.11 and 3.12.
   No code changes were necessary.
+
+- `argon2.exceptions.InvalidHashError` as a replacement for `InvalidHash`.
 
 
 ## [21.3.0](https://github.com/hynek/argon2-cffi/compare/21.2.0...21.3.0) - 2021-12-11

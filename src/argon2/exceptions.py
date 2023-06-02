@@ -37,9 +37,20 @@ class HashingError(Argon2Error):
     """
 
 
-class InvalidHash(ValueError):
+class InvalidHashError(ValueError):
     """
     Raised if the hash is invalid before passing it to Argon2.
 
-    .. versionadded:: 18.2.0
+    .. versionadded:: 23.1.0
+       As a replacement for :exc:`argon2.exceptions.InvalidHash`.
     """
+
+
+InvalidHash = InvalidHashError
+"""
+Deprecated alias for :class:`InvalidHashError`.
+
+.. versionadded:: 18.2.0
+.. deprecated:: 23.1.0
+    Use :exc:`argon2.exceptions.InvalidHashError` instead.
+"""
