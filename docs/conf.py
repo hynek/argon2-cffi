@@ -16,9 +16,7 @@ extensions = [
     "sphinx.ext.todo",
 ]
 
-myst_enable_extensions = [
-    "deflist",
-]
+myst_enable_extensions = ["deflist", "colon_fence"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
