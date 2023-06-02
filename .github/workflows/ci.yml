@@ -110,8 +110,18 @@ jobs:
 
       - run: python -Im tox run -e system-argon2
 
-  mypy:
-    name: Mypy on ${{ matrix.python-version }}
+  mypy-all:
+    name: Mypy for API & own code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+
+      - run: python -Im pip install --upgrade wheel tox
+      - run: python -Im tox run -e mypy-api
+
+  mypy-api:
+    name: Mypy for API on ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -132,7 +142,7 @@ jobs:
           allow-prereleases: true
 
       - run: python -Im pip install --upgrade wheel tox
-      - run: python -Im tox run -e mypy
+      - run: python -Im tox run -e mypy-api
 
   docs:
     name: Build docs & run doctests
