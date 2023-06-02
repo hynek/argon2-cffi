@@ -23,7 +23,6 @@ User's Guide
    parameters
    cli
    faq
-   credits
    changelog
 
 

@@ -83,13 +83,6 @@ path = "CHANGELOG.md"
 start-after = "<!-- changelog follows -->"
 pattern = "\n(###.+?\n)## "
 
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = "## Credits\n"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "AUTHORS.md"
-start-after = "# Credits & License\n"
-
 
 [tool.pytest.ini_options]
 addopts = ["-ra", "--strict-markers", "--strict-config"]
