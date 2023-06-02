@@ -3,12 +3,12 @@ API Reference
 
 .. module:: argon2
 
-*argon2-cffi* comes with an high-level API and uses the officially recommended low-memory *Argon2* parameters that result in a verification time of 40--50ms on recent-ish hardware.
+*argon2-cffi* comes with an high-level API and uses the officially recommended low-memory Argon2 parameters that result in a verification time of 40--50ms on recent-ish hardware.
 
 .. warning::
 
    The current memory requirement is set to rather conservative 64 MB.
-   However, in memory constrained environments such as *Docker* containers that can lead to problems.
+   However, in memory constrained environments such as Docker containers that can lead to problems.
    One possible non-obvious symptom are apparent freezes that are caused by swapping.
 
    Please check :doc:`parameters` for more details.
@@ -219,7 +219,7 @@ Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` 
   >>> out == argon2.low_level.hash_secret_raw(pwd, salt, 1, 8, 1, 8, Type.D)
   True
 
-All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as long they are not altered by *Argon2* itself.
+All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as long they are not altered by Argon2 itself.
 
 .. autofunction:: error_to_str
 

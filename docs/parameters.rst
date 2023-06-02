@@ -19,7 +19,7 @@ If you need finer tuning, the current recommended best practice is as follow:
 
 #. Choose whether you want Argon2i, Argon2d, or Argon2id (``type``).
    If you don't know what that means, choose Argon2id (:attr:`argon2.Type.ID`).
-#. Figure out how many threads can be used on each call to *Argon2* (``parallelism``, called "lanes" in the RFC).
+#. Figure out how many threads can be used on each call to Argon2 (``parallelism``, called "lanes" in the RFC).
    They recommend 4 threads.
 #. Figure out how much memory each call can afford (``memory_cost``).
    The APIs use Kibibytes_ (1024 bytes) as base unit.

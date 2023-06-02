@@ -1,4 +1,4 @@
-# *Argon2* for Python
+# Argon2 for Python
 
 [![Documentation](https://img.shields.io/badge/Docs-Read%20The%20Docs-black)](https://argon2-cffi.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/argon2-cffi/blob/main/LICENSE)
@@ -8,7 +8,7 @@
 
 <!-- begin-short -->
 
-[*Argon2*](https://github.com/p-h-c/phc-winner-argon2) won the [Password Hashing Competition](https://www.password-hashing.net/) and *argon2-cffi* is the simplest way to use it in Python and PyPy:
+[Argon2](https://github.com/p-h-c/phc-winner-argon2) won the [Password Hashing Competition](https://www.password-hashing.net/) and *argon2-cffi* is the simplest way to use it in Python and PyPy:
 
 ```pycon
 >>> from argon2 import PasswordHasher

@@ -2,7 +2,7 @@ CLI
 ===
 
 To aid you with finding the parameters, *argon2-cffi* offers a CLI interface that can be accessed using ``python -m argon2``.
-It will benchmark *Argon2*’s password *verification* in the current environment:
+It will benchmark Argon2's password *verification* in the current environment:
 
 .. code-block:: console
 

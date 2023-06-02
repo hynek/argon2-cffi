@@ -1,8 +1,8 @@
 Installation
 ============
 
-Using a Vendored *Argon2*
--------------------------
+Using a Vendored Argon2
+-----------------------
 
 .. code-block:: bash
 
@@ -10,7 +10,7 @@ Using a Vendored *Argon2*
 
 should be all it takes.
 
-But since *argon2-cffi* depends on `argon2-cffi-bindings`_ that vendors *Argon2*'s C code by default, it can lead to complications depending on the platform.
+But since *argon2-cffi* depends on `argon2-cffi-bindings`_ that vendors Argon2's C code by default, it can lead to complications depending on the platform.
 
 The C code is known to compile and work on all common platforms (including x86, ARM, and PPC).
 On x86, an SSE2_-optimized version is used.
@@ -39,11 +39,11 @@ A working C compiler and `CFFI environment`_ are required to build the `argon2-c
 If you've been able to compile Python CFFI extensions before, *argon2-cffi* should install without any problems.
 
 
-Using a System-wide Installation of *Argon2*
---------------------------------------------
+Using a System-wide Installation of Argon2
+------------------------------------------
 
 If you set ``ARGON2_CFFI_USE_SYSTEM`` to ``1`` (and *only* ``1``), *argon2-cffi-bindings* will not build its bindings.
-However binary wheels are preferred by *pip* and *Argon2* gets installed along with *argon2-cffi* anyway.
+However binary wheels are preferred by *pip* and Argon2 gets installed along with *argon2-cffi* anyway.
 
 Therefore you also have to instruct *pip* to use a source distribution of `argon2-cffi-bindings`_:
 
@@ -52,7 +52,7 @@ Therefore you also have to instruct *pip* to use a source distribution of `argon
   env ARGON2_CFFI_USE_SYSTEM=1 \
     python -m pip install --no-binary=argon2-cffi-bindings argon2-cffi
 
-This approach can lead to problems around your build chain and you can run into incompatibilities between *Argon2* and *argon2-cffi* if the latter has been tested against a different version.
+This approach can lead to problems around your build chain and you can run into incompatibilities between Argon2 and *argon2-cffi* if the latter has been tested against a different version.
 
 **It is your own responsibility to deal with these risks if you choose this path.**
 

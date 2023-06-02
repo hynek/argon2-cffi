@@ -220,7 +220,7 @@ def core(context: Any, type: int) -> int:
 
     .. warning::
         This is a strictly advanced function working on raw C data structures.
-        Both *Argon2*'s and *argon2-cffi*'s higher-level bindings do a lot of
+        Both Argon2's and *argon2-cffi*'s higher-level bindings do a lot of
         sanity checks and housekeeping work that *you* are now responsible for
         (e.g. clearing buffers). The structure of the *context* object can,
         has, and will change with *any* release!
@@ -228,13 +228,13 @@ def core(context: Any, type: int) -> int:
         Use at your own peril; *argon2-cffi* does *not* use this binding
         itself.
 
-    :param context: A CFFI *Argon2* context object (i.e. an ``struct
-        Argon2_Context``/``argon2_context``).
-    :param int type: Which *Argon2* variant to use.  You can use the ``value``
+    :param context: A CFFI Argon2 context object (i.e. an ``struct
+        Argon2_Context`` / ``argon2_context``).
+    :param int type: Which Argon2 variant to use.  You can use the ``value``
         field of :class:`Type`'s fields.
 
     :rtype: int
-    :return: An *Argon2* error code.  Can be transformed into a string using
+    :return: An Argon2 error code.  Can be transformed into a string using
         :func:`error_to_str`.
 
     .. versionadded:: 16.0.0

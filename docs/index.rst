@@ -1,6 +1,6 @@
-==================================
-*argon2-cffi*: *Argon2* for Python
-==================================
+================================
+*argon2-cffi*: Argon2 for Python
+================================
 
 Release v\ |release| (:doc:`What's new? <changelog>`)
 
