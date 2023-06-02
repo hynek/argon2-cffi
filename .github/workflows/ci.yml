@@ -36,17 +36,6 @@ jobs:
           - "pypy-3.8"
 
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            files.pythonhosted.org:443
-            github.com:443
-            objects.githubusercontent.com:443
-            pypi.org:443
-
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
@@ -84,15 +73,6 @@ jobs:
     needs: tests
 
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            files.pythonhosted.org:443
-            github.com:443
-            pypi.org:443
-
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
       - uses: actions/download-artifact@v3
@@ -120,16 +100,6 @@ jobs:
       SETUPTOOLS_SCM_PRETEND_VERSION: "" # inconsistency error otherwise
 
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            azure.archive.ubuntu.com:80
-            files.pythonhosted.org:443
-            github.com:443
-            pypi.org:443
-
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -185,14 +155,6 @@ jobs:
       SETUPTOOLS_SCM_PRETEND_VERSION: ""
 
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            files.pythonhosted.org:443
-            github.com:443
-            pypi.org:443
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -207,15 +169,6 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            files.pythonhosted.org:443
-            github.com:443
-            pypi.org:443
-
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
       - run: python -Im pip install -e .[dev]
@@ -236,11 +189,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-
       - name: Decide whether the needed jobs succeeded or failed
         uses: re-actors/alls-green@release/v1
         with:
