@@ -15,26 +15,24 @@ description = "Argon2 for Python"
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 dynamic = ["version", "readme"]
 requires-python = ">=3.7"
-license = { file = "LICENSE" }
+license = "MIT"
 keywords = ["password", "hash", "hashing", "security"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Natural Language :: English",
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: Unix",
-    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
-    "Programming Language :: Python",
     "Topic :: Security :: Cryptography",
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -60,7 +58,7 @@ Ko-fi = "https://ko-fi.com/the_hynek"
 
 [tool.hatch.version]
 source = "vcs"
-raw-options = { version_scheme = "no-guess-dev" }
+raw-options = { local_scheme = "no-local-version" }
 
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
