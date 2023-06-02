@@ -121,29 +121,13 @@ omit = []
 
 
 [tool.mypy]
+strict = true
+
 show_error_codes = true
+enable_error_code = ["ignore-without-code"]
 
-# show error messages from unrelated files
-follow_imports = "normal"
-
-# suppress errors about unsatisfied imports
 ignore_missing_imports = true
 
-# be strict
-check_untyped_defs = true
-disallow_any_generics = true
-disallow_incomplete_defs = true
-disallow_untyped_calls = true
-disallow_untyped_defs = true
-no_implicit_optional = true
-strict_optional = true
-warn_no_return = true
-warn_redundant_casts = true
-warn_unreachable = true
-warn_unused_ignores = true
-
-# sometimes redefinition is just fine
-allow_redefinition = true
 
 [[tool.mypy.overrides]]
 module = "tests.*"

@@ -133,7 +133,7 @@ def hash_secret(
     if rv != lib.ARGON2_OK:
         raise HashingError(error_to_str(rv))
 
-    return ffi.string(buf)
+    return ffi.string(buf)  # type: ignore[no-any-return]
 
 
 def hash_secret_raw(
@@ -241,7 +241,7 @@ def core(context: Any, type: int) -> int:
 
     .. versionadded:: 16.0.0
     """
-    return lib.argon2_ctx(context, type)
+    return lib.argon2_ctx(context, type)  # type: ignore[no-any-return]
 
 
 def error_to_str(error: int) -> str:
@@ -256,4 +256,5 @@ def error_to_str(error: int) -> str:
     """
     msg = ffi.string(lib.argon2_error_message(error))
     msg = msg.decode("ascii")
-    return msg
+
+    return msg  # type: ignore[no-any-return]
