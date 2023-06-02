@@ -51,7 +51,7 @@ class Type(Enum):
     it less suitable for hashing secrets and more suitable for cryptocurrencies
     and applications with no threats from side-channel timing attacks.
     """
-    I = lib.Argon2_i
+    I = lib.Argon2_i  # noqa: E741
     r"""
     Argon2\ **i** uses data-independent memory access.  Argon2i is slower as
     it makes more passes over the memory to protect from tradeoff attacks.
@@ -206,12 +206,14 @@ def verify_secret(hash: bytes, secret: bytes, type: Type) -> Literal[True]:
         len(secret),
         type.value,
     )
+
     if rv == lib.ARGON2_OK:
         return True
-    elif rv == lib.ARGON2_VERIFY_MISMATCH:
+
+    if rv == lib.ARGON2_VERIFY_MISMATCH:
         raise VerifyMismatchError(error_to_str(rv))
-    else:
-        raise VerificationError(error_to_str(rv))
+
+    raise VerificationError(error_to_str(rv))
 
 
 def core(context: Any, type: int) -> int:

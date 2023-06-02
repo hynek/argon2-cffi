@@ -52,4 +52,4 @@ class TestLegacyMetadataHack:
         with pytest.raises(
             AttributeError, match="module argon2 has no attribute __yolo__"
         ):
-            argon2.__yolo__
+            argon2.__yolo__  # noqa: B018

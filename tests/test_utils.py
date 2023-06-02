@@ -9,7 +9,7 @@ from hypothesis import strategies as st
 
 from argon2 import Parameters, Type, extract_parameters
 from argon2._utils import NoneType, _check_types, _decoded_str_len
-from argon2.exceptions import InvalidHash
+from argon2.exceptions import InvalidHashError
 
 
 class TestCheckTypes:
@@ -105,7 +105,7 @@ class TestExtractParameters:
         """
         Invalid hashes of various types raise an InvalidHash error.
         """
-        with pytest.raises(InvalidHash):
+        with pytest.raises(InvalidHashError):
             extract_parameters(hash)
 
 
@@ -115,14 +115,14 @@ class TestParameters:
         Parameters are iff every attribute is equal.
         """
         assert VALID_PARAMETERS == VALID_PARAMETERS
-        assert not VALID_PARAMETERS != VALID_PARAMETERS
+        assert VALID_PARAMETERS == VALID_PARAMETERS
 
     def test_eq_wrong_type(self):
         """
         Parameters are only compared if they have the same type.
         """
         assert VALID_PARAMETERS != "foo"
-        assert not VALID_PARAMETERS == object()
+        assert VALID_PARAMETERS != object()
 
     def test_repr(self):
         """

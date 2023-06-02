@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from .exceptions import InvalidHash
+from .exceptions import InvalidHashError
 from .low_level import Type
 
 
@@ -37,11 +37,11 @@ def _check_types(**kw: Any) -> str | None:
     return None
 
 
-def _decoded_str_len(l: int) -> int:
+def _decoded_str_len(length: int) -> int:
     """
     Compute how long an encoded string of length *l* becomes.
     """
-    rem = l % 4
+    rem = length % 4
 
     if rem == 3:
         last_group_len = 2
@@ -50,7 +50,7 @@ def _decoded_str_len(l: int) -> int:
     else:
         last_group_len = 0
 
-    return l // 4 * 3 + last_group_len
+    return length // 4 * 3 + last_group_len
 
 
 @dataclass
@@ -79,7 +79,7 @@ class Parameters:
     memory_cost: int
     parallelism: int
 
-    __slots__ = [
+    __slots__ = (
         "type",
         "version",
         "salt_len",
@@ -87,7 +87,7 @@ class Parameters:
         "time_cost",
         "memory_cost",
         "parallelism",
-    ]
+    )
 
 
 _NAME_TO_TYPE = {"argon2id": Type.ID, "argon2i": Type.I, "argon2d": Type.D}
@@ -111,10 +111,10 @@ def extract_parameters(hash: str) -> Parameters:
         parts.insert(2, "v=18")
 
     if len(parts) != 6:
-        raise InvalidHash
+        raise InvalidHashError
 
-    if parts[0] != "":
-        raise InvalidHash
+    if parts[0]:
+        raise InvalidHashError
 
     try:
         type = _NAME_TO_TYPE[parts[1]]
@@ -122,14 +122,14 @@ def extract_parameters(hash: str) -> Parameters:
         kvs = {
             k: int(v)
             for k, v in (
-                s.split("=") for s in [parts[2]] + parts[3].split(",")
+                s.split("=") for s in [parts[2], *parts[3].split(",")]
             )
         }
     except Exception:
-        raise InvalidHash
+        raise InvalidHashError from None
 
     if sorted(kvs.keys()) != _REQUIRED_KEYS:
-        raise InvalidHash
+        raise InvalidHashError
 
     return Parameters(
         type=type,

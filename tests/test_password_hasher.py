@@ -4,7 +4,7 @@ import pytest
 
 from argon2 import PasswordHasher, Type, extract_parameters
 from argon2._password_hasher import _ensure_bytes
-from argon2.exceptions import InvalidHash
+from argon2.exceptions import InvalidHash, InvalidHashError
 
 
 class TestEnsureBytes:
@@ -83,9 +83,16 @@ class TestPasswordHasher:
 
         assert "'time_cost' must be a int (got str)." == e.value.args[0]
 
+    def test_verify_invalid_hash_error(self):
+        """
+        If the hash can't be parsed, InvalidHashError is raised.
+        """
+        with pytest.raises(InvalidHashError):
+            PasswordHasher().verify("tiger", "does not matter")
+
     def test_verify_invalid_hash(self):
         """
-        If the hash can't be parsed, InvalidHash is raised.
+        InvalidHashError and the deprecrated InvalidHash are the same.
         """
         with pytest.raises(InvalidHash):
             PasswordHasher().verify("tiger", "does not matter")

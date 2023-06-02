@@ -6,7 +6,7 @@ import os
 
 from ._typing import Literal
 from ._utils import Parameters, _check_types, extract_parameters
-from .exceptions import InvalidHash
+from .exceptions import InvalidHashError
 from .low_level import Type, hash_secret, verify_secret
 from .profiles import RFC_9106_LOW_MEMORY
 
@@ -209,7 +209,7 @@ class PasswordHasher:
         try:
             hash_type = self._header_to_type[hash[:9]]
         except LookupError:
-            raise InvalidHash()
+            raise InvalidHashError() from None
 
         return verify_secret(
             hash, _ensure_bytes(password, self.encoding), hash_type

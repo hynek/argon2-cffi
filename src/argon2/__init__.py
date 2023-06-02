@@ -75,7 +75,8 @@ def __getattr__(name: str) -> str:
 
     if name in ("__uri__", "__url__"):
         return meta["Project-URL"].split(" ", 1)[-1]
-    elif name == "__email__":
+
+    if name == "__email__":
         return meta["Author-email"].split("<", 1)[1].rstrip(">")
 
     return meta[dunder_to_metadata[name]]
