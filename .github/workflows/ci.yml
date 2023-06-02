@@ -177,6 +177,8 @@ jobs:
 
     needs:
       - coverage
+      - mypy-all
+      - mypy-api
       - docs
       - install-dev
       - system-package
