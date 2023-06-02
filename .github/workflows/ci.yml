@@ -47,11 +47,6 @@ jobs:
       - name: Determine Python version for tox
         run: |
           V=${{ matrix.python-version }}
-          if [[ "$V" = ~* ]]; then
-            # Extract version from a '~3.XX.0-0' specifier.
-            V=${V:1:4}
-          fi
-
           if [[ "$V" = pypy-* ]]; then
             V=pypy3
           else
