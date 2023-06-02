@@ -118,7 +118,7 @@ jobs:
       - uses: actions/setup-python@v4
 
       - run: python -Im pip install --upgrade wheel tox
-      - run: python -Im tox run -e mypy-api
+      - run: python -Im tox run -e -f mypy
 
   mypy-api:
     name: Mypy for API on ${{ matrix.python-version }}
