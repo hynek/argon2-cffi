@@ -20,3 +20,8 @@ If you're using *scrypt* or *yescrypt*, you will be probably fine for good.
     See also The Zen of Python: "Errors should never pass silently."
 
 3.  It's more [Pythonic](https://docs.python.org/3/glossary.html#term-EAFP).
+
+
+## Does *argon2-cffi* release the GIL?
+
+[Yes](https://cffi.readthedocs.io/en/latest/ref.html#conversions).
