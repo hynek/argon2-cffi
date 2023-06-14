@@ -45,7 +45,7 @@ jobs:
           allow-prereleases: true
           cache: pip
 
-      - name: Prepare tox
+      - name: Prepare tox & run tests
         run: |
           V=${{ matrix.python-version }}
           if [[ "$V" = pypy-* ]]; then
@@ -56,7 +56,7 @@ jobs:
 
           python -Im pip install tox
 
-      - run: python -Im tox run -f $V
+          python -Im tox run -f $V
       - run: python -Im tox run -e mypy-api
 
       - name: Upload coverage data
