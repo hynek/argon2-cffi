@@ -58,7 +58,7 @@ jobs:
 
           python -Im tox run -f $V
       - run: python -Im tox run -e mypy-api
-        if: ! startsWith(matrix.python-version, 'pypy-')
+        if: ${{ !startsWith(matrix.python-version, 'pypy-') }}
       - name: Upload coverage data
         uses: actions/upload-artifact@v3
         with:
