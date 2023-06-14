@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   tests:
-    name: Tests on ${{ matrix.python-version }}
+    name: Tests & Mypy on ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -35,6 +35,7 @@ jobs:
           - "3.12"
           - "pypy-3.7"
           - "pypy-3.8"
+          - "pypy-3.9"
 
     steps:
       - uses: actions/checkout@v3
@@ -42,9 +43,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
-      - run: python -Im pip install --upgrade wheel tox
+          cache: pip
 
-      - name: Determine Python version for tox
+      - name: Prepare tox & run tests
         run: |
           V=${{ matrix.python-version }}
           if [[ "$V" = pypy-* ]]; then
@@ -53,9 +54,11 @@ jobs:
             V=py$(echo $V | tr -d .)
           fi
 
-          echo TOX_PYTHON=$V >>$GITHUB_ENV
+          python -Im pip install tox
 
-      - run: python -Im tox run -f ${{ env.TOX_PYTHON }}
+          python -Im tox run -f $V
+      - run: python -Im tox run -e mypy-api
+        if: ${{ !startsWith(matrix.python-version, 'pypy-') }}
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v3
@@ -72,15 +75,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+        with:
+          cache: pip
       - uses: actions/download-artifact@v3
         with:
           name: coverage-data
-      - run: python -Im pip install --upgrade coverage[toml]
 
       - name: Combine coverage & fail if it's <100%.
         run: |
+          python -Im pip install coverage[toml]
+
           python -Im coverage combine
           python -Im coverage html --skip-covered --skip-empty
+
+          # Report and write to summary.
+          python -Im coverage report | sed 's/^/    /' >> $GITHUB_STEP_SUMMARY
+
+          # Report again and fail if under 100%.
           python -Im coverage report --fail-under=100
 
       - name: Upload HTML report if check failed.
@@ -101,48 +112,29 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v4
-      - name: Install dependencies
+        with:
+          cache: pip
+
+      - name: Install dependencies & run tox
         run: |
           sudo apt-get install libargon2-0 libargon2-0-dev
           python -VV
           python -Im site
           python -Im pip install --upgrade wheel tox
 
-      - run: python -Im tox run -e system-argon2
+          python -Im tox run -e system-argon2
 
-  mypy-all:
-    name: Mypy for API & own code
+  mypy:
+    name: Type-check code base
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
 
-      - run: python -Im pip install --upgrade wheel tox
-      - run: python -Im tox run -f mypy
-
-  mypy-api:
-    name: Mypy for API on ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version:
-          - "3.7"
-          - "3.8"
-          - "3.9"
-          - "3.10"
-          - "3.11"
-          - "3.12"
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-          allow-prereleases: true
-
-      - run: python -Im pip install --upgrade wheel tox
-      - run: python -Im tox run -e mypy-api
+      - name: Prepare & run tox
+        run: |
+          python -Im pip install tox
+          python -Im tox run -e mypy-pkg
 
   docs:
     name: Build docs & run doctests
@@ -153,9 +145,11 @@ jobs:
         with:
           # Keep in-sync with .readthedocs.yaml and tox.ini/docs.
           python-version: "3.11"
-      - run: python -Im pip install --upgrade wheel tox
 
-      - run: tox run -e docs
+      - name: Prepare & run tox
+        run: |
+          python -Im pip install tox
+          python -Im tox run -e docs
 
   install-dev:
     name: Verify dev env
@@ -167,9 +161,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
-      - run: python -Im pip install -e .[dev]
 
-      - run: python -Im argon2 -n 1 -t 1 -m 8 -p 1
+      - name: Install in dev mode and run CLI
+        run: |
+         python -Im pip install -e .[dev]
+         python -Im argon2 -n 1 -t 1 -m 8 -p 1
 
   # Ensure everything required is passing for branch protection.
   required-checks-pass:
@@ -177,8 +173,7 @@ jobs:
 
     needs:
       - coverage
-      - mypy-all
-      - mypy-api
+      - mypy
       - docs
       - install-dev
       - system-package
