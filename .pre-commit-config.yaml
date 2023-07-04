@@ -2,18 +2,14 @@
 ci:
   autoupdate_schedule: monthly
 
-default_language_version:
-  # Keep in sync with .python-version.
-  python: python3.11
-
 repos:
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
       - id: black
 
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.0.272
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.276
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]

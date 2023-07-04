@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 from base64 import b64encode
+from dataclasses import replace
 
 import pytest
 
@@ -112,10 +113,10 @@ class TestExtractParameters:
 class TestParameters:
     def test_eq(self):
         """
-        Parameters are iff every attribute is equal.
+        Parameters are equal iff every attribute is equal.
         """
-        assert VALID_PARAMETERS == VALID_PARAMETERS
-        assert VALID_PARAMETERS == VALID_PARAMETERS
+        assert VALID_PARAMETERS == VALID_PARAMETERS  # noqa: PLR0124
+        assert VALID_PARAMETERS != replace(VALID_PARAMETERS, salt_len=9)
 
     def test_eq_wrong_type(self):
         """

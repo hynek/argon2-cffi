@@ -254,7 +254,4 @@ def error_to_str(error: int) -> str:
 
     .. versionadded:: 16.0.0
     """
-    msg = ffi.string(lib.argon2_error_message(error))
-    msg = msg.decode("ascii")
-
-    return msg  # type: ignore[no-any-return]
+    return ffi.string(lib.argon2_error_message(error)).decode("ascii")  # type: ignore[no-any-return]

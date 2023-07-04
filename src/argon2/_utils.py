@@ -125,7 +125,7 @@ def extract_parameters(hash: str) -> Parameters:
                 s.split("=") for s in [parts[2], *parts[3].split(",")]
             )
         }
-    except Exception:
+    except Exception:  # noqa: BLE001
         raise InvalidHashError from None
 
     if sorted(kvs.keys()) != _REQUIRED_KEYS:

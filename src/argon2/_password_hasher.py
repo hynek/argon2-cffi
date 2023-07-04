@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import os
 
+from typing import ClassVar
+
 from ._typing import Literal
 from ._utils import Parameters, _check_types, extract_parameters
 from .exceptions import InvalidHashError
@@ -164,7 +166,7 @@ class PasswordHasher:
             type=self.type,
         ).decode("ascii")
 
-    _header_to_type = {
+    _header_to_type: ClassVar[dict[bytes, Type]] = {
         b"$argon2i$": Type.I,
         b"$argon2d$": Type.D,
         b"$argon2id": Type.ID,
@@ -209,7 +211,7 @@ class PasswordHasher:
         try:
             hash_type = self._header_to_type[hash[:9]]
         except LookupError:
-            raise InvalidHashError() from None
+            raise InvalidHashError from None
 
         return verify_secret(
             hash, _ensure_bytes(password, self.encoding), hash_type
