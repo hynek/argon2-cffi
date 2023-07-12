@@ -30,25 +30,24 @@ jobs:
       - uses: hynek/build-and-inspect-python-package@v1
 
   # Upload to Test PyPI on every commit on main.
-  # XXX: our name is currently squatted by a third party on test.pypi.org.
-  # release-test-pypi:
-  #   name: Publish in-dev package to test.pypi.org
-  #   environment: release-test-pypi
-  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-  #   runs-on: ubuntu-latest
-  #   needs: build-package
+  release-test-pypi:
+    name: Publish in-dev package to test.pypi.org
+    environment: release-test-pypi
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: build-package
 
-  #   steps:
-  #     - name: Download packages built by build-and-inspect-python-package
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: Packages
-  #         path: dist
+    steps:
+      - name: Download packages built by build-and-inspect-python-package
+        uses: actions/download-artifact@v3
+        with:
+          name: Packages
+          path: dist
 
-  #     - name: Upload package to Test PyPI
-  #       uses: pypa/gh-action-pypi-publish@release/v1
-  #       with:
-  #         repository-url: https://test.pypi.org/legacy/
+      - name: Upload package to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
 
   # Upload to real PyPI on GitHub Releases.
   release-pypi:
