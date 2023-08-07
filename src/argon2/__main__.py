@@ -70,24 +70,17 @@ def main(argv: list[str]) -> None:
 
     print("\nMeasuring...")
     duration = timeit.timeit(
-        "ph.verify({hash!r}, {password!r})".format(
-            hash=hash, password=password
-        ),
-        setup="""\
+        f"ph.verify({hash!r}, {password!r})",
+        setup=f"""\
 from argon2 import PasswordHasher, Type
 
 ph = PasswordHasher(
-    time_cost={time_cost!r},
-    memory_cost={memory_cost!r},
-    parallelism={parallelism!r},
-    hash_len={hash_len!r},
+    time_cost={args.t!r},
+    memory_cost={args.m!r},
+    parallelism={args.p!r},
+    hash_len={args.l!r},
 )
-gc.enable()""".format(
-            time_cost=args.t,
-            memory_cost=args.m,
-            parallelism=args.p,
-            hash_len=args.l,
-        ),
+gc.enable()""",
         number=args.n,
     )
     print(f"\n{duration / args.n * 1000:.1f}ms per password verification")

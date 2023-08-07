@@ -26,9 +26,7 @@ def _check_types(**kw: Any) -> str | None:
             else:
                 types = types.__name__
             errors.append(
-                "'{name}' must be a {type} (got {actual})".format(
-                    name=name, type=types, actual=type(value).__name__
-                )
+                f"'{name}' must be a {types} (got {type(value).__name__})"
             )
 
     if errors != []:
