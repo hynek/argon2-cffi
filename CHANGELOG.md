@@ -99,7 +99,7 @@ Vendoring *Argon2* @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/6
 
 ### Removed
 
-- Microsoft stopped providing the necessary SDKs to ship Python 2.7 wheels and currenly the downloads amount to 0.09%.
+- Microsoft stopped providing the necessary SDKs to ship Python 2.7 wheels and currently the downloads amount to 0.09%.
   Therefore we have decided that Python 2.7 is not supported anymore.
 
 

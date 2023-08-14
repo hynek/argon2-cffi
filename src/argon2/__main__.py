@@ -36,7 +36,7 @@ def main(argv: list[str]) -> None:
     parser.add_argument(
         "--profile",
         type=str,
-        help="A profile from `argon2.profiles. Takes precendence.",
+        help="A profile from `argon2.profiles. Takes precedence.",
         default=None,
     )
 

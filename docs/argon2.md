@@ -17,7 +17,7 @@ Argon2 comes in three variants: Argon2**d**, Argon2**i**, and Argon2**id**.
 Argon2**d**'s strength is the resistance against [time–memory trade-offs], while Argon2**i**'s focus is on resistance against [side-channel attacks].
 
 Accordingly, Argon2**i** was originally considered the correct choice for password hashing and password-based key derivation.
-In practice it turned out that a *combination* of d and i -- that combines their strenghts -- is the better choice.
+In practice it turned out that a *combination* of d and i -- that combines their strengths -- is the better choice.
 And so Argon2**id** was born and is now considered the *main variant* (and the only variant required by the RFC to be implemented).
 
 
