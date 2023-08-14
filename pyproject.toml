@@ -119,6 +119,12 @@ exclude_lines = [
 omit = []
 
 
+[tool.interrogate]
+verbose = 2
+fail-under = 100
+whitelist-regex = ["test_.*"]
+
+
 [tool.mypy]
 strict = true
 
