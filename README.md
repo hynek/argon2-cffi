@@ -41,9 +41,7 @@ argon2.exceptions.VerifyMismatchError: The password does not match the supplied 
 
 *argon2-cffi* is maintained by [Hynek Schlawack](https://hynek.me/).
 
-The development is kindly supported by my employer [Variomedia AG](https://www.variomedia.de/), *argon2-cffi* [Tidelift subscribers](https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=referral&utm_campaign=enterprise&utm_term=repo), and my amazing [GitHub Sponsors](https://github.com/sponsors/hynek).
-
-A full list of contributors can be found in GitHub's [overview](https://github.com/hynek/argon2-cffi/graphs/contributors).
+The development is kindly supported by my employer [Variomedia AG](https://www.variomedia.de/), *argon2-cffi* [Tidelift subscribers](https://tidelift.com/?utm_source=lifter&utm_medium=referral&utm_campaign=hynek), and my amazing [GitHub Sponsors](https://github.com/sponsors/hynek).
 
 
 ## *argon2-cffi* for Enterprise
@@ -52,4 +50,4 @@ Available as part of the Tidelift Subscription.
 
 The maintainers of *argon2-cffi* and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open-source packages you use to build your applications.
 Save time, reduce risk, and improve code health, while paying the maintainers of the exact packages you use.
-[Learn more.](https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=undefined&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+[Learn more.](https://tidelift.com/?utm_source=lifter&utm_medium=referral&utm_campaign=hynek)
