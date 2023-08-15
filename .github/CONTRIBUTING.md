@@ -1,14 +1,10 @@
 # How To Contribute
 
-First off, thank you for considering contributing to *argon2-cffi*!
-It's people like *you* who make it such a great tool for everyone.
+First off, thank you for considering contributing!
+It's people like *you* who make it is such a great tool for everyone.
 
-This document intends to make contribution more accessible by codifying tribal knowledge and expectations.
-Don't be afraid to open half-finished PRs, and ask questions if something is unclear!
-
-Please note that this project is released with a Contributor [Code of Conduct](https://github.com/hynek/argon2-cffi/blob/main/.github/CODE_OF_CONDUCT.md).
-By participating in this project you agree to abide by its terms.
-Please report any harm to [Hynek Schlawack] in any way you find appropriate.
+This document is mainly to help you to get started by codifying tribal knowledge and expectations and make it more accessible to everyone.
+But don't be afraid to open half-finished PRs and ask questions if something is unclear!
 
 
 ## Workflow
@@ -35,24 +31,28 @@ You can (and should) run our test suite using [*tox*].
 However, you’ll probably want a more traditional environment as well.
 
 First, create a [virtual environment](https://virtualenv.pypa.io/) so you don't break your system-wide Python installation.
-We recommend using the Python version from the `.python-version` file in project's root directory.
+We recommend using the Python version from the `.python-version-default` file in project's root directory.
 
-If you're using [*direnv*](https://direnv.net), you can automate the creation of a virtual environment with the correct Python version by adding the following `.envrc` to the project root:
+If you're using [*direnv*](https://direnv.net), you can automate the creation of a virtual environment with the correct Python version by adding the following `.envrc` to the project root after you've cloned it to your computer:
 
 ```bash
-layout python python$(cat .python-version)
+layout python python$(cat .python-version-default)
 ```
 
-Next, get an up-to-date checkout of the *argon2-cffi* repository:
+If you're using tools that understand `.python-version` files like [*pyenv*](https://github.com/pyenv/pyenv) does, you can make it a link to the `.python-version-default` file.
+
+---
+
+Next, fork the repository on GitHub and get an up-to-date checkout:
 
 ```console
-$ git clone git@github.com:hynek/argon2-cffi.git
+$ git clone git@github.com:<your-username>/argon2-cffi.git
 ```
 
 or if you prefer to use *Git* via `https`:
 
 ```console
-$ git clone https://github.com/hynek/argon2-cffi.git
+$ git clone https://github.com/<your-username>/argon2-cffi.git
 ```
 
 Change into the newly created directory and **after activating your virtual environment** install an editable version of *argon2-cffi* along with its tests and docs requirements:
@@ -90,7 +90,7 @@ This is not strictly necessary, because our [*tox*] file contains an environment
 $ pre-commit run --all-files
 ```
 
-and our CI has integration with `pre-commit.ci <https://pre-commit.ci>`_.
+and our CI has integration with [*pre-commit.ci*](https://pre-commit.ci).
 But it's way more comfortable to run it locally and *git* catching avoidable errors.
 
 
@@ -128,15 +128,13 @@ But it's way more comfortable to run it locally and *git* catching avoidable err
 
 - To run the test suite, all you need is a recent [*tox*].
   It will ensure the test suite runs with all dependencies against all Python versions just as it will in our [CI].
-  If you lack some Python versions, you can can always limit the environments like `tox -e py38,py39`, or make it a non-failure using `tox --skip-missing-interpreters`.
 
-  In that case you should look into [*asdf*](https://asdf-vm.com) or [*pyenv*](https://github.com/pyenv/pyenv), which make it very easy to install many different Python versions in parallel.
 - Write [good test docstrings](https://jml.io/pages/test-docstrings.html).
 
 
 ## Documentation
 
-- Use [semantic newlines] in [*reStructuredText*] and [*Markdown*](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) files (files ending in `.rst` and `.md`):
+- Use [semantic newlines] in [*reStructuredText*](https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html) and [Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) files (files ending in `.rst` and `.md`):
 
   ```rst
   This is a sentence.
@@ -180,6 +178,15 @@ or:
 `argon2_cffi.func()` now doesn't crash the Large Hadron Collider anymore when passed the *foobar* argument.
 The bug really *was* nasty.
 ```
+
+---
+
+Again, this list is mainly to help you to get started by codifying tribal knowledge and expectations.
+If something is unclear, feel free to ask for help!
+
+Please note that this project is released with a Contributor [Code of Conduct](https://github.com/hynek/argon2-cffi/blob/main/.github/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
+Please report any harm to [Hynek Schlawack] in any way you find appropriate.
 
 
 [CI]: https://github.com/hynek/argon2-cffi/actions
