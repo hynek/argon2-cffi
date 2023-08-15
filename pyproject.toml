@@ -43,8 +43,9 @@ dependencies = [
 
 [project.optional-dependencies]
 tests = ["hypothesis", "pytest"]
+typing = ["mypy"]
 docs = ["sphinx", "sphinx-notfound-page", "furo", "myst-parser"]
-dev = ["argon2-cffi[tests]", "mypy"]
+dev = ["argon2-cffi[tests,typing]", "tox>4"]
 
 [project.urls]
 Documentation = "https://argon2-cffi.readthedocs.io/"
