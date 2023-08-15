@@ -1,10 +1,13 @@
 import argon2
 
 
+argon2.PasswordHasher.from_parameters(argon2.profiles.RFC_9106_HIGH_MEMORY)
 ph = argon2.PasswordHasher()
 
 ph.hash("pw")
+ph.hash("pw", salt=b"salt")
 ph.hash(b"pw")
+ph.hash(b"pw", salt=b"salt")
 ph.verify("hash", "pw")
 ph.verify(b"hash", "pw")
 ph.verify(b"hash", b"pw")

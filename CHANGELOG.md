@@ -46,6 +46,10 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 - `argon2.exceptions.InvalidHashError` as a replacement for `InvalidHash`.
 
+- *salt* parameter to `argon2.PasswordHasher.hash()` to allow for custom salts.
+  This is only useful for specialized use-cases -- leave it on None unless you know exactly what you are doing.
+  [#153](https://github.com/hynek/argon2-cffi/pull/153)
+
 
 ## [21.3.0](https://github.com/hynek/argon2-cffi/compare/21.2.0...21.3.0) - 2021-12-11
 
