@@ -109,7 +109,7 @@ Low Level
 
 .. automodule:: argon2.low_level
 
-.. autoclass:: Type
+.. autoclass:: Type()
 
    .. attribute:: D
 
