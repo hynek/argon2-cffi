@@ -14,6 +14,8 @@ extensions = [
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
+    "sphinx.ext.napoleon",
+    "sphinx_copybutton",
 ]
 
 myst_enable_extensions = ["deflist", "colon_fence"]
