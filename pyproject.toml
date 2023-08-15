@@ -70,6 +70,9 @@ raw-options = { local_scheme = "no-local-version" }
 content-type = "text/markdown"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = "# *argon2-cffi*: Argon2 for Python\n\n"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "README.md"
 start-after = "<!-- begin pypi -->\n"
 end-before = "\n<!-- end pypi -->"
