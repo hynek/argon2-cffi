@@ -2,7 +2,7 @@
 
 import pytest
 
-from argon2 import PasswordHasher, Type, extract_parameters
+from argon2 import PasswordHasher, Type, extract_parameters, profiles
 from argon2._password_hasher import _ensure_bytes
 from argon2.exceptions import InvalidHash, InvalidHashError
 
@@ -50,6 +50,18 @@ class TestPasswordHasher:
 
         assert isinstance(h, str)
         assert h[: len(prefix)] == prefix
+
+    def test_custom_salt(self, password=b"password"):
+        """
+        A custom salt can be specified.
+        """
+        ph = PasswordHasher.from_parameters(profiles.CHEAPEST)
+
+        h = ph.hash(password, salt=b"1234567890123456")
+
+        assert h == (
+            "$argon2id$v=19$m=8,t=1,p=1$MTIzNDU2Nzg5MDEyMzQ1Ng$maTa5w"
+        )
 
     @bytes_and_str_password
     def test_verify_agility(self, password):
