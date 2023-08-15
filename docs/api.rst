@@ -148,7 +148,22 @@ Low Level
 .. automodule:: argon2.low_level
 
 .. autoclass:: Type
-  :members: D, I, ID
+
+   .. attribute:: D
+
+      Argon2\ **d** is faster and uses data-depending memory access.
+      That makes it less suitable for hashing secrets and more suitable for cryptocurrencies and applications with no threats from side-channel timing attacks.
+
+   .. attribute:: I
+
+      Argon2\ **i** uses data-independent memory access.
+      Argon2i is slower as it makes more passes over the memory to protect from tradeoff attacks.
+
+   .. attribute:: ID
+
+      Argon2\ **id** is a hybrid of Argon2i and Argon2d, using a combination of data-depending and data-independent memory accesses, which gives some of Argon2i's resistance to side-channel cache timing attacks and much of Argon2d's resistance to GPU cracking attacks.
+
+      .. versionadded:: 16.3.0
 
 .. autodata:: ARGON2_VERSION
 

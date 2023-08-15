@@ -81,3 +81,16 @@ def __getattr__(name: str) -> str:
         return meta["Author-email"].split("<", 1)[1].rstrip(">")
 
     return meta[dunder_to_metadata[name]]
+
+
+# Make nicer public names.
+__locals = locals()
+for __name in __all__:
+    if (
+        not isinstance(__locals[__name], int)
+        and not __name.startswith("__")
+        and not __name.islower()
+    ):
+        __locals[__name].__module__ = "argon2"
+del __locals
+del __name  # pyright: ignore[reportUnboundVariable]

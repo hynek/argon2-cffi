@@ -69,14 +69,23 @@ At this point,
 $ python -m pytest
 ```
 
-should work and pass, as should:
+should work and pass.
+
+For documentation, you can use:
 
 ```console
-$ cd docs
-$ make html
+$ tox run -e docs-watch
 ```
 
-The built documentation can then be found in `docs/_build/html/`.
+This will build the documentation, and then watch for changes and rebuild it whenever you save a file.
+
+To just build the documentation and run doctests, use:
+
+```console
+$ tox run -e docs
+```
+
+You will find the built documentation in `docs/_build/html`.
 
 To avoid committing code that violates our style guide, we strongly advise you to install [*pre-commit*] and its hooks:
 

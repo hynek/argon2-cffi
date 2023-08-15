@@ -12,12 +12,12 @@ It comes with two recommendations in [section 4](https://www.rfc-editor.org/rfc/
 
 Please use the {doc}`cli` interface together with its `--profile` argument to see if they work for you.
 
-______________________________________________________________________
+---
 
 If you need finer tuning, the current recommended best practice is as follow:
 
 1. Choose whether you want Argon2i, Argon2d, or Argon2id (`type`).
-   If you don't know what that means, choose Argon2id ({attr}`argon2.Type.ID`).
+   If you don't know what that means, choose Argon2id ({attr}`argon2.low_level.Type.ID`).
 
 2. Figure out how many threads can be used on each call to Argon2 (`parallelism`, called "lanes" in the RFC).
    They recommend 4 threads.

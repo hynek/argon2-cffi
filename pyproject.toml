@@ -44,12 +44,12 @@ dependencies = [
 [project.optional-dependencies]
 tests = ["hypothesis", "pytest"]
 docs = ["sphinx", "sphinx-notfound-page", "furo", "myst-parser"]
-dev = ["argon2-cffi[tests,docs]", "mypy"]
+dev = ["argon2-cffi[tests]", "mypy"]
 
 [project.urls]
 Documentation = "https://argon2-cffi.readthedocs.io/"
 Changelog = "https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md"
-"Source Code" = "https://github.com/hynek/argon2-cffi"
+GitHub = "https://github.com/hynek/argon2-cffi"
 Funding = "https://github.com/sponsors/hynek"
 Tidelift = "https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=pypi"
 

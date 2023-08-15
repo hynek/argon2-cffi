@@ -29,7 +29,8 @@ def hash_password(
     type: Type = Type.I,
 ) -> bytes:
     """
-    Legacy alias for :func:`hash_secret` with default parameters.
+    Legacy alias for :func:`argon2.low_level.hash_secret` with default
+    parameters.
 
     .. deprecated:: 16.0.0
         Use :class:`argon2.PasswordHasher` for passwords.
@@ -51,7 +52,8 @@ def hash_password_raw(
     type: Type = Type.I,
 ) -> bytes:
     """
-    Legacy alias for :func:`hash_secret_raw` with default parameters.
+    Legacy alias for :func:`argon2.low_level.hash_secret_raw` with default
+    parameters.
 
     .. deprecated:: 16.0.0
         Use :class:`argon2.PasswordHasher` for passwords.
@@ -67,7 +69,8 @@ def verify_password(
     hash: bytes, password: bytes, type: Type = Type.I
 ) -> Literal[True]:
     """
-    Legacy alias for :func:`verify_secret` with default parameters.
+    Legacy alias for :func:`argon2.low_level.verify_secret` with default
+    parameters.
 
     .. deprecated:: 16.0.0
         Use :class:`argon2.PasswordHasher` for passwords.

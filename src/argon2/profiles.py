@@ -2,7 +2,7 @@
 
 """
 This module offers access to standardized parameters that you can load using
-:meth:`PasswordHasher.from_parameters()`. See the `source code
+:meth:`argon2.PasswordHasher.from_parameters()`. See the `source code
 <https://github.com/hynek/argon2-cffi/blob/main/src/argon2/profiles.py>`_ for
 concrete values and :doc:`parameters` for more information.
 

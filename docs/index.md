@@ -1,6 +1,6 @@
 # *argon2-cffi*: Argon2 for Python
 
-Release **{sub-ref}`release`**  ([What's new?](changelog))
+Release **{sub-ref}`release`**  ([What's new?](https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md))
 
 ```{include} ../README.md
 :end-before: <!-- end-short -->
@@ -19,14 +19,13 @@ api
 parameters
 cli
 faq
-changelog
 ```
 
 
-## Project Information
+## Project Links
 
 ```{include} ../README.md
-:start-after: '## Project Information'
+:start-after: '## Project Links'
 ```
 
 
@@ -34,3 +33,15 @@ changelog
 
 - {ref}`genindex`
 - {ref}`search`
+
+```{toctree}
+:hidden:
+:caption: Meta
+
+PyPI <https://pypi.org/project/argon2-cffi/>
+GitHub <https://github.com/hynek/argon2-cffi/>
+Changelog <https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md>
+Contributing <https://github.com/hynek/argon2-cffi/blob/main/.github/CONTRIBUTING.md>
+Security Policy <https://github.com/hynek/argon2-cffi/blob/main/.github/SECURITY.md>
+Funding <https://hynek.me/say-thanks/>
+```

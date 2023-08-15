@@ -46,28 +46,8 @@ class Type(Enum):
     """
 
     D = lib.Argon2_d
-    r"""
-    Argon2\ **d** is faster and uses data-depending memory access, which makes
-    it less suitable for hashing secrets and more suitable for cryptocurrencies
-    and applications with no threats from side-channel timing attacks.
-    """
     I = lib.Argon2_i  # noqa: E741
-    r"""
-    Argon2\ **i** uses data-independent memory access.  Argon2i is slower as
-    it makes more passes over the memory to protect from tradeoff attacks.
-    """
     ID = lib.Argon2_id
-    r"""
-    Argon2\ **id** is a hybrid of Argon2i and Argon2d, using a combination of
-    data-depending and data-independent memory accesses, which gives some of
-    Argon2i's resistance to side-channel cache timing attacks and much of
-    Argon2d's resistance to GPU cracking attacks.
-
-    That makes it the preferred type for password hashing and password-based
-    key derivation.
-
-    .. versionadded:: 16.3.0
-    """
 
 
 def hash_secret(
@@ -92,7 +72,8 @@ def hash_secret(
     :param Type type: Which Argon2 variant to use.
     :param int version: Which Argon2 version to use.
 
-    For an explanation of the Argon2 parameters see :class:`PasswordHasher`.
+    For an explanation of the Argon2 parameters see
+    :class:`argon2.PasswordHasher`.
 
     :rtype: bytes
 

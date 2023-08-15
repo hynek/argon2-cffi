@@ -195,7 +195,7 @@ class PasswordHasher:
             because *hash* is not valid for *password*.
         :raises argon2.exceptions.VerificationError: If verification fails for
             other reasons.
-        :raises argon2.exceptions.InvalidHash: If *hash* is so clearly
+        :raises argon2.exceptions.InvalidHashError: If *hash* is so clearly
             invalid, that it couldn't be passed to Argon2.
 
         :return: ``True`` on success, raise
