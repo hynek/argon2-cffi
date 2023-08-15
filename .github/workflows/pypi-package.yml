@@ -3,10 +3,7 @@ name: Build & maybe upload PyPI package
 
 on:
   push:
-    branches: [main]
     tags: ["*"]
-  pull_request:
-    branches: [main]
   release:
     types:
       - published
@@ -17,7 +14,6 @@ permissions:
   id-token: write
 
 jobs:
-  # Always build & lint package.
   build-package:
     name: Build & verify package
     runs-on: ubuntu-latest
@@ -29,7 +25,6 @@ jobs:
 
       - uses: hynek/build-and-inspect-python-package@v1
 
-  # Upload to Test PyPI on every commit on main.
   release-test-pypi:
     name: Publish in-dev package to test.pypi.org
     environment: release-test-pypi
