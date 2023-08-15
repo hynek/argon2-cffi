@@ -68,15 +68,18 @@ jobs:
             V=py$(echo $V | tr -d .)
           fi
 
+          echo TOX_PYTHON=$V >>$GITHUB_ENV
+
           python -Im pip install tox
 
-          python -Im tox run \
-            --installpkg dist/*.whl \
-            -f $V
       - run: |
           python -Im tox run \
             --installpkg dist/*.whl \
-            -e mypy-api
+            -f ${{ env.TOX_PYTHON }}-tests
+      - run: |
+          python -Im tox run \
+            --installpkg dist/*.whl \
+            -f ${{ env.TOX_PYTHON }}-mypy
         if: ${{ !startsWith(matrix.python-version, 'pypy-') }}
 
       - name: Upload coverage data
