@@ -125,6 +125,10 @@ fail-under = 100
 whitelist-regex = ["test_.*"]
 
 
+[tool.pyright]
+ignore = ["conftest.py", "docs", "tests"]
+
+
 [tool.mypy]
 strict = true
 
