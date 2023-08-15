@@ -1,4 +1,4 @@
-# Argon2 for Python
+# *argon2-cffi*: Argon2 for Python
 
 [![Documentation](https://img.shields.io/badge/Docs-Read%20The%20Docs-black)](https://argon2-cffi.readthedocs.io/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/argon2-cffi/blob/main/LICENSE)
@@ -6,7 +6,8 @@
 [![PyPI version](https://img.shields.io/pypi/v/argon2-cffi)](https://pypi.org/project/argon2-cffi/)
 [![Downloads / Month](https://static.pepy.tech/personalized-badge/argon2-cffi?period=month&units=international_system&left_color=grey&right_color=blue&left_text=Downloads%20/%20Month)](https://pepy.tech/project/argon2-cffi)
 
-<!-- begin-short -->
+<!-- begin short -->
+<!-- begin pypi -->
 
 [Argon2](https://github.com/p-h-c/phc-winner-argon2) won the [Password Hashing Competition](https://www.password-hashing.net/) and *argon2-cffi* is the simplest way to use it in Python:
 
@@ -26,7 +27,7 @@ Traceback (most recent call last):
 argon2.exceptions.VerifyMismatchError: The password does not match the supplied hash
 
 ```
-<!-- end-short -->
+<!-- end short -->
 
 ## Project Links
 
@@ -34,8 +35,10 @@ argon2.exceptions.VerifyMismatchError: The password does not match the supplied 
 - [**GitHub**](https://github.com/hynek/argon2-cffi)
 - [**Documentation**](https://argon2-cffi.readthedocs.io/)
 - [**Changelog**](https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md)
+- [**Funding**](https://hynek.me/say-thanks/)
 - The low-level Argon2 CFFI bindings are maintained in the separate [*argon2-cffi-bindings*](https://github.com/hynek/argon2-cffi-bindings) project.
 
+<!-- end pypi -->
 
 ## Credits
 

@@ -3,14 +3,22 @@
 Release **{sub-ref}`release`**  ([What's new?](https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md))
 
 ```{include} ../README.md
-:end-before: <!-- end-short -->
-:start-after: <!-- begin-short -->
+:end-before: <!-- end short -->
+:start-after: <!-- begin short -->
 ```
 
+If you don't know where to start, learn {doc}`argon2` and take it from there!
 
-## User's Guide
+
+## Indices and Tables
+
+- {doc}`api`
+- {ref}`genindex`
+- {ref}`search`
+
 
 ```{toctree}
+:hidden:
 :maxdepth: 1
 
 argon2
@@ -22,18 +30,6 @@ cli
 faq
 ```
 
-
-## Project Links
-
-```{include} ../README.md
-:start-after: '## Project Links'
-```
-
-
-## Indices and tables
-
-- {ref}`genindex`
-- {ref}`search`
 
 ```{toctree}
 :hidden:

@@ -71,22 +71,34 @@ content-type = "text/markdown"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "README.md"
+start-after = "<!-- begin pypi -->\n"
+end-before = "\n<!-- end pypi -->"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 text = """
 
+## Release Information
 
-## Release Information for """
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "CHANGELOG.md"
-start-after = "<!-- changelog follows -->"
-pattern = "## ([^\n]+?\n\n)###"
+"""
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "CHANGELOG.md"
 start-after = "<!-- changelog follows -->"
 pattern = "\n(###.+?\n)## "
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = """
+---
+
+[→ Full Changelog](https://github.com/hynek/svcs/blob/main/CHANGELOG.md)
+
+
+"""
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+start-at = "## Credits"
+
 
 
 [tool.pytest.ini_options]
