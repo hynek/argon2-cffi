@@ -210,7 +210,7 @@ These APIs are from the first release of *argon2-cffi* and proved to live in an 
 On one hand they have defaults and check parameters but on the other hand they only consume byte strings.
 
 Therefore the decision has been made to replace them by a high-level (:class:`argon2.PasswordHasher`) and a low-level (:mod:`argon2.low_level`) solution.
-There are no immediate plans to remove them though.
+They will be removed in 2024.
 
 .. autofunction:: argon2.hash_password
 .. autofunction:: argon2.hash_password_raw

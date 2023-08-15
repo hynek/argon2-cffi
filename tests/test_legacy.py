@@ -32,28 +32,41 @@ class TestHash:
         """
         Calling without arguments works.
         """
-        hash_password(b"secret")
+        with pytest.deprecated_call(
+            match="argon2.hash_password is deprecated"
+        ) as dc:
+            hash_password(b"secret")
+
+        assert dc.pop().filename.endswith("test_legacy.py")
 
     def test_raw_defaults(self):
         """
         Calling without arguments works.
         """
-        hash_password_raw(b"secret")
+        with pytest.deprecated_call(
+            match="argon2.hash_password_raw is deprecated"
+        ) as dc:
+            hash_password_raw(b"secret")
+
+        assert dc.pop().filename.endswith("test_legacy.py")
 
     @i_and_d_encoded
     def test_hash_password(self, type, hash):
         """
         Creates the same encoded hash as the Argon2 CLI client.
         """
-        rv = hash_password(
-            TEST_PASSWORD,
-            TEST_SALT,
-            TEST_TIME,
-            TEST_MEMORY,
-            TEST_PARALLELISM,
-            TEST_HASH_LEN,
-            type,
-        )
+        with pytest.deprecated_call(
+            match="argon2.hash_password is deprecated"
+        ):
+            rv = hash_password(
+                TEST_PASSWORD,
+                TEST_SALT,
+                TEST_TIME,
+                TEST_MEMORY,
+                TEST_PARALLELISM,
+                TEST_HASH_LEN,
+                type,
+            )
 
         assert hash == rv
         assert isinstance(rv, bytes)
@@ -63,15 +76,18 @@ class TestHash:
         """
         Creates the same raw hash as the Argon2 CLI client.
         """
-        rv = hash_password_raw(
-            TEST_PASSWORD,
-            TEST_SALT,
-            TEST_TIME,
-            TEST_MEMORY,
-            TEST_PARALLELISM,
-            TEST_HASH_LEN,
-            type,
-        )
+        with pytest.deprecated_call(
+            match="argon2.hash_password_raw is deprecated"
+        ):
+            rv = hash_password_raw(
+                TEST_PASSWORD,
+                TEST_SALT,
+                TEST_TIME,
+                TEST_MEMORY,
+                TEST_PARALLELISM,
+                TEST_HASH_LEN,
+                type,
+            )
 
         assert hash == rv
         assert isinstance(rv, bytes)
@@ -80,15 +96,24 @@ class TestHash:
         """
         Hashing passwords with NUL bytes works as expected.
         """
-        rv = hash_password_raw(b"abc\x00", TEST_SALT)
+        with pytest.deprecated_call(
+            match="argon2.hash_password_raw is deprecated"
+        ):
+            rv = hash_password_raw(b"abc\x00", TEST_SALT)
 
-        assert rv != hash_password_raw(b"abc", TEST_SALT)
+        with pytest.deprecated_call(
+            match="argon2.hash_password_raw is deprecated"
+        ):
+            assert rv != hash_password_raw(b"abc", TEST_SALT)
 
     def test_random_salt(self):
         """
         Omitting a salt, creates a random one.
         """
-        rv = hash_password(b"secret")
+        with pytest.deprecated_call(
+            match="argon2.hash_password is deprecated"
+        ):
+            rv = hash_password(b"secret")
         salt = rv.split(b",")[-1].split(b"$")[1]
 
         assert (
@@ -101,14 +126,18 @@ class TestHash:
         """
         Passing an argument of wrong type raises TypeError.
         """
-        with pytest.raises(TypeError):
+        with pytest.deprecated_call(
+            match="argon2.hash_password is deprecated"
+        ), pytest.raises(TypeError):
             hash_password("oh no, unicode!")
 
     def test_illegal_argon2_parameter(self):
         """
         Raises HashingError if hashing fails.
         """
-        with pytest.raises(HashingError):
+        with pytest.deprecated_call(
+            match="argon2.hash_password is deprecated"
+        ), pytest.raises(HashingError):
             hash_password(TEST_PASSWORD, memory_cost=1)
 
     @given(st.binary(max_size=128))
@@ -116,14 +145,17 @@ class TestHash:
         """
         Hash various passwords as cheaply as possible.
         """
-        hash_password(
-            password,
-            salt=b"12345678",
-            time_cost=1,
-            memory_cost=8,
-            parallelism=1,
-            hash_len=8,
-        )
+        with pytest.deprecated_call(
+            match="argon2.hash_password is deprecated"
+        ):
+            hash_password(
+                password,
+                salt=b"12345678",
+                time_cost=1,
+                memory_cost=8,
+                parallelism=1,
+                hash_len=8,
+            )
 
 
 class TestVerify:
@@ -132,18 +164,27 @@ class TestVerify:
         """
         Given a valid hash and password and correct type, we succeed.
         """
-        assert True is verify_password(hash, TEST_PASSWORD, type)
+        with pytest.deprecated_call(
+            match="argon2.verify_password is deprecated"
+        ) as dc:
+            assert True is verify_password(hash, TEST_PASSWORD, type)
+
+        assert dc.pop().filename.endswith("test_legacy.py")
 
     def test_fail_wrong_argon2_type(self):
         """
         Given a valid hash and password and wrong type, we fail.
         """
-        with pytest.raises(VerificationError):
+        with pytest.deprecated_call(
+            match="argon2.verify_password is deprecated"
+        ), pytest.raises(VerificationError):
             verify_password(TEST_HASH_I, TEST_PASSWORD, Type.D)
 
     def test_wrong_arg_type(self):
         """
         Passing an argument of wrong type raises TypeError.
         """
-        with pytest.raises(TypeError):
+        with pytest.deprecated_call(
+            match="argon2.verify_password is deprecated"
+        ), pytest.raises(TypeError):
             verify_password(TEST_HASH_I, TEST_PASSWORD.decode("ascii"))

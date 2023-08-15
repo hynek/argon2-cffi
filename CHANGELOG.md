@@ -35,6 +35,9 @@ What explicitly *may* change over time are the default hashing parameters and th
 - The `InvalidHash` exception is deprecated in favor of `InvalidHashError`.
   No plans for removal currently exist and the names can (but shouldn't) be used interchangeably.
 
+- `argon2.hash_password()`, `argon2.hash_password_raw()`, and `argon2.verify_password()` that have been soft-deprecated since 2016 are now hard-deprecated.
+  They now raise `DeprecationWarning`s and will be removed in 2024.
+
 
 ### Added
 

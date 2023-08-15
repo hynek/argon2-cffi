@@ -7,6 +7,7 @@ Legacy mid-level functions.
 from __future__ import annotations
 
 import os
+import warnings
 
 from ._password_hasher import (
     DEFAULT_HASH_LENGTH,
@@ -17,6 +18,9 @@ from ._password_hasher import (
 )
 from ._typing import Literal
 from .low_level import Type, hash_secret, hash_secret_raw, verify_secret
+
+
+_INSTEAD = " is deprecated, use argon2.PasswordHasher instead"
 
 
 def hash_password(
@@ -35,6 +39,9 @@ def hash_password(
     .. deprecated:: 16.0.0
         Use :class:`argon2.PasswordHasher` for passwords.
     """
+    warnings.warn(
+        "argon2.hash_password" + _INSTEAD, DeprecationWarning, stacklevel=2
+    )
     if salt is None:
         salt = os.urandom(DEFAULT_RANDOM_SALT_LENGTH)
     return hash_secret(
@@ -58,6 +65,9 @@ def hash_password_raw(
     .. deprecated:: 16.0.0
         Use :class:`argon2.PasswordHasher` for passwords.
     """
+    warnings.warn(
+        "argon2.hash_password_raw" + _INSTEAD, DeprecationWarning, stacklevel=2
+    )
     if salt is None:
         salt = os.urandom(DEFAULT_RANDOM_SALT_LENGTH)
     return hash_secret_raw(
@@ -75,4 +85,7 @@ def verify_password(
     .. deprecated:: 16.0.0
         Use :class:`argon2.PasswordHasher` for passwords.
     """
+    warnings.warn(
+        "argon2.verify_password" + _INSTEAD, DeprecationWarning, stacklevel=2
+    )
     return verify_secret(hash, password, type)
