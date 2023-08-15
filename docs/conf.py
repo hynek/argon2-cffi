@@ -36,9 +36,11 @@ copyright = "2015, Hynek Schlawack"
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = metadata.version("argon2-cffi")
-# The short X.Y version.
-version = release.rsplit(".", 1)[0]
+if "dev" in (release := metadata.version("argon2-cffi")):
+    release = version = "UNRELEASED"
+else:
+    # The short X.Y version.
+    version = release.rsplit(".", 1)[0]
 
 # Move type hints into the description block, instead of the func definition.
 autodoc_typehints = "description"
