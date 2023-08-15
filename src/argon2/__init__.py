@@ -86,11 +86,7 @@ def __getattr__(name: str) -> str:
 # Make nicer public names.
 __locals = locals()
 for __name in __all__:
-    if (
-        not isinstance(__locals[__name], int)
-        and not __name.startswith("__")
-        and not __name.islower()
-    ):
+    if not __name.startswith(("__", "DEFAULT_")) and not __name.islower():
         __locals[__name].__module__ = "argon2"
 del __locals
 del __name  # pyright: ignore[reportUnboundVariable]
