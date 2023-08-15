@@ -15,6 +15,7 @@ Release **{sub-ref}`release`**  ([What's new?](https://github.com/hynek/argon2-c
 
 argon2
 installation
+howto
 api
 parameters
 cli
