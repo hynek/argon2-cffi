@@ -185,8 +185,10 @@ class TestHash:
                 Type.I,
             )
 
-    @both_hash_funcs
-    @given(st.binary(max_size=128))
+    @given(
+        st.sampled_from((hash_secret, hash_secret_raw)),
+        st.binary(max_size=128),
+    )
     def test_hash_fast(self, func, secret):
         """
         Hash various secrets as cheaply as possible.
