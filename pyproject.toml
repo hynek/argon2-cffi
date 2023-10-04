@@ -149,6 +149,7 @@ whitelist-regex = ["test_.*"]
 
 [tool.pyright]
 ignore = ["conftest.py", "docs", "tests"]
+disableBytesTypePromotions = true
 
 
 [tool.mypy]
