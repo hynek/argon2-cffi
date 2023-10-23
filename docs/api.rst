@@ -169,7 +169,7 @@ For example, if you wanted to check the :rfc:`9106` test vectors for Argon2id th
   >>> from argon2.low_level import Type, core, ffi, lib
 
   >>> def low_level_hash(
-  ...        password, associated, salt, secret,
+  ...        password, salt, secret, associated,
   ...        hash_len, version, t_cost, m_cost, lanes, threads):
   ...     cout = ffi.new("uint8_t[]", hash_len)
   ...     cpwd = ffi.new("uint8_t[]", password)
@@ -215,7 +215,7 @@ For example, if you wanted to check the :rfc:`9106` test vectors for Argon2id th
   >>> assert (
   ...     "0d640df58d78766c08c037a34a8b53c9d01ef0452d75b65eb52520e96b01e659"
   ...     == low_level_hash(
-  ...            password, associated, salt, secret,
+  ...            password, salt, secret, associated,
   ...            32, 19, 3, 32, 4, 4,
   ...     )
   ... )
