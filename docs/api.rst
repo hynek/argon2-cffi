@@ -168,7 +168,9 @@ For example, if you wanted to check the :rfc:`9106` test vectors for Argon2id th
 
   >>> from argon2.low_level import Type, core, ffi, lib
 
-  >>> def low_level_hash(password, associated, salt, secret, hash_len, version):
+  >>> def low_level_hash(
+  ...        password, associated, salt, secret,
+  ...        hash_len, version, t_cost, m_cost, lanes, threads):
   ...     cout = ffi.new("uint8_t[]", hash_len)
   ...     cpwd = ffi.new("uint8_t[]", password)
   ...     cad = ffi.new("uint8_t[]", associated)
@@ -189,10 +191,10 @@ For example, if you wanted to check the :rfc:`9106` test vectors for Argon2id th
   ...             "secretlen": len(csecret) - 1,
   ...             "ad": cad,
   ...             "adlen": len(cad) - 1,
-  ...             "t_cost": 3,
-  ...             "m_cost": 32,
-  ...             "lanes": 4,
-  ...             "threads": 4,
+  ...             "t_cost": t_cost,
+  ...             "m_cost": m_cost,
+  ...             "lanes": lanes,
+  ...             "threads": threads,
   ...             "allocate_cbk": ffi.NULL,
   ...             "free_cbk": ffi.NULL,
   ...             "flags": lib.ARGON2_DEFAULT_FLAGS,
@@ -212,7 +214,10 @@ For example, if you wanted to check the :rfc:`9106` test vectors for Argon2id th
 
   >>> assert (
   ...     "0d640df58d78766c08c037a34a8b53c9d01ef0452d75b65eb52520e96b01e659"
-  ...     == low_level_hash(password, associated, salt, secret, 32, 19)
+  ...     == low_level_hash(
+  ...            password, associated, salt, secret,
+  ...            32, 19, 3, 32, 4, 4,
+  ...     )
   ... )
 
 All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as long they are not altered by Argon2 itself.
