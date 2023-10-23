@@ -161,42 +161,59 @@ The super low-level ``argon2_core()`` function is exposed too if you need access
 .. autofunction:: core
 
 In order to use :func:`core`, you need access to *argon2-cffi*'s FFI objects.
-Therefore it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` when working with it:
+Therefore, it is OK to use ``argon2.low_level.ffi`` and ``argon2.low_level.lib`` when working with it.
+For example, if you wanted to check the :rfc:`9106` test vectors for Argon2id that include a secret and associated data that both get mixed into the hash and aren't exposed by the high-level APIs:
 
 .. doctest::
 
-  >>> from argon2.low_level import ARGON2_VERSION, Type, core, ffi, lib
-  >>> pwd = b"secret"
-  >>> salt = b"12345678"
-  >>> hash_len = 8
-  >>> # Make sure you keep FFI objects alive until *after* the core call!
-  >>> cout = ffi.new("uint8_t[]", hash_len)
-  >>> cpwd = ffi.new("uint8_t[]", pwd)
-  >>> csalt = ffi.new("uint8_t[]", salt)
-  >>> ctx = ffi.new(
-  ...     "argon2_context *", dict(
-  ...         version=ARGON2_VERSION,
-  ...         out=cout, outlen=hash_len,
-  ...         pwd=cpwd, pwdlen=len(pwd),
-  ...         salt=csalt, saltlen=len(salt),
-  ...         secret=ffi.NULL, secretlen=0,
-  ...         ad=ffi.NULL, adlen=0,
-  ...         t_cost=1,
-  ...         m_cost=8,
-  ...         lanes=1, threads=1,
-  ...         allocate_cbk=ffi.NULL, free_cbk=ffi.NULL,
-  ...         flags=lib.ARGON2_DEFAULT_FLAGS,
+  >>> from argon2.low_level import Type, core, ffi, lib
+
+  >>> def low_level_hash(password, associated, salt, secret, hash_len, version):
+  ...     cout = ffi.new("uint8_t[]", hash_len)
+  ...     cpwd = ffi.new("uint8_t[]", password)
+  ...     cad = ffi.new("uint8_t[]", associated)
+  ...     csalt = ffi.new("uint8_t[]", salt)
+  ...     csecret = ffi.new("uint8_t[]", secret)
+  ...
+  ...     ctx = ffi.new(
+  ...         "argon2_context *",
+  ...         {
+  ...             "out": cout,
+  ...             "outlen": hash_len,
+  ...             "version": version,
+  ...             "pwd": cpwd,
+  ...             "pwdlen": len(cpwd) - 1,
+  ...             "salt": csalt,
+  ...             "saltlen": len(csalt) - 1,
+  ...             "secret": csecret,
+  ...             "secretlen": len(csecret) - 1,
+  ...             "ad": cad,
+  ...             "adlen": len(cad) - 1,
+  ...             "t_cost": 3,
+  ...             "m_cost": 32,
+  ...             "lanes": 4,
+  ...             "threads": 4,
+  ...             "allocate_cbk": ffi.NULL,
+  ...             "free_cbk": ffi.NULL,
+  ...             "flags": lib.ARGON2_DEFAULT_FLAGS,
+  ...         },
   ...     )
+  ...
+  ...     assert lib.ARGON2_OK == core(ctx, Type.ID.value)
+  ...
+  ...     return bytes(ffi.buffer(ctx.out, ctx.outlen)).hex()
+
+  >>> password = bytes.fromhex(
+  ...    "0101010101010101010101010101010101010101010101010101010101010101"
   ... )
-  >>> ctx
-  <cdata 'struct Argon2_Context *' owning 120 bytes>
-  >>> core(ctx, Type.D.value)
-  0
-  >>> out = bytes(ffi.buffer(ctx.out, ctx.outlen))
-  >>> out
-  b'\xb4\xe2HjO\x14d\x9b'
-  >>> out == argon2.low_level.hash_secret_raw(pwd, salt, 1, 8, 1, 8, Type.D)
-  True
+  >>> associated = bytes.fromhex("040404040404040404040404")
+  >>> salt = bytes.fromhex("02020202020202020202020202020202")
+  >>> secret = bytes.fromhex("0303030303030303")
+
+  >>> assert (
+  ...     "0d640df58d78766c08c037a34a8b53c9d01ef0452d75b65eb52520e96b01e659"
+  ...     == low_level_hash(password, associated, salt, secret, 32, 19)
+  ... )
 
 All constants and types on ``argon2.low_level.lib`` are guaranteed to stay as long they are not altered by Argon2 itself.
 
