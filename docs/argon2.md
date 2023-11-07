@@ -33,7 +33,7 @@ However according to the [Argon2 paper] [^outdated], page 2:
 > \[…\] the existence of a trivial time-memory tradeoff allows compact implementations with the same energy cost.
 
 Therefore a new algorithm was needed.
-This time future-proof and with committee-vetting instead of single implementors.
+This time future-proof and with committee-vetting instead of single implementers.
 
 [^outdated]: Please note that the paper is in some parts outdated.
     For instance it predates the genesis of Argon2**id**.
