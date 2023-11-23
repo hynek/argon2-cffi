@@ -53,7 +53,7 @@ autodoc_typehints_description_target = "documented"
 # directories to ignore when looking for source files.
 exclude_patterns = ["_build"]
 
-nitpick_ignore = []
+# nitpick_ignore = []
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -66,6 +66,16 @@ add_function_parentheses = True
 # -- Options for HTML output ----------------------------------------------
 
 html_theme = "furo"
+html_theme_options = {
+    "top_of_page_button": None,
+    "light_css_variables": {
+        "font-stack": "Inter,sans-serif",
+        "font-stack--monospace": "BerkeleyMono, MonoLisa, ui-monospace, "
+        "SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace",
+    },
+}
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = "argon2-cffidoc"
