@@ -82,7 +82,6 @@ def hash_secret(
     .. versionadded:: 16.0.0
 
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
-    .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
     size = (
         lib.argon2_encodedlen(
