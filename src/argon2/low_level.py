@@ -66,18 +66,24 @@ def hash_secret(
     An encoded hash can be directly passed into :func:`verify_secret` as it
     contains all parameters and the salt.
 
-    :param bytes secret: Secret to hash.
-    :param bytes salt: A salt_.  Should be random and different for each
-        secret.
-    :param Type type: Which Argon2 variant to use.
-    :param int version: Which Argon2 version to use.
+    Parameters:
+        secret: Secret to hash.
+
+        salt:
+            A salt_.  Should be random and different for each secret.
+
+        type: Which Argon2 variant to use.
+
+        version: Which Argon2 version to use.
 
     For an explanation of the Argon2 parameters see
     :class:`argon2.PasswordHasher`.
 
-    :rtype: bytes
+    Returns:
+        An encoded Argon2 hash.
 
-    :raises argon2.exceptions.HashingError: If hashing fails.
+    Raises:
+        argon2.exceptions.HashingError: If hashing fails.
 
     .. versionadded:: 16.0.0
 
@@ -160,20 +166,28 @@ def verify_secret(hash: bytes, secret: bytes, type: Type) -> Literal[True]:
     """
     Verify whether *secret* is correct for *hash* of *type*.
 
-    :param bytes hash: An encoded Argon2 hash as returned by
+    Parameters:
+        hash:
+        An encoded Argon2 hash as returned by
         :func:`hash_secret`.
-    :param bytes secret: The secret to verify whether it matches the one
-        in *hash*.
-    :param Type type: Type for *hash*.
 
-    :raises argon2.exceptions.VerifyMismatchError: If verification fails
-        because *hash* is not valid for *secret* of *type*.
-    :raises argon2.exceptions.VerificationError: If verification fails for
-        other reasons.
+        secret:
+            The secret to verify whether it matches the one
+            in *hash*.
 
-    :return: ``True`` on success, raise
+        type: Type for *hash*.
+
+    Raises:
+        argon2.exceptions.VerifyMismatchError:
+            If verification fails
+            because *hash* is not valid for *secret* of *type*.
+        argon2.exceptions.VerificationError:
+            If verification fails for
+            other reasons.
+
+    Returns:
+        ``True`` on success, raise
         :exc:`~argon2.exceptions.VerificationError` otherwise.
-    :rtype: bool
 
     .. versionadded:: 16.0.0
     .. versionchanged:: 16.1.0
@@ -210,13 +224,17 @@ def core(context: Any, type: int) -> int:
         Use at your own peril; *argon2-cffi* does *not* use this binding
         itself.
 
-    :param context: A CFFI Argon2 context object (i.e. an ``struct
-        Argon2_Context`` / ``argon2_context``).
-    :param int type: Which Argon2 variant to use.  You can use the ``value``
-        field of :class:`Type`'s fields.
+    Parameters:
+        context:
+            A CFFI Argon2 context object (i.e. an ``struct Argon2_Context`` /
+            ``argon2_context``).
 
-    :rtype: int
-    :return: An Argon2 error code.  Can be transformed into a string using
+        type:
+            Which Argon2 variant to use.  You can use the ``value`` field of
+            :class:`Type`'s fields.
+
+    Returns:
+        An Argon2 error code.  Can be transformed into a string using
         :func:`error_to_str`.
 
     .. versionadded:: 16.0.0
@@ -228,9 +246,11 @@ def error_to_str(error: int) -> str:
     """
     Convert an Argon2 error code into a native string.
 
-    :param int error: An Argon2 error code as returned by :func:`core`.
+    Parameters:
+        error: An Argon2 error code as returned by :func:`core`.
 
-    :rtype: str
+    Returns:
+        A human-readable string describing the error.
 
     .. versionadded:: 16.0.0
     """

@@ -13,10 +13,10 @@ But since *argon2-cffi* depends on [argon2-cffi-bindings] that vendors Argon2's 
 The C code is known to compile and work on all common platforms (including x86, ARM, and PPC).
 On x86, an [SSE2]-optimized version is used.
 
-If something goes wrong, please try to update your *cffi*, *pip* and *setuptools* packages first:
+If something goes wrong, please try to update your *pip* package first:
 
 ```console
-$ python -Im pip install -U cffi pip setuptools
+$ python -Im pip install -U pip
 ```
 
 Overall this should be the safest bet because *argon2-cffi* has been specifically tested against the vendored version.
@@ -25,7 +25,7 @@ Overall this should be the safest bet because *argon2-cffi* has been specificall
 ### Wheels
 
 Binary [wheels](https://pythonwheels.com) for macOS, Windows, and Linux are provided on [PyPI] by [argon2-cffi-bindings].
-With a recent-enough *pip* and *setuptools*, they should be used automatically.
+With a recent-enough *pip* they should be used automatically.
 
 
 ### Source Distribution
@@ -50,8 +50,12 @@ This approach can lead to problems around your build chain and you can run into 
 
 **It is your own responsibility to deal with these risks if you choose this path.**
 
-Available since version 18.1.0.
-The `--no-binary` option value changed in 21.2.0 due to the outsourcing of the binary bindings.
+:::{versionadded} 18.1.0
+:::
+
+:::{versionchanged} 21.2.0
+The `--no-binary` option value changed due to the outsourcing of the binary bindings.
+:::
 
 
 ## Override Automatic SSE2 Detection
@@ -65,7 +69,8 @@ Therefore you can use the `ARGON2_CFFI_USE_SSE2` environment variable to control
 - If you set it to `0`, *argon2-cffi* will build **without** SSE2 support.
 - If you set it to anything else, it will be ignored and *argon2-cffi* will try to guess.
 
-Available since version 20.1.0.
+:::{versionadded} 20.1.0
+:::
 
 [argon2-cffi-bindings]: https://github.com/hynek/argon2-cffi-bindings
 [cffi environment]: https://cffi.readthedocs.io/en/latest/installation.html

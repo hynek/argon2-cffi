@@ -58,13 +58,20 @@ class Parameters:
 
     See :doc:`parameters` on how to pick them.
 
-    :ivar Type type: Hash type.
-    :ivar int version: Argon2 version.
-    :ivar int salt_len: Length of the salt in bytes.
-    :ivar int hash_len: Length of the hash in bytes.
-    :ivar int time_cost: Time cost in iterations.
-    :ivar int memory_cost: Memory cost in kibibytes.
-    :ivar int parallelism: Number of parallel threads.
+    Attributes:
+        type: Hash type.
+
+        version: Argon2 version.
+
+        salt_len: Length of the salt in bytes.
+
+        hash_len: Length of the hash in bytes.
+
+        time_cost: Time cost in iterations.
+
+        memory_cost: Memory cost in kibibytes.
+
+        parallelism: Number of parallel threads.
 
     .. versionadded:: 18.2.0
     """
@@ -96,9 +103,11 @@ def extract_parameters(hash: str) -> Parameters:
     """
     Extract parameters from an encoded *hash*.
 
-    :param str params: An encoded Argon2 hash string.
+    Parameters:
+        hash: An encoded Argon2 hash string.
 
-    :rtype: Parameters
+    Returns:
+        The parameters used to create the hash.
 
     .. versionadded:: 18.2.0
     """

@@ -18,7 +18,7 @@ Argon2**d**'s strength is the resistance against [time–memory trade-offs], whi
 
 Accordingly, Argon2**i** was originally considered the correct choice for password hashing and password-based key derivation.
 In practice it turned out that a *combination* of d and i -- that combines their strengths -- is the better choice.
-And so Argon2**id** was born and is now considered the *main variant* (and the only variant required by the RFC to be implemented).
+And so Argon2**id** was born and is now considered the *main variant* -- and the only variant required by the RFC to be implemented.
 
 
 ## Why “just use bcrypt” Is Not the Best Answer (Anymore)

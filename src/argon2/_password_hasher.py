@@ -33,27 +33,36 @@ class PasswordHasher:
     r"""
     High level class to hash passwords with sensible defaults.
 
-    Uses Argon2\ **id** by default and always uses a random salt_ for hashing.
-    But it can verify any type of Argon2 as long as the hash is correctly
-    encoded.
+    Uses Argon2\ **id** by default and uses a random salt_ for hashing. But it
+    can verify any type of Argon2 as long as the hash is correctly encoded.
 
     The reason for this being a class is both for convenience to carry
     parameters and to verify the parameters only *once*.  Any unnecessary
-    slowdown when hashing is a tangible advantage for a brute force attacker.
+    slowdown when hashing is a tangible advantage for a brute-force attacker.
 
-    :param int time_cost: Defines the amount of computation realized and
-        therefore the execution time, given in number of iterations.
-    :param int memory_cost: Defines the memory usage, given in kibibytes_.
-    :param int parallelism: Defines the number of parallel threads (*changes*
-        the resulting hash value).
-    :param int hash_len: Length of the hash in bytes.
-    :param int salt_len: Length of random salt to be generated for each
-        password.
-    :param str encoding: The Argon2 C library expects bytes.  So if
-        :meth:`hash` or :meth:`verify` are passed a ``str``, it will be
-        encoded using this encoding.
-    :param Type type: Argon2 type to use.  Only change for interoperability
-        with legacy systems.
+    Parameters:
+        time_cost:
+            Defines the amount of computation realized and therefore the
+            execution time, given in number of iterations.
+
+        memory_cost: Defines the memory usage, given in kibibytes_.
+
+        parallelism:
+            Defines the number of parallel threads (*changes* the resulting
+            hash value).
+
+        hash_len: Length of the hash in bytes.
+
+        salt_len: Length of random salt to be generated for each password.
+
+        encoding:
+            The Argon2 C library expects bytes.  So if :meth:`hash` or
+            :meth:`verify` are passed a ``str``, it will be encoded using this
+            encoding.
+
+        type:
+            Argon2 type to use.  Only change for interoperability with legacy
+            systems.
 
     .. versionadded:: 16.0.0
     .. versionchanged:: 18.2.0
@@ -114,6 +123,9 @@ class PasswordHasher:
         """
         Construct a `PasswordHasher` from *params*.
 
+        Returns:
+            A `PasswordHasher` instance with the parameters from *params*.
+
         .. versionadded:: 21.2.0
         """
         ph = cls()
@@ -150,7 +162,6 @@ class PasswordHasher:
         Hash *password* and return an encoded hash.
 
         Parameters:
-
             password: Password to hash.
 
             salt: If None, a random salt is securely created.
@@ -161,11 +172,9 @@ class PasswordHasher:
                     you are doing.
 
         Raises:
-
             argon2.exceptions.HashingError: If hashing fails.
 
         Returns:
-
             Hashed *password*.
 
         .. versionadded:: 23.1.0 *salt* parameter
@@ -198,23 +207,25 @@ class PasswordHasher:
             other parsing than the determination of the hash type is done by
             *argon2-cffi*.
 
-        :param hash: An encoded hash as returned from
-            :meth:`PasswordHasher.hash`.
-        :type hash: ``bytes`` or ``str``
+        Parameters:
+            hash: An encoded hash as returned from :meth:`PasswordHasher.hash`.
 
-        :param password: The password to verify.
-        :type password: ``bytes`` or ``str``
+            password: The password to verify.
 
-        :raises argon2.exceptions.VerifyMismatchError: If verification fails
-            because *hash* is not valid for *password*.
-        :raises argon2.exceptions.VerificationError: If verification fails for
-            other reasons.
-        :raises argon2.exceptions.InvalidHashError: If *hash* is so clearly
-            invalid, that it couldn't be passed to Argon2.
+        Raises:
+            argon2.exceptions.VerifyMismatchError:
+                If verification fails because *hash* is not valid for
+                *password*.
 
-        :return: ``True`` on success, raise
-            :exc:`~argon2.exceptions.VerificationError` otherwise.
-        :rtype: bool
+            argon2.exceptions.VerificationError:
+                If verification fails for other reasons.
+
+            argon2.exceptions.InvalidHashError:
+                If *hash* is so clearly invalid, that it couldn't be passed to
+                Argon2.
+
+        Returns:
+            ``True`` on success, otherwise an exception is raised.
 
         .. versionchanged:: 16.1.0
             Raise :exc:`~argon2.exceptions.VerifyMismatchError` on mismatches
@@ -244,7 +255,11 @@ class PasswordHasher:
         Therefore it's best practice to check -- and if necessary rehash --
         passwords after each successful authentication.
 
-        :rtype: bool
+        Parameters:
+            hash: An encoded Argon2 password hash.
+
+        Returns:
+            Whether *hash* was created using the instance's parameters.
 
         .. versionadded:: 18.2.0
         """

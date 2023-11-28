@@ -106,16 +106,22 @@ But it's way more comfortable to run it locally and *git* catching avoidable err
 ## Code
 
 - Obey [PEP 8](https://www.python.org/dev/peps/pep-0008/) and [PEP 257](https://www.python.org/dev/peps/pep-0257/).
-  We use the `"""`-on-separate-lines style for docstrings:
+  We use the `"""`-on-separate-lines style for docstrings and [Napoleon](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html) for parsing them:
 
   ```python
-  def func(x):
+  def func(x: str, y: bool) -> int:
       """
       Do something.
 
-      :param str x: A very important parameter.
+      Parameters:
+          x: A very important parameter.
 
-      :rtype: str
+          y:
+              Another important parameter whose description is too long for one
+              line, therefore it starts on the next line.
+
+      Returns:
+          Something!
       """
   ```
 - If you add or change public APIs, tag the docstring using `..  versionadded:: 16.0.0 WHAT` or `..  versionchanged:: 16.2.0 WHAT`.
