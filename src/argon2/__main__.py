@@ -17,7 +17,10 @@ from . import (
 
 
 def main(argv: list[str]) -> None:
-    parser = argparse.ArgumentParser(description="Benchmark Argon2.")
+    parser = argparse.ArgumentParser(
+        description="Benchmark Argon2.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
     parser.add_argument(
         "-n", type=int, default=100, help="Number of iterations to measure."
     )
@@ -56,23 +59,21 @@ def main(argv: list[str]) -> None:
         )
     hash = ph.hash(password)
 
-    params = {
-        "time_cost": (ph.time_cost, "iterations"),
-        "memory_cost": (ph.memory_cost, "KiB"),
-        "parallelism": (ph.parallelism, "threads"),
-        "hash_len": (ph.hash_len, "bytes"),
-    }
-
     print("Running Argon2id %d times with:" % (args.n,))
 
-    for k, v in sorted(params.items()):
-        print("%s: %d %s" % (k, v[0], v[1]))
+    for name, value, units in [
+        ("hash_len", ph.hash_len, "bytes"),
+        ("memory_cost", ph.memory_cost, "KiB"),
+        ("parallelism", ph.parallelism, "threads"),
+        ("time_cost", ph.time_cost, "iterations"),
+    ]:
+        print("%s: %d %s" % (name, value, units))
 
     print("\nMeasuring...")
     duration = timeit.timeit(
         f"ph.verify({hash!r}, {password!r})",
         setup=f"""\
-from argon2 import PasswordHasher, Type
+from argon2 import PasswordHasher
 
 ph = PasswordHasher(
     time_cost={args.t!r},

@@ -193,7 +193,7 @@ class TestHash:
         """
         Hash various secrets as cheaply as possible.
         """
-        hash_secret(
+        func(
             secret,
             salt=b"12345678",
             time_cost=1,
