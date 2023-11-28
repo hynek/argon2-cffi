@@ -1,4 +1,6 @@
 @import url('https://rsms.me/inter/inter.css');
+@import url('https://assets.hynek.me/css/bm.css');
+
 
 :root {
   font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
