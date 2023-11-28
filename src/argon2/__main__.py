@@ -62,10 +62,10 @@ def main(argv: list[str]) -> None:
     print("Running Argon2id %d times with:" % (args.n,))
 
     for name, value, units in [
-        ("time_cost", ph.time_cost, "iterations"),
+        ("hash_len", ph.hash_len, "bytes"),
         ("memory_cost", ph.memory_cost, "KiB"),
         ("parallelism", ph.parallelism, "threads"),
-        ("hash_len", ph.hash_len, "bytes"),
+        ("time_cost", ph.time_cost, "iterations"),
     ]:
         print("%s: %d %s" % (name, value, units))
 
