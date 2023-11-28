@@ -168,26 +168,23 @@ def verify_secret(hash: bytes, secret: bytes, type: Type) -> Literal[True]:
 
     Parameters:
         hash:
-        An encoded Argon2 hash as returned by
-        :func:`hash_secret`.
+            An encoded Argon2 hash as returned by :func:`hash_secret`.
 
         secret:
-            The secret to verify whether it matches the one
-            in *hash*.
+            The secret to verify whether it matches the one in *hash*.
 
         type: Type for *hash*.
 
     Raises:
         argon2.exceptions.VerifyMismatchError:
-            If verification fails
-            because *hash* is not valid for *secret* of *type*.
+            If verification fails because *hash* is not valid for *secret* of
+            *type*.
         argon2.exceptions.VerificationError:
-            If verification fails for
-            other reasons.
+            If verification fails for other reasons.
 
     Returns:
-        ``True`` on success, raise
-        :exc:`~argon2.exceptions.VerificationError` otherwise.
+        ``True`` on success, raise :exc:`~argon2.exceptions.VerificationError`
+        otherwise.
 
     .. versionadded:: 16.0.0
     .. versionchanged:: 16.1.0
