@@ -52,7 +52,7 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           python-version: ${{ matrix.python-version }}
@@ -100,7 +100,7 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           python-version-file: .python-version-default
@@ -140,7 +140,7 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           python-version-file: .python-version-default
@@ -165,7 +165,7 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           python-version-file: .python-version-default
@@ -185,7 +185,7 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           python-version-file: .python-version-default
@@ -207,7 +207,7 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           # Keep in-sync with .readthedocs.yaml and tox.ini/docs.
@@ -227,7 +227,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           cache: pip
           python-version-file: .python-version-default
