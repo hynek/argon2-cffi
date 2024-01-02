@@ -212,7 +212,7 @@ jobs:
         with:
           cache: pip
           # Keep in-sync with .readthedocs.yaml and tox.ini/docs.
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Prepare & run tox
         run: |
