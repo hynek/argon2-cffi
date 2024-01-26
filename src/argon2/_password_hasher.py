@@ -79,6 +79,7 @@ class PasswordHasher:
     .. _salt: https://en.wikipedia.org/wiki/Salt_(cryptography)
     .. _kibibytes: https://en.wikipedia.org/wiki/Binary_prefix#kibi
     """
+
     __slots__ = ["_parameters", "encoding"]
 
     _parameters: Parameters
