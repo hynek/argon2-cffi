@@ -40,7 +40,7 @@ class PasswordHasher:
     parameters and to verify the parameters only *once*.  Any unnecessary
     slowdown when hashing is a tangible advantage for a brute-force attacker.
 
-    Parameters:
+    Args:
         time_cost:
             Defines the amount of computation realized and therefore the
             execution time, given in number of iterations.
@@ -162,10 +162,11 @@ class PasswordHasher:
         """
         Hash *password* and return an encoded hash.
 
-        Parameters:
+        Args:
             password: Password to hash.
 
-            salt: If None, a random salt is securely created.
+            salt:
+                If None, a random salt is securely created.
 
                 .. danger::
 
@@ -208,7 +209,7 @@ class PasswordHasher:
             other parsing than the determination of the hash type is done by
             *argon2-cffi*.
 
-        Parameters:
+        Args:
             hash: An encoded hash as returned from :meth:`PasswordHasher.hash`.
 
             password: The password to verify.
@@ -256,7 +257,7 @@ class PasswordHasher:
         Therefore it's best practice to check -- and if necessary rehash --
         passwords after each successful authentication.
 
-        Parameters:
+        Args:
             hash: An encoded Argon2 password hash.
 
         Returns:

@@ -113,7 +113,7 @@ But it's way more comfortable to run it locally and *git* catching avoidable err
       """
       Do something.
 
-      Parameters:
+      Args:
           x: A very important parameter.
 
           y:

@@ -66,11 +66,10 @@ def hash_secret(
     An encoded hash can be directly passed into :func:`verify_secret` as it
     contains all parameters and the salt.
 
-    Parameters:
+    Args:
         secret: Secret to hash.
 
-        salt:
-            A salt_.  Should be random and different for each secret.
+        salt: A salt_. Should be random and different for each secret.
 
         type: Which Argon2 variant to use.
 
@@ -166,7 +165,7 @@ def verify_secret(hash: bytes, secret: bytes, type: Type) -> Literal[True]:
     """
     Verify whether *secret* is correct for *hash* of *type*.
 
-    Parameters:
+    Args:
         hash:
             An encoded Argon2 hash as returned by :func:`hash_secret`.
 
@@ -179,6 +178,7 @@ def verify_secret(hash: bytes, secret: bytes, type: Type) -> Literal[True]:
         argon2.exceptions.VerifyMismatchError:
             If verification fails because *hash* is not valid for *secret* of
             *type*.
+
         argon2.exceptions.VerificationError:
             If verification fails for other reasons.
 
@@ -221,7 +221,7 @@ def core(context: Any, type: int) -> int:
         Use at your own peril; *argon2-cffi* does *not* use this binding
         itself.
 
-    Parameters:
+    Args:
         context:
             A CFFI Argon2 context object (i.e. an ``struct Argon2_Context`` /
             ``argon2_context``).
@@ -243,7 +243,7 @@ def error_to_str(error: int) -> str:
     """
     Convert an Argon2 error code into a native string.
 
-    Parameters:
+    Args:
         error: An Argon2 error code as returned by :func:`core`.
 
     Returns:

@@ -103,7 +103,7 @@ def extract_parameters(hash: str) -> Parameters:
     """
     Extract parameters from an encoded *hash*.
 
-    Parameters:
+    Args:
         hash: An encoded Argon2 hash string.
 
     Returns:
