@@ -93,7 +93,7 @@ pattern = "\n(###.+?\n)## "
 text = """
 ---
 
-[→ Full Changelog](https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md)
+[Full Changelog →](https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md)
 
 
 """
