@@ -8,18 +8,7 @@ The **first number** of the version is the year.
 The **second number** is incremented with each release, starting at 1 for each year.
 The **third number** is when we need to start branches for older releases (only for emergencies).
 
----
-
-*argon2-cffi* has a very strong backwards-compatibility policy.
-Generally speaking, you shouldn't ever be afraid of updating.
-
-Whenever breaking changes are needed, they are:
-
-1.  …announced here in the changelog.
-2.  …the old behavior raises a `DeprecationWarning` for a year (if possible).
-3.  …are done with another announcement in the changelog.
-
-What explicitly *may* change over time are the default hashing parameters and the behavior of the [CLI interface](https://argon2-cffi.readthedocs.io/en/stable/cli.html).
+You can find our backwards-compatibility policy [here](https://github.com/hynek/argon2-cffi/blob/main/.github/SECURITY.md).
 
 <!-- changelog follows -->
 
