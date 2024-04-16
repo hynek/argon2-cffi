@@ -244,7 +244,7 @@ class PasswordHasher:
             hash, _ensure_bytes(password, self.encoding), hash_type
         )
 
-    def check_needs_rehash(self, hash: str) -> bool:
+    def check_needs_rehash(self, hash: str | bytes) -> bool:
         """
         Check whether *hash* was created using the instance's parameters.
 
@@ -264,5 +264,9 @@ class PasswordHasher:
             Whether *hash* was created using the instance's parameters.
 
         .. versionadded:: 18.2.0
+        .. versionchanged:: 24.1.0 Accepts bytes for *hash*.
         """
+        if isinstance(hash, bytes):
+            hash = hash.decode("ascii")
+
         return self._parameters != extract_parameters(hash)

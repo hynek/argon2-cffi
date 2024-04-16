@@ -26,6 +26,12 @@ What explicitly *may* change over time are the default hashing parameters and th
 
 ## [Unreleased](https://github.com/hynek/argon2-cffi/compare/23.1.0...HEAD)
 
+### Changed
+
+- `argon2.PasswordHasher.check_needs_rehash()` now also accepts bytes like the rest of the API.
+  [#174](https://github.com/hynek/argon2-cffi/pull/174)
+
+
 ## [23.1.0](https://github.com/hynek/argon2-cffi/compare/21.3.0...23.1.0) - 2023-08-15
 
 ### Removed
