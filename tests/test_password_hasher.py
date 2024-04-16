@@ -109,22 +109,32 @@ class TestPasswordHasher:
         with pytest.raises(InvalidHash):
             PasswordHasher().verify("tiger", "does not matter")
 
-    def test_check_needs_rehash_no(self):
+    @pytest.mark.parametrize("use_bytes", [True, False])
+    def test_check_needs_rehash_no(self, use_bytes):
         """
         Return False if the hash has the correct parameters.
         """
         ph = PasswordHasher(1, 8, 1, 16, 16)
 
-        assert not ph.check_needs_rehash(ph.hash("foo"))
+        hash = ph.hash("foo")
+        if use_bytes:
+            hash = hash.encode()
 
-    def test_check_needs_rehash_yes(self):
+        assert not ph.check_needs_rehash(hash)
+
+    @pytest.mark.parametrize("use_bytes", [True, False])
+    def test_check_needs_rehash_yes(self, use_bytes):
         """
         Return True if any of the parameters changes.
         """
         ph = PasswordHasher(1, 8, 1, 16, 16)
         ph_old = PasswordHasher(1, 8, 1, 8, 8)
 
-        assert ph.check_needs_rehash(ph_old.hash("foo"))
+        hash = ph_old.hash("foo")
+        if use_bytes:
+            hash = hash.encode()
+
+        assert ph.check_needs_rehash(hash)
 
     def test_type_is_configurable(self):
         """
