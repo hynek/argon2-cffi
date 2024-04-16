@@ -33,13 +33,20 @@ However, you’ll probably want a more traditional environment as well.
 First, create a [virtual environment](https://virtualenv.pypa.io/) so you don't break your system-wide Python installation.
 We recommend using the Python version from the `.python-version-default` file in project's root directory.
 
-If you're using [*direnv*](https://direnv.net), you can automate the creation of a virtual environment with the correct Python version by adding the following `.envrc` to the project root after you've cloned it to your computer:
+If you're using tools that understand `.python-version` files like [*pyenv*](https://github.com/pyenv/pyenv) does, you can make it a link to the `.python-version-default` file (`ln -s .python-version-default .python-version`).
+
+If you're using [*direnv*](https://direnv.net), you can automate the creation of the project virtual environment with the correct Python version by adding the following `.envrc` to the project root:
 
 ```bash
 layout python python$(cat .python-version-default)
 ```
 
-If you're using tools that understand `.python-version` files like [*pyenv*](https://github.com/pyenv/pyenv) does, you can make it a link to the `.python-version-default` file.
+or, if you like [*uv*](https://github.com/astral-sh/uv):
+
+```bash
+test -d .venv || uv venv --python python$(cat .python-version-default)
+. .venv/bin/activate
+```
 
 ---
 
