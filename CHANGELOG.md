@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [*Keep a Changelog*](https://keepachangelog.com/en/1.0.0/) and this project adheres to [*Calendar Versioning*](https://calver.org/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Calendar Versioning](https://calver.org/).
 
 The **first number** of the version is the year.
 The **second number** is incremented with each release, starting at 1 for each year.
@@ -53,7 +53,7 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 
 ### Fixed
 
-- While the last release added type hints, the fact that it's been missing a `py.typed` file made *Mypy* ignore them.
+- While the last release added type hints, the fact that it's been missing a `py.typed` file made Mypy ignore them.
   [#113](https://github.com/hynek/argon2-cffi/pull/113)
 
 
@@ -63,10 +63,10 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 
 - Python 3.5 is not supported anymore.
 
-- The *CFFI* bindings have been extracted into a separate project: [*argon2-cffi-bindings*]
+- The CFFI bindings have been extracted into a separate project: [*argon2-cffi-bindings*]
   This makes *argon2-cffi* a Python-only project und should make it easier to contribute to and have more frequent releases with high-level features.
 
-  This change is breaking for users who want to use a system-wide installation of *Argon2* instead of our vendored code, because the argument to the ``--no-binary`` argument changed.
+  This change is breaking for users who want to use a system-wide installation of Argon2 instead of our vendored code, because the argument to the ``--no-binary`` argument changed.
   Please refer to the [installation guide](https://argon2-cffi.readthedocs.io/en/stable/installation.html).
 
 
@@ -76,7 +76,7 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
   Including:
     - Apple Silicon via `universal2`
     - Linux on `amd64` and `arm64`
-    - [*musl libc*](https://musl.libc.org) ([*Alpine* Linux!](https://www.alpinelinux.org)) on `i686`, `amd64`, and `arm64`
+    - [*musl libc*](https://musl.libc.org) ([Alpine Linux!](https://www.alpinelinux.org)) on `i686`, `amd64`, and `arm64`
     - PyPy 3.8
 
   We hope to provide wheels for Windows on `arm64` soon, but are waiting for GitHub Actions to support that.
@@ -100,7 +100,7 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 
 ## [21.1.0](https://github.com/hynek/argon2-cffi/compare/20.1.0...21.1.0) - 2021-08-29
 
-Vendoring *Argon2* @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/62358ba2123abd17fccf2a108a301d4b52c01a7c) (20190702)
+Vendoring Argon2 @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/62358ba2123abd17fccf2a108a301d4b52c01a7c) (20190702)
 
 ### Removed
 
@@ -111,7 +111,7 @@ Vendoring *Argon2* @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/6
 ### Changed
 
 - There are indeed no changes whatsoever to the code of *argon2-cffi*.
-  The *Argon2* project also hasn't tagged a new release since July 2019.
+  The Argon2 project also hasn't tagged a new release since July 2019.
   There also don't seem to be any important pending fixes.
 
   This release is mainly about improving the way binary wheels are built (`abi3` on all platforms).
@@ -119,17 +119,17 @@ Vendoring *Argon2* @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/6
 
 ## [20.1.0](https://github.com/hynek/argon2-cffi/compare/19.2.0...20.1.0) - 2020-05-11
 
-Vendoring *Argon2* @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/62358ba2123abd17fccf2a108a301d4b52c01a7c) (20190702)
+Vendoring Argon2 @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/62358ba2123abd17fccf2a108a301d4b52c01a7c) (20190702)
 
 
 ### Added
 
-- It is now possible to manually override the detection of *SSE2* using the `ARGON2_CFFI_USE_SSE2` environment variable.
+- It is now possible to manually override the detection of SSE2 using the `ARGON2_CFFI_USE_SSE2` environment variable.
 
 
 ## [19.2.0](https://github.com/hynek/argon2-cffi/compare/18.3.0...19.1.0) - 2019-10-27
 
-Vendoring *Argon2* @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/62358ba2123abd17fccf2a108a301d4b52c01a7c) (20190702)
+Vendoring Argon2 @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/62358ba2123abd17fccf2a108a301d4b52c01a7c) (20190702)
 
 ### Removed
 
@@ -146,16 +146,16 @@ Vendoring *Argon2* @ [62358ba](https://github.com/P-H-C/phc-winner-argon2/tree/6
 
 ## [19.1.0](https://github.com/hynek/argon2-cffi/compare/18.3.0...19.1.0) - 2019-01-17
 
-Vendoring *Argon2* @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
+Vendoring Argon2 @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
 
 ### Added
 
-- Added support for *Argon2* v1.2 hashes in `argon2.extract_parameters()`.
+- Added support for Argon2 v1.2 hashes in `argon2.extract_parameters()`.
 
 
 ## [18.3.0](https://github.com/hynek/argon2-cffi/compare/18.2.0...18.3.0) - 2018-08-19
 
-Vendoring *Argon2* @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
+Vendoring Argon2 @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
 
 ### Added
 
@@ -164,13 +164,13 @@ Vendoring *Argon2* @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/6
 
 ## [18.2.0](https://github.com/hynek/argon2-cffi/compare/18.1.0...18.2.0) - 2018-08-19
 
-Vendoring *Argon2* @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
+Vendoring Argon2 @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
 
 ### Changed
 
 - The hash type for `argon2.PasswordHasher` is Argon2**id** now.
 
-  This decision has been made based on the recommendations in the latest [*Argon2* RFC draft](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-argon2-04#section-4).
+  This decision has been made based on the recommendations in the latest [Argon2 RFC draft](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-argon2-04#section-4).
   [#33](https://github.com/hynek/argon2-cffi/issues/33)
   [#34](https://github.com/hynek/argon2-cffi/pull/34)
 
@@ -182,7 +182,7 @@ Vendoring *Argon2* @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/6
 
 - To make the change of hash type backward compatible, `argon2.PasswordHasher.verify()` now determines the type of the hash and verifies it accordingly.
 
-- To allow for bespoke decisions about upgrading *Argon2* parameters, it's now possible to extract them from a hash via the `argon2.extract_parameters()` function.
+- To allow for bespoke decisions about upgrading Argon2 parameters, it's now possible to extract them from a hash via the `argon2.extract_parameters()` function.
   [#41](https://github.com/hynek/argon2-cffi/pull/41)
 
 - Additionally `argon2.PasswordHasher` now has a `check_needs_rehash()` method that allows to verify whether a hash has been created with the instance's parameters or whether it should be rehashed.
@@ -191,16 +191,16 @@ Vendoring *Argon2* @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/6
 
 ## [18.1.0](https://github.com/hynek/argon2-cffi/compare/16.3.0...18.1.0) - 2018-01-06
 
-Vendoring *Argon2* @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
+Vendoring Argon2 @ [670229c](https://github.com/P-H-C/phc-winner-argon2/tree/670229c849b9fe882583688b74eb7dfdc846f9f6) (20171227)
 
 ### Added
 
-- It is now possible to use the *argon2-cffi* bindings against an *Argon2* library that is provided by the system.
+- It is now possible to use the *argon2-cffi* bindings against an Argon2 library that is provided by the system.
 
 
 ## [16.3.0](https://github.com/hynek/argon2-cffi/compare/16.2.0...16.3.0) - 2016-11-10
 
-Vendoring *Argon2* @ [1c4fc41f81f358283755eea88d4ecd05e43b7fd3](https://github.com/P-H-C/phc-winner-argon2/tree/1c4fc41f81f358283755eea88d4ecd05e43b7fd3) (20161029)
+Vendoring Argon2 @ [1c4fc41f81f358283755eea88d4ecd05e43b7fd3](https://github.com/P-H-C/phc-winner-argon2/tree/1c4fc41f81f358283755eea88d4ecd05e43b7fd3) (20161029)
 
 ### Added
 
@@ -217,7 +217,7 @@ Vendoring *Argon2* @ [1c4fc41f81f358283755eea88d4ecd05e43b7fd3](https://github.c
 
 ## [16.2.0](https://github.com/hynek/argon2-cffi/compare/16.1.0...16.2.0) - 2016-09-10
 
-Vendoring *Argon2* @ [4844d2fee15d44cb19296ddf36029326d17c5aa3](https://github.com/P-H-C/phc-winner-argon2/tree/4844d2fee15d44cb19296ddf36029326d17c5aa3)
+Vendoring Argon2 @ [4844d2fee15d44cb19296ddf36029326d17c5aa3](https://github.com/P-H-C/phc-winner-argon2/tree/4844d2fee15d44cb19296ddf36029326d17c5aa3)
 
 ### Fixed
 
@@ -227,7 +227,7 @@ Vendoring *Argon2* @ [4844d2fee15d44cb19296ddf36029326d17c5aa3](https://github.c
 
 ## [16.1.0](https://github.com/hynek/argon2-cffi/compare/16.0.0...16.1.0) - 2016-04-19
 
-Vendoring *Argon2* @ [00aaa6604501fade85853a4b2f5695611ff6e7c5](https://github.com/P-H-C/phc-winner-argon2/tree/00aaa6604501fade85853a4b2f5695611ff6e7c5).
+Vendoring Argon2 @ [00aaa6604501fade85853a4b2f5695611ff6e7c5](https://github.com/P-H-C/phc-winner-argon2/tree/00aaa6604501fade85853a4b2f5695611ff6e7c5).
 
 ### Added
 
@@ -236,7 +236,7 @@ Vendoring *Argon2* @ [00aaa6604501fade85853a4b2f5695611ff6e7c5](https://github.c
 
 ### Changed
 
-- Add support for [*Argon2* 1.3](https://mailarchive.ietf.org/arch/msg/cfrg/beOzPh41Hz3cjl5QD7MSRNTi3lA/).
+- Add support for [Argon2 1.3](https://mailarchive.ietf.org/arch/msg/cfrg/beOzPh41Hz3cjl5QD7MSRNTi3lA/).
   Old hashes remain functional but opportunistic rehashing is strongly recommended.
 
 ### Removed
@@ -252,7 +252,7 @@ Vendoring *Argon2* @ [00aaa6604501fade85853a4b2f5695611ff6e7c5](https://github.c
 
 ## [16.0.0](https://github.com/hynek/argon2-cffi/compare/15.0.1...16.0.0) - 2016-01-02
 
-Vendoring *Argon2* @ [421dafd2a8af5cbb215e16da5953663eb101d139](https://github.com/P-H-C/phc-winner-argon2/tree/421dafd2a8af5cbb215e16da5953663eb101d139).
+Vendoring Argon2 @ [421dafd2a8af5cbb215e16da5953663eb101d139](https://github.com/P-H-C/phc-winner-argon2/tree/421dafd2a8af5cbb215e16da5953663eb101d139).
 
 ### Deprecated
 
@@ -271,7 +271,7 @@ Vendoring *Argon2* @ [421dafd2a8af5cbb215e16da5953663eb101d139](https://github.c
 
 ## [15.0.1](https://github.com/hynek/argon2-cffi/compare/15.0.0...15.0.1) - 2015-12-18
 
-Vendoring *Argon2* @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b).
+Vendoring Argon2 @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b).
 
 ### Fixed
 
@@ -280,11 +280,11 @@ Vendoring *Argon2* @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.c
 
 ## [15.0.0](https://github.com/hynek/argon2-cffi/compare/15.0.0b5...15.0.0) - 2015-12-18
 
-Vendoring *Argon2* @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b).
+Vendoring Argon2 @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b).
 
 ### Added
 
-- Conditionally use the [*SSE2*](https://en.wikipedia.org/wiki/SSE2)-optimized version of `argon2` on x86 architectures.
+- Conditionally use the [SSE2](https://en.wikipedia.org/wiki/SSE2)-optimized version of `argon2` on x86 architectures.
 
 ### Changed
 
@@ -303,13 +303,13 @@ Vendoring *Argon2* @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.c
 
 ## [15.0.0b5](https://github.com/hynek/argon2-cffi/tree/15.0.0b5) - 2015-12-10
 
-Vendoring *Argon2* @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b).
+Vendoring Argon2 @ [4fe0d8cda37691228dd5a96a310be57369403a4b](https://github.com/P-H-C/phc-winner-argon2/tree/4fe0d8cda37691228dd5a96a310be57369403a4b).
 
 ### Added
 
 - Initial work.
   Previous betas were only for fixing Windows packaging.
-  The authors of *Argon2* were kind enough to [help me](https://github.com/P-H-C/phc-winner-argon2/issues/44) to get it building under Visual Studio 2008 that we’re forced to use for Python 2.7 on Windows.
+  The authors of Argon2 were kind enough to [help me](https://github.com/P-H-C/phc-winner-argon2/issues/44) to get it building under Visual Studio 2008 that we’re forced to use for Python 2.7 on Windows.
 
 
 [*argon2-cffi-bindings*]: https://github.com/hynek/argon2-cffi-bindings
