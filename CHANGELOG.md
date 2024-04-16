@@ -221,7 +221,7 @@ Vendoring Argon2 @ [4844d2fee15d44cb19296ddf36029326d17c5aa3](https://github.com
 
 ### Fixed
 
-- Fixed compilation on debian jessie.
+- Fixed compilation on Debian 8 (Jessie).
   [#13](https://github.com/hynek/argon2-cffi/pull/13)
 
 
