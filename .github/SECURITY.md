@@ -9,7 +9,7 @@ That said, you shouldn't be afraid to upgrade if you're only using our documente
 Whenever there is a need to break compatibility, it is announced in the changelog and raises a `DeprecationWarning` for a year (if possible) before it's finally really broken.
 
 > [!WARNING]
-> What explicitly *may* change over time are the default hashing parameters and the behavior of the [CLI interface](https://argon2-cffi.readthedocs.io/en/stable/cli.html).
+> What explicitly *may* change over time are the default [hashing parameters](https://argon2-cffi.readthedocs.io/en/latest/parameters.html) and the behavior of the [CLI interface](https://argon2-cffi.readthedocs.io/en/stable/cli.html).
 
 
 ## Security contact information
