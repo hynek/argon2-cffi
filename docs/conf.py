@@ -67,7 +67,7 @@ add_function_parentheses = True
 
 html_theme = "furo"
 html_theme_options = {
-    "top_of_page_button": None,
+    "top_of_page_buttons": [],
     "light_css_variables": {
         "font-stack": "Inter,sans-serif",
         "font-stack--monospace": "BerkeleyMono, MonoLisa, ui-monospace, "
