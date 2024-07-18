@@ -67,7 +67,7 @@ def __getattr__(name: str) -> str:
     warnings.warn(
         f"Accessing argon2.{name} is deprecated and will be "
         "removed in a future release. Use importlib.metadata directly "
-        "to query for structlog's packaging metadata.",
+        "to query for argon2-cffi's packaging metadata.",
         DeprecationWarning,
         stacklevel=2,
     )
