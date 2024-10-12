@@ -168,12 +168,9 @@ module = "tests.*"
 ignore_errors = true
 
 
-[tool.black]
-line-length = 79
-
-
 [tool.ruff]
 src = ["src", "tests", "noxfile.py"]
+line-length = 79
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -183,13 +180,14 @@ ignore = [
     "A003",    # shadowing is fine
     "ANN",     # Mypy is better at this
     "ARG001",  # unused arguments are normal when implementing interfaces
-    "COM",     # Black takes care of our commas
+    "COM",     # Formatter takes care of our commas
     "D",       # We prefer our own docstring style.
-    "E501",    # leave line-length enforcement to Black
+    "E501",    # leave line-length enforcement to formatter
     "ERA001",  # Dead code detection is overly eager.
     "FBT",     # we have one function that takes one bool; c'mon!
     "FIX",     # Yes, we want XXX as a marker.
     "INP001",  # sometimes we want Python files outside of packages
+    "ISC001",  # conflicts with ruff format
     "PLR0913", # yes, many arguments, but most have defaults
     "PLR2004", # numbers are sometimes fine
     "PLW2901", # re-assigning within loop bodies is fine

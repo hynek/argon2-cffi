@@ -132,7 +132,8 @@ But it's way more comfortable to run it locally and *git* catching avoidable err
       """
   ```
 - If you add or change public APIs, tag the docstring using `..  versionadded:: 16.0.0 WHAT` or `..  versionchanged:: 16.2.0 WHAT`.
-- We use [*isort*](https://github.com/PyCQA/isort) to sort our imports, and we use [*Black*](https://github.com/psf/black) with line length of 79 characters to format our code.
+
+- We use [Ruff](https://ruff.rs/) to sort our imports and format our code with a line length of 79 characters.
   As long as you run our full [*tox*] suite before committing, or install our [*pre-commit*] hooks (ideally you'll do both – see [*Local Development Environment*](#local-development-environment) above), you won't have to spend any time on formatting your code at all.
   If you don't, [CI] will catch it for you – but that seems like a waste of your time!
 

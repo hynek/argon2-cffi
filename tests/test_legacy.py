@@ -118,8 +118,7 @@ class TestHash:
 
         assert (
             # -1 for not NUL byte
-            int((DEFAULT_RANDOM_SALT_LENGTH << 2) / 3 + 2) - 1
-            == len(salt)
+            int((DEFAULT_RANDOM_SALT_LENGTH << 2) / 3 + 2) - 1 == len(salt)
         )
 
     def test_hash_wrong_arg_type(self):
