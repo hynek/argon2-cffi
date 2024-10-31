@@ -9,6 +9,8 @@ from __future__ import annotations
 import os
 import warnings
 
+from typing import Literal
+
 from ._password_hasher import (
     DEFAULT_HASH_LENGTH,
     DEFAULT_MEMORY_COST,
@@ -16,7 +18,6 @@ from ._password_hasher import (
     DEFAULT_RANDOM_SALT_LENGTH,
     DEFAULT_TIME_COST,
 )
-from ._typing import Literal
 from .low_level import Type, hash_secret, hash_secret_raw, verify_secret
 
 

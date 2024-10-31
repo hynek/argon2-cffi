@@ -12,11 +12,10 @@ Low-level functions if you want to build your own higher level abstractions.
 from __future__ import annotations
 
 from enum import Enum
-from typing import Any
+from typing import Any, Literal
 
 from _argon2_cffi_bindings import ffi, lib
 
-from ._typing import Literal
 from .exceptions import HashingError, VerificationError, VerifyMismatchError
 
 
