@@ -14,7 +14,7 @@ name = "argon2-cffi"
 description = "Argon2 for Python"
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 dynamic = ["version", "readme"]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = "MIT"
 keywords = ["password", "hash", "hashing", "security"]
 classifiers = [
@@ -25,7 +25,6 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: Unix",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -37,10 +36,7 @@ classifiers = [
     "Topic :: Security :: Cryptography",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "argon2-cffi-bindings",
-    "typing-extensions; python_version < '3.8'", # cf. _typing.py module
-]
+dependencies = ["argon2-cffi-bindings"]
 
 [project.optional-dependencies]
 tests = ["hypothesis", "pytest"]

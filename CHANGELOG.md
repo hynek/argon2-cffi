@@ -15,6 +15,11 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 
 ## [Unreleased](https://github.com/hynek/argon2-cffi/compare/23.1.0...HEAD)
 
+### Removed
+
+- Python 3.7 is not supported anymore.
+
+
 ### Changed
 
 - `argon2.PasswordHasher.check_needs_rehash()` now also accepts bytes like the rest of the API.

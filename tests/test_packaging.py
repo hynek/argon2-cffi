@@ -1,16 +1,11 @@
 # SPDX-License-Identifier: MIT
 
-import sys
+
+from importlib import metadata
 
 import pytest
 
 import argon2
-
-
-if sys.version_info < (3, 8):
-    import importlib_metadata as metadata
-else:
-    from importlib import metadata
 
 
 class TestLegacyMetadataHack:
