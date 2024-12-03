@@ -85,13 +85,13 @@ class Parameters:
     parallelism: int
 
     __slots__ = (
-        "type",
-        "version",
-        "salt_len",
         "hash_len",
-        "time_cost",
         "memory_cost",
         "parallelism",
+        "salt_len",
+        "time_cost",
+        "type",
+        "version",
     )
 
 

@@ -59,7 +59,7 @@ def main(argv: list[str]) -> None:
         )
     hash = ph.hash(password)
 
-    print("Running Argon2id %d times with:" % (args.n,))
+    print(f"Running Argon2id {args.n} times with:")
 
     for name, value, units in [
         ("hash_len", ph.hash_len, "bytes"),
@@ -67,7 +67,7 @@ def main(argv: list[str]) -> None:
         ("parallelism", ph.parallelism, "threads"),
         ("time_cost", ph.time_cost, "iterations"),
     ]:
-        print("%s: %d %s" % (name, value, units))
+        print(f"{name}: {value} {units}")
 
     print("\nMeasuring...")
     duration = timeit.timeit(
