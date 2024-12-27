@@ -17,7 +17,9 @@ DEFAULT_RANDOM_SALT_LENGTH = RFC_9106_LOW_MEMORY.salt_len
 DEFAULT_HASH_LENGTH = RFC_9106_LOW_MEMORY.hash_len
 DEFAULT_TIME_COST = RFC_9106_LOW_MEMORY.time_cost
 DEFAULT_MEMORY_COST = RFC_9106_LOW_MEMORY.memory_cost
-DEFAULT_PARALLELISM = RFC_9106_LOW_MEMORY.parallelism
+DEFAULT_PARALLELISM = (
+    1 if platform.machine() == "wasm32" else RFC_9106_LOW_MEMORY.parallelism
+)
 
 
 def _ensure_bytes(s: bytes | str, encoding: str) -> bytes:
