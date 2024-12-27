@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-import platform
-
 from dataclasses import dataclass
 from typing import Any
 
-from .exceptions import InvalidHashError, UnsupportedParamsError
+from .exceptions import InvalidHashError
 from .low_level import Type
 
 
@@ -149,28 +147,3 @@ def extract_parameters(hash: str) -> Parameters:
         memory_cost=kvs["m"],
         parallelism=kvs["p"],
     )
-
-
-def _validate_parameters(params: Parameters) -> bool:
-    """
-    Validates parameters against current platform.
-    There are difficulties on how to implement Threading in
-    WebAssembly. To use this library in Pyodide,
-    params.parallelism must be equal to 1.
-
-    Args:
-        hash: An encoded Argon2 hash string.
-
-    Returns:
-        True: if params are ok
-        Raise an InvalidParamsError otherwise
-    """
-
-    match platform.machine():
-        case "wasm32":
-            if params.parallelism != 1:
-                raise UnsupportedParamsError
-        case _:
-            pass
-
-    return True

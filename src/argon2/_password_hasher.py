@@ -3,16 +3,12 @@
 from __future__ import annotations
 
 import os
+import platform
 
 from typing import ClassVar, Literal
 
-from ._utils import (
-    Parameters,
-    _check_types,
-    _validate_parameters,
-    extract_parameters,
-)
-from .exceptions import InvalidHashError
+from ._utils import Parameters, _check_types, extract_parameters
+from .exceptions import InvalidHashError, UnsupportedParamsError
 from .low_level import Type, hash_secret, verify_secret
 from .profiles import RFC_9106_LOW_MEMORY
 
@@ -121,7 +117,9 @@ class PasswordHasher:
             parallelism=parallelism,
         )
         # verify params before accepting
-        _validate_parameters(params)
+        if platform.machine() == "wasm32" and parallelism != 1:
+            raise UnsupportedParamsError
+
         # Cache a Parameters object for check_needs_rehash.
         self._parameters = params
         self.encoding = encoding
@@ -137,7 +135,8 @@ class PasswordHasher:
         .. versionadded:: 21.2.0
         """
         # verify params before accepting
-        _validate_parameters(params)
+        if platform.machine() == "wasm32" and params.parallelism != 1:
+            raise UnsupportedParamsError
         ph = cls()
         ph._parameters = params
 
