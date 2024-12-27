@@ -6,7 +6,12 @@ import os
 
 from typing import ClassVar, Literal
 
-from ._utils import Parameters, _check_types, extract_parameters
+from ._utils import (
+    Parameters,
+    _check_types,
+    _validate_parameters,
+    extract_parameters,
+)
 from .exceptions import InvalidHashError
 from .low_level import Type, hash_secret, verify_secret
 from .profiles import RFC_9106_LOW_MEMORY
@@ -106,8 +111,7 @@ class PasswordHasher:
         if e:
             raise TypeError(e)
 
-        # Cache a Parameters object for check_needs_rehash.
-        self._parameters = Parameters(
+        params = Parameters(
             type=type,
             version=19,
             salt_len=salt_len,
@@ -116,6 +120,10 @@ class PasswordHasher:
             memory_cost=memory_cost,
             parallelism=parallelism,
         )
+        # verify params before accepting
+        _validate_parameters(params)
+        # Cache a Parameters object for check_needs_rehash.
+        self._parameters = params
         self.encoding = encoding
 
     @classmethod
@@ -128,6 +136,8 @@ class PasswordHasher:
 
         .. versionadded:: 21.2.0
         """
+        # verify params before accepting
+        _validate_parameters(params)
         ph = cls()
         ph._parameters = params
 

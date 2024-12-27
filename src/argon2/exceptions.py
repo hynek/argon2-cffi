@@ -46,6 +46,14 @@ class InvalidHashError(ValueError):
     """
 
 
+class UnsupportedParamsError(ValueError):
+    """
+    Raised if the current platform doesn not support the parameters.
+
+    Eg. In Wasm32, parallelism must be set to 1.
+    """
+
+
 InvalidHash = InvalidHashError
 """
 Deprecated alias for :class:`InvalidHashError`.
