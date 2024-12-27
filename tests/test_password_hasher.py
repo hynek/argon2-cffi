@@ -1,10 +1,17 @@
 # SPDX-License-Identifier: MIT
 
+from unittest import mock
+
 import pytest
 
 from argon2 import PasswordHasher, Type, extract_parameters, profiles
 from argon2._password_hasher import _ensure_bytes
-from argon2.exceptions import InvalidHash, InvalidHashError
+from argon2._utils import Parameters
+from argon2.exceptions import (
+    InvalidHash,
+    InvalidHashError,
+    UnsupportedParamsError,
+)
 
 
 class TestEnsureBytes:
@@ -151,3 +158,21 @@ class TestPasswordHasher:
         assert Type.I is ph.type is ph._parameters.type
         assert Type.I is extract_parameters(ph.hash("foo")).type
         assert ph.check_needs_rehash(default_hash)
+
+    def test_params_on_wasm32(self):
+        """
+        Should fail if on wasm32 and parallelism > 1
+        """
+        with mock.patch("platform.machine", return_value="wasm32"):
+            with pytest.raises(UnsupportedParamsError):
+                PasswordHasher(parallelism=2)
+
+            # last param is parallelism so it should fail
+            params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
+            with pytest.raises(UnsupportedParamsError):
+                ph = PasswordHasher.from_parameters(params)
+
+            # test normal execution
+            ph = PasswordHasher(parallelism=1)
+            hash = ph.hash("hello")
+            assert ph.verify(hash, "hello") is True
