@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import platform
+import sys
 
 from typing import ClassVar, Literal
 
@@ -13,13 +14,23 @@ from .low_level import Type, hash_secret, verify_secret
 from .profiles import RFC_9106_LOW_MEMORY
 
 
+# this is a function because tests injects machine and platform
+# in PasswordHasher class. A global variable will be populated once and
+# we will need to import the file each time so that the mocking will be
+# effective. The function is used during initialization so it will not be
+# an overhead
+def is_wasm() -> bool:
+    return sys.platform == "emscripten" or platform.machine() in [
+        "wasm32",
+        "wasm64",
+    ]
+
+
 DEFAULT_RANDOM_SALT_LENGTH = RFC_9106_LOW_MEMORY.salt_len
 DEFAULT_HASH_LENGTH = RFC_9106_LOW_MEMORY.hash_len
 DEFAULT_TIME_COST = RFC_9106_LOW_MEMORY.time_cost
 DEFAULT_MEMORY_COST = RFC_9106_LOW_MEMORY.memory_cost
-DEFAULT_PARALLELISM = (
-    1 if platform.machine() == "wasm32" else RFC_9106_LOW_MEMORY.parallelism
-)
+DEFAULT_PARALLELISM = 1 if is_wasm() else RFC_9106_LOW_MEMORY.parallelism
 
 
 def _ensure_bytes(s: bytes | str, encoding: str) -> bytes:
@@ -118,8 +129,9 @@ class PasswordHasher:
             memory_cost=memory_cost,
             parallelism=parallelism,
         )
+
         # verify params before accepting
-        if platform.machine() == "wasm32" and parallelism != 1:
+        if is_wasm() and parallelism != 1:
             raise UnsupportedParamsError
 
         # Cache a Parameters object for check_needs_rehash.
@@ -137,7 +149,7 @@ class PasswordHasher:
         .. versionadded:: 21.2.0
         """
         # verify params before accepting
-        if platform.machine() == "wasm32" and params.parallelism != 1:
+        if is_wasm() and params.parallelism != 1:
             raise UnsupportedParamsError
         ph = cls()
         ph._parameters = params
