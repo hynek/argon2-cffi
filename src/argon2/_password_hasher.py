@@ -132,7 +132,10 @@ class PasswordHasher:
 
         # verify params before accepting
         if is_wasm() and parallelism != 1:
-            raise UnsupportedParamsError
+            msg = (
+                "within wasm/wasi environments `parallelism` must be set to 1"
+            )
+            raise UnsupportedParamsError(msg)
 
         # Cache a Parameters object for check_needs_rehash.
         self._parameters = params
@@ -150,7 +153,11 @@ class PasswordHasher:
         """
         # verify params before accepting
         if is_wasm() and params.parallelism != 1:
-            raise UnsupportedParamsError
+            msg = (
+                "within wasm/wasi environments `parallelism` must be set to 1"
+            )
+            raise UnsupportedParamsError(msg)
+
         ph = cls()
         ph._parameters = params
 

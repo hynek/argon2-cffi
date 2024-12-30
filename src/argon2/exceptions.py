@@ -50,8 +50,17 @@ class UnsupportedParamsError(ValueError):
     """
     Raised if the current platform doesn not support the parameters.
 
-    Eg. In Wasm32, parallelism must be set to 1.
+    Eg. In Wasm32/64, parallelism must be set to 1.
+
+    Args:
+        (Opt) message: a description of the incompatibility
     """
+
+    def __init__(
+        self,
+        message: str = "Params are not compatible with the current platform",
+    ) -> None:
+        super().__init__(message)
 
 
 InvalidHash = InvalidHashError
