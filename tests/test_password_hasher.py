@@ -1,10 +1,17 @@
 # SPDX-License-Identifier: MIT
 
+from unittest import mock
+
 import pytest
 
 from argon2 import PasswordHasher, Type, extract_parameters, profiles
 from argon2._password_hasher import _ensure_bytes
-from argon2.exceptions import InvalidHash, InvalidHashError
+from argon2._utils import Parameters
+from argon2.exceptions import (
+    InvalidHash,
+    InvalidHashError,
+    UnsupportedParamsError,
+)
 
 
 class TestEnsureBytes:
@@ -151,3 +158,33 @@ class TestPasswordHasher:
         assert Type.I is ph.type is ph._parameters.type
         assert Type.I is extract_parameters(ph.hash("foo")).type
         assert ph.check_needs_rehash(default_hash)
+
+    @mock.patch("sys.platform", "emscripten")
+    def test_params_on_wasm(self):
+        """
+        Should fail if on wasm and parallelism > 1
+        """
+        for machine in ["wasm32", "wasm64"]:
+            with mock.patch("platform.machine", return_value=machine):
+                with pytest.raises(UnsupportedParamsError) as exinfo:
+                    PasswordHasher(parallelism=2)
+
+                assert (
+                    str(exinfo.value)
+                    == "within wasm/wasi environments `parallelism` must be set to 1"
+                )
+
+                # last param is parallelism so it should fail
+                params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
+                with pytest.raises(UnsupportedParamsError) as exinfo:
+                    ph = PasswordHasher.from_parameters(params)
+
+                assert (
+                    str(exinfo.value)
+                    == "within wasm/wasi environments `parallelism` must be set to 1"
+                )
+
+                # test normal execution
+                ph = PasswordHasher(parallelism=1)
+                hash = ph.hash("hello")
+                assert ph.verify(hash, "hello") is True
