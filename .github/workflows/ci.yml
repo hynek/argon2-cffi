@@ -147,7 +147,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get install libargon2-0 libargon2-0-dev
+          sudo apt-get install libargon2-1 libargon2-dev
           python -VV
           python -Im site
           python -Im pip install --upgrade wheel tox
