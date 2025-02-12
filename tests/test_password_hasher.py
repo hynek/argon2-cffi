@@ -170,8 +170,8 @@ class TestPasswordHasher:
                     PasswordHasher(parallelism=2)
 
                 assert (
-                    str(exinfo.value)
-                    == "within wasm/wasi environments `parallelism` must be set to 1"
+                    "within wasm/wasi environments `parallelism` must be set to 1"
+                    == str(exinfo.value)
                 )
 
                 # last param is parallelism so it should fail
@@ -180,11 +180,17 @@ class TestPasswordHasher:
                     ph = PasswordHasher.from_parameters(params)
 
                 assert (
-                    str(exinfo.value)
-                    == "within wasm/wasi environments `parallelism` must be set to 1"
+                    "within wasm/wasi environments `parallelism` must be set to 1"
+                    == str(exinfo.value)
                 )
 
                 # test normal execution
                 ph = PasswordHasher(parallelism=1)
+                hash = ph.hash("hello")
+                assert ph.verify(hash, "hello") is True
+
+                # test default params
+                default_params = profiles.get_default_params()
+                ph = PasswordHasher.from_parameters(params)
                 hash = ph.hash("hello")
                 assert ph.verify(hash, "hello") is True
