@@ -14,10 +14,11 @@ from __future__ import annotations
 from ._utils import Parameters, _is_wasm
 from .low_level import Type
 
+
 def get_default_params() -> Parameters:
     """
     Create default params for current platform
-    
+
     Returns:
         Parameters for current platform
     """
@@ -27,6 +28,7 @@ def get_default_params() -> Parameters:
         params.parallelism = 1
 
     return params
+
 
 # FIRST RECOMMENDED option per RFC 9106.
 RFC_9106_HIGH_MEMORY = Parameters(

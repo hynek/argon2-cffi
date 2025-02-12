@@ -167,10 +167,8 @@ def validate_params_for_platform(params: Parameters) -> None:
         params: Parameters to be validated
 
     Returns:
-       None 
+       None
     """
     if _is_wasm() and params.parallelism != 1:
         msg = "within wasm/wasi environments `parallelism` must be set to 1"
         raise UnsupportedParamsError(msg)
-    return None
-

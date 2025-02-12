@@ -16,6 +16,7 @@ from .exceptions import InvalidHashError
 from .low_level import Type, hash_secret, verify_secret
 from .profiles import get_default_params
 
+
 default_params = get_default_params()
 
 DEFAULT_RANDOM_SALT_LENGTH = default_params.salt_len
