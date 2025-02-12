@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import platform
+import sys
+
 from dataclasses import dataclass
 from typing import Any
 
-from .exceptions import InvalidHashError
+from .exceptions import InvalidHashError, UnsupportedParamsError
 from .low_level import Type
 
 
@@ -33,6 +36,13 @@ def _check_types(**kw: Any) -> str | None:
         return ", ".join(errors) + "."
 
     return None
+
+
+def _is_wasm() -> bool:
+    return sys.platform == "emscripten" or platform.machine() in [
+        "wasm32",
+        "wasm64",
+    ]
 
 
 def _decoded_str_len(length: int) -> int:
@@ -147,3 +157,20 @@ def extract_parameters(hash: str) -> Parameters:
         memory_cost=kvs["m"],
         parallelism=kvs["p"],
     )
+
+
+def validate_params_for_platform(params: Parameters) -> None:
+    """
+    Validate *params* against current platform.
+
+    Args:
+        params: Parameters to be validated
+
+    Returns:
+       None 
+    """
+    if _is_wasm() and params.parallelism != 1:
+        msg = "within wasm/wasi environments `parallelism` must be set to 1"
+        raise UnsupportedParamsError(msg)
+    return None
+

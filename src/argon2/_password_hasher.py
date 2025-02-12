@@ -3,34 +3,26 @@
 from __future__ import annotations
 
 import os
-import platform
-import sys
 
 from typing import ClassVar, Literal
 
-from ._utils import Parameters, _check_types, extract_parameters
-from .exceptions import InvalidHashError, UnsupportedParamsError
+from ._utils import (
+    Parameters,
+    _check_types,
+    extract_parameters,
+    validate_params_for_platform,
+)
+from .exceptions import InvalidHashError
 from .low_level import Type, hash_secret, verify_secret
-from .profiles import RFC_9106_LOW_MEMORY
+from .profiles import get_default_params
 
+default_params = get_default_params()
 
-# this is a function because tests injects machine and platform
-# in PasswordHasher class. A global variable will be populated once and
-# we will need to import the file each time so that the mocking will be
-# effective. The function is used during initialization so it will not be
-# an overhead
-def is_wasm() -> bool:
-    return sys.platform == "emscripten" or platform.machine() in [
-        "wasm32",
-        "wasm64",
-    ]
-
-
-DEFAULT_RANDOM_SALT_LENGTH = RFC_9106_LOW_MEMORY.salt_len
-DEFAULT_HASH_LENGTH = RFC_9106_LOW_MEMORY.hash_len
-DEFAULT_TIME_COST = RFC_9106_LOW_MEMORY.time_cost
-DEFAULT_MEMORY_COST = RFC_9106_LOW_MEMORY.memory_cost
-DEFAULT_PARALLELISM = 1 if is_wasm() else RFC_9106_LOW_MEMORY.parallelism
+DEFAULT_RANDOM_SALT_LENGTH = default_params.salt_len
+DEFAULT_HASH_LENGTH = default_params.hash_len
+DEFAULT_TIME_COST = default_params.time_cost
+DEFAULT_MEMORY_COST = default_params.memory_cost
+DEFAULT_PARALLELISM = default_params.parallelism
 
 
 def _ensure_bytes(s: bytes | str, encoding: str) -> bytes:
@@ -131,11 +123,7 @@ class PasswordHasher:
         )
 
         # verify params before accepting
-        if is_wasm() and parallelism != 1:
-            msg = (
-                "within wasm/wasi environments `parallelism` must be set to 1"
-            )
-            raise UnsupportedParamsError(msg)
+        validate_params_for_platform(params)
 
         # Cache a Parameters object for check_needs_rehash.
         self._parameters = params
@@ -151,12 +139,7 @@ class PasswordHasher:
 
         .. versionadded:: 21.2.0
         """
-        # verify params before accepting
-        if is_wasm() and params.parallelism != 1:
-            msg = (
-                "within wasm/wasi environments `parallelism` must be set to 1"
-            )
-            raise UnsupportedParamsError(msg)
+        validate_params_for_platform(params)
 
         ph = cls()
         ph._parameters = params

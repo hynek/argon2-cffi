@@ -11,9 +11,22 @@ concrete values and :doc:`parameters` for more information.
 
 from __future__ import annotations
 
-from ._utils import Parameters
+from ._utils import Parameters, _is_wasm
 from .low_level import Type
 
+def get_default_params() -> Parameters:
+    """
+    Create default params for current platform
+    
+    Returns:
+        Parameters for current platform
+    """
+    params = RFC_9106_LOW_MEMORY
+
+    if _is_wasm():
+        params.parallelism = 1
+
+    return params
 
 # FIRST RECOMMENDED option per RFC 9106.
 RFC_9106_HIGH_MEMORY = Parameters(
