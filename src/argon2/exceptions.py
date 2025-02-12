@@ -48,7 +48,7 @@ class InvalidHashError(ValueError):
 
 class UnsupportedParamsError(ValueError):
     """
-    Raised if the current platform doesn not support the parameters.
+    Raised if the current platform does not support the parameters.
 
     Eg. In Wasm32/64, parallelism must be set to 1.
 
