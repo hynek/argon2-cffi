@@ -140,12 +140,15 @@ class PasswordHasher:
 
         .. versionadded:: 21.2.0
         """
-        validate_params_for_platform(params)
 
-        ph = cls()
-        ph._parameters = params
-
-        return ph
+        return cls(
+            time_cost=params.time_cost,
+            memory_cost=params.memory_cost,
+            parallelism=params.parallelism,
+            hash_len=params.hash_len,
+            salt_len=params.salt_len,
+            type=params.type,
+        )
 
     @property
     def time_cost(self) -> int:
