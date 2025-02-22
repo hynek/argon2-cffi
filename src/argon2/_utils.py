@@ -8,7 +8,7 @@ import sys
 from dataclasses import dataclass
 from typing import Any
 
-from .exceptions import InvalidHashError, UnsupportedParamsError
+from .exceptions import InvalidHashError, UnsupportedParametersError
 from .low_level import Type
 
 
@@ -171,4 +171,4 @@ def validate_params_for_platform(params: Parameters) -> None:
     """
     if _is_wasm() and params.parallelism != 1:
         msg = "In WebAssembly environments `parallelism` must be 1."
-        raise UnsupportedParamsError(msg)
+        raise UnsupportedParametersError(msg)

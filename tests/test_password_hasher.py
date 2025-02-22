@@ -10,7 +10,7 @@ from argon2._utils import Parameters
 from argon2.exceptions import (
     InvalidHash,
     InvalidHashError,
-    UnsupportedParamsError,
+    UnsupportedParametersError,
 )
 
 
@@ -167,7 +167,7 @@ class TestPasswordHasher:
         for machine in ["wasm32", "wasm64"]:
             with mock.patch("platform.machine", return_value=machine):
                 with pytest.raises(
-                    UnsupportedParamsError,
+                    UnsupportedParametersError,
                     match="In WebAssembly environments `parallelism` must be 1.",
                 ):
                     PasswordHasher(parallelism=2)
@@ -175,7 +175,7 @@ class TestPasswordHasher:
                 # last param is parallelism so it should fail
                 params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
                 with pytest.raises(
-                    UnsupportedParamsError,
+                    UnsupportedParametersError,
                     match="In WebAssembly environments `parallelism` must be 1.",
                 ):
                     ph = PasswordHasher.from_parameters(params)

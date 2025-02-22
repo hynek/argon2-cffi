@@ -46,20 +46,14 @@ class InvalidHashError(ValueError):
     """
 
 
-class UnsupportedParamsError(ValueError):
+class UnsupportedParametersError(ValueError):
     """
-        Raised if the current platform does not support the parameters.
+    Raised if the current platform does not support the parameters.
 
-        For example, in WebAssembly parallelism must be set to 1.
+    For example, in WebAssembly parallelism must be set to 1.
 
     .. versionadded:: 25.1.0
     """
-
-    def __init__(
-        self,
-        message: str = "Params are not compatible with the current platform",
-    ) -> None:
-        super().__init__(message)
 
 
 InvalidHash = InvalidHashError

@@ -14,7 +14,8 @@ If you don't specify any parameters, the following constants are used:
 .. data:: DEFAULT_MEMORY_COST
 .. data:: DEFAULT_PARALLELISM
 
-They are taken from :data:`argon2.profiles.RFC_9106_LOW_MEMORY`.
+They are taken from :data:`argon2.profiles.RFC_9106_LOW_MEMORY`, but they may vary depending on the platform.
+You can use :func:`argon2.profiles.get_default_parameters` to get the current platform's defaults.
 
 
 Profiles
@@ -79,6 +80,8 @@ That should give you a feeling on how they perform in *your* environment.
    .. versionadded:: 21.2.0
 
 
+.. autofunction:: argon2.profiles.get_default_parameters
+
 .. _`RFC 9106`: https://www.rfc-editor.org/rfc/rfc9106.html
 
 
@@ -94,6 +97,9 @@ Exceptions
 .. autoexception:: argon2.exceptions.InvalidHashError
 
 .. autoexception:: argon2.exceptions.InvalidHash
+
+.. autoexception:: argon2.exceptions.UnsupportedParametersError
+
 
 
 Utilities

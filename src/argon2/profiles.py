@@ -21,6 +21,9 @@ def get_default_parameters() -> Parameters:
     """
     Create default parameters for current platform.
 
+    Returns:
+        Default, compatible, parameters for current platform.
+
     .. versionadded:: 25.1.0
     """
     params = RFC_9106_LOW_MEMORY
