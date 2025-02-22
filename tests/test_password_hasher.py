@@ -189,8 +189,10 @@ class TestPasswordHasher:
                 hash = ph.hash("hello")
                 assert ph.verify(hash, "hello") is True
 
-                # test default params
+                # explicit, but still default parameters
                 default_params = profiles.get_default_params()
                 ph = PasswordHasher.from_parameters(default_params)
+
                 hash = ph.hash("hello")
+
                 assert ph.verify(hash, "hello") is True
