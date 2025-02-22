@@ -17,10 +17,12 @@ from .low_level import Type
 
 def get_default_params() -> Parameters:
     """
-    Create default params for current platform
+    Create default params for current platform.
 
     Returns:
-        Parameters for current platform
+        Default parameters for current platform.
+        
+    .. versionadded:: 25.1.0
     """
     params = RFC_9106_LOW_MEMORY
 
