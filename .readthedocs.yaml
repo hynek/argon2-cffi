@@ -7,19 +7,15 @@ build:
     # Keep version in sync with tox.ini/docs and ci.yml/docs.
     python: "3.13"
   jobs:
-    # Need the tags to calculate the version.
-    post_checkout:
+    create_environment:
+      # Need the tags to calculate the version (sometimes).
       - git fetch --tags
 
-python:
-  install:
-    - method: pip
-      path: .
-      extra_requirements:
-        - docs
+      - asdf plugin add uv
+      - asdf install uv latest
+      - asdf global uv latest
 
-submodules:
-  include: all
-
-sphinx:
-  configuration: docs/conf.py
+    build:
+      html:
+        - uvx --with tox-uv tox run -e docs-sponsors
+        - uvx --with tox-uv tox run -e docs-build -- $READTHEDOCS_OUTPUT

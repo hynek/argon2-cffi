@@ -201,7 +201,7 @@ jobs:
 
 
   docs:
-    name: Build docs & run doctests
+    name: Run doctests
     needs: build-package
     runs-on: ubuntu-latest
     steps:
@@ -219,7 +219,7 @@ jobs:
 
       - run: >
           uvx --with tox-uv
-          tox run -e docs
+          tox run -e docs-doctests
 
 
   install-dev:
