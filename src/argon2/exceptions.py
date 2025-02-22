@@ -50,10 +50,9 @@ class UnsupportedParamsError(ValueError):
     """
     Raised if the current platform does not support the parameters.
 
-    Eg. In Wasm32/64, parallelism must be set to 1.
-
-    Args:
-        (Opt) message: a description of the incompatibility
+    For example, in WebAssembly parallelism must be set to 1.
+    
+.. versionadded:: 25.1.0
     """
 
     def __init__(
