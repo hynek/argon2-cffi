@@ -14,10 +14,10 @@ from ._utils import (
 )
 from .exceptions import InvalidHashError
 from .low_level import Type, hash_secret, verify_secret
-from .profiles import get_default_params
+from .profiles import get_default_parameters
 
 
-default_params = get_default_params()
+default_params = get_default_parameters()
 
 DEFAULT_RANDOM_SALT_LENGTH = default_params.salt_len
 DEFAULT_HASH_LENGTH = default_params.hash_len
