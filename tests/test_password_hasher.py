@@ -184,9 +184,11 @@ class TestPasswordHasher:
                     == "within wasm/wasi environments `parallelism` must be set to 1"
                 )
 
-                # test normal execution
+                # explicitly correct parameters
                 ph = PasswordHasher(parallelism=1)
+
                 hash = ph.hash("hello")
+
                 assert ph.verify(hash, "hello") is True
 
                 # explicit, but still default parameters
