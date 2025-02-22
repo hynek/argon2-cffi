@@ -26,6 +26,9 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 - `argon2.PasswordHasher.check_needs_rehash()` now also accepts bytes like the rest of the API.
   [#174](https://github.com/hynek/argon2-cffi/pull/174)
 
+- Improved parameter compatibility handling for Pyodide / WebAssembly environments.
+  [#190](https://github.com/hynek/argon2-cffi/pull/190)
+
 
 ## [23.1.0](https://github.com/hynek/argon2-cffi/compare/21.3.0...23.1.0) - 2023-08-15
 
