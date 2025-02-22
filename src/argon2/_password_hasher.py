@@ -6,17 +6,24 @@ import os
 
 from typing import ClassVar, Literal
 
-from ._utils import Parameters, _check_types, extract_parameters
+from ._utils import (
+    Parameters,
+    _check_types,
+    extract_parameters,
+    validate_params_for_platform,
+)
 from .exceptions import InvalidHashError
 from .low_level import Type, hash_secret, verify_secret
-from .profiles import RFC_9106_LOW_MEMORY
+from .profiles import get_default_params
 
 
-DEFAULT_RANDOM_SALT_LENGTH = RFC_9106_LOW_MEMORY.salt_len
-DEFAULT_HASH_LENGTH = RFC_9106_LOW_MEMORY.hash_len
-DEFAULT_TIME_COST = RFC_9106_LOW_MEMORY.time_cost
-DEFAULT_MEMORY_COST = RFC_9106_LOW_MEMORY.memory_cost
-DEFAULT_PARALLELISM = RFC_9106_LOW_MEMORY.parallelism
+default_params = get_default_params()
+
+DEFAULT_RANDOM_SALT_LENGTH = default_params.salt_len
+DEFAULT_HASH_LENGTH = default_params.hash_len
+DEFAULT_TIME_COST = default_params.time_cost
+DEFAULT_MEMORY_COST = default_params.memory_cost
+DEFAULT_PARALLELISM = default_params.parallelism
 
 
 def _ensure_bytes(s: bytes | str, encoding: str) -> bytes:
@@ -106,8 +113,7 @@ class PasswordHasher:
         if e:
             raise TypeError(e)
 
-        # Cache a Parameters object for check_needs_rehash.
-        self._parameters = Parameters(
+        params = Parameters(
             type=type,
             version=19,
             salt_len=salt_len,
@@ -116,6 +122,11 @@ class PasswordHasher:
             memory_cost=memory_cost,
             parallelism=parallelism,
         )
+
+        validate_params_for_platform(params)
+
+        # Cache a Parameters object for check_needs_rehash.
+        self._parameters = params
         self.encoding = encoding
 
     @classmethod
@@ -128,10 +139,15 @@ class PasswordHasher:
 
         .. versionadded:: 21.2.0
         """
-        ph = cls()
-        ph._parameters = params
 
-        return ph
+        return cls(
+            time_cost=params.time_cost,
+            memory_cost=params.memory_cost,
+            parallelism=params.parallelism,
+            hash_len=params.hash_len,
+            salt_len=params.salt_len,
+            type=params.type,
+        )
 
     @property
     def time_cost(self) -> int:
