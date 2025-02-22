@@ -15,3 +15,5 @@ ph.verify("hash", b"pw")
 
 if ph.check_needs_rehash("hash") is True:
     ...
+
+params: argon2.Parameters = argon2.profiles.get_default_parameters()
