@@ -17,5 +17,4 @@ build:
 
     build:
       html:
-        - uvx --with tox-uv tox run -e docs-sponsors
         - uvx --with tox-uv tox run -e docs-build -- $READTHEDOCS_OUTPUT
