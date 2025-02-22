@@ -123,7 +123,6 @@ class PasswordHasher:
             parallelism=parallelism,
         )
 
-        # verify params before accepting
         validate_params_for_platform(params)
 
         # Cache a Parameters object for check_needs_rehash.
