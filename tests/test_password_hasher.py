@@ -163,7 +163,7 @@ class TestPasswordHasher:
     @pytest.mark.parametrize("machine", ["wasm32", "wasm64"])
     def test_params_on_wasm(self, machine):
         """
-        Should fail if on wasm and parallelism > 1
+        Parameter validation catches invalid parameters on WebAssembly.
         """
         with mock.patch("platform.machine", return_value=machine):
             with pytest.raises(
