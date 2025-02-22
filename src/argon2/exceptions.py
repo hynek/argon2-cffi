@@ -48,11 +48,11 @@ class InvalidHashError(ValueError):
 
 class UnsupportedParamsError(ValueError):
     """
-    Raised if the current platform does not support the parameters.
+        Raised if the current platform does not support the parameters.
 
-    For example, in WebAssembly parallelism must be set to 1.
-    
-.. versionadded:: 25.1.0
+        For example, in WebAssembly parallelism must be set to 1.
+
+    .. versionadded:: 25.1.0
     """
 
     def __init__(
