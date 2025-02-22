@@ -160,37 +160,37 @@ class TestPasswordHasher:
         assert ph.check_needs_rehash(default_hash)
 
     @mock.patch("sys.platform", "emscripten")
-    def test_params_on_wasm(self):
+    @pytest.mark.parametrize("machine", ["wasm32", "wasm64"])
+    def test_params_on_wasm(self, machine):
         """
         Should fail if on wasm and parallelism > 1
         """
-        for machine in ["wasm32", "wasm64"]:
-            with mock.patch("platform.machine", return_value=machine):
-                with pytest.raises(
-                    UnsupportedParametersError,
-                    match="In WebAssembly environments `parallelism` must be 1.",
-                ):
-                    PasswordHasher(parallelism=2)
+        with mock.patch("platform.machine", return_value=machine):
+            with pytest.raises(
+                UnsupportedParametersError,
+                match="In WebAssembly environments `parallelism` must be 1.",
+            ):
+                PasswordHasher(parallelism=2)
 
-                # last param is parallelism so it should fail
-                params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
-                with pytest.raises(
-                    UnsupportedParametersError,
-                    match="In WebAssembly environments `parallelism` must be 1.",
-                ):
-                    ph = PasswordHasher.from_parameters(params)
+            # last param is parallelism so it should fail
+            params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
+            with pytest.raises(
+                UnsupportedParametersError,
+                match="In WebAssembly environments `parallelism` must be 1.",
+            ):
+                ph = PasswordHasher.from_parameters(params)
 
-                # explicitly correct parameters
-                ph = PasswordHasher(parallelism=1)
+            # explicitly correct parameters
+            ph = PasswordHasher(parallelism=1)
 
-                hash = ph.hash("hello")
+            hash = ph.hash("hello")
 
-                assert ph.verify(hash, "hello") is True
+            assert ph.verify(hash, "hello") is True
 
-                # explicit, but still default parameters
-                default_params = profiles.get_default_parameters()
-                ph = PasswordHasher.from_parameters(default_params)
+            # explicit, but still default parameters
+            default_params = profiles.get_default_parameters()
+            ph = PasswordHasher.from_parameters(default_params)
 
-                hash = ph.hash("hello")
+            hash = ph.hash("hello")
 
-                assert ph.verify(hash, "hello") is True
+            assert ph.verify(hash, "hello") is True
