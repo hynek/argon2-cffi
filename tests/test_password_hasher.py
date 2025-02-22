@@ -167,8 +167,8 @@ class TestPasswordHasher:
         for machine in ["wasm32", "wasm64"]:
             with mock.patch("platform.machine", return_value=machine):
                 with pytest.raises(
-                     UnsupportedParamsError,
-                     match="In WebAssembly environments `parallelism` must be 1.",
+                    UnsupportedParamsError,
+                    match="In WebAssembly environments `parallelism` must be 1.",
                 ) as exinfo:
                     PasswordHasher(parallelism=2)
 
