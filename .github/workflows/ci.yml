@@ -201,7 +201,7 @@ jobs:
 
 
   docs:
-    name: Build docs & run doctests
+    name: Run doctests
     needs: build-package
     runs-on: ubuntu-latest
     steps:
@@ -211,15 +211,11 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v5
-        with:
-          # Keep in sync with tox.ini/docs & .readthedocs.yaml
-          python-version: "3.13"
       - uses: hynek/setup-cached-uv@v2
 
       - run: >
           uvx --with tox-uv
-          tox run -e docs
+          tox run -e docs-doctests
 
 
   install-dev:
