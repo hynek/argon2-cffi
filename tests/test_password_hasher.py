@@ -176,13 +176,9 @@ class TestPasswordHasher:
 
                 # last param is parallelism so it should fail
                 params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
-                with pytest.raises(UnsupportedParamsError) as exinfo:
+                with pytest.raises(UnsupportedParamsError, match="In WebAssembly environments `parallelism` must be 1.") as exinfo:
                     ph = PasswordHasher.from_parameters(params)
 
-                assert (
-                    str(exinfo.value)
-                    == "within wasm/wasi environments `parallelism` must be set to 1"
-                )
 
                 # explicitly correct parameters
                 ph = PasswordHasher(parallelism=1)
