@@ -177,7 +177,7 @@ class TestPasswordHasher:
                 with pytest.raises(
                     UnsupportedParamsError,
                     match="In WebAssembly environments `parallelism` must be 1.",
-                ) as exinfo:
+                ):
                     ph = PasswordHasher.from_parameters(params)
 
                 # explicitly correct parameters
