@@ -166,13 +166,11 @@ class TestPasswordHasher:
         """
         for machine in ["wasm32", "wasm64"]:
             with mock.patch("platform.machine", return_value=machine):
-                with pytest.raises(UnsupportedParamsError) as exinfo:
+                with pytest.raises(
+                     UnsupportedParamsError,
+                     match="In WebAssembly environments `parallelism` must be 1.",
+                ) as exinfo:
                     PasswordHasher(parallelism=2)
-
-                assert (
-                    str(exinfo.value)
-                    == "within wasm/wasi environments `parallelism` must be set to 1"
-                )
 
                 # last param is parallelism so it should fail
                 params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
