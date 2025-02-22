@@ -170,5 +170,5 @@ def validate_params_for_platform(params: Parameters) -> None:
        None
     """
     if _is_wasm() and params.parallelism != 1:
-        msg = "within wasm/wasi environments `parallelism` must be set to 1"
+        msg = "In WebAssembly environments `parallelism` must be 1."
         raise UnsupportedParamsError(msg)
