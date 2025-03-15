@@ -6,7 +6,7 @@ But it's good to double check using *argon2-cffi*'s {doc}`cli` client, whether i
 :::
 
 Finding the right parameters for a password hashing algorithm is a daunting task.
-As of September 2021, we have the official Internet standard [RFC 9106] to help use with it.
+As of September 2021, we have the official Internet standard [RFC 9106] to help us with it.
 
 It comes with two recommendations in [section 4](https://www.rfc-editor.org/rfc/rfc9106.html#section-4), that (as of *argon2-cffi* 21.2.0) you can load directly from the {mod}`argon2.profiles` module: {data}`argon2.profiles.RFC_9106_HIGH_MEMORY` (called "FIRST RECOMMENDED") and {data}`argon2.profiles.RFC_9106_LOW_MEMORY` ("SECOND RECOMMENDED") into {meth}`argon2.PasswordHasher.from_parameters()`.
 
