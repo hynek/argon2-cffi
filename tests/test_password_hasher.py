@@ -224,7 +224,7 @@ def test_multithreaded_hashing():
         try:
             sys.setswitchinterval(0.00001)
             for chunk in chunks:
-                futures.append(tpe.submit(closure, barrier, chunk))
+                futures.append(tpe.submit(closure, barrier, chunk))  # noqa: PERF401
         finally:
             sys.setswitchinterval(orig_interval)
             if len(futures) < max_workers:
