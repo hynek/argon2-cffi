@@ -222,7 +222,7 @@ def test_multithreaded_hashing():
         barrier = threading.Barrier(max_workers)
         futures = []
         try:
-            sys.setswitchinterval(.00001)
+            sys.setswitchinterval(0.00001)
             for chunk in chunks:
                 futures.append(tpe.submit(closure, barrier, chunk))
         finally:
