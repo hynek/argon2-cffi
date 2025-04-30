@@ -202,6 +202,9 @@ class TestPasswordHasher:
 
 
 def test_multithreaded_hashing():
+    """
+    Hash passwords in a thread pool and check for thread safety
+    """
     hasher = PasswordHasher(parallelism=2)
 
     num_passwords = 100
