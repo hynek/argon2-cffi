@@ -39,7 +39,7 @@ classifiers = [
 ]
 dependencies = ["argon2-cffi-bindings"]
 
-[project.optional-dependencies]
+[dependency-groups]
 tests = ["hypothesis", "pytest"]
 typing = ["mypy"]
 docs = [
@@ -49,7 +49,11 @@ docs = [
     "furo",
     "myst-parser",
 ]
-dev = ["argon2-cffi[tests,typing]", "tox>4"]
+dev = [
+    {include-group = "tests"},
+    {include-group = "typing"},
+    "tox>4"
+]
 
 [project.urls]
 Documentation = "https://argon2-cffi.readthedocs.io/"

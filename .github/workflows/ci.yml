@@ -195,7 +195,7 @@ jobs:
 
       - run: |
           uv venv
-          uv pip install .[typing]
+          uv pip install . --group typing
           echo "$PWD/.venv/bin" >> $GITHUB_PATH
       - uses: jakebailey/pyright-action@v2
 
@@ -235,7 +235,7 @@ jobs:
 
       - name: Install in dev mode and run CLI
         run: |
-         python -Im pip install -e .[dev]
+         python -Im pip install -e . --group dev
          python -Im argon2 -n 1 -t 1 -m 8 -p 1
 
 
