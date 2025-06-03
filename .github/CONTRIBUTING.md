@@ -25,15 +25,14 @@ But don't be afraid to open half-finished PRs and ask questions if something is 
 - Don’t break backwards-compatibility.
 
 
-## Local Development Environment
+## Local development environment
 
-You can (and should) run our test suite using [*tox*].
-However, you’ll probably want a more traditional environment as well.
+First, **fork** the repository on GitHub and **clone** it using one of the alternatives that you can copy-paste by pressing the big green button labeled `<> Code`.
 
-First, create a [virtual environment](https://virtualenv.pypa.io/) so you don't break your system-wide Python installation.
-We recommend using the Python version from the `.python-version-default` file in project's root directory.
+You can (and should) run our test suite using [*tox*](https://tox.wiki/).
+However, you'll probably want a more traditional environment as well.
 
-If you're using tools that understand `.python-version` files like [*pyenv*](https://github.com/pyenv/pyenv) does, you can make it a link to the `.python-version-default` file (`ln -s .python-version-default .python-version`).
+We recommend using the Python version from the `.python-version-default` file in the project's root directory, because that's the one that is used in the CI by default, too.
 
 If you're using [*direnv*](https://direnv.net), you can automate the creation of the project virtual environment with the correct Python version by adding the following `.envrc` to the project root:
 
@@ -48,37 +47,25 @@ test -d .venv || uv venv --python python$(cat .python-version-default)
 . .venv/bin/activate
 ```
 
----
+> [!WARNING]
+> - **Before** you start working on a new pull request, use the "*Sync fork*" button in GitHub's web UI to ensure your fork is up to date.
+> - **Always create a new branch off `main` for each new pull request.**
+>   Yes, you can work on `main` in your fork and submit pull requests.
+>   But this will *inevitably* lead to you not being able to synchronize your fork with upstream and having to start over.
 
-Next, fork the repository on GitHub and get an up-to-date checkout:
-
-```console
-$ git clone git@github.com:<your-username>/argon2-cffi.git
-```
-
-or if you prefer to use *Git* via `https`:
+Change into the newly created directory and after activating a virtual environment, install an editable version of this project along with its tests requirements:
 
 ```console
-$ git clone https://github.com/<your-username>/argon2-cffi.git
+$ pip install -e . --group dev  # or `uv pip install -e . --group dev`
 ```
 
-Change into the newly created directory and **after activating your virtual environment** install an editable version of *argon2-cffi* along with its tests and docs requirements:
+Now you can run the test suite:
 
 ```console
-$ cd argon2-cffi
-$ python -m pip install --upgrade pip wheel  # PLEASE don't skip this step
-$ python -m pip install -e '.[dev]'
+$ python -Im pytest
 ```
 
-At this point,
-
-```console
-$ python -m pytest
-```
-
-should work and pass.
-
-For documentation, you can use:
+When working on the documentation, use:
 
 ```console
 $ tox run -e docs-watch
