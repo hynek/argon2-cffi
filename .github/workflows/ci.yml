@@ -142,7 +142,6 @@ jobs:
       - run: tar xf dist/*.tar.gz --strip-components=1
       - uses: actions/setup-python@v5
         with:
-          cache: pip
           python-version-file: .python-version-default
 
       - name: Install dependencies
@@ -150,7 +149,7 @@ jobs:
           sudo apt-get install libargon2-1 libargon2-dev
           python -VV
           python -Im site
-          python -Im pip install --upgrade wheel tox
+          python -Im pip install --upgrade tox
 
       - run: python -Im tox run -e system-argon2
 
