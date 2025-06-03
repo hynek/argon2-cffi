@@ -16,15 +16,13 @@ authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 dynamic = ["version", "readme"]
 requires-python = ">=3.8"
 license = "MIT"
+license-files = ["LICENSE"]
 keywords = ["password", "hash", "hashing", "security"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
-    "Operating System :: Unix",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -35,7 +33,7 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: Security :: Cryptography",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 dependencies = ["argon2-cffi-bindings"]
 
@@ -49,11 +47,7 @@ docs = [
     "furo",
     "myst-parser",
 ]
-dev = [
-    {include-group = "tests"},
-    {include-group = "typing"},
-    "tox>4"
-]
+dev = [{ include-group = "tests" }, { include-group = "typing" }, "tox>4"]
 
 [project.urls]
 Documentation = "https://argon2-cffi.readthedocs.io/"
@@ -103,7 +97,6 @@ text = """
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "README.md"
 start-at = "## Credits"
-
 
 
 [tool.pytest.ini_options]
