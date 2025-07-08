@@ -63,13 +63,13 @@ class TestPasswordHasher:
         assert isinstance(h, str)
         assert h[: len(prefix)] == prefix
 
-    def test_custom_salt(self, password=b"password"):
+    def test_custom_salt(self):
         """
         A custom salt can be specified.
         """
         ph = PasswordHasher.from_parameters(profiles.CHEAPEST)
 
-        h = ph.hash(password, salt=b"1234567890123456")
+        h = ph.hash(b"password", salt=b"1234567890123456")
 
         assert h == (
             "$argon2id$v=19$m=8,t=1,p=1$MTIzNDU2Nzg5MDEyMzQ1Ng$maTa5w"

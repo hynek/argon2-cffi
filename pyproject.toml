@@ -182,6 +182,7 @@ ignore = [
     "FIX",     # Yes, we want XXX as a marker.
     "INP001",  # sometimes we want Python files outside of packages
     "ISC001",  # conflicts with ruff format
+    "PLC0415", # sometimes, imports must live elsewhere
     "PLR0913", # yes, many arguments, but most have defaults
     "PLR2004", # numbers are sometimes fine
     "PLW2901", # re-assigning within loop bodies is fine
