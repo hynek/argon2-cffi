@@ -125,18 +125,20 @@ class TestHash:
         """
         Passing an argument of wrong type raises TypeError.
         """
-        with pytest.deprecated_call(
-            match="argon2.hash_password is deprecated"
-        ), pytest.raises(TypeError):
+        with (
+            pytest.deprecated_call(match="argon2.hash_password is deprecated"),
+            pytest.raises(TypeError),
+        ):
             hash_password("oh no, unicode!")
 
     def test_illegal_argon2_parameter(self):
         """
         Raises HashingError if hashing fails.
         """
-        with pytest.deprecated_call(
-            match="argon2.hash_password is deprecated"
-        ), pytest.raises(HashingError):
+        with (
+            pytest.deprecated_call(match="argon2.hash_password is deprecated"),
+            pytest.raises(HashingError),
+        ):
             hash_password(TEST_PASSWORD, memory_cost=1)
 
     @given(st.binary(max_size=128))
@@ -174,16 +176,22 @@ class TestVerify:
         """
         Given a valid hash and password and wrong type, we fail.
         """
-        with pytest.deprecated_call(
-            match="argon2.verify_password is deprecated"
-        ), pytest.raises(VerificationError):
+        with (
+            pytest.deprecated_call(
+                match="argon2.verify_password is deprecated"
+            ),
+            pytest.raises(VerificationError),
+        ):
             verify_password(TEST_HASH_I, TEST_PASSWORD, Type.D)
 
     def test_wrong_arg_type(self):
         """
         Passing an argument of wrong type raises TypeError.
         """
-        with pytest.deprecated_call(
-            match="argon2.verify_password is deprecated"
-        ), pytest.raises(TypeError):
+        with (
+            pytest.deprecated_call(
+                match="argon2.verify_password is deprecated"
+            ),
+            pytest.raises(TypeError),
+        ):
             verify_password(TEST_HASH_I, TEST_PASSWORD.decode("ascii"))
