@@ -119,7 +119,7 @@ jobs:
           # cffi 2 is required and currently beta.
           uv pip install --prerelease=allow dist/*.whl --group dev
 
-          pytest tests
+          .venv/bin/python -Im pytest tests
 
 
   coverage:
