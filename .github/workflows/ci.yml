@@ -114,7 +114,7 @@ jobs:
       - uses: hynek/setup-cached-uv@v2
 
       - name: Run tests
-        run: >
+        run: |
           uv venv --python $PYTHON
           # cffi 2 is required and currently beta.
           uv pip install --prerelease=allow dist/*.whl --group dev
