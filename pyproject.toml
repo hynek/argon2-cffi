@@ -29,6 +29,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Free Threading",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: Security :: Cryptography",
@@ -116,23 +117,6 @@ source = ["src", ".tox/py*/**/site-packages"]
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
-exclude_lines = [
-    # a more strict default pragma
-    "\\# pragma: no cover\\b",
-
-    # allow defensive code
-    "^\\s*raise AssertionError\\b",
-    "^\\s*raise NotImplementedError\\b",
-    "^\\s*return NotImplemented\\b",
-    "^\\s*raise$",
-
-    # typing-related code
-    "^if (False|TYPE_CHECKING):",
-    ": \\.\\.\\.(\\s*#.*)?$",
-    "^ +\\.\\.\\.$",
-    "-> ['\"]?NoReturn['\"]?:",
-]
-omit = []
 
 
 [tool.interrogate]
@@ -154,7 +138,6 @@ show_error_codes = true
 enable_error_code = ["ignore-without-code"]
 
 ignore_missing_imports = true
-
 
 [[tool.mypy.overrides]]
 module = "tests.*"
@@ -202,7 +185,6 @@ ignore = [
     "TRY002", # stock exceptions are fine in tests
     "EM101",  # no need for exception msg hygiene in tests
 ]
-
 
 [tool.ruff.lint.isort]
 lines-between-types = 1
