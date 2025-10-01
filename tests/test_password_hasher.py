@@ -173,7 +173,7 @@ class TestPasswordHasher:
         with mock.patch("platform.machine", return_value=machine):
             with pytest.raises(
                 UnsupportedParametersError,
-                match="In WebAssembly environments `parallelism` must be 1.",
+                match="In WebAssembly environments `parallelism` must be 1",
             ):
                 PasswordHasher(parallelism=2)
 
@@ -181,7 +181,7 @@ class TestPasswordHasher:
             params = Parameters(Type.I, 2, 8, 8, 3, 256, 8)
             with pytest.raises(
                 UnsupportedParametersError,
-                match="In WebAssembly environments `parallelism` must be 1.",
+                match="In WebAssembly environments `parallelism` must be 1",
             ):
                 ph = PasswordHasher.from_parameters(params)
 
