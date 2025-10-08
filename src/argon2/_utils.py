@@ -6,7 +6,6 @@ import platform
 import sys
 
 from dataclasses import dataclass
-from typing import Any
 
 from .exceptions import InvalidHashError, UnsupportedParametersError
 from .low_level import Type
@@ -15,7 +14,7 @@ from .low_level import Type
 NoneType = type(None)
 
 
-def _check_types(**kw: Any) -> str | None:
+def _check_types(**kw: tuple[object, type | tuple[type, ...]]) -> str | None:
     """
     Check each ``name: (value, types)`` in *kw*.
 
@@ -25,11 +24,11 @@ def _check_types(**kw: Any) -> str | None:
     for name, (value, types) in kw.items():
         if not isinstance(value, types):
             if isinstance(types, tuple):
-                types = ", or ".join(t.__name__ for t in types)
+                type_names = ", or ".join(t.__name__ for t in types)
             else:
-                types = types.__name__
+                type_names = types.__name__
             errors.append(
-                f"'{name}' must be a {types} (got {type(value).__name__})"
+                f"'{name}' must be a {type_names} (got {type(value).__name__})"
             )
 
     if errors != []:
