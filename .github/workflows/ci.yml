@@ -27,7 +27,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: hynek/build-and-inspect-python-package@efb823f52190ad02594531168b7a2d5790e66516 # v2.14.0
+      - uses: hynek/build-and-inspect-python-package@fe0a0fb1925ca263d076ca4f2c13e93a6e92a33e # v2.17.0
         id: baipp
 
     outputs:
@@ -63,7 +63,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
-      - uses: hynek/setup-cached-uv@757bedc3f972eb7227a1aa657651f15a8527c817 # v2.3.0
+      - uses: hynek/setup-cached-uv@4300ec2180bc77d705e626a34e381b81a4772c51 # v2.5.0
 
       - name: Run tests
         run: >
@@ -72,7 +72,7 @@ jobs:
           -f py${PYTHON//./}-tests
 
       - name: Upload coverage data
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: coverage-data-${{ matrix.python-version }}
           path: .coverage.*
@@ -111,7 +111,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
-      - uses: hynek/setup-cached-uv@757bedc3f972eb7227a1aa657651f15a8527c817 # v2.3.0
+      - uses: hynek/setup-cached-uv@4300ec2180bc77d705e626a34e381b81a4772c51 # v2.5.0
 
       - name: Run tests
         run: |
@@ -135,7 +135,7 @@ jobs:
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version-file: .python-version-default
-      - uses: hynek/setup-cached-uv@757bedc3f972eb7227a1aa657651f15a8527c817 # v2.3.0
+      - uses: hynek/setup-cached-uv@4300ec2180bc77d705e626a34e381b81a4772c51 # v2.5.0
 
       - name: Download coverage data
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -157,7 +157,7 @@ jobs:
           coverage report --fail-under=100
 
       - name: Upload HTML report if check failed.
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: html-report
           path: htmlcov
@@ -204,7 +204,7 @@ jobs:
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version-file: .python-version-default
-      - uses: hynek/setup-cached-uv@757bedc3f972eb7227a1aa657651f15a8527c817 # v2.3.0
+      - uses: hynek/setup-cached-uv@4300ec2180bc77d705e626a34e381b81a4772c51 # v2.5.0
 
       - run: uvx --with tox-uv tox run -f typing
 
@@ -219,7 +219,7 @@ jobs:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: hynek/setup-cached-uv@757bedc3f972eb7227a1aa657651f15a8527c817 # v2.3.0
+      - uses: hynek/setup-cached-uv@4300ec2180bc77d705e626a34e381b81a4772c51 # v2.5.0
 
       - run: >
           uvx --with tox-uv
