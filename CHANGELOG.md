@@ -20,14 +20,13 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 
 ### Added
 
-- Official support for Python 3.13 and 3.14.
+- Official support for Python 3.13, 3.14, and 3.15.
   No code changes were necessary.
 
 
 ### Removed
 
-- Python 3.7 and 3.8 are not supported anymore.
-  [#186](https://github.com/hynek/argon2-cffi/pull/186)
+- Python 3.7, 3.8, and 3.9 are not supported anymore.
 
 
 ### Changed

@@ -14,7 +14,7 @@ name = "argon2-cffi"
 description = "Argon2 for Python"
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 dynamic = ["version", "readme"]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
 keywords = ["password", "hash", "hashing", "security"]
@@ -23,12 +23,12 @@ classifiers = [
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Programming Language :: Python :: Free Threading",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
@@ -162,6 +162,7 @@ ignore = [
     "ANN",     # Mypy is better at this
     "ARG001",  # unused arguments are normal when implementing interfaces
     "COM",     # Formatter takes care of our commas
+    "CPY",     # they expect a very specific shape of a copyright notice
     "D",       # We prefer our own docstring style.
     "E501",    # leave line-length enforcement to formatter
     "ERA001",  # Dead code detection is overly eager.
@@ -170,7 +171,8 @@ ignore = [
     "INP001",  # sometimes we want Python files outside of packages
     "ISC001",  # conflicts with ruff format
     "PLC0415", # sometimes, imports must live elsewhere
-    "PLR0913", # yes, many arguments, but most have defaults
+    "PLR0913", # leave complexity to me
+    "PLR0917", # leave complexity to me
     "PLR2004", # numbers are sometimes fine
     "PLW2901", # re-assigning within loop bodies is fine
     "RUF001",  # leave my smart characters alone
