@@ -29,23 +29,24 @@ But don't be afraid to open half-finished PRs and ask questions if something is 
 
 First, **fork** the repository on GitHub and **clone** it using one of the alternatives that you can copy-paste by pressing the big green button labeled `<> Code`.
 
-You can (and should) run our test suite using [*tox*](https://tox.wiki/).
-However, you'll probably want a more traditional environment as well.
+We use a fully locked development environment based on [*uv*](https://docs.astral.sh/uv/), so the easiest way to get started is to [install *uv*](https://docs.astral.sh/uv/getting-started/installation/) and run:
 
-We recommend using the Python version from the `.python-version-default` file in the project's root directory, because that's the one that is used in the CI by default, too.
-
-If you're using [*direnv*](https://direnv.net), you can automate the creation of the project virtual environment with the correct Python version by adding the following `.envrc` to the project root:
-
-```bash
-layout python python$(cat .python-version-default)
+```console
+$ uv sync --python $(cat .python-version-default)
 ```
 
-or, if you like [*uv*](https://github.com/astral-sh/uv):
+This creates a virtual environment in `.venv` using the Python version from the `.python-version-default` file, because that's the one that is used in the CI by default, too.
+It also installs everything that's pinned in `uv.lock`.
+After that, `uv run pytest` runs the test suite without you having to activate anything; if you activate `.venv` you can also run `pytest` directly.
+
+If you're using [*direnv*](https://direnv.net), you can automate the creation and activation of that environment by adding the following `.envrc` to the project root:
 
 ```bash
-test -d .venv || uv venv --python python$(cat .python-version-default)
+uv sync --python $(cat .python-version-default)
 . .venv/bin/activate
 ```
+
+You can also link `.python-version-default` to `.python-version` so you don't have to remember to use `$(cat .python-version-default)` every time.
 
 > [!WARNING]
 > - **Before** you start working on a new pull request, use the "*Sync fork*" button in GitHub's web UI to ensure your fork is up to date.
@@ -53,48 +54,33 @@ test -d .venv || uv venv --python python$(cat .python-version-default)
 >   Yes, you can work on `main` in your fork and submit pull requests.
 >   But this will *inevitably* lead to you not being able to synchronize your fork with upstream and having to start over.
 
-Change into the newly created directory and after activating a virtual environment, install an editable version of this project along with its tests requirements:
-
-```console
-$ pip install -e . --group dev  # or `uv pip install -e . --group dev`
-```
-
-Now you can run the test suite:
-
-```console
-$ python -Im pytest
-```
+You can (and should) run our full test suite using [*tox*].
+It's part of our development environment, so `uv run tox` works out of the box.
 
 When working on the documentation, use:
 
 ```console
-$ tox run -e docs-watch
+$ uv run tox run -e docs-watch
 ```
 
 This will build the documentation, and then watch for changes and rebuild it whenever you save a file.
 
-To just build the documentation and run doctests, use:
-
-```console
-$ tox run -e docs
-```
+To just build the documentation, use `uv run tox run -e docs-build`, and to run the doctests, use `uv run tox run -e docs-doctests`.
 
 You will find the built documentation in `docs/_build/html`.
 
-To avoid committing code that violates our style guide, we strongly advise you to install [*pre-commit*] and its hooks:
+Our linters run in *tox*, too:
 
 ```console
-$ pre-commit install
+$ uv run tox run -f lint
 ```
 
-This is not strictly necessary, because our [*tox*] file contains an environment that runs:
+This formats and lints the code base using [Ruff](https://ruff.rs/) and runs all [*pre-commit*] hooks.
+To have *git* catch avoidable errors before you commit, install the hooks locally using [*prek*](https://prek.j178.dev/) (or *pre-commit*, if you prefer):
 
 ```console
-$ pre-commit run --all-files
+$ uv run prek install -f
 ```
-
-and our CI has integration with [*pre-commit.ci*](https://pre-commit.ci).
-But it's way more comfortable to run it locally and *git* catching avoidable errors.
 
 
 ## Code
@@ -121,8 +107,8 @@ But it's way more comfortable to run it locally and *git* catching avoidable err
 - If you add or change public APIs, tag the docstring using `..  versionadded:: 16.0.0 WHAT` or `..  versionchanged:: 16.2.0 WHAT`.
 
 - We use [Ruff](https://ruff.rs/) to sort our imports and format our code with a line length of 79 characters.
-  As long as you run our full [*tox*] suite before committing, or install our [*pre-commit*] hooks (ideally you'll do both – see [*Local Development Environment*](#local-development-environment) above), you won't have to spend any time on formatting your code at all.
-  If you don't, [CI] will catch it for you – but that seems like a waste of your time!
+  As long as you run `uv run tox run -f lint` before committing (see [*Local Development Environment*](#local-development-environment) above) you won't have to spend any time on formatting your code at all.
+  If you don't, [CI] will catch it for you, but that seems like a waste of your time!
 
 
 ## Tests
@@ -202,5 +188,5 @@ Please report any harm to [Hynek Schlawack] in any way you find appropriate.
 [CI]: https://github.com/hynek/argon2-cffi/actions
 [Hynek Schlawack]: https://hynek.me/about/
 [*pre-commit*]: https://pre-commit.com/
-[*tox*]: https://https://tox.wiki/
+[*tox*]: https://tox.wiki/
 [semantic newlines]: https://rhodesmill.org/brandon/2012/one-sentence-per-line/
