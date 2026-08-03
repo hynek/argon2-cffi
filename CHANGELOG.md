@@ -15,18 +15,29 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 
 ## [Unreleased](https://github.com/hynek/argon2-cffi/compare/25.1.0...HEAD)
 
-
-## [25.1.0](https://github.com/hynek/argon2-cffi/compare/23.1.0...25.1.0) - 2025-06-03
-
 ### Added
 
-- Official support for Python 3.13, 3.14, and 3.15.
+- Official support for Python 3.15.
   No code changes were necessary.
 
 
 ### Removed
 
-- Python 3.7, 3.8, and 3.9 are not supported anymore.
+- Python 3.8 and 3.9 are not supported anymore.
+
+
+## [25.1.0](https://github.com/hynek/argon2-cffi/compare/23.1.0...25.1.0) - 2025-06-03
+
+### Added
+
+- Official support for Python 3.13 and 3.14.
+  No code changes were necessary.
+
+
+### Removed
+
+- Python 3.7 is not supported anymore.
+  [#186](https://github.com/hynek/argon2-cffi/pull/186)
 
 
 ### Changed
