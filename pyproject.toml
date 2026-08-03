@@ -38,7 +38,7 @@ classifiers = [
 dependencies = ["argon2-cffi-bindings"]
 
 [dependency-groups]
-tests = ["hypothesis", "pytest"]
+tests = ["hypothesis", "pytest>9"]
 cov = [{ include-group = "tests" }, "coverage[toml]"]
 typing = ["mypy"]
 pyright = ["pyright"]
@@ -118,11 +118,11 @@ path = "README.md"
 start-at = "## Credits"
 
 
-[tool.pytest.ini_options]
-addopts = ["-ra", "--strict-markers", "--strict-config"]
-xfail_strict = true
-testpaths = "tests"
-filterwarnings = ["once::Warning"]
+[tool.pytest]
+strict = true
+testpaths = ["tests"]
+addopts = ["-ra", "--import-mode=importlib"]
+log_level = "INFO"
 
 
 [tool.coverage.run]

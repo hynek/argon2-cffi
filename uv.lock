@@ -124,14 +124,14 @@ requires-dist = [{ name = "argon2-cffi-bindings" }]
 cov = [
     { name = "coverage", extras = ["toml"] },
     { name = "hypothesis" },
-    { name = "pytest" },
+    { name = "pytest", specifier = ">9" },
 ]
 dev = [
     { name = "hypothesis" },
     { name = "mypy" },
     { name = "prek", specifier = ">=0.4" },
     { name = "pyrefly" },
-    { name = "pytest" },
+    { name = "pytest", specifier = ">9" },
     { name = "ruff", specifier = ">=0.16" },
     { name = "tox", specifier = ">4" },
     { name = "tox-uv-bare" },
@@ -159,7 +159,7 @@ pyrefly = [{ name = "pyrefly" }]
 pyright = [{ name = "pyright" }]
 tests = [
     { name = "hypothesis" },
-    { name = "pytest" },
+    { name = "pytest", specifier = ">9" },
 ]
 tox = [
     { name = "tox", specifier = ">4" },

@@ -44,7 +44,9 @@ class TestEnsureBytes:
 
 
 bytes_and_str_password = pytest.mark.parametrize(
-    "password", ["pässword".encode("latin1"), "pässword"]
+    "password",
+    ["pässword".encode("latin1"), "pässword"],
+    ids=["bytes", "unicode"],
 )
 
 
