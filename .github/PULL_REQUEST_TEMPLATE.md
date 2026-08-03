@@ -18,7 +18,7 @@ If an item doesn't apply to your pull request, **check it anyway** to make it ap
   - This is not a pre-requisite for your pull request to be accepted, but **you have been warned**.
 - [ ] Added **tests** for changed code.
     - The CI fails with less than 100% coverage.
-- [ ] **New APIs** are added to our typing tests in [`api.py`](https://github.com/hynek/argon2-cffi/blob/main/tests/typing/api.py).
+- [ ] **New APIs** are added to our typing tests in [`api.py`](https://github.com/hynek/argon2-cffi/blob/main/typing_tests/api.py).
 - [ ] Updated **documentation** for changed code.
     - [ ] New functions/classes have to be added to `docs/api.rst` by hand.
     - [ ] Changed/added classes/methods/functions have appropriate `versionadded`, `versionchanged`, or `deprecated` [directives](http://www.sphinx-doc.org/en/stable/markup/para.html#directive-versionadded).

@@ -60,6 +60,7 @@ dev = [
     { include-group = "typing" },
     { include-group = "lint" },
     { include-group = "tox" },
+    { include-group = "pyrefly" },
 ]
 
 [project.urls]
@@ -143,13 +144,17 @@ fail-under = 100
 whitelist-regex = ["test_.*"]
 
 
+[tool.pyrefly]
+project-includes = ["src", "typing_tests"]
+
+
 [[tool.ty.overrides]]
 include = ["tests"]
 rules.all = "ignore"
 
 
 [tool.pyright]
-ignore = ["conftest.py", "docs", "tests"]
+include = ["src", "typing_tests"]
 disableBytesTypePromotions = true
 
 
