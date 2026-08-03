@@ -4,7 +4,8 @@ version: 2
 build:
   os: ubuntu-lts-latest
   tools:
-    # mandatory field; we let uv install Python to avoid manual duplication
+    # Mandatory field. We allow uv to install Python to avoid manual
+    # duplication, but latest is usually the correct version.
     python: latest
   jobs:
     create_environment:
