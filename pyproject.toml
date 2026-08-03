@@ -39,7 +39,14 @@ dependencies = ["argon2-cffi-bindings"]
 
 [dependency-groups]
 tests = ["hypothesis", "pytest"]
+cov = [{ include-group = "tests" }, "coverage[toml]"]
 typing = ["mypy"]
+pyright = ["pyright"]
+ty = ["ty"]
+pyrefly = ["pyrefly"]
+lint = ["ruff>=0.16", "prek>=0.4"]
+# -bare, because we bring our own uv.
+tox = ["tox>4", "tox-uv-bare"]
 docs = [
     "sphinx",
     "sphinx-notfound-page",
@@ -47,7 +54,13 @@ docs = [
     "furo",
     "myst-parser",
 ]
-dev = [{ include-group = "tests" }, { include-group = "typing" }, "tox>4"]
+docs-watch = [{ include-group = "docs" }, "watchfiles"]
+dev = [
+    { include-group = "tests" },
+    { include-group = "typing" },
+    { include-group = "lint" },
+    { include-group = "tox" },
+]
 
 [project.urls]
 Documentation = "https://argon2-cffi.readthedocs.io/"
@@ -55,6 +68,11 @@ Changelog = "https://github.com/hynek/argon2-cffi/blob/main/CHANGELOG.md"
 GitHub = "https://github.com/hynek/argon2-cffi"
 Funding = "https://github.com/sponsors/hynek"
 Tidelift = "https://tidelift.com/?utm_source=lifter&utm_medium=referral&utm_campaign=hynek"
+
+
+[tool.uv]
+# Dependency cooldown
+exclude-newer = "1 week"
 
 
 [tool.hatch.version]

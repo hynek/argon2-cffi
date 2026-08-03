@@ -15,7 +15,6 @@ env:
 
 permissions: {}
 
-
 jobs:
   build-package:
     name: Build & verify package
@@ -34,7 +33,6 @@ jobs:
       # Used to define the matrix for tests below. The value is based on
       # packaging metadata (trove classifiers).
       python-versions: ${{ steps.baipp.outputs.supported_python_classifiers_json_array }}
-
 
   tests:
     name: Tests & Mypy API on ${{ matrix.python-version }}
@@ -67,7 +65,8 @@ jobs:
 
       - name: Run tests
         run: >
-          uvx --with tox-uv tox run
+          uv run --only-group tox
+          tox run
           --installpkg dist/*.whl
           -f py${PYTHON//./}-tests
 
@@ -81,7 +80,8 @@ jobs:
 
       - name: Check public API with Mypy
         run: >
-          uvx --with tox-uv tox run
+          uv run --only-group tox
+          tox run
           --installpkg dist/*.whl
           -e py${PYTHON//./}-mypy
 
@@ -120,7 +120,6 @@ jobs:
           uv pip install --prerelease=allow dist/*.whl --group dev
 
           .venv/bin/python -Im pytest tests
-
 
   coverage:
     name: Ensure 100% test coverage
@@ -163,9 +162,8 @@ jobs:
           path: htmlcov
         if: ${{ failure() }}
 
-
-  system-package:
-    name: Install & test with system package of Argon2
+  alternative-bindings:
+    name: Test against alternative bindings
     runs-on: ubuntu-latest
     needs: build-package
 
@@ -179,15 +177,20 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version-file: .python-version-default
+      - uses: hynek/setup-cached-uv@34e35d30f1ebc7421a5cc733bca38dcc62603960 # v2.6.0
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get install libargon2-1 libargon2-dev
-          python -VV
-          python -Im site
-          python -Im pip install --upgrade tox
+      - name: Install system package of Argon2
+        run: sudo apt-get install libargon2-1 libargon2-dev
 
-      - run: python -Im tox run -e system-argon2
+      - name: Test with system package of Argon2
+        run: >
+          uv run --only-group tox
+          tox run -e tests-system-argon2
+
+      - name: Test against main branch of argon2-cffi-bindings
+        run: >
+          uv run --only-group tox
+          tox run -e tests-bindings-main
 
   typing:
     name: Check types using supported type checkers
@@ -206,7 +209,9 @@ jobs:
           python-version-file: .python-version-default
       - uses: hynek/setup-cached-uv@34e35d30f1ebc7421a5cc733bca38dcc62603960 # v2.6.0
 
-      - run: uvx --with tox-uv tox run -f typing
+      - run: >
+          uv run --only-group tox
+          tox run -f typing
 
   docs:
     name: Run doctests
@@ -222,9 +227,25 @@ jobs:
       - uses: hynek/setup-cached-uv@34e35d30f1ebc7421a5cc733bca38dcc62603960 # v2.6.0
 
       - run: >
-          uvx --with tox-uv
+          uv run --only-group tox
           tox run -e docs-doctests
 
+  lint:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version-file: .python-version-default
+      - uses: hynek/setup-cached-uv@34e35d30f1ebc7421a5cc733bca38dcc62603960 # v2.6.0
+
+      - run: >
+          uv run --only-group tox
+          tox run -f lint
 
   install-dev:
     name: Verify dev env
@@ -237,15 +258,12 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
-        with:
-          python-version-file: .python-version-default
+      - uses: hynek/setup-cached-uv@34e35d30f1ebc7421a5cc733bca38dcc62603960 # v2.6.0
 
-      - name: Install in dev mode and run CLI
+      - name: Sync locked dev env and run CLI
         run: |
-         python -Im pip install -e . --group dev
-         python -Im argon2 -n 1 -t 1 -m 8 -p 1
-
+          uv sync --locked --python $(cat .python-version-default)
+          uv run python -Im argon2 -n 1 -t 1 -m 8 -p 1
 
   required-checks-pass:
     if: always()
@@ -255,11 +273,12 @@ jobs:
       - coverage
       - typing
       - docs
+      - lint
       - install-dev
-      - system-package
+      - alternative-bindings
 
     steps:
       - name: Decide whether the needed jobs succeeded or failed
-        uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe  # v1.2.2
+        uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe # v1.2.2
         with:
           jobs: ${{ toJSON(needs) }}
