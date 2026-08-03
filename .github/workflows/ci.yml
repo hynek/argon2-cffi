@@ -68,7 +68,7 @@ jobs:
           uv run --only-group tox
           tox run
           --installpkg dist/*.whl
-          -f py${PYTHON//./}-tests
+          -f ${PYTHON}-tests
 
       - name: Upload coverage data
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -83,7 +83,7 @@ jobs:
           uv run --only-group tox
           tox run
           --installpkg dist/*.whl
-          -e py${PYTHON//./}-mypy
+          -e ${PYTHON}-mypy
 
   free-threading:
     name: Test free-threaded builds on ${{ matrix.python-version }}
