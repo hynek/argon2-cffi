@@ -35,7 +35,7 @@ def get_default_parameters() -> Parameters:
 
 
 # FIRST RECOMMENDED option per RFC 9106.
-RFC_9106_HIGH_MEMORY = Parameters(
+RFC_9106_HIGH_MEMORY: Parameters = Parameters(
     type=Type.ID,
     version=19,
     salt_len=16,
@@ -46,7 +46,7 @@ RFC_9106_HIGH_MEMORY = Parameters(
 )
 
 # SECOND RECOMMENDED option per RFC 9106.
-RFC_9106_LOW_MEMORY = Parameters(
+RFC_9106_LOW_MEMORY: Parameters = Parameters(
     type=Type.ID,
     version=19,
     salt_len=16,
@@ -57,7 +57,7 @@ RFC_9106_LOW_MEMORY = Parameters(
 )
 
 # The pre-RFC defaults in argon2-cffi 18.2.0 - 21.1.0.
-PRE_21_2 = Parameters(
+PRE_21_2: Parameters = Parameters(
     type=Type.ID,
     version=19,
     salt_len=16,
@@ -68,7 +68,7 @@ PRE_21_2 = Parameters(
 )
 
 # Only for testing!
-CHEAPEST = Parameters(
+CHEAPEST: Parameters = Parameters(
     type=Type.ID,
     version=19,
     salt_len=8,
