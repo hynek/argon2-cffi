@@ -2,6 +2,7 @@
 
 [![Documentation](https://img.shields.io/badge/Docs-Read%20The%20Docs-black)](https://argon2-cffi.readthedocs.io/)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/6671/badge)](https://bestpractices.coreinfrastructure.org/projects/6671)
+[![No AI slop inside.](https://img.shields.io/badge/no-slop-purple)](https://github.com/hynek/argon2-cffi/blob/main/.github/AI_POLICY.md)
 [![PyPI version](https://img.shields.io/pypi/v/argon2-cffi)](https://pypi.org/project/argon2-cffi/)
 [![Downloads / Month](https://static.pepy.tech/personalized-badge/argon2-cffi?period=month&units=international_system&left_color=grey&right_color=blue&left_text=Downloads%20/%20Month)](https://pepy.tech/project/argon2-cffi)
 
