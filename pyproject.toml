@@ -75,6 +75,9 @@ Tidelift = "https://tidelift.com/?utm_source=lifter&utm_medium=referral&utm_camp
 # Dependency cooldown
 exclude-newer = "1 week"
 
+[tool.uv.exclude-newer-package]
+argon2-cffi-bindings = false
+
 
 [tool.hatch.version]
 source = "vcs"
