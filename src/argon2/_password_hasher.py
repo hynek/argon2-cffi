@@ -12,7 +12,7 @@ from ._utils import (
     extract_parameters,
     validate_params_for_platform,
 )
-from .exceptions import InvalidHashError
+from .exceptions import HashingError, InvalidHashError, VerificationError
 from .low_level import Type, hash_secret, verify_secret
 from .profiles import get_default_parameters
 
@@ -195,7 +195,15 @@ class PasswordHasher:
             Hashed *password*.
 
         .. versionadded:: 23.1.0 *salt* parameter
+        .. versionchanged:: 26.1.0
+           Raise :exc:`~argon2.exceptions.HashingError` -- instead of an
+           undocumented :exc:`AttributeError` -- if *password* is neither
+           :class:`str` nor :class:`bytes`.
         """
+        e = _check_types(password=(password, (str, bytes)))
+        if e:
+            raise HashingError(e)
+
         return hash_secret(
             secret=_ensure_bytes(password, self.encoding),
             salt=salt or os.urandom(self.salt_len),
@@ -248,7 +256,19 @@ class PasswordHasher:
             Raise :exc:`~argon2.exceptions.VerifyMismatchError` on mismatches
             instead of its more generic superclass.
         .. versionadded:: 18.2.0 Hash type agility.
+        .. versionchanged:: 26.1.0
+           Raise :exc:`~argon2.exceptions.InvalidHashError` for a *hash*, and
+           :exc:`~argon2.exceptions.VerificationError` for a *password*,
+           that is neither :class:`str` nor :class:`bytes` -- instead of an
+           undocumented :exc:`AttributeError`.
         """
+        e = _check_types(hash=(hash, (str, bytes)))
+        if e:
+            raise InvalidHashError(e)
+        e = _check_types(password=(password, (str, bytes)))
+        if e:
+            raise VerificationError(e)
+
         hash = _ensure_bytes(hash, "ascii")
         try:
             hash_type = self._header_to_type[hash[:9]]
@@ -280,7 +300,15 @@ class PasswordHasher:
 
         .. versionadded:: 18.2.0
         .. versionchanged:: 24.1.0 Accepts bytes for *hash*.
+        .. versionchanged:: 26.1.0
+           Raise :exc:`~argon2.exceptions.InvalidHashError` -- instead of an
+           undocumented :exc:`AttributeError` -- if *hash* is neither
+           :class:`str` nor :class:`bytes`.
         """
+        e = _check_types(hash=(hash, (str, bytes)))
+        if e:
+            raise InvalidHashError(e)
+
         if isinstance(hash, bytes):
             hash = hash.decode("ascii")
 
