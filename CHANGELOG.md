@@ -29,6 +29,7 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 ### Fixed
 
 - `PasswordHasher.hash()`, `PasswordHasher.verify()`, and `PasswordHasher.check_needs_rehash()` now raise `argon2_cffi.exceptions.HashingError`, `argon2_cffi.exceptions.InvalidHashError`, or `argon2_cffi.exceptions.VerificationError` -- whichever their docstring already promised -- instead of an undocumented `AttributeError` when called with a *password* or *hash* that isn't `str` or `bytes`.
+  [#242](https://github.com/hynek/argon2-cffi/pull/242)
 
 
 ## [25.1.0](https://github.com/hynek/argon2-cffi/compare/23.1.0...25.1.0) - 2025-06-03
