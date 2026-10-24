@@ -13,9 +13,11 @@ from argon2 import PasswordHasher, Type, extract_parameters, profiles
 from argon2._password_hasher import _ensure_bytes
 from argon2._utils import Parameters
 from argon2.exceptions import (
+    HashingError,
     InvalidHash,
     InvalidHashError,
     UnsupportedParametersError,
+    VerificationError,
 )
 
 
@@ -122,6 +124,49 @@ class TestPasswordHasher:
         """
         with pytest.raises(InvalidHash):
             PasswordHasher().verify("tiger", "does not matter")
+
+    @pytest.mark.parametrize("bad_hash", [None, 1234, [], {}])
+    def test_verify_hash_wrong_type_raises_invalid_hash_error(self, bad_hash):
+        """
+        A *hash* that is neither str nor bytes raises InvalidHashError,
+        not an undocumented AttributeError.
+        """
+        with pytest.raises(InvalidHashError):
+            PasswordHasher().verify(bad_hash, "does not matter")
+
+    @pytest.mark.parametrize("bad_password", [None, 1234, [], {}])
+    def test_verify_password_wrong_type_raises_verification_error(
+        self, bad_password
+    ):
+        """
+        A *password* that is neither str nor bytes raises
+        VerificationError, not an undocumented AttributeError.
+        """
+        ph = PasswordHasher()
+        real_hash = ph.hash("correct password")
+
+        with pytest.raises(VerificationError):
+            ph.verify(real_hash, bad_password)
+
+    @pytest.mark.parametrize("bad_password", [None, 1234, [], {}])
+    def test_hash_wrong_type_raises_hashing_error(self, bad_password):
+        """
+        A *password* that is neither str nor bytes raises HashingError,
+        not an undocumented AttributeError.
+        """
+        with pytest.raises(HashingError):
+            PasswordHasher().hash(bad_password)
+
+    @pytest.mark.parametrize("bad_hash", [None, 1234, [], {}])
+    def test_check_needs_rehash_wrong_type_raises_invalid_hash_error(
+        self, bad_hash
+    ):
+        """
+        A *hash* that is neither str nor bytes raises InvalidHashError,
+        not an undocumented AttributeError.
+        """
+        with pytest.raises(InvalidHashError):
+            PasswordHasher().check_needs_rehash(bad_hash)
 
     @pytest.mark.parametrize("use_bytes", [True, False])
     def test_check_needs_rehash_no(self, use_bytes):
