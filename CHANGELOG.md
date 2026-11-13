@@ -23,7 +23,7 @@ You can find our backwards-compatibility policy [here](https://github.com/hynek/
 
 ### Removed
 
-- Python 3.8 and 3.9 are not supported anymore.
+- Python 3.8, 3.9, and 3.10 are not supported anymore.
 
 
 ## [25.1.0](https://github.com/hynek/argon2-cffi/compare/23.1.0...25.1.0) - 2025-06-03
